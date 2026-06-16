@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>毎日記録</title>
 </head>
 <body>
-
+	<h1>毎日記録</h1>
 </body>
 </html>

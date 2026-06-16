@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ココロノナミ|マイページ</title>
 </head>
 <body>
-
+<h2>ホームページ</h2>
 </body>
 </html>

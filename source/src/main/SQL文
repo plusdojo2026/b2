@@ -1,0 +1,52 @@
+-- SQL文一覧
+
+-- ※「外部キーあり」のテーブルは最後に作成する
+
+-- データベース作成
+CREATE DATABASE heartwave;
+
+-- データベース遷移
+USE heartwave;
+
+-- テーブル作成(users)
+CREATE TABLE Users(user_id INT AUTO_INCREMENT PRIMARY KEY, pw varchar(20), daysTotalLogin int DEFAULT 0, daysToGoal int DEFAULT 0, depthCurrent int DEFAULT 0, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(bingo)
+CREATE TABLE Bingo(bingo_id int PRIMARY KEY, currentPos int DEFAULT 1, day varchar(50), point bool DEFAULT FALSE, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(timeCmt)
+CREATE TABLE TimeCmt(timeCmt_id int PRIMARY KEY, cmtTime varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(tips)
+CREATE TABLE Tips(tips_id int PRIMARY KEY, tips varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(emotion)
+CREATE TABLE Emotion(emotion_id int PRIMARY KEY, emotion varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(question)
+CREATE TABLE Question(question_id int PRIMARY KEY, question varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(questionAns)
+CREATE TABLE QuestionAns(questionAns_id int AUTO_INCREMENT PRIMARY KEY, questionAns int NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(resultPicture)
+CREATE TABLE ResultPicture(resultPicture_id int PRIMARY KEY, resultImg varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(weekCmt)
+CREATE TABLE WeekCmt(weekCmt_id int PRIMARY KEY, analysisCmt varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(moodSwings)
+CREATE TABLE MoodSwings(moodSwings_id int PRIMARY KEY, moodType varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(dailyRec)(外部キーあり)
+CREATE TABLE DailyRec(dailyRec_id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion int NOT NULL, FOREIGN KEY(emotion) REFERENCES Emotion(emotion_id), updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(simpleRec)(外部キーあり)
+CREATE TABLE SimpleRec(simpleRec int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion int NOT NULL, FOREIGN KEY(emotion) REFERENCES Emotion(emotion_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(recordType)(外部キーあり)
+CREATE TABLE RecordType(recordType_id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), typeImg int, FOREIGN KEY(typeImg) REFERENCES ResultPicture(resultPicture_id), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+-- テーブル作成(weekRes)(外部キーあり)
+CREATE TABLE WeekRes(weekRes_id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), analysisCmt int, FOREIGN KEY(analysisCmt) REFERENCES WeekCmt(weekCmt_id), avgPositive double, moodType int, FOREIGN KEY(moodType) REFERENCES MoodSwings(moodSwings_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+

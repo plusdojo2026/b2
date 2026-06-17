@@ -4,18 +4,18 @@ import java.io.Serializable;
 public class WeeklyDTO implements Serializable {
 	private int weekRes_id;			// ID
 	private String weeklyRes;		// 週期間
-	private int weekCmt_id;			// 分析コメント
+	private String analysisCmt;			// 分析コメント
 	private double avgPositive;	// 平均ポジティブ率
-	private int moodSwings_id;			// 気分の浮き沈み
+	private String moodType;	// 気分の浮き沈み
 	private String created_at;		// 登録日
 
-	public WeeklyDTO(int weekRes_id,  String weeklyRes, int weekCmt_id, double avgPositive, int moodSwings_id, String created_at) {
+	public WeeklyDTO(int weekRes_id,  String weeklyRes, String analysisCmt, double avgPositive, String moodType, String created_at) {
 		super();
 		this.weekRes_id = weekRes_id;
 		this.weeklyRes = weeklyRes;
-		this.weekCmt_id = weekCmt_id;
+		this.analysisCmt = analysisCmt;
 		this.avgPositive = avgPositive;
-		this.moodSwings_id = moodSwings_id;
+		this.moodType = moodType;
 		this.created_at = created_at;
 	}
 
@@ -33,11 +33,11 @@ public class WeeklyDTO implements Serializable {
 		this.weeklyRes = weeklyRes;
 	}
 
-	public int getWeekCmt_id() {
-		return weekCmt_id;
+	public String getAnalysisCmt() {
+		return analysisCmt;
 	}
-	public void setWeekCmt_id(int weekCmt_id) {
-		this.weekCmt_id = weekCmt_id;
+	public void setAnalysisCmt(String analysisCmt) {
+		this.analysisCmt = analysisCmt;
 	}
 
 	public double getAvgPositive() {
@@ -47,11 +47,11 @@ public class WeeklyDTO implements Serializable {
 		this.avgPositive = avgPositive;
 	}
 
-	public int getMoodSwings_id() {
-		return moodSwings_id;
+	public String getMoodType() {
+		return moodType;
 	}
-	public void setMoodSwings_id(int moodSwings_id) {
-		this.moodSwings_id = moodSwings_id;
+	public void setMoodType(String moodType) {
+		this.moodType = moodType;
 	}
 
 	public String getCreated_at() {
@@ -64,9 +64,9 @@ public class WeeklyDTO implements Serializable {
 		super();
 		this.weekRes_id = 0;
 		this.weeklyRes = "";
-		this.weekCmt_id = 0;
+		this.analysisCmt = "";
 		this.avgPositive = 0;
-		this.moodSwings_id = 0;
+		this.moodType = "";
 		this.created_at = "";
 		
 	}

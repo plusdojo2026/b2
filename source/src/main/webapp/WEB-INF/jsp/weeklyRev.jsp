@@ -16,11 +16,11 @@
 		<br> 期間：
 		<c:out value="${e.weeklyRes}" />
 		<br> コメントid：
-		<c:out value="${e.weekCmt_id}" />
+		<c:out value="${e.analysisCmt}" />
 		<br> 平均ポジティブ率：
 		<c:out value="${e.avgPositive}" />
 		<br> 気分の浮き沈み：
-		<c:out value="${e.moodSwings_id}" />
+		<c:out value="${e.moodType}" />
 		<br> 登録日：
 		<c:out value="${e.created_at}" />
 		<br>

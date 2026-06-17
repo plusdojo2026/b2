@@ -24,7 +24,13 @@ public class WeeklyDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM WeekRes WHERE weekRes_id = 2";
+			String sql = "SELECT wr.weekRes_id, wr.weeklyRes, wr.avgPositive, "
+					+ "wc.analysisCmt, ms.moodType, wr.created_at "
+					+ "FROM WeekRes wr "
+					+ "JOIN WeekCmt wc ON wr.analysisCmt = wc.weekCmt_id "
+					+ "JOIN MoodSwings ms ON wr.moodType = ms.moodSwings_id "
+					+ "WHERE wr.weekRes_id = 2";
+			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SQL文を完成させる
@@ -38,9 +44,9 @@ public class WeeklyDAO {
 				WeeklyDTO weekly = new WeeklyDTO(
 						rs.getInt("weekRes_id"), 
 						rs.getString("weeklyRes"), 
-						rs.getInt("weekCmt_id"), 
+						rs.getString("analysisCmt"), 
 						rs.getDouble("avgPositive"), 
-						rs.getInt("moodSwings_id"), 
+						rs.getString("moodType"), 
 						rs.getString("created_at")
 						);
 				weekList.add(weekly);
@@ -65,5 +71,8 @@ public class WeeklyDAO {
 		}
 		// 結果を返す
 		return weekList;
+	}
+	public void aggregate() {
+		
 	}
 }

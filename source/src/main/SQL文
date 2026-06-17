@@ -26,12 +26,6 @@ CREATE TABLE Emotion(emotion_id int PRIMARY KEY, emotion varchar(100), created_a
 -- テーブル作成(question)
 CREATE TABLE Question(question_id int PRIMARY KEY, question varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
--- テーブル作成(questionAns)
-CREATE TABLE QuestionAns(questionAns_id int AUTO_INCREMENT PRIMARY KEY, questionAns int NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
--- テーブル作成(resultPicture)
-CREATE TABLE ResultPicture(resultPicture_id int PRIMARY KEY, resultImg varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
 -- テーブル作成(weekCmt)
 CREATE TABLE WeekCmt(weekCmt_id int PRIMARY KEY, analysisCmt varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
@@ -39,13 +33,13 @@ CREATE TABLE WeekCmt(weekCmt_id int PRIMARY KEY, analysisCmt varchar(500), creat
 CREATE TABLE MoodSwings(moodSwings_id int PRIMARY KEY, moodType varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(dailyRec)(外部キーあり)
-CREATE TABLE DailyRec(dailyRec_id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(emotion_id), positiveRate double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE DailyRec(dailyRec_id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(emotion_id), negativeRate double, positiveRate double, activeIndex, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(simpleRec)(外部キーあり)
 CREATE TABLE SimpleRec(simpleRec int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(emotion_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(recordType)(外部キーあり)
-CREATE TABLE RecordType(recordType_id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), resultPicture_id int, FOREIGN KEY(resultPicture_id) REFERENCES ResultPicture(resultPicture_id), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE RecordType(recordType_id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), resultPicture_id varchar(100), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(weekRes)(外部キーあり)
 CREATE TABLE WeekRes(weekRes_id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), weekCmt_id int, FOREIGN KEY(weekCmt_id) REFERENCES WeekCmt(weekCmt_id), avgPositive double, moodSwings_id int, FOREIGN KEY(moodSwings_id) REFERENCES MoodSwings(moodSwings_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -127,7 +121,6 @@ INSERT INTO Question(question_id, question) VALUES(11,'今日は、元気さや�
 INSERT INTO Question(question_id, question) VALUES(12,'前向きに動き出せるエネルギーがあった');
 INSERT INTO Question(question_id, question) VALUES(13,'人との関わりが心地よく、前向きに感じられた');
 INSERT INTO Question(question_id, question) VALUES(14,'周囲に対して優しく接したい気持ちが自然にあった');
-
 
 
 

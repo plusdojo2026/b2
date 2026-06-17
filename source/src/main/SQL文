@@ -9,10 +9,10 @@ CREATE DATABASE heartwave;
 USE heartwave;
 
 -- テーブル作成(users)
-CREATE TABLE Users(user_id INT AUTO_INCREMENT PRIMARY KEY, pw varchar(20), daysTotalLogin int DEFAULT 0, daysToGoal int DEFAULT 0, depthCurrent int DEFAULT 0, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE Users(user_id INT AUTO_INCREMENT PRIMARY KEY, userName varchar(20), pw varchar(20), daysTotalLogin int DEFAULT 0, depthCurrent int DEFAULT 0, currentPos int DEFAULT 1, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(bingo)
-CREATE TABLE Bingo(bingo_id int PRIMARY KEY, currentPos int DEFAULT 1, day varchar(50), point bool DEFAULT FALSE, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE Bingo(bingo_id int PRIMARY KEY, point bool DEFAULT FALSE, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(timeCmt)
 CREATE TABLE TimeCmt(timeCmt_id int PRIMARY KEY, cmtTime varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -26,12 +26,6 @@ CREATE TABLE Emotion(emotion_id int PRIMARY KEY, emotion varchar(100), created_a
 -- テーブル作成(question)
 CREATE TABLE Question(question_id int PRIMARY KEY, question varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
--- テーブル作成(questionAns)
-CREATE TABLE QuestionAns(questionAns_id int AUTO_INCREMENT PRIMARY KEY, questionAns int NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
--- テーブル作成(resultPicture)
-CREATE TABLE ResultPicture(resultPicture_id int PRIMARY KEY, resultImg varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
 -- テーブル作成(weekCmt)
 CREATE TABLE WeekCmt(weekCmt_id int PRIMARY KEY, analysisCmt varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
@@ -39,14 +33,101 @@ CREATE TABLE WeekCmt(weekCmt_id int PRIMARY KEY, analysisCmt varchar(500), creat
 CREATE TABLE MoodSwings(moodSwings_id int PRIMARY KEY, moodType varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(dailyRec)(外部キーあり)
-CREATE TABLE DailyRec(dailyRec_id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion int NOT NULL, FOREIGN KEY(emotion) REFERENCES Emotion(emotion_id), updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE DailyRec(dailyRec_id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(emotion_id), negativeRate double, positiveRate double, activeIndex, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(simpleRec)(外部キーあり)
-CREATE TABLE SimpleRec(simpleRec int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion int NOT NULL, FOREIGN KEY(emotion) REFERENCES Emotion(emotion_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE SimpleRec(simpleRec int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(emotion_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(recordType)(外部キーあり)
-CREATE TABLE RecordType(recordType_id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), typeImg int, FOREIGN KEY(typeImg) REFERENCES ResultPicture(resultPicture_id), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE RecordType(recordType_id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), resultPicture_id varchar(100), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(weekRes)(外部キーあり)
-CREATE TABLE WeekRes(weekRes_id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), analysisCmt int, FOREIGN KEY(analysisCmt) REFERENCES WeekCmt(weekCmt_id), avgPositive double, moodType int, FOREIGN KEY(moodType) REFERENCES MoodSwings(moodSwings_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE WeekRes(weekRes_id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), weekCmt_id int, FOREIGN KEY(weekCmt_id) REFERENCES WeekCmt(weekCmt_id), avgPositive double, moodSwings_id int, FOREIGN KEY(moodSwings_id) REFERENCES MoodSwings(moodSwings_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+
+
+
+
+-- カラム作成
+
+-- ビンゴ登録 1~25まで
+INSERT INTO Bingo(bingo_id) VALUES(1);
+INSERT INTO Bingo(bingo_id) VALUES(2);
+INSERT INTO Bingo(bingo_id) VALUES(3);
+INSERT INTO Bingo(bingo_id) VALUES(4);
+INSERT INTO Bingo(bingo_id) VALUES(5);
+INSERT INTO Bingo(bingo_id) VALUES(6);
+INSERT INTO Bingo(bingo_id) VALUES(7);
+INSERT INTO Bingo(bingo_id) VALUES(8);
+INSERT INTO Bingo(bingo_id) VALUES(9);
+INSERT INTO Bingo(bingo_id) VALUES(10);
+INSERT INTO Bingo(bingo_id) VALUES(11);
+INSERT INTO Bingo(bingo_id) VALUES(12);
+INSERT INTO Bingo(bingo_id) VALUES(13);
+INSERT INTO Bingo(bingo_id) VALUES(14);
+INSERT INTO Bingo(bingo_id) VALUES(15);
+INSERT INTO Bingo(bingo_id) VALUES(16);
+INSERT INTO Bingo(bingo_id) VALUES(17);
+INSERT INTO Bingo(bingo_id) VALUES(18);
+INSERT INTO Bingo(bingo_id) VALUES(19);
+INSERT INTO Bingo(bingo_id) VALUES(20);
+INSERT INTO Bingo(bingo_id) VALUES(21);
+INSERT INTO Bingo(bingo_id) VALUES(22);
+INSERT INTO Bingo(bingo_id) VALUES(23);
+INSERT INTO Bingo(bingo_id) VALUES(24);
+INSERT INTO Bingo(bingo_id) VALUES(25);
+
+
+-- 感情タグ登録
+
+-- 怒り
+INSERT INTO Emotion(emotion_id, emotion) VALUES(1,'img/imgAnger');
+
+-- 悲しみ
+INSERT INTO Emotion(emotion_id, emotion) VALUES(2,'img/imgSad');
+
+-- 悔しい
+INSERT INTO Emotion(emotion_id, emotion) VALUES(3,'img/imgRegret');
+
+-- 焦り
+INSERT INTO Emotion(emotion_id, emotion) VALUES(4,'img/imgImpatioence');
+
+-- 楽しい
+INSERT INTO Emotion(emotion_id, emotion) VALUES(5,'img/imgFun');
+
+-- 嬉しい
+INSERT INTO Emotion(emotion_id, emotion) VALUES(6,'img/imgHappy');
+
+-- 幸せ
+INSERT INTO Emotion(emotion_id, emotion) VALUES(7,'img/imgHappiness');
+
+-- 好き
+INSERT INTO Emotion(emotion_id, emotion) VALUES(8,'img/imgLike');
+
+
+-- 質問内容
+
+INSERT INTO Question(question_id, question) VALUES(1,'今日は、人や物事に対してイライラしやすいと感じた');
+INSERT INTO Question(question_id, question) VALUES(2,'内心で怒りや反発の気持ちが強くなる瞬間があった');
+INSERT INTO Question(question_id, question) VALUES(3,'頭の中が整理しづらく、考えがまとまりにくい時間があった');
+INSERT INTO Question(question_id, question) VALUES(4,'何をすればいいか迷いやすい感覚があった');
+INSERT INTO Question(question_id, question) VALUES(5,'自分に価値が感じられず、気持ちが沈む時間があった');
+INSERT INTO Question(question_id, question) VALUES(6,'希望が持ちにくく、前向きになれないと感じた');
+INSERT INTO Question(question_id, question) VALUES(7,'体や心が重く、動き出すのが難しいと感じた');
+INSERT INTO Question(question_id, question) VALUES(8,'意欲や活力が低く、休みたい気持ちが強かった');
+INSERT INTO Question(question_id, question) VALUES(9,'今日は、落ち着かない気持ちになる場面があった');
+INSERT INTO Question(question_id, question) VALUES(10,'緊張や不安を感じる時間があった');
+INSERT INTO Question(question_id, question) VALUES(11,'今日は、元気さや活力を感じる時間があった');
+INSERT INTO Question(question_id, question) VALUES(12,'前向きに動き出せるエネルギーがあった');
+INSERT INTO Question(question_id, question) VALUES(13,'人との関わりが心地よく、前向きに感じられた');
+INSERT INTO Question(question_id, question) VALUES(14,'周囲に対して優しく接したい気持ちが自然にあった');
+
+
+
+
+
+
+
+
+
 

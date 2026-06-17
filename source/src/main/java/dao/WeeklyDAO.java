@@ -19,18 +19,16 @@ public class WeeklyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT WeekRes_id, weeklyRes, analysisCmt, avgPositive, moodType, created_at "
-							 + "FROM WeekRes "
-							 + "JOIN WeekCmt ON WeekRes.analysisCmt = WeekCmt.analysisCmt "
-							 + "JOIN MoodSwings ON WeekRes.moodType = MoodSwings.moodType "
-							 + "ORDER BY weekRes_id";
-
+			String sql = "SELECT * FROM WeekRes WHERE weekRes_id = 2";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			//SQL文を完成させる
+			//pStmt.setInt(1, week.getWeekRes_id());
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -38,11 +36,11 @@ public class WeeklyDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				WeeklyDTO weekly = new WeeklyDTO(
-						rs.getInt("weekRes"), 
+						rs.getInt("weekRes_id"), 
 						rs.getString("weeklyRes"), 
-						rs.getInt("analysisCmt"), 
+						rs.getInt("weekCmt_id"), 
 						rs.getDouble("avgPositive"), 
-						rs.getInt("moodType"), 
+						rs.getInt("moodSwings_id"), 
 						rs.getString("created_at")
 						);
 				weekList.add(weekly);

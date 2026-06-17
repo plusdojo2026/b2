@@ -33,8 +33,8 @@ public class WeeklyServlet extends HttpServlet {
 		
 		// 一覧表示のために全件取得
         WeeklyDAO dao = new WeeklyDAO();
-        WeeklyDTO empty = new WeeklyDTO();
-        List<WeeklyDTO> list = dao.select(empty);
+        WeeklyDTO dto = new WeeklyDTO();
+        List<WeeklyDTO> list = dao.select(dto);
         
         //JSP に渡す
         request.setAttribute("weekList", list);

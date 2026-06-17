@@ -2,28 +2,28 @@ package dto;
 import java.io.Serializable;
 
 public class WeeklyDTO implements Serializable {
-	private int weekRes;				// ID
+	private int weekRes_id;			// ID
 	private String weeklyRes;		// 週期間
-	private int analysisCmt;			// 分析コメント
+	private int weekCmt_id;			// 分析コメント
 	private double avgPositive;	// 平均ポジティブ率
-	private int moodType;			// 気分の浮き沈み
+	private int moodSwings_id;			// 気分の浮き沈み
 	private String created_at;		// 登録日
 
-	public WeeklyDTO(int weekRes,  String weeklyRes, int analysisCmt, double avgPositive, int moodType, String created_at) {
+	public WeeklyDTO(int weekRes_id,  String weeklyRes, int weekCmt_id, double avgPositive, int moodSwings_id, String created_at) {
 		super();
-		this.weekRes = weekRes;
+		this.weekRes_id = weekRes_id;
 		this.weeklyRes = weeklyRes;
-		this.analysisCmt = analysisCmt;
+		this.weekCmt_id = weekCmt_id;
 		this.avgPositive = avgPositive;
-		this.moodType = moodType;
+		this.moodSwings_id = moodSwings_id;
 		this.created_at = created_at;
 	}
 
-	public int getWeekRes() {
-		return weekRes;
+	public int getWeekRes_id() {
+		return weekRes_id;
 	}
-	public void setWeekRes(int weekRes) {
-		this.weekRes = weekRes;
+	public void setWeekRes_id(int weekRes_id) {
+		this.weekRes_id = weekRes_id;
 	}
 
 	public String getWeeklyRes() {
@@ -33,11 +33,11 @@ public class WeeklyDTO implements Serializable {
 		this.weeklyRes = weeklyRes;
 	}
 
-	public int getAnalysisCmt() {
-		return analysisCmt;
+	public int getWeekCmt_id() {
+		return weekCmt_id;
 	}
-	public void setAnalysisCmt(int analysisCmt) {
-		this.analysisCmt = analysisCmt;
+	public void setWeekCmt_id(int weekCmt_id) {
+		this.weekCmt_id = weekCmt_id;
 	}
 
 	public double getAvgPositive() {
@@ -47,11 +47,11 @@ public class WeeklyDTO implements Serializable {
 		this.avgPositive = avgPositive;
 	}
 
-	public int getMoodType() {
-		return moodType;
+	public int getMoodSwings_id() {
+		return moodSwings_id;
 	}
-	public void setMoodType(int moodType) {
-		this.moodType = moodType;
+	public void setMoodSwings_id(int moodSwings_id) {
+		this.moodSwings_id = moodSwings_id;
 	}
 
 	public String getCreated_at() {
@@ -62,11 +62,11 @@ public class WeeklyDTO implements Serializable {
 	}
 	public WeeklyDTO() {
 		super();
-		this.weekRes = 0;
+		this.weekRes_id = 0;
 		this.weeklyRes = "";
-		this.analysisCmt = 0;
+		this.weekCmt_id = 0;
 		this.avgPositive = 0;
-		this.moodType = 0;
+		this.moodSwings_id = 0;
 		this.created_at = "";
 		
 	}

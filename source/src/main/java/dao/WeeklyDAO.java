@@ -72,7 +72,38 @@ public class WeeklyDAO {
 		// 結果を返す
 		return weekList;
 	}
-	public void aggregate() {
+	public boolean aggregate() {
+		Connection conn = null;
+		boolean result = false;
 		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+		String sqlDelete = "DELETE FROM WeekRes WHERE weeklyRes = ?";
+		String sqlInsert = "INSERT INTO WeekRes (weeklyRes, analysisCmt, avgPositive, moodType, created_at) "
+		                 + "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		// 結果を返す
+		return result;
 	}
 }

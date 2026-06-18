@@ -8,18 +8,19 @@ import java.sql.SQLException;
 import dto.DailyDTO;
 
 public class DailyDAO {
-	
-	
-	// 登録処理 引数:daily, 返り値:result
+	/* 登録処理-----------------------------------------------
+	 * [引数:daily, 返り値:result]
+	 * (未実装)入力された設問データを集計、「ポジティブ率」「ネガティブ率」「感情活性指数」を算出する。
+	 * ・単に入力されたデータを登録する
+	 */
 	public boolean insert(DailyDTO daily) {
 		Connection conn = null;
 		boolean result = false;
 
 		try {
-			// JDBCドライバを読み込む
+			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
@@ -32,7 +33,7 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql1 = "INSERT INTO DailyRec VALUES (0, ?, ?, ?, 0, ?, ?)";
+			String sql1 = "INSERT INTO DailyRec VALUES (0, ?, ?, ?, 0, ?, ?, yearWeek(CURDATE(),1))";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文初期値を自動で入力する(Stringのみ)
@@ -145,7 +146,7 @@ public class DailyDAO {
 			
 			//1.DiaryRecテーブル
 			String sql1 = "UPDATE DailyRec SET freeForm=?, photo=?, positive=?, emotion_id=?, update_at=?, created_at=? "
-					+ "WHERE dailyRec_id=?";
+					+ "WHERE id=?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文初期値を自動で入力する(Stringのみ)

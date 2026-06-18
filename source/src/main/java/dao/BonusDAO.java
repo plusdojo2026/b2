@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dto.CardDTO;
+import dto.BonusDTO;
 
 public class BonusDAO {
 	
@@ -104,9 +104,9 @@ public class BonusDAO {
 	
 	
 	//ビンゴの内容を取得
-	public boolean selectBingo(int user_id) {
+	public BonusDTO selectBingo(int user_id) {
 		Connection conn = null;
-		boolean result = false;
+		BonusDTO record = null;
 
 		try {
 			// JDBCドライバを読み込む
@@ -124,20 +124,15 @@ public class BonusDAO {
 			//現在位置をカラム名に代入
 			pStmt.setInt(1,user_id);	
 			
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
 			
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			// selectした情報をリストに挿入
-			while(rs.next()) {
-				CardDTO record = new CardDTO(rs.getInt("card_id"),rs.getString("company"),rs.getString("department"),rs.getString("manage_pos"),rs.getString("name"),rs.getString("post"),rs.getString("address"),rs.getString("tel"),rs.getString("fax"),rs.getString("mail"),rs.getString("regist_day"),rs.getString("memo"),rs.getBoolean("favorite"),rs.getString("yomi"),rs.getString("name_yomi"));	
-				cardlist.add(record);
-			}
+			record = new BonusDTO(rs.getInt("id"),rs.getInt("user_id"),rs.getBoolean("day1"),rs.getBoolean("day2"),rs.getBoolean("day3"),rs.getBoolean("day4"),rs.getBoolean("day5"),rs.getBoolean("day6"),rs.getBoolean("day7"),rs.getBoolean("day8"),rs.getBoolean("day9"),rs.getBoolean("day10"),rs.getBoolean("day11"),rs.getBoolean("day12"),rs.getBoolean("day13"),rs.getBoolean("day14"),rs.getBoolean("day15"),rs.getBoolean("day16"),rs.getBoolean("day17"),rs.getBoolean("day18"),rs.getBoolean("day19"),rs.getBoolean("day20"),rs.getBoolean("day21"),rs.getBoolean("day22"),rs.getBoolean("day23"),rs.getBoolean("day24"),rs.getBoolean("day25"));
 			
+			// 結果を返す
+			return record;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,9 +148,7 @@ public class BonusDAO {
 				}
 			}
 		}
-
-		// 結果を返す
-		return result;
+		return record;
 	}
 	
 	

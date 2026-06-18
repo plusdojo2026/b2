@@ -195,9 +195,34 @@ public class BonusDTO implements Serializable {
 		this.day25 = day25;
 	}
 	
-	public BonusDTO(int id, int user_id) {
+	public BonusDTO(int id, int user_id, Boolean day1, Boolean day2, Boolean day3, Boolean day4, Boolean day5, Boolean day6, Boolean day7, Boolean day8, Boolean day9, Boolean day10, Boolean day11, Boolean day12, Boolean day13, Boolean day14, Boolean day15, Boolean day16, Boolean day17, Boolean day18, Boolean day19, Boolean day20, Boolean day21, Boolean day22, Boolean day23, Boolean day24, Boolean day25) {
 		this.id = id;
 		this.user_id = user_id;
+		this.day1=day1;
+		this.day2=day2;
+		this.day3=day3;
+		this.day4=day4;
+		this.day5=day5;
+		this.day6=day6;
+		this.day7=day7;
+		this.day8=day8;
+		this.day9=day9;
+		this.day10=day10;
+		this.day11=day11;
+		this.day12=day12;
+		this.day13=day13;
+		this.day14=day14;
+		this.day15=day15;
+		this.day16=day16;
+		this.day17=day17;
+		this.day18=day18;
+		this.day19=day19;
+		this.day20=day20;
+		this.day21=day21;
+		this.day22=day22;
+		this.day23=day23;
+		this.day24=day24;
+		this.day25=day25;
 	}
 	
 }

@@ -31,6 +31,7 @@ public class WeeklyDAO {
 					"root", "password");
 
 
+			//仮データ後で消す
 			String weeklyRes = "2026-06-01~2026-06-07";
 			//最初の日を取り出す
 			String yearweek = weeklyRes.split("~")[0];
@@ -76,6 +77,7 @@ public class WeeklyDAO {
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmtWeek.executeQuery();
 
+			List<DailyDTO> dailyList = new ArrayList<>();
 			// 結果表をコレクションにコピーする//weekResの型をintからStringに変更すること
 			while (rs.next()) {
 				WeeklyDTO weekly = new WeeklyDTO(
@@ -85,7 +87,8 @@ public class WeeklyDAO {
 						rs.getString("analysisCmt"), 
 						rs.getDouble("avgPositive"), 
 						rs.getString("moodType"), 
-						rs.getString("created_at")
+						rs.getString("created_at"),
+						dailyList
 						);
 				weekList.add(weekly);
 			}

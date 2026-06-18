@@ -3,7 +3,8 @@ package dto;
 import java.io.Serializable;
 
 public class QuickDTO implements Serializable{
-	private int simpleRec; //ID
+	private int id; //ID
+	private int user_id; //ユーザーID
 	private String event; //出来事
 	private String belief; //信念
 	private String result; //結果
@@ -13,9 +14,10 @@ public class QuickDTO implements Serializable{
 	private String created_at; //登録日
 
 
-public QuickDTO(int simpleRec,String event,String belief,String result,String reframe,String txtFree,int emotion_id,String created_at) {
+public QuickDTO(int id,int user_id,String event,String belief,String result,String reframe,String txtFree,int emotion_id,String created_at) {
 	super();
-	this.simpleRec=simpleRec;
+	this.id = id;
+	this.user_id = user_id;
 	this.event = event;
 	this.belief = belief;
 	this.result = result;
@@ -25,12 +27,20 @@ public QuickDTO(int simpleRec,String event,String belief,String result,String re
 	this.created_at = created_at;
 }
 
-public int getSimpleRec() {
-	return simpleRec;
+public int getId() {
+	return id;
 }
 
-public void setSimpleRec(int simpleRec) {
-	this.simpleRec = simpleRec;
+public void setId(int id) {
+	this.id = id;
+}
+
+public int getUser_id() {
+	return user_id;
+}
+
+public void setUser_id(int user_id) {
+	this.user_id = user_id;
 }
 
 public String getEvent() {
@@ -91,7 +101,8 @@ public void setCreated_at(String created_at) {
 
 public QuickDTO() {
 	super();
-	this.simpleRec = 0;
+	this.id = 0;
+	this.user_id = 0;
 	this.event = "";
 	this.belief = "";
 	this.result = "";

@@ -12,7 +12,7 @@
 	<c:set var="e" value="${weekList[0]}" />
 	<p>
 		id：
-		<c:out value="${e.weekRes_id}" />
+		<c:out value="${e.id}" />
 		<br> 期間：
 		<c:out value="${e.weeklyRes}" />
 		<br> コメントid：

@@ -19,7 +19,7 @@ public class UserDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -46,10 +46,15 @@ public class UserDAO {
 				user.setUpdated_at(rs.getString("updated_at"));
 				user.setCreated_at(rs.getString("created_at"));
 			}
+		//SQL実行時にエラーが起きたら入る
 		} catch (SQLException e) {
 			e.printStackTrace();
+			user = null;
+		//JDBCドライバが見つからないときに入る
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			user = null;
+		//失敗しても成功しても入る
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -57,6 +62,7 @@ public class UserDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
+					user = null;
 				}
 			}
 		}
@@ -76,7 +82,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -112,42 +118,50 @@ public class UserDAO {
 		}
 		
 //ログイン	ページ
-		//ユーザーログイン(引数で指定されたidpwでログイン成功ならtrueを返す）
-		public boolean isLoginOK(UserDTO user) {
+		//ユーザーログイン(引数で指定されたidpwでログイン成功ならユーザー情報を返し、失敗ならnullを返す）
+		public UserDTO Login(String userName, String pw) {
 			Connection conn = null;
-			boolean loginResult = false;
+			UserDTO user = null; //成功したらユーザー情報を詰めて返す
 
 			try {
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
-				// SELECT文を準備する
-				String sql = "SELECT count(*) FROM Users WHERE userName=? AND pw=?";
+				// SELECT文を準備する(ログイン判定+ユーザー情報取得)
+				String sql = "SELECT * FROM Users WHERE userName=? AND pw=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
-				pStmt.setString(1, user.getUserName());
-				pStmt.setString(2, user.getPw());
+				pStmt.setString(1, userName);
+				pStmt.setString(2, pw);
 				
 
 				// SELECT文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
 
 				// ユーザーIDとパスワードが一致するユーザーがいれば結果をtrueにする
-				rs.next();
-				if (rs.getInt("count(*)") == 1) {
-					loginResult = true;
+				if (rs.next()) {
+					user = new UserDTO();
+					user.setUser_id(rs.getInt("user_id"));
+					user.setUserName(rs.getString("userName"));
+					user.setPw(rs.getString("pw"));
+					user.setLoginStreak(rs.getInt("loginStreak"));
+					user.setDaysTotalLogin(rs.getInt("daysTotalLogin"));
+					user.setDepthCurrent(rs.getInt("depthCurrent"));
+					user.setCurrentPos(rs.getInt("currentPos"));
+					user.setUpdated_at(rs.getString("updated_at"));
+					user.setCreated_at(rs.getString("created_at"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-				loginResult = false;
+				user = null;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				loginResult = false;
+				user = null;
 			} finally {
 				// データベースを切断
 				if (conn != null) {
@@ -155,13 +169,13 @@ public class UserDAO {
 						conn.close();
 					} catch (SQLException e) {
 						e.printStackTrace();
-						loginResult = false;
+						user = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return loginResult;
+			return user;
 		}
 
 //　ホームページ	
@@ -175,7 +189,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -218,7 +232,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 	
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 	
@@ -262,7 +276,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -305,7 +319,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -348,7 +362,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -392,7 +406,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 		
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 		

@@ -33,7 +33,7 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql1 = "INSERT INTO DailyRec VALUES (0, ?, ?, ?, 0, ?, ?, yearWeek(CURDATE(),1))";
+			String sql1 = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文初期値を自動で入力する(Stringのみ)
@@ -69,7 +69,7 @@ public class DailyDAO {
 			}
 			
 			//2.Questionテーブル
-			String sql2 = "INSERT INTO Question VALUES (0, ?, ?)";
+			String sql2 = "INSERT INTO Question VALUES (0, ?, 0, ?)";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			// SQL文初期値を自動で入力する(Stringのみ)

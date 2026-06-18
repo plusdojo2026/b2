@@ -43,8 +43,8 @@ public class LoginServlet extends HttpServlet{
 		String pw = request.getParameter("pw");
 		
 		// ログイン処理を行う
-				UserDAO iDao = new UserDAO();
-				UserDTO user = iDao.Login(userName, pw);  //ログイン成功したらUserDTOを返す
+				UserDAO lDao = new UserDAO();
+				UserDTO user = lDao.Login(userName, pw);  //ログイン成功したらUserDTOを返す
 				if (user != null) { // ログイン成功したとき
 					// セッションスコープにユーザー情報を格納する
 					HttpSession session = request.getSession();

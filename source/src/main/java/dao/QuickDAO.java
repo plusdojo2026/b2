@@ -12,7 +12,7 @@ import dto.QuickDTO;
 
 public class QuickDAO{
 
-	public List<QuickDTO> select(QuickDTO week) {
+	public List<QuickDTO> select(QuickDTO quick) {
 		Connection conn = null;
 		List<QuickDTO> quickList = new ArrayList<QuickDTO>();
 
@@ -21,11 +21,13 @@ public class QuickDAO{
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				// データベースに接続する
-				conn = DriverManager.getConnection("");			
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");			
 
 				// SQL文を準備する
-				String sql = "SELECT simpleRec, event, belief, result, reframe, txtFree, emotion_id, created_at "
-								 + " FROM  SimpleRec ORDER BY simpleRec";
+				String sql = "SELECT id, user_id, event, belief, result, reframe, txtFree, emotion_id, created_at "
+								 + " FROM  SimpleRec ORDER BY id";
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
@@ -35,7 +37,8 @@ public class QuickDAO{
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
 					QuickDTO Quick = new QuickDTO(
-							rs.getInt("simpleRec"), 
+							rs.getInt("id"), 
+							rs.getInt("user_id"),
 							rs.getString("event"), 
 							rs.getString("belief"), 
 							rs.getString("result"), 
@@ -78,21 +81,26 @@ public class QuickDAO{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
 	        // データベースに接続する
-	        conn = DriverManager.getConnection("");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?\"\n"
+	        		+ "						+ \"characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true\",\n"
+	        		+ "						\"root\", \"password");
 
 	        // SQL文を準備する
-	        String sql = "INSERT INTO SimpleRec(event, belief, result, reframe, txtFree, emotion_id, created_at) "
-	                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO SimpleRec(user_id,event, belief, result, reframe, txtFree, emotion_id, created_at) "
+	                   + "VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 
 	        // SQL文に値をセットする
-	        pStmt.setString(1, dto.getEvent());
-	        pStmt.setString(2, dto.getBelief());
-	        pStmt.setString(3, dto.getResult());
-	        pStmt.setString(4, dto.getReframe());
-	        pStmt.setString(5, dto.getTxtFree());
-	        pStmt.setInt(6, dto.getEmotion_id());
+	        pStmt.setInt(1, dto.getUser_id());
+	        pStmt.setString(2, dto.getEvent());
+	        pStmt.setString(3, dto.getBelief());
+	        pStmt.setString(4, dto.getResult());
+	        pStmt.setString(5, dto.getReframe());
+	        pStmt.setString(6, dto.getTxtFree());
+	        pStmt.setInt(7, dto.getEmotion_id());
+	        pStmt.setString(8, dto.getCreated_at());
+
 
 	        // SQL文を実行する（1件登録できたら成功）
 	        if (pStmt.executeUpdate() == 1) {
@@ -120,5 +128,5 @@ public class QuickDAO{
 	    // 結果を返す
 	    return result;
 	}
-
 }
+

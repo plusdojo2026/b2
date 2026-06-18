@@ -32,12 +32,14 @@ public class WeeklyServlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 		
 		// 一覧表示のために全件取得
-        WeeklyDAO dao = new WeeklyDAO();
-        WeeklyDTO dto = new WeeklyDTO();
-        List<WeeklyDTO> list = dao.select(dto);
+        WeeklyDAO weekDao = new WeeklyDAO();
+        WeeklyDTO weekDto = new WeeklyDTO();
+        List<WeeklyDTO> wList = weekDao.select(weekDto);
+        //List<DailyDTO> dList = DailyDao.select(DailyDto);
         
         //JSP に渡す
-        request.setAttribute("weekList", list);
+        request.setAttribute("weekList", wList);
+        //request.setAttribute("dayList", dList);
 
 	// 週間結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/weeklyRev.jsp");

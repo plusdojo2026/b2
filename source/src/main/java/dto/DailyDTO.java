@@ -4,65 +4,77 @@ import java.io.Serializable;
 
 public class DailyDTO implements Serializable {
 	/*
-	 * dailyRec_id : 主キー、auto increment
+	 * id : 主キー、auto increment
 	 * update_at, created_atはStringで実装、ソートなど作るときにはdate型へ変更必須
 	 * 
 	 */
 
 	//フィールド----------------------------------------------
 	//DiaryRecテーブル
-	private int dailyRec_id, emotion_id;
+	private int id, user_id, emotion_id;
 	private String freeForm, photo, positive, update_at, created_at;
-	//質問内容
-	private int question_id; //主キー
+	private double negativeRate, positiveRate, activeIndex;
+	private int yearWeek; //記録が何年何月何週のものかを判別する
+	//質問内容テーブル
+	private int question_id, qType; //question_id = Question.id(主キー)
 	private String question, created_atQcont;
-	//質問解答
-	private int questionAns_id; //主キー
-	private String questionAns, created_atQans;
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int dailyRec_id, String freeForm, String photo, String positive, int emotion_id, String update_at,
-			String created_at, int question_id, String question, String created_atQcont, int questionAns_id, String questionAns, String created_atQans) {
+	public DailyDTO(int id, int user_id, String freeForm, String photo, String positive, int emotion_id, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String update_at,
+			String created_at, int question_id, String question, int qType, String created_atQcont) {
 		super();
-		this.dailyRec_id = dailyRec_id;
+		this.id = id;
+		this.user_id = user_id;
 		this.freeForm = freeForm;
 		this.photo = photo;
 		this.positive = positive;
 		this.emotion_id = emotion_id;
+		this.negativeRate = negativeRate;
+		this.positiveRate = positiveRate;
+		this.activeIndex = activeIndex;
+		this.yearWeek = yearWeek;
 		this.update_at = update_at;
 		this.created_at = created_at;
-		
+
 		this.question_id = question_id;
 		this.question = question;
+		this.qType = qType;
 		this.created_atQcont = created_atQcont;
-		this.questionAns_id = questionAns_id;
-		this.created_atQans = created_atQans;
 	}
 	//一応入力なしを作ってみた
 	public DailyDTO() {
 		super();
-		this.dailyRec_id = 0;
+		this.id = 0;
+		this.user_id = 0;
 		this.freeForm = "";
 		this.photo = "";
 		this.positive = "";
 		this.emotion_id = 0;
+		this.negativeRate = 0;
+		this.positiveRate = 0;
+		this.activeIndex = 0;
+		this.yearWeek = 0;
 		this.update_at = "";
 		this.created_at = "";
 		
 		this.question_id = 0;
 		this.question = "";
+		this.qType = 0;
 		this.created_atQcont = "";
-		
-		this.questionAns_id = 0;
-		this.created_atQans = "";
 	}
 	
 	//ゲッタ、セッタ------------------------------------------------
-	public int getDailyRec_id() {
-		return dailyRec_id;
+	public int getId() {
+		return id;
 	}
-	public void setDailyRec_id(int dailyRec_id) {
-		this.dailyRec_id = dailyRec_id;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	public String getFreeForm() {
 		return freeForm;
@@ -82,11 +94,29 @@ public class DailyDTO implements Serializable {
 	public void setPositive(String positive) {
 		this.positive = positive;
 	}
-	public int getEmotion() {
+	public int getEmotion_id() {
 		return emotion_id;
 	}
-	public void setEmotion(int emotion_id) {
+	public void setEmotion_id(int emotion_id) {
 		this.emotion_id = emotion_id;
+	}
+	public double getNegativeRate() {
+		return negativeRate;
+	}
+	public void setNegativeRate(double negativeRate) {
+		this.negativeRate = negativeRate;
+	}
+	public double getPositiveRate() {
+		return positiveRate;
+	}
+	public void setPositiveRate(double positiveRate) {
+		this.positiveRate = positiveRate;
+	}
+	public double getActiveIndex() {
+		return activeIndex;
+	}
+	public void setActiveIndex(double activeIndex) {
+		this.activeIndex = activeIndex;
 	}
 	public String getUpdate_at() {
 		return update_at;
@@ -112,29 +142,23 @@ public class DailyDTO implements Serializable {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	public int getqType() {
+		return qType;
+	}
+	public void setqType(int qType) {
+		this.qType = qType;
+	}
 	public String getCreated_atQcont() {
 		return created_atQcont;
 	}
 	public void setCreated_atQcont(String created_atQcont) {
 		this.created_atQcont = created_atQcont;
 	}
-	public int getQuestionAns_id() {
-		return questionAns_id;
+	public int getYearWeek() {
+		return yearWeek;
 	}
-	public void setQuestionAns_id(int questionAns_id) {
-		this.questionAns_id = questionAns_id;
-	}
-	public String getQuestionAns() {
-		return questionAns;
-	}
-	public void setQuestionAns(String questionAns) {
-		this.questionAns = questionAns;
-	}
-	public String getCreated_atQans() {
-		return created_atQans;
-	}
-	public void setCreated_atQans(String created_atQans) {
-		this.created_atQans = created_atQans;
+	public void setYearWeek(int yearWeek) {
+		this.yearWeek = yearWeek;
 	}
 	
 }

@@ -24,7 +24,7 @@ public class UserDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT user_id, userName, pw, loginStreak, daysTotalLogin, depthCurrent, currentPos, updated_at, created_at FROM Users WHERE user_id = ?";
+			String sql = "SELECT id, userName, pw, loginStreak, daysTotalLogin, depthCurrent, currentPos, updated_at, created_at FROM Users WHERE id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -36,7 +36,7 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする
 			if (rs.next()) {
 				user = new UserDTO();
-				user.setUser_id(rs.getInt("user_id"));
+				user.setId(rs.getInt("id"));
 				user.setUserName(rs.getString("userName"));
 				user.setPw(rs.getString("pw"));
 				user.setLoginStreak(rs.getInt("loginStreak"));
@@ -117,6 +117,55 @@ public class UserDAO {
 			return result;
 		}
 		
+		//登録の重複を確認(usernameとpw)→trueの場合組み合わせが存在する
+			public boolean existsUser(String UserName, String pw) {
+				Connection conn = null;
+				boolean exists = false;
+
+				try {
+					// JDBCドライバを読み込む
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					// データベースに接続する
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+							"root", "password");
+
+					// SQL文を準備する
+					String sql = "SELECT COUNT(*) FROM Users WHERE userName=? AND pw=?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+
+					// SQL文を完成させる
+						pStmt.setString(1, UserName);
+						pStmt.setString(2, pw);
+					
+					// SELECT文を実行し、結果を取得する
+					ResultSet rs = pStmt.executeQuery();
+					
+					// SQL文を実行する
+					if (rs.next()) {
+						exists = rs.getInt(1) > 0; //COUNTの結果が1件以上なら「存在する」と判断する
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				// 結果を返す
+				return exists;
+			}
+				
+		
 //ログイン	ページ
 		//ユーザーログイン(引数で指定されたidpwでログイン成功ならユーザー情報を返し、失敗ならnullを返す）
 		public UserDTO Login(String userName, String pw) {
@@ -133,7 +182,7 @@ public class UserDAO {
 						"root", "password");
 
 				// SELECT文を準備する(ログイン判定+ユーザー情報取得)
-				String sql = "SELECT * FROM Users WHERE userName=? AND pw=?";
+				String sql = "SELECT id, userName, pw, loginStreak, daysTotalLogin, depthCurrent, currentPos, updated_at, created_at FROM Users WHERE userName=? AND pw=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				pStmt.setString(1, userName);
@@ -146,7 +195,7 @@ public class UserDAO {
 				// ユーザーIDとパスワードが一致するユーザーがいれば結果をtrueにする
 				if (rs.next()) {
 					user = new UserDTO();
-					user.setUser_id(rs.getInt("user_id"));
+					user.setId(rs.getInt("id"));
 					user.setUserName(rs.getString("userName"));
 					user.setPw(rs.getString("pw"));
 					user.setLoginStreak(rs.getInt("loginStreak"));
@@ -194,7 +243,7 @@ public class UserDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "UPDATE Users SET daysTotalLogin= daysTotalLogin +1 WHERE user_id=?";
+				String sql = "UPDATE Users SET daysTotalLogin= daysTotalLogin +1 WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 				pStmt.setInt(1, userId);
@@ -237,7 +286,7 @@ public class UserDAO {
 						"root", "password");
 	
 				// SQL文を準備する
-				String sql = "UPDATE Users SET loginStreak = loginStreak +1 WHERE user_id=?";
+				String sql = "UPDATE Users SET loginStreak = loginStreak +1 WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				pStmt.setInt(1, userId);
@@ -281,7 +330,7 @@ public class UserDAO {
 							"root", "password");
 	
 					// SQL文を準備する
-					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 10 WHERE user_id=?";
+					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 10 WHERE id=?";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 					pStmt.setInt(1, userId);
@@ -324,7 +373,7 @@ public class UserDAO {
 							"root", "password");
 	
 					// SQL文を準備する
-					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 1 WHERE user_id=?";
+					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 1 WHERE id=?";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 					pStmt.setInt(1, userId);
@@ -367,7 +416,7 @@ public class UserDAO {
 							"root", "password");
 	
 					// SQL文を準備する
-					String sql = "UPDATE Users SET depthCurrent = depthCurrent - 30 WHERE user_id=?";
+					String sql = "UPDATE Users SET depthCurrent = depthCurrent - 30 WHERE id=?";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 					pStmt.setInt(1, userId);
@@ -411,13 +460,13 @@ public class UserDAO {
 						"root", "password");
 		
 				// SQL文を準備する
-				String sql = "UPDATE Users SET userName=?, pw=? WHERE user_id=?";
+				String sql = "UPDATE Users SET userName=?, pw=? WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 					
 				// SQL文を完成させる
 					pStmt.setString(1, user.getUserName());
 					pStmt.setString(2, user.getPw());
-					pStmt.setInt(3, user.getUser_id());
+					pStmt.setInt(3, user.getId());
 		
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {

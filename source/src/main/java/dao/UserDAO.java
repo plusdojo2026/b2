@@ -445,7 +445,7 @@ public class UserDAO {
 			}			
 
 //　マイページ
-		//　マイページ
+		//　マイページ(userNameとpwの編集)
 		public boolean updateUser(UserDTO user) {
 			Connection conn = null;
 			boolean result = false;
@@ -489,6 +489,6 @@ public class UserDAO {
 		
 			// 結果を返す
 			return result;
-		}		
+		}
 		
 }

@@ -4,12 +4,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.time.temporal.IsoFields;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.DailyDTO;
 import dto.WeeklyDTO;
 
 public class WeeklyDAO {
+	//週間結果ページ表示時に週間のDBから該当の週のデータをもってくるメソッド。
+	//weeklyResを渡したい。該当のWeeklyとDailyのデータを返したい。
 	public List<WeeklyDTO> select(WeeklyDTO week) {
 		Connection conn = null;
 		List<WeeklyDTO> weekList = new ArrayList<WeeklyDTO>();
@@ -23,26 +30,57 @@ public class WeeklyDAO {
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
-			// SQL文を準備する
-			String sql = "SELECT wr.weekRes_id, wr.weeklyRes, wr.avgPositive, "
-					+ "wc.analysisCmt, ms.moodType, wr.created_at "
-					+ "FROM WeekRes wr "
-					+ "JOIN WeekCmt wc ON wr.analysisCmt = wc.weekCmt_id "
-					+ "JOIN MoodSwings ms ON wr.moodType = ms.moodSwings_id "
-					+ "WHERE wr.weekRes_id = 2";
+
+			String weeklyRes = "2026-06-01~2026-06-07";
+			//最初の日を取り出す
+			String yearweek = weeklyRes.split("~")[0];
+			//LocalDateに変換
+			LocalDate date = LocalDate.parse(yearweek);
+
+			//年・月・日を取り出す
+			int year = date.getYear();
+			int month = date.getMonthValue();
+			int day = date.getDayOfMonth();
+			LocalDate date2 = LocalDate.of(year, month, day);
+
+			//年とISO週番号を出す
+			WeekFields wf = WeekFields.ISO;
+			int yearNum = date2.get(wf.weekBasedYear());
+			int weekNum = date2.get(wf.weekOfWeekBasedYear());
+
+			//YYYYWWに変換
+			String StyearWeek = String.format("%d%02d", yearNum, weekNum);
+			int yearWeek = Integer.parseInt(StyearWeek);
+			String sqlDay = "SELECT positiveRate, negativeRate, activeIndex FROM DailyRes WHERE yearWeek = ?";
 			
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
 			
-			//SQL文を完成させる
-			//pStmt.setInt(1, week.getWeekRes_id());
+			pStmtDay.setInt(1, yearWeek);
 			
 			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+			
+			
+			// SQL文を準備する//idではなくweeklyResで指定する形に変更すること。"WHERE wr.weeklyRes = ?"
+			String sqlWeek = "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, "
+					+ "wc.analysisCmt, ms.moodType, wr.created_at "
+					+ "FROM WeekRes wr "
+					+ "JOIN WeekCmt wc ON wr.weekCmt_id = wc.weekCmt_id "
+					+ "JOIN MoodSwings ms ON wr.moodSwings_id = ms.moodSwings_id "
+					+ "WHERE wr.id = ?";
+			
+			PreparedStatement pStmtWeek = conn.prepareStatement(sqlWeek);
+			
+			//SQL文を完成させる//pStmt.setInt(1, weeklyRes);
+			pStmtWeek.setInt(1, 1);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmtWeek.executeQuery();
 
-			// 結果表をコレクションにコピーする
+			// 結果表をコレクションにコピーする//weekResの型をintからStringに変更すること
 			while (rs.next()) {
 				WeeklyDTO weekly = new WeeklyDTO(
-						rs.getInt("weekRes_id"), 
+						rs.getInt("id"), 
+						rs.getInt("user_id"), 
 						rs.getString("weeklyRes"), 
 						rs.getString("analysisCmt"), 
 						rs.getDouble("avgPositive"), 
@@ -72,7 +110,81 @@ public class WeeklyDAO {
 		// 結果を返す
 		return weekList;
 	}
-	public void aggregate() {
+	
+	//毎日記録登録時に週間のDBに新規追加・更新を入れるメソッド
+	
+	//毎日記録登録時に該当の日が含まれる週間のDBに更新・新規作成を入れるメソッド
+	public boolean aggregate(DailyDTO daily) {
+		Connection conn = null;
+		boolean result = false;
 		
+		try {
+	        // JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        // データベースに接続
+	        conn = DriverManager.getConnection(
+	                "jdbc:mysql://localhost:3306/heartwave?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
+	        
+	      //DailyDTOから渡されるので後で消す。
+	        int analysisCmt = 2;
+	        int avgPositive = 80;
+	        int moodType = 3;
+	        
+	        //yearweekを日付の文字列に変換
+	        int yearweek = 202615; //dailyのyearWeek。DailyDTOから渡されるので後で消す。
+
+	        int year = yearweek / 100;
+	        int week = yearweek % 100;
+
+	        LocalDate start = LocalDate.of(year, 1, 4).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week).with(ChronoField.DAY_OF_WEEK, 1);
+	        LocalDate end = start.plusDays(6);
+	        String weeklyRes = start + "~" + end;
+
+	        //BEGIN
+	        conn.setAutoCommit(false);
+
+	        //DELETE
+	        String sqlDelete = "DELETE FROM WeekRes WHERE weeklyRes = ?";
+
+			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
+	            ps.setString(1, weeklyRes);
+	            ps.executeUpdate();
+	        }
+
+	        //INSERT//user_idの扱い？
+	        String sqlInsert = "INSERT INTO WeekRes (weeklyRes, analysisCmt, avgPositive, moodType, created_at) "
+	                         + "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+
+	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
+	            ps.setString(1, weeklyRes);
+				ps.setInt(2, analysisCmt);
+				ps.setInt(3, avgPositive);
+				ps.setInt(4, moodType);
+	            ps.executeUpdate();
+	        }
+
+	        //COMMIT
+	        conn.commit();
+	        result = true;
+
+	    } catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 結果を返す
+		return result;
 	}
 }

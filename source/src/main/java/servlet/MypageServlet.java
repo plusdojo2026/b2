@@ -38,15 +38,15 @@ import dto.UserDTO;
 			// セッションを取得
 			HttpSession session = request.getSession();
 			// もしもログインしていなかったらログインサーブレットにリダイレクトする
-			if (session.getAttribute("user") == null) {
+			if (session.getAttribute("user") == null) { //セッションにuser(DTO)があるか確認
 				response.sendRedirect("/webapp/LoginServlet");
 				return;
 			}
 			
-			//ログイン中のユーザーを取得
-			UserDTO loginUser = (UserDTO) session.getAttribute("user");
+			//ログイン中のユーザーを取得→キャスト
+			UserDTO loginUser = (UserDTO) session.getAttribute("user"); //セッションからUserDTOを取得
 			//更新対象のユーザーIDを取り出す
-			int myId =loginUser.getId();
+			int myId =loginUser.getId(); //UserDTOの中からidを取り出す
 			
 			// リクエストパラメータを取得する(フォームから送られた新しいuserNameとpwを取得)
 			request.setCharacterEncoding("UTF-8");
@@ -66,9 +66,9 @@ import dto.UserDTO;
 			
 			//usernameとpwの編集
 			UserDTO user = new UserDTO();  //ログイン成功したらUserDTOを返す
-			user.setId(myId);
-			user.setUserName(userName);
-			user.setPw(pw);
+			user.setId(myId); //どのユーザーを更新するか
+			user.setUserName(userName); //更新するもの
+			user.setPw(pw); //更新するもの
 			
 			
 			boolean result = uDao.updateUser(user);

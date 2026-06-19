@@ -9,7 +9,7 @@
 <body>
 <h1>簡易記録</h1>
 <p>感情タグ[必須]：</p>
-<form method="POST" action="/webapp/ReviewServlet">
+<form method="post" action="/webapp/QuickServlet">
 <input type="radio" name="emotion_id" value="1"> 怒り<br>
 <input type="radio" name="emotion_id" value="2"> 悲しみ<br>
 <input type="radio" name="emotion_id" value="3"> 悔しい<br>

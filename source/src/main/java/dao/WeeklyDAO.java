@@ -74,11 +74,10 @@ public class WeeklyDAO {
 				    daily.setPhoto(rsDay.getString("photo"));
 				    daily.setPositive(rsDay.getString("positive"));
 				    daily.setEmotionId(rsDay.getInt("emotion_id"));
-
+				    daily.setTypeId(rsDay.getInt("type_id"));
 				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
 				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
 				    daily.setActiveIndex(rsDay.getDouble("activeIndex"));
-
 				    daily.setYearWeek(rsDay.getInt("yearWeek"));
 				    daily.setUpdate_at(rsDay.getString("update_at"));
 				    daily.setCreated_at(rsDay.getString("created_at"));
@@ -183,24 +182,26 @@ public class WeeklyDAO {
 	        }
 	        //感情バランス指数
 	        double emoBalance = avgPositive - avgNegative;
-	      //分析した式を後で以下に入れること
+	      //分析した式を後で以下に入れること//細かい設定は後で考えましょう
 	        int analysisCmt = 2;
 	        //変動指数 = 活性指数の標準偏差
-	        double temp = 0.4;
-	        if (temp <= 20) {
+	        System.out.println(moodType);
+	        double sum = 0;
+	        for (double value : activeIndex) {
+	            sum += (value - avgActiveIndex) * (value - avgActiveIndex);
+	        }
+	        double temp = Math.sqrt(sum/activeIndex.size());
+	        if (temp <= 20 && emoBalance < 1) {
 	        	analysisCmt = 1;
-	        } else if (temp <= 40) {
+	        } else if (temp <= 40 && emoBalance < 1) {
 	        	analysisCmt = 2;
-	        } else if (temp <= 60) {
+	        } else if (temp <= 60 && emoBalance < 1) {
 	        	analysisCmt = 3;
-	        } else if (temp <= 80) {
+	        } else if (temp <= 80 && emoBalance < 1) {
 	        	analysisCmt = 4;
 	        } else {
 	        	analysisCmt = 5;
 	        }
-	        
-		      
-	       
 	        
 	        //yearWeekを日付の文字列に変換
 	        int yearWeek = 202615; //dailyのyearWeek。DailyDTOから渡されるので後で消す。

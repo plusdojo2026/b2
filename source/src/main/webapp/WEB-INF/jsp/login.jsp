@@ -8,5 +8,13 @@
 </head>
 <body>
 <h1>ログインページ</h1>
+<hr>
+
+		<form method="POST" action="/webapp/LoginServlet">
+			ID<input type="text" name="userName"><br> 
+			PW<input type="password" name="pw"><br> 
+			<input type="submit" name="login" value="ログイン">
+		</form>
+		
 </body>
 </html>

@@ -3,10 +3,10 @@
 -- ※「外部キーあり」のテーブルは最後に作成する
 
 -- データベース作成
-CREATE DATABASE heartwave;
+CREATE DATABASE b2;
 
 -- データベース遷移
-USE heartwave;
+USE b2;
 
 -- テーブル作成(users)
 CREATE TABLE Users(id INT AUTO_INCREMENT PRIMARY KEY, userName varchar(20), pw varchar(20), daysTotalLogin int DEFAULT 0, depthCurrent int DEFAULT 0, currentPos int DEFAULT 1, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -39,7 +39,7 @@ CREATE TABLE RecordType(id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100),
 CREATE TABLE DailyRec(id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), type_id int NOT NULL, FOREIGN KEY(type_id) REFERENCES RecordType(id), negativeRate double, positiveRate double, activeIndex double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(simpleRec)(外部キーあり)
-CREATE TABLE SimpleRec(id int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE SimpleRec(id int AUTO_INCREMENT PRIMARY KEY, user_id int, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 
 -- テーブル作成(weekRes)(外部キーあり)

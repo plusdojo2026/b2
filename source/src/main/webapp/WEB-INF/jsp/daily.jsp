@@ -14,6 +14,10 @@
 		    <input type="radio" name="emotion_id" class="daily">
 		</div>
 
+		<div>
+			
+		</div>
+
 	    <div>
 			<label class="label">自由入力</label><br>
 			<input type="text" name="freeForm" class="daily" placeholder="ランダムテーマに沿って自由に入力" >

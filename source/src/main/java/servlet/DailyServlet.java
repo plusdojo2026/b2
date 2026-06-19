@@ -47,15 +47,24 @@ public class DailyServlet extends HttpServlet {
 		// ログイン確認、してなければログイン画面へ
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/namecard/LoginServlet");
+			response.sendRedirect("/b2/LoginServlet");
 			return;
 		}
 
 		// リクエストパラメータを取得する
+
+		for(QuestionDTO q : qList) {
+			String qAns = request.getParameter(
+				"q_" + q.getId();
+			);
+
+			int score = Integer.parseInt(answer);
+		}
+
 		request.setCharacterEncoding("UTF-8");
 		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		int emotionId = Integer.parseInt(request.getParameter("emotionId"));
+		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
 		String positive= request.getParameter("positive");

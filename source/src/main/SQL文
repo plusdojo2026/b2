@@ -3,10 +3,10 @@
 -- ※「外部キーあり」のテーブルは最後に作成する
 
 -- データベース作成
-CREATE DATABASE heartwave;
+CREATE DATABASE b2;
 
 -- データベース遷移
-USE heartwave;
+USE b2;
 
 -- テーブル作成(users)
 CREATE TABLE Users(id INT AUTO_INCREMENT PRIMARY KEY, userName varchar(20), pw varchar(20), daysTotalLogin int DEFAULT 0, depthCurrent int DEFAULT 0, currentPos int DEFAULT 1, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);

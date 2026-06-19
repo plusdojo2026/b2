@@ -9,6 +9,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import dto.DailyDTO;
@@ -149,22 +150,63 @@ public class WeeklyDAO {
 	        // JDBCドライバを読み込む
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	        // データベースに接続
+	        // データベースに接続//後でデータベース変更しておくこと
 	        conn = DriverManager.getConnection(
 	                "jdbc:mysql://localhost:3306/heartwave?"
 	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	                "root", "password");
 	        
-	      //DailyDTOから渡されるので後で消す。
-	        int analysisCmt = 2;
-	        int avgPositive = 80;
-	        int moodType = 3;
+	        //その日が属す週の各データをとってくる
+	       //String sql = SELECT typeId, positiveRate, activeIndex FROM DailyRec WHERE WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC"
 	        
-	        //yearweekを日付の文字列に変換
-	        int yearweek = 202615; //dailyのyearWeek。DailyDTOから渡されるので後で消す。
+	        //平均ポジティブ率(double)//1行目はダミー後で消す
+			List<Double> positiveRate = new ArrayList<>(Arrays.asList(0.8, 0.7, 0.9, 0.8, 0.7, 0.9, 0.8));
+			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
+			//平均ネガティブ率(double)//1行目はダミー後で消す
+			List<Double> negativeRate = new ArrayList<>(Arrays.asList(0.8, 0.7, 0.9, 0.8, 0.7, 0.9, 0.8));
+			double avgNegative = negativeRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
+			
+	      //５段階評価で考える？0~20:凪，21~40：穏やか，41~60：平均的，61~80：やや激しめ，81~100： ジェットコースター
+	        List<Double> activeIndex = new ArrayList<>(Arrays.asList(50.0, 40.0, 60.0, 70.0, 80.0, 30.0, 20.0));
+			double avgActiveIndex = activeIndex.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+	        int moodType = 1;
+	        if (avgActiveIndex <= 20) {
+	        	moodType = 1;
+	        } else if (avgActiveIndex <= 40) {
+	        	moodType = 2;
+	        } else if (avgActiveIndex <= 60) {
+	        	moodType = 3;
+	        } else if (avgActiveIndex <= 80) {
+	        	moodType = 4;
+	        } else {
+	        	moodType = 5;
+	        }
+	        //感情バランス指数
+	        double emoBalance = avgPositive - avgNegative;
+	      //分析した式を後で以下に入れること
+	        int analysisCmt = 2;
+	        //変動指数 = 活性指数の標準偏差
+	        double temp = 0.4;
+	        if (temp <= 20) {
+	        	analysisCmt = 1;
+	        } else if (temp <= 40) {
+	        	analysisCmt = 2;
+	        } else if (temp <= 60) {
+	        	analysisCmt = 3;
+	        } else if (temp <= 80) {
+	        	analysisCmt = 4;
+	        } else {
+	        	analysisCmt = 5;
+	        }
+	        
+		      
+	       
+	        
+	        //yearWeekを日付の文字列に変換
+	        int yearWeek = 202615; //dailyのyearWeek。DailyDTOから渡されるので後で消す。
 
-	        int year = yearweek / 100;
-	        int week = yearweek % 100;
+	        int year = yearWeek / 100;
+	        int week = yearWeek % 100;
 
 	        LocalDate start = LocalDate.of(year, 1, 4).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week).with(ChronoField.DAY_OF_WEEK, 1);
 	        LocalDate end = start.plusDays(6);
@@ -189,7 +231,7 @@ public class WeeklyDAO {
 	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
 	            ps.setString(1, weeklyRes);
 				ps.setInt(2, analysisCmt);
-				ps.setInt(3, avgPositive);
+				ps.setDouble(3, avgPositive);
 				ps.setInt(4, moodType);
 	            ps.executeUpdate();
 	        }

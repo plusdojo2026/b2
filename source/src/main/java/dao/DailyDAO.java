@@ -10,7 +10,7 @@ import dto.DailyDTO;
 public class DailyDAO {
 	/* 登録処理-----------------------------------------------
 	 * [引数:daily, 返り値:result]
-	 * (未実装)入力された設問データを集計、「ポジティブ率」「ネガティブ率」「感情活性指数」を算出する。
+	 * ・(未実装)入力された設問データを集計、「ポジティブ率」「ネガティブ率」「感情活性指数」を算出する。
 	 * ・単に入力されたデータを登録する
 	 */
 	public boolean insert(DailyDTO daily) {
@@ -67,7 +67,7 @@ public class DailyDAO {
 			if (pStmt1.executeUpdate() == 1) {
 				result = true;
 			}
-			
+			/*
 			//2.Questionテーブル
 			String sql2 = "INSERT INTO Question VALUES (0, ?, 0, ?)";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
@@ -88,22 +88,9 @@ public class DailyDAO {
 			if (pStmt2.executeUpdate() == 1) {
 				result = true;
 			}
-			
-			//3.QuestionAnsテーブル
-			String sql3 = "INSERT INTO QuestionAns VALUES (0, ?)";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getCreated_atQans() != null) {
-				pStmt3.setString(1, daily.getCreated_atQans());
-			} else {
-				pStmt3.setString(1, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt3.executeUpdate() == 1) {
-				result = true;
-			}
-			
+				*/
+		
+		//例外処理
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

@@ -9,13 +9,13 @@ public class DailyDTO implements Serializable {
 	 */
 
 	//フィールド----------------------------------------------
-	private int dailyId, userId, emotionId;
+	private int dailyId, userId, emotionId, typeId;
 	private String freeForm, photo, positive, update_at, created_at;
 	private double negativeRate, positiveRate, activeIndex;
 	private int yearWeek; //記録が何年何月何週のものかを判別する
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int dailyId, int userId, String freeForm, String photo, String positive, int emotionId, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String update_at,
+	public DailyDTO(int dailyId, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String update_at,
 			String created_at) {
 		super();
 		this.dailyId = dailyId;
@@ -24,6 +24,7 @@ public class DailyDTO implements Serializable {
 		this.photo = photo;
 		this.positive = positive;
 		this.emotionId = emotionId;
+		this.typeId = typeId;
 		this.negativeRate = negativeRate;
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
@@ -40,6 +41,7 @@ public class DailyDTO implements Serializable {
 		this.photo = "";
 		this.positive = "";
 		this.emotionId = 0;
+		this.typeId = 0;
 		this.negativeRate = 0;
 		this.positiveRate = 0;
 		this.activeIndex = 0;
@@ -66,6 +68,12 @@ public class DailyDTO implements Serializable {
 	}
 	public void setEmotionId(int emotionId) {
 		this.emotionId = emotionId;
+	}
+	public int getTypeId() {
+		return typeId;
+	}
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;
 	}
 	public String getFreeForm() {
 		return freeForm;

@@ -46,11 +46,15 @@ import dto.UserDTO;
 			String userName = request.getParameter("userName");
 			String pw = request.getParameter("pw");
 			
+			
 			//重複チェック
 			UserDAO nDao = new UserDAO();
-			int id = nDao.existsUser(userName, pw);
+			boolean exists = nDao.existsUser(userName, pw);
 			
-			if (id == 0) { // 重複あり
+			
+			
+			if (exists == true) { // 重複あり
+				System.out.println("miss");
 				request.setAttribute("newUserRegisterror", "このユーザーは既に登録されています");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); //再度新規登録ページを表示
 				dispatcher.forward(request, response);
@@ -62,17 +66,19 @@ import dto.UserDTO;
 			user.setUserName(userName);
 			user.setPw(pw);
 			
-			boolean result = nDao.insert(user);
+			int id = nDao.insert(user);
 			
-			if(result) { //新規登録成功
+			if(id != 0) { //新規登録成功
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", id);
 				
-				response.sendRedirect("login.jsp"); //loginページにとぶ
 				BonusDAO bonus = new BonusDAO();
 				boolean bingoAdd = false;
 				bingoAdd = bonus.createBingo(id);
 				System.out.println(bingoAdd);
+				
+				response.sendRedirect("/b2/LoginServlet"); //loginページにとぶ
 				return;
 				
 			}else { //新規登録失敗

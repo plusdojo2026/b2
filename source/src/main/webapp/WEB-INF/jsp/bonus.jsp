@@ -14,7 +14,7 @@
 
         <table class="bingo_table" cellspacing="20">
             <tr>
-                <td style="background-color: ${bingo.day1 == true ? 'red' : 'aqua'};">1</td>
+                <td style="background-color: ${bingo.day1 == true ? 'red' : 'aqua'};"><img alt="snail" src="img/Snail.png"></td>
                 <td style="background-color: ${bingo.day2 == true ? 'red' : 'aqua'};">2</td>
                 <td style="background-color: ${bingo.day3 == true ? 'red' : 'aqua'};">3</td>
                 <td style="background-color: ${bingo.day4 == true ? 'red' : 'aqua'};">4</td>

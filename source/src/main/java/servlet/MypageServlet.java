@@ -45,8 +45,6 @@ import dto.UserDTO;
 			
 			//ログイン中のユーザーを取得→キャスト
 			UserDTO loginUser = (UserDTO) session.getAttribute("user"); //セッションからUserDTOを取得
-			//更新対象のユーザーIDを取り出す
-			int myId =loginUser.getId(); //UserDTOの中からidを取り出す
 			
 			// リクエストパラメータを取得する(フォームから送られた新しいuserNameとpwを取得)
 			request.setCharacterEncoding("UTF-8");
@@ -55,9 +53,10 @@ import dto.UserDTO;
 			
 			//重複チェック
 			UserDAO uDao = new UserDAO();
-			boolean exists = uDao.existsUser(userName, pw);
+			int exists = uDao.existsUser(userName, pw);
+			boolean duplicated = (exists == 0);
 			
-			if (exists) { // 重複あり
+			if (duplicated) { // 重複あり
 				request.setAttribute("mypageError", "このユーザー名とパスワードの組み合わせは既に使われています");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp"); //再度新規登録ページを表示
 				dispatcher.forward(request, response);
@@ -66,7 +65,7 @@ import dto.UserDTO;
 			
 			//usernameとpwの編集
 			UserDTO user = new UserDTO();  //ログイン成功したらUserDTOを返す
-			user.setId(myId); //どのユーザーを更新するか
+			user.setId(loginUser.getId()); //どのユーザーを更新するか
 			user.setUserName(userName); //更新するもの
 			user.setPw(pw); //更新するもの
 			

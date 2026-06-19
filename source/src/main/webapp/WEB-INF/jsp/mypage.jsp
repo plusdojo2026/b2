@@ -8,5 +8,13 @@
 </head>
 <body>
 <h2>マイページ</h2>
+
+ログインID<input type="text" name="userName"><br> 
+パスワード<input type="password" name="pw"><br>
+パスワード（確認用）<input type="password" name="pw"><br> 
+<input type="submit" name="submit" value="更新"><br> 
+<input type="submit" name="submit" value="ログイン"><br>
+<input type="submit" name="submit" value="戻る"><br> 
+<input type="submit" name="submit" value="ログアウト"><br> 
 </body>
 </html>

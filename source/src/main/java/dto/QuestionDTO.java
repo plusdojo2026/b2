@@ -26,11 +26,11 @@ public class QuestionDTO implements Serializable {
 		this.questionId = questionId;
 	}
 
-	public int getqType() {
+	public int getQType() {
 		return qType;
 	}
 
-	public void setqType(int qType) {
+	public void setQType(int qType) {
 		this.qType = qType;
 	}
 

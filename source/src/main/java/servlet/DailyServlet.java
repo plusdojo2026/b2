@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.DailyDAO;
+import dao.QuestionDAO;
+import dto.QuestionDTO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -25,7 +31,11 @@ public class DailyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//設問を14問ランダムに選出する
-		List<QuestionDTO> questions = questionDao.findRandomQuestions(14);
+		QuestionDAO qDAO = new QuestionDAO();
+		List<QuestionDTO> qList = qDAO.select();
+		
+		//設問を格納
+		request.setAttribute("qList", qList);
 
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/daily.jsp");

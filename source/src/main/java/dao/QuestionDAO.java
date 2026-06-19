@@ -30,7 +30,7 @@ public class QuestionDAO {
 			 * 
 			 */
 			
-			String sql = "SELECT questionId, qType, question, created_atQcont, randQ FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
+			String sql = "SELECT id, qType, question, created_at, randQ FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//質問をABC項目ごとに2問取り出す

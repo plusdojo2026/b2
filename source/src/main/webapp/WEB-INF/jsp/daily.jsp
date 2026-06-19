@@ -24,7 +24,26 @@
 			<table border="1">
 				<c:forEach var="q" items="${qList}">
 					<tr>
-						<td>${q}</td>
+						<input type="hidden" name="qType" value="qType">
+						<td>Q.${q.id}</td>
+						<td>${q.question}</td>
+						<td>
+							<label>
+								<input type="radio" name="${q.id}" value="0">1
+							</label>
+							<label>
+								<input type="radio" name="${q.id}" value="1">2
+							</label>
+							<label>
+								<input type="radio" name="${q.id}" value="2">3
+							</label>
+							<label>
+								<input type="radio" name="${q.id}" value="3">4
+							</label>
+							<label>
+								<input type="radio" name="${q.id}" value="4">5
+							</label>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

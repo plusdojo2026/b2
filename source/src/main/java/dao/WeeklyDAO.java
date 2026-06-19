@@ -30,8 +30,10 @@ public class WeeklyDAO {
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
+			
 			String weeklyRes = week.getWeeklyRes();
 			//最初の日を取り出す
+
 			String yearweek = weeklyRes.split("~")[0];
 			//LocalDateに変換
 			LocalDate date = LocalDate.parse(yearweek);
@@ -50,7 +52,8 @@ public class WeeklyDAO {
 			//YYYYWWに変換
 			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
 			int yearWeek = Integer.parseInt(StYearWeek);
-			String sqlDay = "SELECT * FROM DailyRes WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+
+			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
 
 				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
 				pStmtDay.setInt(1, week.getUser_id());
@@ -132,6 +135,7 @@ public class WeeklyDAO {
 				}
 			}
 		}
+		
 		// 結果を返す
 		return weekList;
 	}

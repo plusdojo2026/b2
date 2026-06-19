@@ -27,21 +27,22 @@ public class WeeklyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// リクエストパラメータを取得する
-				request.setCharacterEncoding("UTF-8");
-		
-		//とある週のデータを取得
-        WeeklyDAO dao = new WeeklyDAO();
-        WeeklyDTO dto = new WeeklyDTO();
-        List<WeeklyDTO> List = dao.select(dto);
-        
-        //JSP に渡す
-        request.setAttribute("weekList", List);
 
-	// 週間結果ページにフォワードする
+		// リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
+
+		// とある週のデータを取得
+		WeeklyDAO dao = new WeeklyDAO();
+		WeeklyDTO dto = new WeeklyDTO();
+		dto.setWeeklyRes("2026-06-01~2026-06-07");
+		dto.setUser_id(1);
+		List<WeeklyDTO> List = dao.select(dto);
+
+		// JSP に渡す
+		request.setAttribute("weekList", List);
+
+		// 週間結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/weeklyRev.jsp");
 		dispatcher.forward(request, response);
 	}
-}	
-
+}

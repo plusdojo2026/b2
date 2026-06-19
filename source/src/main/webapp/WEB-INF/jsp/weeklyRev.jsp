@@ -25,7 +25,9 @@
 		<c:out value="${e.created_at}" />
 		<br>
 	</p>
+	
 	<h1>折れ線グラフ</h1>
+	
 	<canvas id="myLineChart"></canvas>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
@@ -38,7 +40,12 @@
       datasets: [
         {
           label: 'ポジティブ/ネガティブ率',
-          data: [-62, 65, -93, 85, -51, 66, -47],
+
+          data: [
+          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+              ${d.positiveRate * 100}${!s.last ? ',' : ''}
+          </c:forEach>
+          ],
           borderColor: "rgba(255,0,0,1)",
           backgroundColor: "rgba(0,0,0,0)"
         }
@@ -47,7 +54,7 @@
     options: {
       title: {
         display: true,
-        text: '気温（8月1日~8月7日）'
+        text: 'ポジティブ率'
       },
       scales: {
         yAxes: [{
@@ -56,7 +63,7 @@
             suggestedMin: 0,
             stepSize: 10,
             callback: function(value, index, values){
-              return  value +  '度'
+              return  value +  '%'
             }
           }
         }]
@@ -102,5 +109,15 @@
     }
   });
   </script>
+  <c:forEach var="d" items="${e.dailyList}">
+    <p>
+        日記ID：<c:out value="${d.id}" /><br>
+        内容：<c:out value="${d.freeForm}" /><br>
+        感情ID：<c:out value="${d.emotion_id}" /><br>
+        ポジティブ率：<c:out value="${d.positiveRate}" /><br>
+        作成日：<c:out value="${d.created_at}" />
+    </p>
+    <hr>
+</c:forEach>
 </body>
 </html>

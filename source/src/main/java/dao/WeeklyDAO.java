@@ -63,9 +63,7 @@ public class WeeklyDAO {
 				ResultSet rsDay = pStmtDay.executeQuery();
 
 				List<DailyDTO> dailyList = new ArrayList<>();
-
 				while (rsDay.next()) {
-
 				    DailyDTO daily = new DailyDTO();
 
 				    daily.setDailyId(rsDay.getInt("id"));
@@ -81,11 +79,10 @@ public class WeeklyDAO {
 				    daily.setYearWeek(rsDay.getInt("yearWeek"));
 				    daily.setUpdate_at(rsDay.getString("update_at"));
 				    daily.setCreated_at(rsDay.getString("created_at"));
-
 				    dailyList.add(daily);
 				}
 			
-			// SQL文を準備する//idではなくweeklyResで指定する形に変更すること。"WHERE wr.weeklyRes = ?"
+			// SQL文を準備する
 			String sqlWeek = "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, "
 					+ "wc.analysisCmt, ms.moodType, wr.created_at "
 					+ "FROM WeekRes wr "
@@ -155,8 +152,8 @@ public class WeeklyDAO {
 	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	                "root", "password");
 	        
-	        //その日が属す週の各データをとってくる
-	       //String sql = SELECT typeId, positiveRate, activeIndex FROM DailyRec WHERE WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC"
+	       //その日が属す週の各データをとってくる
+	       //String sql = SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC"
 	        
 	        //平均ポジティブ率(double)//1行目はダミー後で消す
 			List<Double> positiveRate = new ArrayList<>(Arrays.asList(0.8, 0.7, 0.9, 0.8, 0.7, 0.9, 0.8));
@@ -180,7 +177,7 @@ public class WeeklyDAO {
 	        } else {
 	        	moodType = 5;
 	        }
-	        //感情バランス指数
+	        //感情バランス指数：正なら明るく負なら暗い
 	        double emoBalance = avgPositive - avgNegative;
 	      //分析した式を後で以下に入れること//細かい設定は後で考えましょう
 	        int analysisCmt = 2;
@@ -190,17 +187,19 @@ public class WeeklyDAO {
 	        for (double value : activeIndex) {
 	            sum += (value - avgActiveIndex) * (value - avgActiveIndex);
 	        }
-	        double temp = Math.sqrt(sum/activeIndex.size());
-	        if (temp <= 20 && emoBalance < 1) {
-	        	analysisCmt = 1;
-	        } else if (temp <= 40 && emoBalance < 1) {
-	        	analysisCmt = 2;
-	        } else if (temp <= 60 && emoBalance < 1) {
-	        	analysisCmt = 3;
-	        } else if (temp <= 80 && emoBalance < 1) {
-	        	analysisCmt = 4;
+	        double std = Math.sqrt(sum/activeIndex.size());
+	        if (std < 10 && emoBalance <= 0) {
+	        	analysisCmt = 1; //一貫して明るい
+	        } else if (std < 10 && emoBalance > 0) {
+	        	analysisCmt = 2; //一貫して暗い
+	        } else if (10 <= std && std < 20 && emoBalance <= 0) {
+	        	analysisCmt = 3; //そこそこ波はありつつ明るめ
+	        } else if (10 <= std && std < 20 && emoBalance > 0) {
+	        	analysisCmt = 4; //そこそこ波はありつつ暗め
+	        } else if (20 <= std && emoBalance <= 0) {
+	        	analysisCmt = 5; //不安定ながらも明るい
 	        } else {
-	        	analysisCmt = 5;
+	        	analysisCmt = 6; //不安定だし暗い
 	        }
 	        
 	        //yearWeekを日付の文字列に変換

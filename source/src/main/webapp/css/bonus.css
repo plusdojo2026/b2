@@ -1,1 +1,27 @@
 @charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+}
+
+.title{
+    font-size: 50px;
+    font-weight: 500;
+    text-align: center;
+    color: blue;
+    margin: 20px auto;
+}
+
+
+.bingo_table{
+    margin: auto;
+}
+
+.bingo_table td{
+	font-size: 20px;
+    font-weight: 500;
+	text-align: center;
+    padding: 40px;
+    background-color: aqua;
+    border-radius: 50%;
+}

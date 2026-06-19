@@ -67,12 +67,12 @@ public class WeeklyDAO {
 
 				    DailyDTO daily = new DailyDTO();
 
-				    daily.setId(rsDay.getInt("id"));
-				    daily.setUser_id(rsDay.getInt("user_id"));
+				    daily.setDailyId(rsDay.getInt("id"));
+				    daily.setUserId(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
 				    daily.setPositive(rsDay.getString("positive"));
-				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+				    daily.setEmotionId(rsDay.getInt("emotion_id"));
 
 				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
 				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
@@ -178,7 +178,7 @@ public class WeeklyDAO {
 
 			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
 				ps.setString(1, weeklyRes);
-				ps.setInt(2, daily.getUser_id());
+				ps.setInt(2, daily.getUserId());
 	            ps.executeUpdate();
 	        }
 

@@ -34,8 +34,11 @@ public class WeeklyServlet extends HttpServlet {
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
 		WeeklyDTO dto = new WeeklyDTO();
-		dto.setWeeklyRes("2026-06-01~2026-06-07");
+		
+		//*ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
+		dto.setWeeklyRes("2026-06-08~2026-06-14");
 		dto.setUser_id(1);
+		
 		List<WeeklyDTO> List = dao.select(dto);
 
 		// JSP に渡す

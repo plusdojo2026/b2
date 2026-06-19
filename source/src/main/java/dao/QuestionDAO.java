@@ -30,7 +30,7 @@ public class QuestionDAO {
 			 * 
 			 */
 			
-			String sql = "SELECT id, qType, question, created_at, randQ FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
+			String sql = "SELECT id, question, qType, created_at FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//質問をABC項目ごとに2問取り出す
@@ -42,7 +42,7 @@ public class QuestionDAO {
 
 				while (rs.next()) {
 					//結果をコレクションに格納
-					QuestionDTO dto = new QuestionDTO(rs.getInt("questionId"),rs.getInt("qType"), rs.getString("question"), rs.getString("created_atQcont"));
+					QuestionDTO dto = new QuestionDTO(rs.getInt("id"),rs.getString("question"), rs.getInt("qType"), rs.getString("created_at"));
 					qList.add(dto);
 				}
 

@@ -20,16 +20,14 @@
 		    <input type="radio" name="emotion_id" class="daily">
 		</div>
 
-		<div>
-			<p>${qList}</p>
-			
-				<table border="1">
-					<c:forEach var="q" items="${qList}">
-					    <tr>
-					        <td>${q}</td>
-					    </tr>
-					</c:forEach>
-				</table>
+		<div>			
+			<table border="1">
+				<c:forEach var="q" items="${qList}">
+					<tr>
+						<td>${q}</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 
 <%@ page import="java.util.List" %>
@@ -76,6 +74,8 @@ qType=<%= q.getQType() %>
 			<label class="label">ポジティブ内容入力</label><br>
 			<input type="text" name="positive" class="daily" placeholder="ポジティブな出来事を入力" >
 		</div>
+
+		<input type="submit" name="submit" value="登録">
 	</form>
 </body>
 </html>

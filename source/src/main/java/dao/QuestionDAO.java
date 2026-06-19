@@ -3,13 +3,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.QuestionDTO;
 
 public class QuestionDAO {
 
-	public boolean select(QuestionDTO question) {
+	public List<QuestionDTO> select() {
 		Connection conn = null;
 		List<QuestionDTO> qList = new ArrayList<QuestionDTO>();
 
@@ -24,12 +27,10 @@ public class QuestionDAO {
 			/*
 			 * ~SQL文~
 			 * ・質問をABC項目ごとに2問取り出す
-			 * 1.
-			 * 2.
-			 * 3.
+			 * 
 			 */
 			
-			String sql = "SELECT question, created_atQcont, randQ FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
+			String sql = "SELECT id, question, qType, created_at FROM Question WHERE qType=? ORDER BY RAND() LIMIT 2";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//質問をABC項目ごとに2問取り出す
@@ -40,16 +41,9 @@ public class QuestionDAO {
 				ResultSet rs = pStmt.executeQuery();
 
 				while (rs.next()) {
-
-					QuestionDTO dto = new QuestionDTO();
-
-					dto.setQType(rs.getInt("qType"));
-					dto.setQuestion(rs.getString("question"));
-					dto.setCreatedAtQcont(
-						rs.getString("created_atQcont")
-					);
-
-					questionList.add(dto);
+					//結果をコレクションに格納
+					QuestionDTO dto = new QuestionDTO(rs.getInt("id"),rs.getString("question"), rs.getInt("qType"), rs.getString("created_at"));
+					qList.add(dto);
 				}
 
 				rs.close();
@@ -72,7 +66,7 @@ public class QuestionDAO {
 		}
 
 		// 結果を返す
-		return result;
+		return qList;
 	}
 
 }

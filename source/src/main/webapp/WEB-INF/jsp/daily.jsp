@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- QuestionDAOによる設問取得 -->
+<%@ page import="java.util.List" %>
+<%@ page import="dto.QuestionDTO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +20,45 @@
 		    <input type="radio" name="emotion_id" class="daily">
 		</div>
 
-		<div>
-			
+		<div>			
+			<table border="1">
+				<c:forEach var="q" items="${qList}">
+					<tr>
+						<td>${q}</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
+
+<%@ page import="java.util.List" %>
+<%@ page import="dto.QuestionDTO" %>
+
+<%
+List<QuestionDTO> qList =
+    (List<QuestionDTO>)request.getAttribute("qList");
+%>
+
+<p>取得件数：
+<%= qList != null ? qList.size() : 0 %>
+</p>
+
+<hr>
+
+<%
+if(qList != null){
+    for(QuestionDTO q : qList){
+%>
+
+<p>
+qType=<%= q.getQType() %>
+｜
+<%= q.getQuestion() %>
+</p>
+
+<%
+    }
+}
+%>
 
 	    <div>
 			<label class="label">自由入力</label><br>
@@ -32,5 +74,8 @@
 			<label class="label">ポジティブ内容入力</label><br>
 			<input type="text" name="positive" class="daily" placeholder="ポジティブな出来事を入力" >
 		</div>
-	</body>
+
+		<input type="submit" name="submit" value="登録">
+	</form>
+</body>
 </html>

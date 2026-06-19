@@ -5,32 +5,32 @@ import java.io.Serializable;
 public class QuestionDTO implements Serializable {
 
 	//フィールド
-	private int questionId, qType; //questionId = Question.id(主キー)
-	private String question, created_atQcont;
+	private int id, qType; //id = Question.id(主キー)
+	private String question, created_at;
 	
 	//コンストラクタ
-	public QuestionDTO(int questionId, int qType, String question, String created_atQcont) {
+	public QuestionDTO(int id, String question, int qType, String created_at) {
 		super();
-		this.questionId = questionId;
-		this.qType = qType;
+		this.id = id;
 		this.question = question;
-		this.created_atQcont = created_atQcont;
+		this.qType = qType;
+		this.created_at = created_at;
 	}
 
 	//ゲッタ、セッタ
-	public int getQuestionId() {
-		return questionId;
+	public int getId() {
+		return id;
 	}
 
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getqType() {
+	public int getQType() {
 		return qType;
 	}
 
-	public void setqType(int qType) {
+	public void setQType(int qType) {
 		this.qType = qType;
 	}
 
@@ -42,11 +42,11 @@ public class QuestionDTO implements Serializable {
 		this.question = question;
 	}
 
-	public String getCreated_atQcont() {
-		return created_atQcont;
+	public String getCreated_at() {
+		return created_at;
 	}
 
-	public void setCreated_atQcont(String created_atQcont) {
-		this.created_atQcont = created_atQcont;
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
 	}
 }

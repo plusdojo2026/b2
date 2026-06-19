@@ -48,6 +48,7 @@ public class QuickServlet extends HttpServlet {
 
 	    // DTO に詰める
 	    QuickDTO qdto = new QuickDTO();
+	    qdto.setUser_id(1);
 	    qdto.setEvent(event);
 	    qdto.setBelief(belief);
 	    qdto.setResult(resultTxt);

@@ -24,7 +24,7 @@ CREATE TABLE Tips(id int PRIMARY KEY, tips varchar(500), created_at TIMESTAMP DE
 CREATE TABLE Emotion(id int PRIMARY KEY, emotion varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(question)
-CREATE TABLE Question(id int PRIMARY KEY, question varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE Question(id int PRIMARY KEY, question varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, randQ double);
 
 -- テーブル作成(weekCmt)
 CREATE TABLE WeekCmt(id int PRIMARY KEY, analysisCmt varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.QuickDAO;
 import dto.QuickDTO;
 
 
@@ -54,13 +55,18 @@ public class QuickServlet extends HttpServlet {
 	    qdto.setTxtFree(txtFree);
 	    qdto.setEmotion_id(emotionId);
 	    
+	    QuickDAO qdao = new QuickDAO();
+	    boolean result = qdao.insert(qdto);
+	    System.out.println(result);
+	    
+	    
 	    //テスト用本番はセッションスコープ
 	    int user_id = 1;
 	    
 	    //ポップアップを成功と表示
 
 	    // 結果ページにフォワード
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/review.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 	    dispatcher.forward(request, response);
 	}
 }

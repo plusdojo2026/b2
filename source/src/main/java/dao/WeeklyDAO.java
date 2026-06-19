@@ -30,8 +30,10 @@ public class WeeklyDAO {
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
+			
 			String weeklyRes = week.getWeeklyRes();
 			//最初の日を取り出す
+
 			String yearweek = weeklyRes.split("~")[0];
 			//LocalDateに変換
 			LocalDate date = LocalDate.parse(yearweek);
@@ -50,7 +52,8 @@ public class WeeklyDAO {
 			//YYYYWWに変換
 			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
 			int yearWeek = Integer.parseInt(StYearWeek);
-			String sqlDay = "SELECT * FROM DailyRes WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+
+			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
 
 				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
 				pStmtDay.setInt(1, week.getUser_id());
@@ -64,12 +67,12 @@ public class WeeklyDAO {
 
 				    DailyDTO daily = new DailyDTO();
 
-				    daily.setId(rsDay.getInt("id"));
-				    daily.setUser_id(rsDay.getInt("user_id"));
+				    daily.setDailyId(rsDay.getInt("id"));
+				    daily.setUserId(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
 				    daily.setPositive(rsDay.getString("positive"));
-				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+				    daily.setEmotionId(rsDay.getInt("emotion_id"));
 
 				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
 				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
@@ -132,6 +135,7 @@ public class WeeklyDAO {
 				}
 			}
 		}
+		
 		// 結果を返す
 		return weekList;
 	}
@@ -174,7 +178,7 @@ public class WeeklyDAO {
 
 			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
 				ps.setString(1, weeklyRes);
-				ps.setInt(2, daily.getUser_id());
+				ps.setInt(2, daily.getUserId());
 	            ps.executeUpdate();
 	        }
 

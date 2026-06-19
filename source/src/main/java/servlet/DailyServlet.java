@@ -23,6 +23,10 @@ public class DailyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		//設問を14問ランダムに選出する
+		List<QuestionDTO> questions = questionDao.findRandomQuestions(14);
+
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/daily.jsp");
 		dispatcher.forward(request, response);
@@ -39,10 +43,35 @@ public class DailyServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String emotion_id = request.getParameter("emotion_id");
-		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
+		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		int emotionId = Integer.parseInt(request.getParameter("emotionId"));
+		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
 		String positive= request.getParameter("positive");
+
+		String update_at = request.getParameter("update_at");
+		String created_at = request.getParameter("created_at");
+
+		//リクエストパラメータ：設問解答
+		int q1 = Integer.parseInt(request.getParameter("q1"));
+		int q2 = Integer.parseInt(request.getParameter("q2"));
+		int q3 = Integer.parseInt(request.getParameter("q3"));
+		int q4 = Integer.parseInt(request.getParameter("q4"));
+		int q5 = Integer.parseInt(request.getParameter("q5"));
+		int q6 = Integer.parseInt(request.getParameter("q6"));
+		int q7 = Integer.parseInt(request.getParameter("q7"));
+		int q8 = Integer.parseInt(request.getParameter("q8"));
+		int q9 = Integer.parseInt(request.getParameter("q9"));
+		int q10 = Integer.parseInt(request.getParameter("q10"));
+		int q11 = Integer.parseInt(request.getParameter("q11"));
+		int q12 = Integer.parseInt(request.getParameter("q12"));
+		int q13 = Integer.parseInt(request.getParameter("q13"));
+		int q14 = Integer.parseInt(request.getParameter("q14"));
+
+		// double positiveRate = calcPositiveRate(q1, q2, q3);
+		// double negativeRate = calcNegativeRate(q1, q2, q3);
+		// double activeIndex = calcActiveIndex(q1, q2, q3);
 
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();

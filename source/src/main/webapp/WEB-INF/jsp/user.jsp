@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ユーザーページ</title>
+<title>ココロノナミ|新規登録</title>
 </head>
 <body>
-ユーザーページ表示
-</body>
+<h1>新規登録</h1>
+<hr>
+
+		<form method="POST" action="${pageContext.request.contextPath}/UserServlet">
+			ID<input type="text" name="userName"><br> 
+			PW<input type="password" name="pw"><br> 
+			<input type="submit" name="login" value="ログイン">
+		</form>
+		</body>
 </html>

@@ -73,16 +73,16 @@ public class UserDAO {
 	
 //新規登録ページ
 		//新規登録(引数で指定されたレコードを登録し、成功したらtrueを返す)
-		public boolean insert(UserDTO user) {
+		public int insert(UserDTO user) {
 			Connection conn = null;
-			boolean result = false;
+			int id = 0;
 
 			try {
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -96,7 +96,27 @@ public class UserDAO {
 				
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
-					result = true;
+					
+					
+					//id取得
+					// SQL文を準備する
+					String sql2 = "SELECT id FROM Users WHERE userName=? AND pw=?";
+					PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+					
+					// SQL文を完成させる
+					pStmt2.setString(1, user.getUserName());
+					pStmt2.setString(2, user.getPw());
+					
+					// SELECT文を実行し、結果を取得する
+					ResultSet rs2 = pStmt2.executeQuery();
+					
+					// SQL文を実行する→idを取得
+					if (rs2.next()) {
+						id = rs2.getInt("id");
+						System.out.println("id="+id);
+						return id;
+					}
+					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -114,21 +134,21 @@ public class UserDAO {
 			}
 
 			// 結果を返す
-			return result;
+			return id;
 		}
 		
 		//登録の重複を確認(usernameとpw)→trueの場合組み合わせが存在する
-			public int existsUser(String UserName, String pw) {
+			public boolean existsUser(String UserName, String pw) {
 				Connection conn = null;
 				boolean exists = false;
-				int id = 0;
+				
 
 				try {
 					// JDBCドライバを読み込む
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 
@@ -148,20 +168,7 @@ public class UserDAO {
 						exists = rs.getInt(1) > 0; //COUNTの結果が1件以上なら「存在する」と判断する
 					}
 					
-					if(exists == false){
-						// SQL文を準備する
-						String sql2 = "SELECT id FROM Users WHERE userName=? AND pw=?";
-						PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-						
-						// SELECT文を実行し、結果を取得する
-						ResultSet rs2 = pStmt2.executeQuery();
-						
-						// SQL文を実行する→idを取得
-						if (rs2.next()) {
-							id = rs2.getInt("id");
-							return id;
-						}
-					}
+
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -179,7 +186,7 @@ public class UserDAO {
 				}
 
 				// 結果を返す
-				return id;
+				return exists;
 			}
 				
 		
@@ -194,7 +201,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -255,7 +262,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -298,7 +305,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 	
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 	
@@ -341,7 +348,7 @@ public class UserDAO {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 			
 						// データベースに接続する
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 								"root", "password");
 			
@@ -385,7 +392,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -428,7 +435,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -471,7 +478,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
@@ -514,7 +521,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 
@@ -559,7 +566,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 		
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 		

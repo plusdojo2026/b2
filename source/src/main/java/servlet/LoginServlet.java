@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet{
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);  //user=UserDTOをそのまま保存
 				
-					response.sendRedirect("home.jsp"); //homeページにとぶ
+					response.sendRedirect("/b2/HomeServlet");  //homeページにとぶ
 					
 				}else {// ログイン失敗したとき
 					request.setAttribute("loginError", "ユーザー名またはパスワードが違います");

@@ -25,3 +25,7 @@
     background-color: aqua;
     border-radius: 50%;
 }
+
+.bingo_table img{
+	width: 80px;
+}

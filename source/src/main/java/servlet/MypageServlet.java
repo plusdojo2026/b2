@@ -43,18 +43,15 @@ import dto.UserDTO;
 				return;
 			}
 			
-			// リクエストパラメータを取得する
-			request.setCharacterEncoding("UTF-8");
-			
 			//ログイン中のユーザーを取得
 			UserDTO loginUser = (UserDTO) session.getAttribute("user");
 			//更新対象のユーザーIDを取り出す
 			int myId =loginUser.getId();
-	
-			//フォームから送られた新しいuserNameとpwを取得
+			
+			// リクエストパラメータを取得する(フォームから送られた新しいuserNameとpwを取得)
+			request.setCharacterEncoding("UTF-8");
 			String userName = request.getParameter("userName");
 			String pw = request.getParameter("pw");
-			
 			
 			//重複チェック
 			UserDAO uDao = new UserDAO();

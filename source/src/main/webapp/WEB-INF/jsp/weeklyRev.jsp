@@ -95,13 +95,27 @@ var myLineChart = new Chart(ctx, {
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['8月1日', '8月2日', '8月3日', '8月4日', '8月5日', '8月6日', '8月7日'],
+    	labels: [
+    	      <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+    	        '${d.created_at.substring(5,7) + 0}月${d.created_at.substring(8,10) + 0}日'
+    	        ${!s.last ? ',' : ''}
+    	      </c:forEach>
+    	    ],
       datasets: [
         {
-          label: 'ポジティブ/ネガティブ率',
-          data: [-62, 65, -93, 85, -51, 66, -47],
+          label: 'ポジティブ率',
+          data: [<c:forEach var="d" items="${e.dailyList}" varStatus="s">
+            ${d.positiveRate * 100}${!s.last ? ',' : ''}
+          </c:forEach>],
           backgroundColor: "rgba(219,39,91,0.5)"
-        }
+        },
+        {
+            label: 'ネガティブ率',
+            data: [<c:forEach var="d" items="${e.dailyList}" varStatus="s">
+              ${d.negativeRate * -100}${!s.last ? ',' : ''}
+            </c:forEach>],
+            backgroundColor: "rgba(130,201,169,0.5)"
+          }
       ]
     },
     options: {

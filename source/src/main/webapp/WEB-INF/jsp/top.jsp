@@ -7,6 +7,7 @@
 <title>トップページ</title>
 </head>
 <body>
-トップページ
+<h1>トップページ</h1>
+
 </body>
 </html>

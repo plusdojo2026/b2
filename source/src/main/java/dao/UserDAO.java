@@ -19,7 +19,7 @@ public class UserDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -118,9 +118,10 @@ public class UserDAO {
 		}
 		
 		//登録の重複を確認(usernameとpw)→trueの場合組み合わせが存在する
-			public boolean existsUser(String UserName, String pw) {
+			public int existsUser(String UserName, String pw) {
 				Connection conn = null;
 				boolean exists = false;
+				int id = 0;
 
 				try {
 					// JDBCドライバを読み込む
@@ -146,6 +147,22 @@ public class UserDAO {
 					if (rs.next()) {
 						exists = rs.getInt(1) > 0; //COUNTの結果が1件以上なら「存在する」と判断する
 					}
+					
+					if(exists == false){
+						// SQL文を準備する
+						String sql2 = "SELECT id FROM Users WHERE userName=? AND pw=?";
+						PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+						
+						// SELECT文を実行し、結果を取得する
+						ResultSet rs2 = pStmt2.executeQuery();
+						
+						// SQL文を実行する→idを取得
+						if (rs2.next()) {
+							id = rs2.getInt("id");
+							return id;
+						}
+					}
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -162,7 +179,7 @@ public class UserDAO {
 				}
 
 				// 結果を返す
-				return exists;
+				return id;
 			}
 				
 		
@@ -271,7 +288,7 @@ public class UserDAO {
 			return result;
 		}
 		
-	    //　連続ログイン
+	    //　連続ログイン+1
 		public boolean loginStreak(int userId) {
 			Connection conn = null;
 			boolean result = false;
@@ -313,6 +330,49 @@ public class UserDAO {
 			// 結果を返す
 			return result;
 		}
+		
+		//　連続ログインリセット
+				public boolean loginStreakReset(int userId) {
+					Connection conn = null;
+					boolean result = false;
+			
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("com.mysql.cj.jdbc.Driver");
+			
+						// データベースに接続する
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+								"root", "password");
+			
+						// SQL文を準備する
+						String sql = "UPDATE Users SET loginStreak = 1 WHERE id=?";
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+						
+						pStmt.setInt(1, userId);
+			
+						// SQL文を実行する
+						if (pStmt.executeUpdate() == 1) {
+							result = true;
+						}
+					} catch (SQLException e) {
+							e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+							e.printStackTrace();
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+			
+					// 結果を返す
+					return result;
+				}
 			
 		//　水深①②③
 			//　①連続ログイン成功時(深度を+10)
@@ -442,7 +502,51 @@ public class UserDAO {
 				
 				// 結果を返す
 				return result;
-			}			
+			}
+
+			//最終ログイン日の更新
+			public boolean updatedLogin(int userId, String today) {
+				Connection conn = null;
+				boolean result = false;
+
+				try {
+					// JDBCドライバを読み込む
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					// データベースに接続する
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+							"root", "password");
+
+					// SQL文を準備する
+					String sql = "UPDATE Users SET updated_at = ? WHERE id=?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+					pStmt.setString(1, today);
+					pStmt.setInt(2, userId);
+
+					// SQL文を実行する
+					if (pStmt.executeUpdate() == 1) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				// 結果を返す
+				return result;
+			}
 
 //　マイページ
 		//　マイページ(userNameとpwの編集)

@@ -21,7 +21,7 @@ public class QuickDAO{
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");			
 
@@ -80,14 +80,14 @@ public class QuickDAO{
 	        // JDBCドライバを読み込む
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	        // データベースに接続する
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?\"\n"
-	        		+ "						+ \"characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true\",\n"
-	        		+ "						\"root\", \"password");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 	        // SQL文を準備する
-	        String sql = "INSERT INTO SimpleRec(user_id,event, belief, result, reframe, txtFree, emotion_id, created_at) "
-	                   + "VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO SimpleRec(user_id,event, belief, result, reframe, txtFree, emotion_id) "
+	                   + "VALUES (?,?, ?, ?, ?, ?,?)";
 
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -99,7 +99,6 @@ public class QuickDAO{
 	        pStmt.setString(5, dto.getReframe());
 	        pStmt.setString(6, dto.getTxtFree());
 	        pStmt.setInt(7, dto.getEmotion_id());
-	        pStmt.setString(8, dto.getCreated_at());
 
 
 	        // SQL文を実行する（1件登録できたら成功）

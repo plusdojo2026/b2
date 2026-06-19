@@ -30,9 +30,7 @@ public class WeeklyDAO {
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
-
-			//仮データ後で消す
-			String weeklyRes = "2026-06-01~2026-06-07";
+			String weeklyRes = week.getWeeklyRes();
 			//最初の日を取り出す
 			String yearweek = weeklyRes.split("~")[0];
 			//LocalDateに変換
@@ -50,16 +48,39 @@ public class WeeklyDAO {
 			int weekNum = date2.get(wf.weekOfWeekBasedYear());
 
 			//YYYYWWに変換
-			String StyearWeek = String.format("%d%02d", yearNum, weekNum);
-			int yearWeek = Integer.parseInt(StyearWeek);
-			String sqlDay = "SELECT positiveRate, negativeRate, activeIndex FROM DailyRes WHERE yearWeek = ?";
-			
-			PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
-			
-			pStmtDay.setInt(1, yearWeek);
-			
-			// SQL文を実行し、結果表を取得する
-			
+			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
+			int yearWeek = Integer.parseInt(StYearWeek);
+			String sqlDay = "SELECT * FROM DailyRes WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+
+				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
+				pStmtDay.setInt(1, week.getUser_id());
+				pStmtDay.setInt(2, yearWeek);
+
+				ResultSet rsDay = pStmtDay.executeQuery();
+
+				List<DailyDTO> dailyList = new ArrayList<>();
+
+				while (rsDay.next()) {
+
+				    DailyDTO daily = new DailyDTO();
+
+				    daily.setId(rsDay.getInt("id"));
+				    daily.setUser_id(rsDay.getInt("user_id"));
+				    daily.setFreeForm(rsDay.getString("freeForm"));
+				    daily.setPhoto(rsDay.getString("photo"));
+				    daily.setPositive(rsDay.getString("positive"));
+				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+
+				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
+				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
+				    daily.setActiveIndex(rsDay.getDouble("activeIndex"));
+
+				    daily.setYearWeek(rsDay.getInt("yearWeek"));
+				    daily.setUpdate_at(rsDay.getString("update_at"));
+				    daily.setCreated_at(rsDay.getString("created_at"));
+
+				    dailyList.add(daily);
+				}
 			
 			// SQL文を準備する//idではなくweeklyResで指定する形に変更すること。"WHERE wr.weeklyRes = ?"
 			String sqlWeek = "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, "
@@ -67,30 +88,31 @@ public class WeeklyDAO {
 					+ "FROM WeekRes wr "
 					+ "JOIN WeekCmt wc ON wr.weekCmt_id = wc.weekCmt_id "
 					+ "JOIN MoodSwings ms ON wr.moodSwings_id = ms.moodSwings_id "
-					+ "WHERE wr.id = ?";
+					+ "WHERE wr.weeklyRes = ? AND wr.user_id = ?";
 			
 			PreparedStatement pStmtWeek = conn.prepareStatement(sqlWeek);
 			
 			//SQL文を完成させる//pStmt.setInt(1, weeklyRes);
-			pStmtWeek.setInt(1, 1);
+			pStmtWeek.setString(1, weeklyRes);
+			pStmtWeek.setInt(2, week.getUser_id());
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmtWeek.executeQuery();
 
-			List<DailyDTO> dailyList = new ArrayList<>();
-			// 結果表をコレクションにコピーする//weekResの型をintからStringに変更すること
 			while (rs.next()) {
-				WeeklyDTO weekly = new WeeklyDTO(
-						rs.getInt("id"), 
-						rs.getInt("user_id"), 
-						rs.getString("weeklyRes"), 
-						rs.getString("analysisCmt"), 
-						rs.getDouble("avgPositive"), 
-						rs.getString("moodType"), 
-						rs.getString("created_at"),
-						dailyList
-						);
-				weekList.add(weekly);
+
+			    WeeklyDTO weekly = new WeeklyDTO(
+			        rs.getInt("id"),
+			        rs.getInt("user_id"),
+			        rs.getString("weeklyRes"),
+			        rs.getString("analysisCmt"),
+			        rs.getDouble("avgPositive"),
+			        rs.getString("moodType"),
+			        rs.getString("created_at"),
+			        new ArrayList<>(dailyList)
+			    );
+
+			    weekList.add(weekly);
 			}
 
 		} catch (SQLException e) {
@@ -113,8 +135,6 @@ public class WeeklyDAO {
 		// 結果を返す
 		return weekList;
 	}
-	
-	//毎日記録登録時に週間のDBに新規追加・更新を入れるメソッド
 	
 	//毎日記録登録時に該当の日が含まれる週間のDBに更新・新規作成を入れるメソッド
 	public boolean aggregate(DailyDTO daily) {
@@ -150,10 +170,11 @@ public class WeeklyDAO {
 	        conn.setAutoCommit(false);
 
 	        //DELETE
-	        String sqlDelete = "DELETE FROM WeekRes WHERE weeklyRes = ?";
+	        String sqlDelete = "DELETE FROM WeekRes WHERE weeklyRes = ? AND user_id = ?";
 
 			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
-	            ps.setString(1, weeklyRes);
+				ps.setString(1, weeklyRes);
+				ps.setInt(2, daily.getUser_id());
 	            ps.executeUpdate();
 	        }
 

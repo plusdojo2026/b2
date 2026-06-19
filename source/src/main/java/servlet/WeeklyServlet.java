@@ -31,15 +31,13 @@ public class WeeklyServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 				request.setCharacterEncoding("UTF-8");
 		
-		// 一覧表示のために全件取得
-        WeeklyDAO weekDao = new WeeklyDAO();
-        WeeklyDTO weekDto = new WeeklyDTO();
-        List<WeeklyDTO> wList = weekDao.select(weekDto);
-        //List<DailyDTO> dList = DailyDao.select(DailyDto);
+		//とある週のデータを取得
+        WeeklyDAO dao = new WeeklyDAO();
+        WeeklyDTO dto = new WeeklyDTO();
+        List<WeeklyDTO> List = dao.select(dto);
         
         //JSP に渡す
-        request.setAttribute("weekList", wList);
-        //request.setAttribute("dayList", dList);
+        request.setAttribute("weekList", List);
 
 	// 週間結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/weeklyRev.jsp");

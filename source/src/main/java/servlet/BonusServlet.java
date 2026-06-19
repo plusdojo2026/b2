@@ -40,5 +40,7 @@ public class BonusServlet extends HttpServlet {
 		// ログインボーナスページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bonus.jsp");
 		dispatcher.forward(request, response);
+		
+		
 	}
 }

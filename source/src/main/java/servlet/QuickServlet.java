@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.QuickDAO;
 import dto.QuickDTO;
-import dto.review;
+
 
 /**
  * Servlet implementation class LoginServlet
@@ -27,7 +27,7 @@ public class QuickServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ログインページにフォワードする
+		// 簡易記録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/quick.jsp");
 		dispatcher.forward(request, response);
 		
@@ -47,26 +47,26 @@ public class QuickServlet extends HttpServlet {
 	    int emotionId = Integer.parseInt(request.getParameter("emotion_id"));
 
 	    // DTO に詰める
-	    QuickDTO dto = new QuickDTO();
-	    dto.setEvent(event);
-	    dto.setBelief(belief);
-	    dto.setResult(resultTxt);
-	    dto.setReframe(reframe);
-	    dto.setTxtFree(txtFree);
-	    dto.setEmotion_id(emotionId);
-
-	    // 登録処理
-	    QuickDAO dao = new QuickDAO();
-	    if (dao.insert(dto)) {
-	        request.setAttribute("result",
-	            new review("登録成功☆彡", "レコードを登録したよ。", "/MenuServlet"));
-	    } else { // 登録失敗
-	        request.setAttribute("result",
-	            new review("登録失敗！", "レコードを登録できませんでした。", "/MenuServlet"));
-	    }
+	    QuickDTO qdto = new QuickDTO();
+	    qdto.setEvent(event);
+	    qdto.setBelief(belief);
+	    qdto.setResult(resultTxt);
+	    qdto.setReframe(reframe);
+	    qdto.setTxtFree(txtFree);
+	    qdto.setEmotion_id(emotionId);
+	    
+	    QuickDAO qdao = new QuickDAO();
+	    boolean result = qdao.insert(qdto);
+	    System.out.println(result);
+	    
+	    
+	    //テスト用本番はセッションスコープ
+	    int user_id = 1;
+	    
+	    //ポップアップを成功と表示
 
 	    // 結果ページにフォワード
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 	    dispatcher.forward(request, response);
 	}
 }

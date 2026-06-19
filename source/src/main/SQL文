@@ -12,7 +12,7 @@ USE heartwave;
 CREATE TABLE Users(id INT AUTO_INCREMENT PRIMARY KEY, userName varchar(20), pw varchar(20), daysTotalLogin int DEFAULT 0, depthCurrent int DEFAULT 0, currentPos int DEFAULT 1, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(bingo)
-CREATE TABLE Bingo(id int PRIMARY KEY, user_id int, day1 bool DEFAULT FALSE, day2 bool DEFAULT FALSE, day3 bool DEFAULT FALSE, day4 bool DEFAULT FALSE, day5 bool DEFAULT FALSE, day6 bool DEFAULT FALSE, day7 bool DEFAULT FALSE, day8 bool DEFAULT FALSE, day9 bool DEFAULT FALSE, day10 bool DEFAULT FALSE, day11 bool DEFAULT FALSE, day12 bool DEFAULT FALSE, day13 bool DEFAULT FALSE, day14 bool DEFAULT FALSE, day15 bool DEFAULT FALSE, day16 bool DEFAULT FALSE, day17 bool DEFAULT FALSE, day18 bool DEFAULT FALSE, day19 bool DEFAULT FALSE, day20 bool DEFAULT FALSE, day21 bool DEFAULT FALSE, day22 bool DEFAULT FALSE, day23 bool DEFAULT FALSE, day24 bool DEFAULT FALSE, day25 bool DEFAULT FALSE, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE Bingo(id int AUTO_INCREMENT PRIMARY KEY, user_id int, day1 bool DEFAULT FALSE, day2 bool DEFAULT FALSE, day3 bool DEFAULT FALSE, day4 bool DEFAULT FALSE, day5 bool DEFAULT FALSE, day6 bool DEFAULT FALSE, day7 bool DEFAULT FALSE, day8 bool DEFAULT FALSE, day9 bool DEFAULT FALSE, day10 bool DEFAULT FALSE, day11 bool DEFAULT FALSE, day12 bool DEFAULT FALSE, day13 bool DEFAULT FALSE, day14 bool DEFAULT FALSE, day15 bool DEFAULT FALSE, day16 bool DEFAULT FALSE, day17 bool DEFAULT FALSE, day18 bool DEFAULT FALSE, day19 bool DEFAULT FALSE, day20 bool DEFAULT FALSE, day21 bool DEFAULT FALSE, day22 bool DEFAULT FALSE, day23 bool DEFAULT FALSE, day24 bool DEFAULT FALSE, day25 bool DEFAULT FALSE, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(timeCmt)
 CREATE TABLE TimeCmt(id int PRIMARY KEY, cmtTime varchar(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -36,7 +36,7 @@ CREATE TABLE MoodSwings(id int PRIMARY KEY, moodType varchar(100), created_at TI
 CREATE TABLE RecordType(id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), resultPicture_id varchar(100), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(dailyRec)(外部キーあり)
-CREATE TABLE DailyRec(id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), negativeRate double, positiveRate double, activeIndex double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE DailyRec(id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), type_id int NOT NULL, FOREIGN KEY(type_id) REFERENCES RecordType(id), negativeRate double, positiveRate double, activeIndex double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(simpleRec)(外部キーあり)
 CREATE TABLE SimpleRec(id int AUTO_INCREMENT PRIMARY KEY, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -52,7 +52,7 @@ CREATE TABLE WeekRes(id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), 
 -- カラム作成
 
 -- ビンゴ登録
--- INSERT INTO Bingo(id, user_id) VALUES(1,1);
+-- INSERT INTO Bingo(user_id) VALUES(1);
 
 
 -- 感情タグ登録

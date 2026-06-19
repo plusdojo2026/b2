@@ -1,16 +1,19 @@
 package dto;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeeklyDTO implements Serializable {
-	private int id;			// ID
-	private int user_id;			// ID
+	private int id;							// ID
+	private int user_id;					// USER_ID
 	private String weeklyRes;		// 週期間
 	private String analysisCmt;	// 分析コメント
 	private double avgPositive;	// 平均ポジティブ率
 	private String moodType;		// 気分の浮き沈み
 	private String created_at;		// 登録日
+	private List<DailyDTO> dailyList;
 
-	public WeeklyDTO(int id, int user_id,  String weeklyRes, String analysisCmt, double avgPositive, String moodType, String created_at) {
+	public WeeklyDTO(int id, int user_id,  String weeklyRes, String analysisCmt, double avgPositive, String moodType, String created_at, List<DailyDTO> dailyList) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -19,6 +22,7 @@ public class WeeklyDTO implements Serializable {
 		this.avgPositive = avgPositive;
 		this.moodType = moodType;
 		this.created_at = created_at;
+		this.dailyList = dailyList;
 	}
 
 	public int getId() {
@@ -70,6 +74,14 @@ public class WeeklyDTO implements Serializable {
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
+	
+	public List<DailyDTO> getDailyList() {
+		return dailyList;
+	}
+	public void setDailyList(List<DailyDTO> dailyList) {
+		this.dailyList = dailyList;
+	}
+
 	public WeeklyDTO() {
 		super();
 		this.id = 0;
@@ -79,6 +91,6 @@ public class WeeklyDTO implements Serializable {
 		this.avgPositive = 0;
 		this.moodType = "";
 		this.created_at = "";
-		
+		this.dailyList = new ArrayList<>();
 	}
 }

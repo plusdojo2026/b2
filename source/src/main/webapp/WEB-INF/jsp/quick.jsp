@@ -9,7 +9,7 @@
 <body>
 <h1>簡易記録</h1>
 <p>感情タグ[必須]：</p>
-
+<form method="post" action="/webapp/QuickServlet">
 <input type="radio" name="emotion_id" value="1"> 怒り<br>
 <input type="radio" name="emotion_id" value="2"> 悲しみ<br>
 <input type="radio" name="emotion_id" value="3"> 悔しい<br>
@@ -25,5 +25,8 @@
 <h3>4.ポジティブに変換（ネガティブな出来事のみ）</h3>前向きに捉えなおしてみよう<br><input type="text" name="reframe"placeholder="ex)たまたまこちらを見たタイミングで笑っただけで、私の容姿を笑ったわけではない可能性が高い。"><br>
 <input type="submit" name="regist" value="登録"><br>
 
+<h3>今の気持ちを書いてみよう</h3><input type="text" name="txtFree"><br>
+<input type="submit" name="regist" value="登録"><br>
+</form>
 </body>
 </html>

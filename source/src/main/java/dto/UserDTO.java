@@ -1,7 +1,7 @@
 package dto;
 
 public class UserDTO {
-	private int user_id; // ID
+	private int id; // ID
 	private String userName; // ユーザーネーム
 	private String pw; // パスワード
 	private int loginStreak; // 連続ログイン日数
@@ -11,11 +11,11 @@ public class UserDTO {
 	private String updated_at; // 最終ログイン日時
 	private String created_at; //登録日
 	
-	public int getUser_id() {
-		return user_id;
+	public int getId() {
+		return id;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getUserName() {
 		return userName;
@@ -66,9 +66,9 @@ public class UserDTO {
 		this.created_at = created_at;
 	}
 	
-	public UserDTO(int user_id, String userName, String pw, int loginStreak, int daysTotalLogin, int depthCurrent,
+	public UserDTO(int id, String userName, String pw, int loginStreak, int daysTotalLogin, int depthCurrent,
 			int currentPos, String updated_at, String created_at) {
-		this.user_id = user_id;
+		this.id = id;
 		this.userName = userName;
 		this.pw = pw;
 		this.loginStreak = loginStreak;
@@ -80,7 +80,7 @@ public class UserDTO {
 	}
 	
 	public UserDTO() {
-		this.user_id = 0;
+		this.id = 0;
 		this.userName = "";
 		this.pw = "";
 		this.loginStreak = 0;

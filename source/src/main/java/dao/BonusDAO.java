@@ -25,7 +25,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//新しいビンゴを作成
-			String sql = "INSERT INTO Bingo(user_id) VALUES(1);";
+			String sql = "INSERT INTO Bingo(user_id,day1) VALUES(1,1);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			
@@ -103,7 +103,7 @@ public class BonusDAO {
 	
 	
 	
-	public boolean bingoReset(int pos, int user_id) {
+	public boolean bingoReset(int user_id) {
 		Connection conn = null;
 		boolean result = false;
 

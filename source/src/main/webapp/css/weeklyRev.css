@@ -1,1 +1,79 @@
 @charset "UTF-8";
+
+
+.period {
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+/*分析結果*/
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+.large {
+	grid-column: span 2;
+	width: 100%;
+	display: flex;
+	justify-content: center; 
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.boxTitle {
+	font-size: 1.4rem;
+}
+.boxContent {
+  padding: 4px 8px;
+  font-size: 2.6rem;
+  font-style: bold;
+}
+.analysisCmt {
+	padding: 15px;
+}
+
+	
+
+/* スマホ */
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr; /* 1列にする */
+  }
+
+  .large {
+    grid-column: span 1;
+  }
+  
+.chart-container {
+    width: 95%;
+    height: 350px;
+  }
+  
+}

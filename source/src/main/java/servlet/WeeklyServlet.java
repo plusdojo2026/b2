@@ -35,9 +35,9 @@ public class WeeklyServlet extends HttpServlet {
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
 		WeeklyDTO dto = new WeeklyDTO();
-		DailyDTO dDto = new DailyDTO();
 		
 		//テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
+		DailyDTO dDto = new DailyDTO();
 		dDto.setUserId(1);
 		dDto.setYearWeek(202624);
 		dao.aggregate(dDto);

@@ -23,10 +23,30 @@ import javax.servlet.http.HttpServletResponse;
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-
-
-		// ページにフォワードする
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/top.jsp");
-			dispatcher.forward(request, response);
-		}
-	}		
+	        dispatcher.forward(request, response);
+	    }
+			
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	            throws ServletException, IOException {		
+		
+			// どのボタンが押されたか判定する
+	        String isRegister = request.getParameter("register"); // 新規登録ボタン
+	        String isLogin = request.getParameter("login");       // ログインボタン
+
+	        /* 新規登録」ボタンが押されたとき */
+	        if (isRegister != null) {
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp");
+	            dispatcher.forward(request, response);
+	            return; // 処理を終了
+	        }
+
+	        /* 「ログイン」ボタンが押されたとき */
+	        if (isLogin != null) {
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+	            dispatcher.forward(request, response);
+	            return; // 処理を終了
+	        }
+	    }
+	}			

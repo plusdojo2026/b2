@@ -5,13 +5,15 @@ import java.io.Serializable;
 public class AnalysisDTO implements Serializable {
 	private int typeId;
 	private double negativeRate, positiveRate, activeIndex;
+	private int emoBalance;
 	
-	public AnalysisDTO(int typeId, double negativeRate, double positiveRate, double activeIndex) {
+	public AnalysisDTO(int typeId, double negativeRate, double positiveRate, double activeIndex, int emoBalance) {
 		super();
 		this.typeId = typeId;
 		this.negativeRate = negativeRate;
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
+		this.emoBalance = emoBalance;
 	}
 
 	public int getTypeId() {
@@ -45,6 +47,13 @@ public class AnalysisDTO implements Serializable {
 	public void setActiveIndex(double activeIndex) {
 		this.activeIndex = activeIndex;
 	}
-	
+
+	public int getEmoBalance() {
+		return emoBalance;
+	}
+
+	public void setEmoBalance(int emoBalance) {
+		this.emoBalance = emoBalance;
+	}
 	
 }

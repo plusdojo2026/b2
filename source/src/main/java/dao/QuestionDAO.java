@@ -88,6 +88,11 @@ public class QuestionDAO {
 		 * 
 		 */
 
+		double negative, positive, negativeRate, positiveRate, activeIndex;
+		int emoBalance = 1;
+		/*
+		 * 感情バランス： 0 = ネガティブ、 1 = 普通、 2 = ポジティブ
+		 */
 
 		try {
 			// JDBCドライバ読み込み、データベース接続
@@ -115,35 +120,56 @@ public class QuestionDAO {
 				switch (emoType.get(i)) {
 					case anger:
 						topEmo[0] += point.get(i);
+						negative += point.get(i);
 						break;
 					case confuse:
 						topEmo[1] += point.get(i);
+						negative += point.get(i);
 						break;
 					case depression-dejection:
 						topEmo[2] += point.get(i);
+						negative += point.get(i);
 						break;
 					case fatigue:
 						topEmo[3] += point.get(i);
+						negative += point.get(i);
 						break;
 					case tension-anxiety:
 						topEmo[4] += point.get(i);
+						negative += point.get(i);
 						break;
 					case vigor-activity:
 						topEmo[5] += point.get(i);
+						positive += point.get(i);
 						break;
 					case friendliness:
 						topEmo[6] += point.get(i);
+						positive += point.get(i);
 						break;
 				}
 			}
 
-			//最も点数の高いABC項目を選んでSQLに格納
+			//最も点数の高いABC項目を感情タイプ判別の結果としてSQLに格納
 			Arrays.sort(topEmo);
 			
 			if (daily.getTypeRes() != null) {
 				pStmt.setString(1, daily.getTypeRes());
 			} else {
 				pStmt.setString(1, "");
+			}
+
+			//ポジティブ率、ネガティブ率、感情活性指数を算出
+			negativeRate = negative / 16 * 100;
+			positiveRate = positive / 40 * 100;
+			activeIndex = (positive + negative) / 2;
+
+			//ネガティブ率とポジティブ率の比較
+			if (negativeRate > positiveRate) {
+				emoBalance = 0;
+			} else if (negativeRate < positiveRate) {
+				emoBalance = 2;
+			} else {
+				emoBalance = 1;
 			}
 		
 		//例外処理
@@ -167,7 +193,8 @@ public class QuestionDAO {
 			typeId,
 			negativeRate,
 			positiveRate,
-			activeIndex
+			activeIndex,
+			emoBalance
 		);
 	}
 }

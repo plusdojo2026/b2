@@ -86,10 +86,6 @@ public class DailyServlet extends HttpServlet {
 		String created_at = request.getParameter("created_at");
 
 
-		// double positiveRate = calcPositiveRate(q1, q2, q3);
-		// double negativeRate = calcNegativeRate(q1, q2, q3);
-		// double activeIndex = calcActiveIndex(q1, q2, q3);
-
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
 		if (dDao.insert(new DailyDTO(0, user_id, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at))) { // 登録成功

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.WeeklyDAO;
+import dto.DailyDTO;
 import dto.WeeklyDTO;
 
 /**
@@ -35,6 +36,12 @@ public class WeeklyServlet extends HttpServlet {
 		WeeklyDAO dao = new WeeklyDAO();
 		WeeklyDTO dto = new WeeklyDTO();
 		
+		//テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
+		DailyDTO dDto = new DailyDTO();
+		dDto.setUserId(1);
+		dDto.setYearWeek(202624);
+		dao.aggregate(dDto);
+
 		//*ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
 		dto.setWeeklyRes("2026-06-08~2026-06-14");
 		dto.setUser_id(1);

@@ -9,7 +9,6 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dto.DailyDTO;
@@ -27,7 +26,7 @@ public class WeeklyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -66,7 +65,7 @@ public class WeeklyDAO {
 				while (rsDay.next()) {
 				    DailyDTO daily = new DailyDTO();
 
-				    daily.setDailyId(rsDay.getInt("id"));
+				    daily.setId(rsDay.getInt("id"));
 				    daily.setUserId(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
@@ -146,24 +145,43 @@ public class WeeklyDAO {
 	        // JDBCドライバを読み込む
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	        // データベースに接続//後でデータベース変更しておくこと
+	        // データベースに接続
 	        conn = DriverManager.getConnection(
-	                "jdbc:mysql://localhost:3306/heartwave?"
+	                "jdbc:mysql://localhost:3306/b2?"
 	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	                "root", "password");
 	        
 	       //その日が属す週の各データをとってくる
-	       //String sql = SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC"
+	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
 	        
-	        //平均ポジティブ率(double)//1行目はダミー後で消す
-			List<Double> positiveRate = new ArrayList<>(Arrays.asList(0.8, 0.7, 0.9, 0.8, 0.7, 0.9, 0.8));
+	       PreparedStatement pStmt = conn.prepareStatement(sql);
+
+	       pStmt.setInt(1, daily.getUserId());
+	       pStmt.setInt(2, daily.getYearWeek());
+
+	       // 空Listを用意
+	       List<Double> positiveRate = new ArrayList<>();
+	       List<Double> negativeRate = new ArrayList<>();
+	       List<Double> activeIndex = new ArrayList<>();
+	       try (ResultSet rs = pStmt.executeQuery()) {
+	       // 1行ずつ取り出してListに追加
+	       while (rs.next()) {
+	           positiveRate.add(rs.getDouble("positiveRate"));
+	           negativeRate.add(rs.getDouble("negativeRate"));
+	           activeIndex.add(rs.getDouble("activeIndex"));
+	       }
+	       //空データ対策
+	       if (positiveRate.isEmpty()) {
+	    	   return false;
+	       }
+
+	       }
+	        //平均ポジティブ率(double)
 			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
-			//平均ネガティブ率(double)//1行目はダミー後で消す
-			List<Double> negativeRate = new ArrayList<>(Arrays.asList(0.8, 0.7, 0.9, 0.8, 0.7, 0.9, 0.8));
+			//平均ネガティブ率(double)
 			double avgNegative = negativeRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
 			
 	      //５段階評価で考える？0~20:凪，21~40：穏やか，41~60：平均的，61~80：やや激しめ，81~100： ジェットコースター
-	        List<Double> activeIndex = new ArrayList<>(Arrays.asList(50.0, 40.0, 60.0, 70.0, 80.0, 30.0, 20.0));
 			double avgActiveIndex = activeIndex.stream().mapToDouble(Double::doubleValue).average().orElse(0);
 	        int moodType = 1;
 	        if (avgActiveIndex <= 20) {
@@ -179,32 +197,35 @@ public class WeeklyDAO {
 	        }
 	        //感情バランス指数：正なら明るく負なら暗い
 	        double emoBalance = avgPositive - avgNegative;
-	      //分析した式を後で以下に入れること//細かい設定は後で考えましょう
-	        int analysisCmt = 2;
+
 	        //変動指数 = 活性指数の標準偏差
-	        System.out.println(moodType);
-	        double sum = 0;
-	        for (double value : activeIndex) {
-	            sum += (value - avgActiveIndex) * (value - avgActiveIndex);
+	        double std = 0;
+	        if (!activeIndex.isEmpty()) {
+	        	double sum = 0;
+	        	for (double value : activeIndex) {
+	        		sum += (value - avgActiveIndex) * (value - avgActiveIndex);
+	        	}
+	        	std = Math.sqrt(sum / activeIndex.size());
 	        }
-	        double std = Math.sqrt(sum/activeIndex.size());
-	        if (std < 10 && emoBalance <= 0) {
+
+	        //分析コメント
+	        int analysisCmt = 2;
+	        if (std < 10 && emoBalance >= 0) {
 	        	analysisCmt = 1; //一貫して明るい
-	        } else if (std < 10 && emoBalance > 0) {
+	        } else if (std < 10 && emoBalance < 0) {
 	        	analysisCmt = 2; //一貫して暗い
-	        } else if (10 <= std && std < 20 && emoBalance <= 0) {
+	        } else if (10 <= std && std < 20 && emoBalance >= 0) {
 	        	analysisCmt = 3; //そこそこ波はありつつ明るめ
-	        } else if (10 <= std && std < 20 && emoBalance > 0) {
+	        } else if (10 <= std && std < 20 && emoBalance < 0) {
 	        	analysisCmt = 4; //そこそこ波はありつつ暗め
-	        } else if (20 <= std && emoBalance <= 0) {
+	        } else if (20 <= std && emoBalance >= 0) {
 	        	analysisCmt = 5; //不安定ながらも明るい
 	        } else {
 	        	analysisCmt = 6; //不安定だし暗い
 	        }
 	        
 	        //yearWeekを日付の文字列に変換
-	        int yearWeek = 202615; //dailyのyearWeek。DailyDTOから渡されるので後で消す。
-
+	        int yearWeek = daily.getYearWeek();
 	        int year = yearWeek / 100;
 	        int week = yearWeek % 100;
 
@@ -224,15 +245,16 @@ public class WeeklyDAO {
 	            ps.executeUpdate();
 	        }
 
-	        //INSERT//user_idの扱い？
-	        String sqlInsert = "INSERT INTO WeekRes (weeklyRes, analysisCmt, avgPositive, moodType, created_at) "
-	                         + "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+	        //INSERT
+	        String sqlInsert = "INSERT INTO WeekRes (user_id, weeklyRes, weekCmt_id, avgPositive, moodSwings_id, created_at) "
+	                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-	            ps.setString(1, weeklyRes);
-				ps.setInt(2, analysisCmt);
-				ps.setDouble(3, avgPositive);
-				ps.setInt(4, moodType);
+	        	ps.setInt(1, daily.getUserId());
+	            ps.setString(2, weeklyRes);
+				ps.setInt(3, analysisCmt);
+				ps.setDouble(4, avgPositive);
+				ps.setInt(5, moodType);
 	            ps.executeUpdate();
 	        }
 
@@ -240,9 +262,18 @@ public class WeeklyDAO {
 	        conn.commit();
 	        result = true;
 
-	    } catch (SQLException e) {
+
+		} catch (SQLException e) {
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			// データベースを切断

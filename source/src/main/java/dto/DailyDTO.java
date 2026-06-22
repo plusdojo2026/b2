@@ -5,20 +5,20 @@ import java.io.Serializable;
 public class DailyDTO implements Serializable {
 	/*
 	 * update_at, created_atはStringで実装、ソートなど作るときにはdate型へ変更必須
-	 * idをdailyIdとしている、命名変更することはできる
+	 * idをidとしている、命名変更することはできる
 	 */
 
 	//フィールド----------------------------------------------
-	private int dailyId, userId, emotionId, typeId;
-	private String freeForm, photo, positive, update_at, created_at;
+	private int id, userId, emotionId, typeId;
+	private String freeForm, photo, positive, updated_at, created_at;
 	private double negativeRate, positiveRate, activeIndex;
 	private int yearWeek; //記録が何年何月何週のものかを判別する
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int dailyId, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String update_at,
+	public DailyDTO(int id, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String updated_at,
 			String created_at) {
 		super();
-		this.dailyId = dailyId;
+		this.id = id;
 		this.userId = userId;
 		this.freeForm = freeForm;
 		this.photo = photo;
@@ -29,13 +29,13 @@ public class DailyDTO implements Serializable {
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
 		this.yearWeek = yearWeek;
-		this.update_at = update_at;
+		this.updated_at = updated_at;
 		this.created_at = created_at;
 	}
 	//一応入力なしを作ってみた
 	public DailyDTO() {
 		super();
-		this.dailyId = 0;
+		this.id = 0;
 		this.userId = 0;
 		this.freeForm = "";
 		this.photo = "";
@@ -46,16 +46,16 @@ public class DailyDTO implements Serializable {
 		this.positiveRate = 0;
 		this.activeIndex = 0;
 		this.yearWeek = 0;
-		this.update_at = "";
+		this.updated_at = "";
 		this.created_at = "";
 	}
 	
 	//ゲッタ、セッタ------------------------------------------------
-	public int getDailyId() {
-		return dailyId;
+	public int getId() {
+		return id;
 	}
-	public void setDailyId(int dailyId) {
-		this.dailyId = dailyId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getUserId() {
 		return userId;
@@ -93,11 +93,11 @@ public class DailyDTO implements Serializable {
 	public void setPositive(String positive) {
 		this.positive = positive;
 	}
-	public String getUpdate_at() {
-		return update_at;
+	public String getUpdated_at() {
+		return updated_at;
 	}
-	public void setUpdate_at(String update_at) {
-		this.update_at = update_at;
+	public void setUpdate_at(String updated_at) {
+		this.updated_at = updated_at;
 	}
 	public String getCreated_at() {
 		return created_at;

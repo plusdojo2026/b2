@@ -15,15 +15,48 @@
 
 <p>感情タグ[必須]：</p>
 <form method="post" action="${pageContext.request.contextPath}/QuickServlet">
-	<input type="radio" name="emotion_id" value="1"> 怒り<br>
-	<input type="radio" name="emotion_id" value="2"> 悲しみ<br>
-	<input type="radio" name="emotion_id" value="3"> 悔しい<br>
-	<input type="radio" name="emotion_id" value="4"> 焦り<br>
-	<input type="radio" name="emotion_id" value="5"> 楽しい<br>
-	<input type="radio" name="emotion_id" value="6"> 嬉しい<br>
-	<input type="radio" name="emotion_id" value="7"> 幸せ<br>
-	<input type="radio" name="emotion_id" value="8"> 好き<br>
-	
+<div class="emotion-radio-group">
+	<input type="radio" name="emotion_id" value="1" id=emo1>
+		<label for="emo1">
+            <img src="${pageContext.request.contextPath}/img/angry_clione.png">
+            <span>怒り</span>
+        </label>
+	<input type="radio" name="emotion_id" value="2" id=emo2>
+	<label for="emo2">
+            <img src="${pageContext.request.contextPath}/img/sad_clione.png">
+            <span>悲しい</span>
+        </label>
+	<input type="radio" name="emotion_id" value="3" id=emo3>
+	<label for="emo3">
+            <img src="${pageContext.request.contextPath}/img/frustrated_clione.png">
+            <span>悔しい</span>
+        </label>
+	<input type="radio" name="emotion_id" value="4" id=emo4>
+	<label for="emo4">
+            <img src="${pageContext.request.contextPath}/img/panic_clione.png">
+            <span>焦り</span>
+        </label>
+	<input type="radio" name="emotion_id" value="5" id=emo5>
+	<label for="emo5">
+            <img src="${pageContext.request.contextPath}/img/fun_clione.png">
+            <span>楽しい</span>
+        </label>
+	<input type="radio" name="emotion_id" value="6" id=emo6>
+	<label for="emo6">
+            <img src="${pageContext.request.contextPath}/img/glad_clione.png">
+            <span>嬉しい</span>
+        </label>
+	<input type="radio" name="emotion_id" value="7" id=emo7>
+	<label for="emo7">
+            <img src="${pageContext.request.contextPath}/img/happy_clione.png">
+            <span>幸せ</span>
+        </label>
+	<input type="radio" name="emotion_id" value="8" id=emo8> 
+	<label for="emo8">
+            <img src="${pageContext.request.contextPath}/img/love_clione.png">
+            <span>好き</span>
+        </label>
+</div>	
 	<div class="tab-2">
 	
 	    <input type="radio" id="tab-fact" name="tab-2" checked>

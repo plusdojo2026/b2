@@ -44,40 +44,31 @@ public class DailyServlet extends HttpServlet {
 
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ログイン確認、してなければログイン画面へ
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/namecard/LoginServlet");
-			return;
-		}
 
-		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		int emotionId = Integer.parseInt(request.getParameter("emotionId"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
-		String positive= request.getParameter("positive");
+		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
+		int type_id = Integer.parseInt(request.getParameter("type_id"));
+		double negative= request.getParameter("negative");
+		double positive= request.getParameter("positive");
+		double activeIndex= request.getParameter("activeIndex");
+		int yearWeek = Integer.parseInt(request.getParameter("yearWeek"));
 
-		String update_at = request.getParameter("update_at");
+
+		String updated_at = request.getParameter("updated_at");
 		String created_at = request.getParameter("created_at");
 
-		//リクエストパラメータ：設問解答
-		int q1 = Integer.parseInt(request.getParameter("q1"));
-		int q2 = Integer.parseInt(request.getParameter("q2"));
-		int q3 = Integer.parseInt(request.getParameter("q3"));
-		int q4 = Integer.parseInt(request.getParameter("q4"));
-		int q5 = Integer.parseInt(request.getParameter("q5"));
-		int q6 = Integer.parseInt(request.getParameter("q6"));
-		int q7 = Integer.parseInt(request.getParameter("q7"));
-		int q8 = Integer.parseInt(request.getParameter("q8"));
-		int q9 = Integer.parseInt(request.getParameter("q9"));
-		int q10 = Integer.parseInt(request.getParameter("q10"));
-		int q11 = Integer.parseInt(request.getParameter("q11"));
-		int q12 = Integer.parseInt(request.getParameter("q12"));
-		int q13 = Integer.parseInt(request.getParameter("q13"));
-		int q14 = Integer.parseInt(request.getParameter("q14"));
+				// リクエストパラメータを取得する
+		// for(QuestionDTO q : qList) {
+		// 	String qAns = request.getParameter(
+		// 		"q_" + q.getId();
+		// 	);
+
+		// 	int score = Integer.parseInt(answer);
+		// }
 
 		// double positiveRate = calcPositiveRate(q1, q2, q3);
 		// double negativeRate = calcNegativeRate(q1, q2, q3);
@@ -88,7 +79,7 @@ public class DailyServlet extends HttpServlet {
 		if (dDao.insert()) { // 登録成功
 			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/dailyRev.jsp");
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		    dispatcher.forward(request, response);
 		}
 

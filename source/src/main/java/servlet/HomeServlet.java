@@ -63,7 +63,8 @@ import dto.UserDTO;
 						
 			if(lastLogin.isEqual(today)) {
 			//今日ログイン済み何もしない
-				System.out.println("条件1：今日すでにログイン済みor初回ログイン時");			
+				System.out.println("条件1：今日すでにログイン済みor初回ログイン時");		
+				
 			}else if(lastLogin.plusDays(1).isEqual(today)) {
 				//昨日ログイン　→　連続ログイン継続
 				System.out.println("条件2：昨日ログイン（連続ログイン継続）");

@@ -71,11 +71,9 @@ public class BonusDAO {
 					"root", "password");
 			
 			//今日のビンゴを登録
-			String sql = "UPDATE Bingo SET ?=1";
+			String sql = "UPDATE Bingo SET day" + String.valueOf(pos) + "=1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			//現在位置をカラム名に代入
-			pStmt.setString(1,"day"+ String.valueOf(pos));	
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

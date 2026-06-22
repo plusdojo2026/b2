@@ -26,7 +26,7 @@ public class WeeklyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -65,7 +65,7 @@ public class WeeklyDAO {
 				while (rsDay.next()) {
 				    DailyDTO daily = new DailyDTO();
 
-				    daily.setDailyId(rsDay.getInt("id"));
+				    daily.setId(rsDay.getInt("id"));
 				    daily.setUserId(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
@@ -145,9 +145,9 @@ public class WeeklyDAO {
 	        // JDBCドライバを読み込む
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	        // データベースに接続//後でデータベース変更しておくこと
+	        // データベースに接続
 	        conn = DriverManager.getConnection(
-	                "jdbc:mysql://localhost:3306/heartwave?"
+	                "jdbc:mysql://localhost:3306/b2?"
 	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	                "root", "password");
 	        
@@ -245,7 +245,7 @@ public class WeeklyDAO {
 	            ps.executeUpdate();
 	        }
 
-	        //INSERT//user_idの扱い？後で
+	        //INSERT
 	        String sqlInsert = "INSERT INTO WeekRes (user_id, weeklyRes, weekCmt_id, avgPositive, moodSwings_id, created_at) "
 	                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 

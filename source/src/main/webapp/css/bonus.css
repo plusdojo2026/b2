@@ -4,18 +4,92 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width:850px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+
+
+}
+
+
+@media screen and (max-width:480px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+html{
+    background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+}
+
+body{
+    margin: 0;
+}
+
+
+.flexbox{
+    display: flex;
+    align-items: stretch;
+}
+
+.leftScreen, .rightScreen{
+    width: 50%;
+}
+
+.leftScreen{
+    background-image: url("leftPage.jpg");
+    background-repeat: repeat-y;
+    background-size: 100vh;
+    background-attachment: fixed;
+}
+
+.leftScreen .leftImg{
+    width: 100%;
+}
+
+
+
 .title{
     font-size: 50px;
     font-weight: 500;
     text-align: center;
-    color: blue;
+    color: rgb(255, 255, 255);
     margin: 20px auto;
+    filter: brightness(1.5);
 }
-
 
 .bingo_table{
+    position: relative;
+    border-collapse: separate;
+    border-spacing: 20px;
     margin: auto;
+    background-color: #ffffffb2;
+    border-radius: 20px;
+    box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.3);
 }
+
+
 
 .bingo_table td{
 	font-size: 20px;
@@ -23,11 +97,13 @@
 	text-align: center;
 	width: 100px;
 	height: 100px;
-    padding: 10px;
-    background-color: aqua;
+    padding: 15px;
+    border: 3px solid #ffffff;
+    background-color: rgba(165, 255, 255, 0.744);
     border-radius: 50%;
 }
 
 .bingo_table img{
 	width: 60px;
 }
+

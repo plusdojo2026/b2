@@ -85,8 +85,8 @@ public class WeeklyDAO {
 			String sqlWeek = "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, "
 					+ "wc.analysisCmt, ms.moodType, wr.created_at "
 					+ "FROM WeekRes wr "
-					+ "JOIN WeekCmt wc ON wr.weekCmt_id = wc.weekCmt_id "
-					+ "JOIN MoodSwings ms ON wr.moodSwings_id = ms.moodSwings_id "
+					+ "JOIN WeekCmt wc ON wr.weekCmt_id = wc.id "
+					+ "JOIN MoodSwings ms ON wr.moodSwings_id = ms.id "
 					+ "WHERE wr.weeklyRes = ? AND wr.user_id = ?";
 			
 			PreparedStatement pStmtWeek = conn.prepareStatement(sqlWeek);
@@ -176,7 +176,7 @@ public class WeeklyDAO {
 	       }
 
 	       }
-	        //平均ポジティブ率(double)
+	        //平均ポジティブ率(double)//*100のパーセント変換いらない？後で調整。
 			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
 			//平均ネガティブ率(double)
 			double avgNegative = negativeRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;

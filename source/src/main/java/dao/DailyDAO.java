@@ -10,12 +10,12 @@ import dto.DailyDTO;
 public class DailyDAO {
 	/* 登録処理-----------------------------------------------
 	 * [引数:daily, 返り値:result]
-	 * ・(未実装)入力された設問データを集計、「ポジティブ率」「ネガティブ率」「感情活性指数」を算出する。
+	 * ・DailyRevで結果表示のためにデータをselectする
 	 * ・単に入力されたデータを登録する
 	 */
-	public boolean insert(DailyDTO daily) {
+		public List<QuestionDTO> select() {
 		Connection conn = null;
-		boolean result = false;
+		List<DailyDTO> todayRev = new ArrayList<DailyDTO>();
 
 		try {
 			// JDBCドライバ読み込み、データベース接続
@@ -27,68 +27,21 @@ public class DailyDAO {
 
 			/*
 			 * ~SQL文~
-			 * 1.DiaryRecテーブルに挿入
-			 * 2.Questionテーブルに挿入
-			 * 3.QuestionAnsテーブルに挿入
+			 * ・毎日入力テーブルからcreated_atをASCで一件とりだす
+			 * ・多分todayRevは配列じゃなくていいけど動けばよいのだ精神
 			 */
 			
-			//1.DiaryRecテーブル
-			String sql1 = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
-			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getFreeForm() != null) {
-				pStmt1.setString(1, daily.getFreeForm());
-			} else {
-				pStmt1.setString(1, "");
-			}
-			if (daily.getPhoto() != null) {
-				pStmt1.setString(2, daily.getPhoto());
-			} else {
-				pStmt1.setString(2, "");
-			}
-			if (daily.getPositive() != null) {
-				pStmt1.setString(3, daily.getPositive());
-			} else {
-				pStmt1.setString(3, "");
-			}
-			if (daily.getUpdate_at() != null) {
-				pStmt1.setString(4, daily.getUpdate_at());
-			} else {
-				pStmt1.setString(4, "");
-			}
-			if (daily.getCreated_at() != null) {
-				pStmt1.setString(5, daily.getCreated_at());
-			} else {
-				pStmt1.setString(5, "");
-			}
 			
-			// SQL文を実行する
-			if (pStmt1.executeUpdate() == 1) {
-				result = true;
+			while (rs.next()) {
+				//結果をコレクションに格納
+				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
+				todayRev.add(dto);
 			}
-			/*
-			//2.Questionテーブル
-			String sql2 = "INSERT INTO Question VALUES (0, ?, 0, ?)";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getQuestion() != null) {
-				pStmt2.setString(1, daily.getQuestion());
-			} else {
-				pStmt2.setString(1, "");
-			}
-			if (daily.getCreated_atQcont() != null) {
-				pStmt2.setString(2, daily.getCreated_atQcont());
-			} else {
-				pStmt2.setString(2, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt2.executeUpdate() == 1) {
-				result = true;
-			}
-				*/
+			rs.close();
 		
 		//例外処理
 		} catch (SQLException e) {
@@ -107,7 +60,82 @@ public class DailyDAO {
 		}
 
 		// 結果を返す
-		return result;
+		return todayRev;
+	}
+
+
+	public boolean insert(DailyDTO daily) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバ読み込み、データベース接続
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			/*
+			 * ~SQL文~
+			 * 1.DiaryRecテーブルに挿入
+			 */
+			
+			//1.DiaryRecテーブル
+			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文初期値を自動で入力する(Stringのみ)
+			if (daily.getFreeForm() != null) {
+				pStmt.setString(1, daily.getFreeForm());
+			} else {
+				pStmt.setString(1, "");
+			}
+			if (daily.getPhoto() != null) {
+				pStmt.setString(2, daily.getPhoto());
+			} else {
+				pStmt.setString(2, "");
+			}
+			if (daily.getPositive() != null) {
+				pStmt.setString(3, daily.getPositive());
+			} else {
+				pStmt.setString(3, "");
+			}
+			if (daily.getUpdated_at() != null) {
+				pStmt.setString(4, daily.getUpdated_at());
+			} else {
+				pStmt.setString(4, "");
+			}
+			if (daily.getCreated_at() != null) {
+				pStmt.setString(5, daily.getCreated_at());
+			} else {
+				pStmt.setString(5, "");
+			}
+			
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+		
+		//例外処理
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return dailyResult;
 	}
 
 	

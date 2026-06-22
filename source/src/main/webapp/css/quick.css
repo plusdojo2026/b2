@@ -11,7 +11,7 @@
     flex: 1 1;
     order: -1;
     opacity: .5;
-    min-width: 70px;
+    min-width: 100px;
     padding: .6em 1em;
     border-radius: 5px 5px 0 0;
     background-color: #2589d0;
@@ -50,3 +50,115 @@
     display: block;
 }
 
+/* ===================================================
+   1. レイアウトと初期化
+   =================================================== */
+/* 本体のラジオボタンを非表示にする */
+.emotion-radio-group input[type="radio"] {
+    display: none;
+}
+
+/* 選択肢全体を横並び（4つで自動改行）にする */
+.emotion-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;         /* 選択肢同士の間隔（上下左右） */
+    margin-bottom: 20px;
+    max-width: 525px;  /* 横にぴったり4つ並んだ時点で自動改行させる設定 */
+}
+
+/* ===================================================
+   2. ボタン（label）の通常時の見た目
+   =================================================== */
+/* 画像と文字を囲むボタン風の見た目（重複を統合） */
+.emotion-radio-group label {
+    display: flex;
+    flex-direction: column;  /* 画像の下に文字を配置（縦並び） */
+    align-items: center;     /* 左右の中央寄せ */
+    justify-content: center; /* 上下の中央寄せ */
+    
+    width: 100px;            /* ボックス全体の横幅 */
+    height: 110px;           /* ボックス全体の縦幅 */
+    padding: 10px;
+    border: 2px solid #ccc;  /* 未選択時のグレーの枠線 */
+    border-radius: 10px;     /* 角丸 */
+    background-color: #fff;  /* 通常時の背景（白） */
+    cursor: pointer;
+    box-sizing: border-box;  /* サイズ計算のズレを完全に防ぐ */
+    transition: all 0.2s ease; /* 💡変化（選択時やホバー時）をすべてなめらかにする */
+}
+
+/* マウスを乗せたとき（ホバー時）の効果 */
+.emotion-radio-group label:hover {
+    background-color: #f7f7f7;
+    border-color: #999;
+}
+
+/* ===================================================
+   3. 子要素（画像・文字）の通常時スタイル
+   =================================================== */
+/* 画像自体のサイズ調整と中央寄せの補助 */
+.emotion-radio-group label img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 8px;      /* 画像と文字の間のすき間 */
+    transition: transform 0.2s ease, filter 0.2s ease; /* 💡画像が縮む時（選択が解除された時）もなめらかにする */
+}
+
+/* 文字のスタイル */
+.emotion-radio-group label span {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+/* ===================================================
+   4. 【重要】画像が選択された（チェックが入った）時のスタイル
+   =================================================== */
+/* 💡選ばれたボタン（label自体）の枠線と背景色を劇的に変える */
+.emotion-radio-group input[type="radio"]:checked + label {
+    border-color: #ff6b6b !important;       /* 選択時：枠線を「太い赤」にする */
+    border-width: 3px !important;           /* 選択時：枠線を少し太くして強調 */
+    background-color: #fff5f5 !important;   /* 選択時：背景を「薄い赤」にする */
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.4) !important; /* 選択時：周りをふんわり赤く光らせる */
+}
+
+/* 💡選ばれたボタンの中にある「画像（img）」を拡大して影をつける */
+.emotion-radio-group input[type="radio"]:checked + label img {
+    transform: scale(1.15) !important;      /* 画像を1.15倍に拡大 */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15)) !important; /* 画像に影をつけて浮き上がらせる */
+}
+
+/* 💡選ばれたボタンの「文字（span）」も太字にして目立たせる */
+.emotion-radio-group input[type="radio"]:checked + label span {
+    font-weight: bold !important;
+    color: #ff6b6b !important;
+}
+
+.content-fact input[type="text"] {
+    width: 200%;           /* 💡横幅を枠いっぱいに広げて長い文章を読めるようにする */
+    
+    padding: 12px 15px;    /* 💡上下と左右に余白を作り、入力欄を縦に大きくする */
+    font-size: 16px;       /* 文字の大きさを少し大きくして見やすくする */
+    
+    border: 1px solid #ccc;/* 枠線の太さと色 */
+    border-radius: 6px;    /* 入力欄の角をほんのり丸くする */
+    margin-top: 8px;       /* 見出し（h3）との間のすき間 */
+    margin-bottom: 15px;   /* 次の見出しとの間のすき間 */
+    
+    box-sizing: border-box;/* 余白（padding）を入れても全体の幅が崩れないようにする設定 */
+}
+
+.content-free input[type="text"] {
+    width: 200%; 
+    
+    padding: 12px 15px;
+    font-size: 16px;
+    
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    
+    box-sizing: border-box;
+}

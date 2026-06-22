@@ -90,7 +90,7 @@ var myLineChart = new Chart(ctx, {
 		<div class="box">
 		<span class="boxTitle">平均ポジティブ率：</span>
 		<span class="boxContent">
-		<c:out value="${e.avgPositive}" />%
+		<fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
 		</span></div>
 		<div class="box">
 		<span class="boxTitle">気分の浮き沈み：</span>

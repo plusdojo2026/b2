@@ -1,4 +1,16 @@
 @charset "UTF-8";
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+}
+
+
 .tab-2 {
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +93,7 @@
     background-color: #fff;  /* 通常時の背景（白） */
     cursor: pointer;
     box-sizing: border-box;  /* サイズ計算のズレを完全に防ぐ */
-    transition: all 0.2s ease; /* 💡変化（選択時やホバー時）をすべてなめらかにする */
+    transition: all 0.2s ease; /* 変化（選択時やホバー時）をすべてなめらかにする */
 }
 
 /* マウスを乗せたとき（ホバー時）の効果 */
@@ -129,10 +141,11 @@
   事実整理、とにかく記入のところ
    =================================================== */
 
-.content-fact input[type="text"] {
-    width: 200%;           /* 💡横幅を枠いっぱいに広げて長い文章を読めるようにする */
+.content-fact input[type="text"], 
+.content-free textarea {
+    width: 100%;           /* 横幅を枠いっぱいに広げて長い文章を読めるようにする */
     
-    padding: 12px 15px;    /* 💡上下と左右に余白を作り、入力欄を縦に大きくする */
+    padding: 12px 15px;    /* 上下と左右に余白を作り、入力欄を縦に大きくする */
     font-size: 16px;       /* 文字の大きさを少し大きくして見やすくする */
     
     border: 1px solid #ccc;/* 枠線の太さと色 */
@@ -143,8 +156,9 @@
     box-sizing: border-box;/* 余白（padding）を入れても全体の幅が崩れないようにする設定 */
 }
 
-.content-free input[type="text"] {
-    width: 200%; 
+.content-free input[type="text"], 
+.content-free textarea{
+    width: 100%; 
     
     padding: 12px 15px;
     font-size: 16px;

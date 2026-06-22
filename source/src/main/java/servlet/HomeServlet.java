@@ -60,10 +60,23 @@ import dto.UserDTO;
 			System.out.println("parsed lastLogin: " + lastLogin);
 			System.out.println("today: " + today);
 			System.out.println("lastLogin.plusDays(1): " + lastLogin.plusDays(1));
+			
+			
+			//ビンゴリセット処理
+			if(loginUser.getCurrentPos() >= 26) {
+				uDao.loginPosUpdate(loginUser.getId(), 0);
+				BonusDAO bonus2 = new BonusDAO();
+				boolean bonusRes = bonus2.bingoReset(loginUser.getId());
+				if(bonusRes) {
+					System.out.println("ビンゴリセット出来ませんでした");
+				}
+			}
+			
 						
 			if(lastLogin.isEqual(today)) {
 			//今日ログイン済み何もしない
-				System.out.println("条件1：今日すでにログイン済みor初回ログイン時");			
+				System.out.println("条件1：今日すでにログイン済みor初回ログイン時");		
+				
 			}else if(lastLogin.plusDays(1).isEqual(today)) {
 				//昨日ログイン　→　連続ログイン継続
 				System.out.println("条件2：昨日ログイン（連続ログイン継続）");
@@ -73,7 +86,7 @@ import dto.UserDTO;
 				int pos = loginUser.getCurrentPos();
 								
 				BonusDAO bonus2 = new BonusDAO();
-				boolean bonusRes = bonus2.bingoLogin(pos);
+				boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
 				if(!bonusRes) {
 					System.out.println("ビンゴの登録に失敗");
 				}else {
@@ -90,7 +103,7 @@ import dto.UserDTO;
 					int pos = loginUser.getCurrentPos();
 							
 					BonusDAO bonus2 = new BonusDAO();
-					boolean bonusRes = bonus2.bingoLogin(pos);
+					boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
 					if(!bonusRes) {
 						System.out.println("ビンゴの登録に失敗");
 					}else {

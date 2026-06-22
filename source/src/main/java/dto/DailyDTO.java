@@ -12,10 +12,9 @@ public class DailyDTO implements Serializable {
 	private int id, userId, emotionId, typeId;
 	private String freeForm, photo, positive, updated_at, created_at;
 	private double negativeRate, positiveRate, activeIndex;
-	private int yearWeek; //記録が何年何月何週のものかを判別する
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int id, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex, int yearWeek, String updated_at,
+	public DailyDTO(int id, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex, String updated_at,
 			String created_at) {
 		super();
 		this.id = id;
@@ -28,7 +27,6 @@ public class DailyDTO implements Serializable {
 		this.negativeRate = negativeRate;
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
-		this.yearWeek = yearWeek;
 		this.updated_at = updated_at;
 		this.created_at = created_at;
 	}
@@ -45,7 +43,6 @@ public class DailyDTO implements Serializable {
 		this.negativeRate = 0;
 		this.positiveRate = 0;
 		this.activeIndex = 0;
-		this.yearWeek = 0;
 		this.updated_at = "";
 		this.created_at = "";
 	}
@@ -123,10 +120,4 @@ public class DailyDTO implements Serializable {
 	public void setActiveIndex(double activeIndex) {
 		this.activeIndex = activeIndex;
 	}
-	public int getYearWeek() {
-		return yearWeek;
-	}
-	public void setYearWeek(int yearWeek) {
-		this.yearWeek = yearWeek;
-	}	
 }

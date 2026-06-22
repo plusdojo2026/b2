@@ -6,14 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import dto.DailyDTO;
+import dto.AnalysisDTO;
 
 public class DailyDAO {
-	/* 登録処理-----------------------------------------------
-	 * [引数:daily, 返り値:result]
-	 * ・DailyRevで結果表示のためにデータをselectする
-	 * ・単に入力されたデータを登録する
-	 */
-		public List<QuestionDTO> select() {
+
+		public List<DailyDTO> select() {
 		Connection conn = null;
 		List<DailyDTO> todayRev = new ArrayList<DailyDTO>();
 
@@ -26,18 +23,19 @@ public class DailyDAO {
 					"root", "password");
 
 			/*
-			 * ~SQL文~
+			 * 
+			 * 毎日記録結果ページで当日の情報を呼び出すメソッド
 			 * ・毎日入力テーブルからcreated_atをASCで一件とりだす
 			 * ・多分todayRevは配列じゃなくていいけど動けばよいのだ精神
 			 */
 			
-			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
+			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			
 			while (rs.next()) {
 				//結果をコレクションに格納
-				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
+				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
 				todayRev.add(dto);
 			}
 
@@ -68,6 +66,7 @@ public class DailyDAO {
 		Connection conn = null;
 		boolean result = false;
 
+
 		try {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -77,13 +76,17 @@ public class DailyDAO {
 					"root", "password");
 
 			/*
-			 * ~SQL文~
-			 * 1.DiaryRecテーブルに挿入
+			 * 毎日記録入力画面の登録メソッド
+			 * ・DiaryRecテーブルに入力した情報を登録
 			 */
 			
 			//1.DiaryRecテーブル
 			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+
+			//分析したデータを格納する
+			
 
 			// SQL文初期値を自動で入力する(Stringのみ)
 			if (daily.getFreeForm() != null) {
@@ -157,6 +160,7 @@ public class DailyDAO {
 			 * 1.DiaryRecテーブルに挿入
 			 * 2.Questionテーブルに挿入
 			 * 3.QuestionAnsテーブルに挿入
+			 * 途中
 			 */
 			
 			//1.DiaryRecテーブル

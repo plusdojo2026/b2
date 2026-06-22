@@ -53,10 +53,10 @@ import dto.UserDTO;
 			
 			//重複チェック
 			UserDAO uDao = new UserDAO();
-			int exists = uDao.existsUser(userName, pw);
-			boolean duplicated = (exists == 0);
+			boolean exists = uDao.existsUser(userName, pw);
 			
-			if (duplicated) { // 重複あり
+			
+			if (exists == true) { // 重複あり
 				request.setAttribute("mypageError", "このユーザー名とパスワードの組み合わせは既に使われています");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp"); //再度新規登録ページを表示
 				dispatcher.forward(request, response);

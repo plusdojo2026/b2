@@ -22,9 +22,29 @@
 
 		<div>			
 			<table border="1">
-				<c:forEach var="q" items="${qList}">
+				<c:forEach var="q" items="${qList}" varStatus="status">
 					<tr>
-						<td>${q}</td>
+						<input type="hidden" name="${q.qType}" value="${q.qType}">
+						<input type="hidden" name="${q.qType}" value="${q.qType}">
+						<td>Q.${status.count}</td>
+						<td>${q.question}</td>
+						<td>
+							<label>
+								<input type="radio" name=q_"${status.count}" value="0">1
+							</label>
+							<label>
+								<input type="radio" name=q_"${status.count}" value="1">2
+							</label>
+							<label>
+							<input type="radio" name=q_"${status.count}" value="2">3
+							</label>
+							<label>
+								<input type="radio" name=q_"${status.count}" value="3">4
+							</label>
+							<label>
+								<input type="radio" name=q_"${status.count}" value="4">5
+							</label>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -38,27 +58,6 @@ List<QuestionDTO> qList =
     (List<QuestionDTO>)request.getAttribute("qList");
 %>
 
-<p>取得件数：
-<%= qList != null ? qList.size() : 0 %>
-</p>
-
-<hr>
-
-<%
-if(qList != null){
-    for(QuestionDTO q : qList){
-%>
-
-<p>
-qType=<%= q.getQType() %>
-｜
-<%= q.getQuestion() %>
-</p>
-
-<%
-    }
-}
-%>
 
 	    <div>
 			<label class="label">自由入力</label><br>

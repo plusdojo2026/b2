@@ -9,8 +9,8 @@
 <body>
 <h2>マイページ</h2>
 
-ログインID<input type="text" name="userName"><br> 
-パスワード<input type="password" name="pw"><br>
+ログインID<input type="text" name="userName" value="${user.userName}"><br> 
+パスワード<input type="password" name="pw" value="${user.pw}"><br>
 パスワード（確認用）<input type="password" name="pw"><br> 
 <input type="submit" name="submit" value="更新"><br> 
 <input type="submit" name="submit" value="ログイン"><br>

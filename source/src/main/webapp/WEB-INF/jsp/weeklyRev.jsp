@@ -6,17 +6,20 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>週間結果</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/weeklyRev.css">
 </head>
 <body>
 	<c:set var="e" value="${weekList[0]}" />
-	<h1>
+	<h1 class="period">
 		<c:out value="${e.weeklyRes}" />
-		の週間結果
 	</h1>
 
-	<h1>折れ線グラフ</h1>
-	<canvas id="myLineChart"></canvas>
+	<div class="chart-container">
+	<canvas id="myLineChart" ></canvas>
+	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 	
@@ -58,8 +61,10 @@ var myLineChart = new Chart(ctx, {
   options: {
     title: {
       display: true,
-      text: 'ポジティブ率'
+      text: 'ポジティブ率とネガティブ率の遷移'
     },
+    responsive: true,
+    maintainAspectRatio: false, 
     scales: {
       yAxes: [{
         ticks: {
@@ -75,68 +80,24 @@ var myLineChart = new Chart(ctx, {
   }
 });
 </script>
-	<p>
-		<br> 分析コメント：
+	<div class="container">
+		<div class="box large">
+		<span class="boxTitle">分析コメント</span>
+		<span class="analysisCmt">
 		<c:out value="${e.analysisCmt}" />
-		<br> 平均ポジティブ率：
-		<c:out value="${e.avgPositive}" />
-		<br> 気分の浮き沈み：
+		</span>
+		</div>
+		<div class="box">
+		<span class="boxTitle">平均ポジティブ率：</span>
+		<span class="boxContent">
+		<c:out value="${e.avgPositive}" />%
+		</span></div>
+		<div class="box">
+		<span class="boxTitle">気分の浮き沈み：</span>
+		<span class="boxContent">
 		<c:out value="${e.moodType}" />
-	</p>
+		</span></div>
+	</div>
 
-
-	<h1>棒グラフ</h1>
-	<canvas id="myBarChart"></canvas>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
-	<script>
-  var ctx = document.getElementById("myBarChart");
-  var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-    	labels: [
-    	      <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-    	        '${d.created_at.substring(5,7) + 0}月${d.created_at.substring(8,10) + 0}日'
-    	        ${!s.last ? ',' : ''}
-    	      </c:forEach>
-    	    ],
-      datasets: [
-        {
-          label: 'ポジティブ率',
-          data: [<c:forEach var="d" items="${e.dailyList}" varStatus="s">
-            ${d.positiveRate * 100}${!s.last ? ',' : ''}
-          </c:forEach>],
-          backgroundColor: "rgba(219,39,91,0.5)"
-        },
-        {
-            label: 'ネガティブ率',
-            data: [<c:forEach var="d" items="${e.dailyList}" varStatus="s">
-              ${d.negativeRate * -100}${!s.last ? ',' : ''}
-            </c:forEach>],
-            backgroundColor: "rgba(130,201,169,0.5)"
-          }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'ポジティブ/ネガティブ率'
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            suggestedMax: 100,
-            suggestedMin: 0,
-            stepSize: 10,
-            callback: function(value, index, values){
-              return  value +  '％'
-            }
-          }
-        }]
-      },
-    }
-  });
-  </script>
 </body>
 </html>

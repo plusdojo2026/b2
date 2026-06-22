@@ -468,7 +468,7 @@ public class UserDAO {
 				return result;
 			}
 			
-			//③連続ログインが途切れた時(深度を-30ｍ、マイナスな値かどうかはｓｅｒｖｌｅｔの方で判断）
+			//③連続ログインが途切れた時(深度を-30ｍ)
 			public boolean decreaseDepth1(int userId) {
 				Connection conn = null;
 				boolean result = false;
@@ -482,11 +482,28 @@ public class UserDAO {
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 	
-					// SQL文を準備する
-					String sql = "UPDATE Users SET depthCurrent = depthCurrent - 30 WHERE id=?";
+					// SQL文を準備する(現在の深度を取得)
+					String sql1 = "SELECT depthCurrent FROM Users WHERE id=?";
+					PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+					pStmt1.setInt(1, userId);
+					ResultSet rs = pStmt1.executeQuery();
+					
+					int depthCurrent = 0;
+					if(rs.next()) {
+						depthCurrent = rs.getInt("depthCurrent");
+					}
+			
+					//深度がマイナスにならない
+					int newDepth = depthCurrent -30; 
+					if(newDepth < 0) { newDepth = 0; //深度がマイナスにならない
+					}
+					
+					// 水深の更新
+					String sql = "UPDATE Users SET depthCurrent = ? WHERE id=?";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 				
-					pStmt.setInt(1, userId);
+					pStmt.setInt(1, newDepth);
+					pStmt.setInt(2, userId);
 	
 					// SQL文を実行する
 					if (pStmt.executeUpdate() == 1) {
@@ -553,6 +570,64 @@ public class UserDAO {
 
 				// 結果を返す
 				return result;
+			}
+			
+			//ビンゴposの更新
+			public boolean loginPosUpdate(int userId, int pos) {
+				Connection conn = null;
+				boolean result = false;
+
+				try {
+					// JDBCドライバを読み込む
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					// データベースに接続する
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+							"root", "password");
+					
+					//pos(ビンゴの日付の更新)
+					pos += 1;
+					
+					// SQL文を準備する
+					String sql = "UPDATE Users SET currentPos = " + pos + " WHERE id=?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+					
+					pStmt.setInt(1, userId);
+
+					// SQL文を実行する
+					if (pStmt.executeUpdate() == 1) {
+						result = true;
+					}
+				} catch (SQLException e) {
+						e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				// 結果を返す
+				return result;
+			}
+			//連続ログイン
+			public void processLoginStreak(int userId) {
+			    updateTotalLoginDays(userId);  // 通算ログイン +1
+			    loginStreak(userId);           // 連続ログイン +1
+			    addDepth10(userId);            // 深度 +10
+			}
+			//途切れた時
+			public void processLoginBreak(int userId) {
+			    updateTotalLoginDays(userId);  // 通算ログイン +1
+			    loginStreakReset(userId);      // streak = 1
+			    decreaseDepth1(userId);        // 深度 -30（マイナス防止）
 			}
 
 //　マイページ

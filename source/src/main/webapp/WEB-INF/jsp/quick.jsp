@@ -5,13 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>ココロノナミ|簡易記録入力</title>
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/quick.css">
 <style>
 
 </style>
 </head>
 <body>
+<div class="flexbox">
+            <div class="leftScreen"></div>
 
+            <div class="rightScreen">
+ <div class="rightScreen">           
 <form method="post" action="${pageContext.request.contextPath}/QuickServlet">
 <h1>簡易記録</h1>
 <p>感情タグ[必須]：</p>
@@ -67,19 +72,21 @@
 	    <label for="tab-free">とにかく記入</label>   
 	
 		<div class="content-fact">
-			<h3>1.出来事</h3>何が起こったのか<br><input type="text" name="event"placeholder="ex)知らない人が私を見て笑った"><br>
-			<h3>2.信念</h3>その出来事をどう捉えた？<br><input type="text" name="belief"placeholder="ex)自分の容姿を笑われたのではないか"><br>
-			<h3>3.結果</h3>その時どんな気持ちになった？<br><input type="text" name="result"placeholder="ex)惨めな気持ちになった。"><br>
-			<h3>4.ポジティブに変換（ネガティブな出来事のみ）</h3>前向きに捉えなおしてみよう<br><textarea name="reframe" rows="2" placeholder="ex)たまたまこちらを見たタイミングで笑っただけで、私の容姿を笑ったわけではない可能性が高い。"></textarea><br>
+			<h3>1.出来事</h3>何が起こったのか<br><input type="text" name="event" required placeholder="ex)知らない人が私を見て笑った"><br>
+			<h3>2.信念</h3>その出来事をどう捉えた？<br><input type="text" name="belief" required placeholder="ex)自分の容姿を笑われたのではないか"><br>
+			<h3>3.結果</h3>その時どんな気持ちになった？<br><input type="text" name="result" required placeholder="ex)惨めな気持ちになった。"><br>
+			<h3>4.ポジティブに変換（ネガティブな出来事のみ）</h3>前向きに捉えなおしてみよう<br><textarea name="reframe"  cols="70" rows="4" required  placeholder="ex)たまたまこちらを見たタイミングで笑っただけで、私の容姿を笑ったわけではない可能性が高い。"></textarea><br>
 		</div>
 		
 		<div  class="content-free">
-			<h3>今の気持ちを書いてみよう</h3><input type="text" name="txtFree"><br>
+			<h3>今の気持ちを書いてみよう</h3><textarea name="txtFree" cols="70" rows="4"　required></textarea><br>
 		</div>
 	</div>
 	
-	<input type="submit" name="regist" value="登録"><br>
+	<input type="submit" name="regist" value="登録" class="btn--red btn--cubic btn--radius"><br>
 </form>
-
+</div>
+        </div>
+        <script src="bonus.js"></script>
 </body>
 </html>

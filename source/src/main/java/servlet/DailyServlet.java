@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DailyDAO;
 import dao.QuestionDAO;
+import dto.AnalysisDTO;
 import dto.DailyDTO;
 import dto.QuestionDTO;
 
@@ -47,17 +48,10 @@ public class DailyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
-		//結果表示などに用いるデータ
-		double negativeRate, positiveRate, activeIndex;
-		
-		negativeRate= 12.0;
-		positiveRate= 10.0;
-		activeIndex= 20.0;
 
 		//各質問の点数とABC項目を配列で整理する
 		ArrayList<Integer> point = new ArrayList<>();
-		ArrayList<String> emoType = new ArrayList<>();
+		ArrayList<Integer> emoType = new ArrayList<>();
 		
 		for (int qGet = 0; qGet < 14; qGet++) {
 			
@@ -69,29 +63,47 @@ public class DailyServlet extends HttpServlet {
 
 			//質問のABC項目を取得して格納
 			String qEmo = request.getParameter(
-				"qType"
+				"qType_" + (qGet + 1)
 			);
-			emoType.add(qEmo);
+			emoType.add(Integer.parseInt(qEmo));
 		}
 
-		//各項目を合算し、分析する
+		// int type_id = result.getType_id();
+		// double negativeRate = result.getNegativeRate();
+		// double positiveRate = result.getPositiveRate();
+		// double activeIndex = result.getActiveIndex();
+		// int emoBalance = result.getEmoBalance();
 
 		//その他のパラメータ
-		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
 		String positive = request.getParameter("positive");
 		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
-		String updated_at = request.getParameter("updated_at");
-		String created_at = request.getParameter("created_at");
 
+		//各項目を合算し、分析する
+		QuestionDAO qDao = new QuestionDAO();
+		AnalysisDTO result = qDao.analyze(point, emoType);
+		DailyDTO daily = new DailyDTO(
+			0,
+			user_id,
+			freeForm,
+			photo,
+			positive,
+			emotion_id,
+			result.getTypeId(),
+			result.getNegativeRate(),
+			result.getPositiveRate(),
+			result.getActiveIndex()
+		);
 
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
-		if (dDao.insert(new DailyDTO(0, user_id, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at))) { // 登録成功
-			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/dailyRev.jsp");
+		if (dDao.insert(daily)) { // 登録成功
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dailyRev.jsp");
+		    dispatcher.forward(request, response);
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/daily.jsp");
 		    dispatcher.forward(request, response);
 		}
 

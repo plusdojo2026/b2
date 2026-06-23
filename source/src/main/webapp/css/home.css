@@ -1,1 +1,21 @@
 @charset "UTF-8";
+
+.quickrecord{
+	border:1px solid black;
+}
+
+.loginbonus{
+	border:1px solid black;
+}
+
+.homereview{
+	border:1px solid black;
+}
+
+ul{
+	list-style:none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
+

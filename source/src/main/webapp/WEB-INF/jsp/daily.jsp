@@ -31,7 +31,7 @@
 			<table border="1">
 				<c:forEach var="q" items="${qList}" varStatus="status">
 					<tr>
-						<input type="hidden" name="qType_${status.count}" value="${q.qType}">
+						<input type="hidden" name="qType_${status.count}" value=${q.qType}>
 						<input type="hidden" name="user_id" value="1">
 						<td>Q.${status.count}</td>
 						<td>${q.question}</td>

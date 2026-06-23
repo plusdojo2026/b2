@@ -63,7 +63,7 @@ public class DailyServlet extends HttpServlet {
 
 			//質問のABC項目を取得して格納
 			String qEmo = request.getParameter(
-				"qType" + (qGet + 1)
+				"qType_" + (qGet + 1)
 			);
 			emoType.add(qEmo);
 		}

@@ -9,20 +9,20 @@ public class DailyDTO implements Serializable {
 	 */
 
 	//フィールド----------------------------------------------
-	private int id, userId, emotionId, typeId;
+	private int id, user_id, emotion_id, type_id;
 	private String freeForm, photo, positive;
 	private double negativeRate, positiveRate, activeIndex;
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int id, int userId, String freeForm, String photo, String positive, int emotionId, int typeId, double negativeRate, double positiveRate, double activeIndex) {
+	public DailyDTO(int id, int user_id, String freeForm, String photo, String positive, int emotion_id, int type_id, double negativeRate, double positiveRate, double activeIndex) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.user_id = user_id;
 		this.freeForm = freeForm;
 		this.photo = photo;
 		this.positive = positive;
-		this.emotionId = emotionId;
-		this.typeId = typeId;
+		this.emotion_id = emotion_id;
+		this.type_id = type_id;
 		this.negativeRate = negativeRate;
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
@@ -31,12 +31,12 @@ public class DailyDTO implements Serializable {
 	public DailyDTO() {
 		super();
 		this.id = 0;
-		this.userId = 0;
+		this.user_id = 0;
 		this.freeForm = "";
 		this.photo = "";
 		this.positive = "";
-		this.emotionId = 0;
-		this.typeId = 0;
+		this.emotion_id = 0;
+		this.type_id = 0;
 		this.negativeRate = 0;
 		this.positiveRate = 0;
 		this.activeIndex = 0;
@@ -49,23 +49,23 @@ public class DailyDTO implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
-	public int getEmotionId() {
-		return emotionId;
+	public int getEmotion_id() {
+		return emotion_id;
 	}
-	public void setEmotionId(int emotionId) {
-		this.emotionId = emotionId;
+	public void setEmotion_id(int emotion_id) {
+		this.emotion_id = emotion_id;
 	}
-	public int getTypeId() {
-		return typeId;
+	public int getType_id() {
+		return type_id;
 	}
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
 	}
 	public String getFreeForm() {
 		return freeForm;

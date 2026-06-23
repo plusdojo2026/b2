@@ -6,14 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import dto.DailyDTO;
+import dto.AnalysisDTO;
 
 public class DailyDAO {
-	/* 登録処理-----------------------------------------------
-	 * [引数:daily, 返り値:result]
-	 * ・DailyRevで結果表示のためにデータをselectする
-	 * ・単に入力されたデータを登録する
-	 */
-		public List<QuestionDTO> select() {
+
+		public List<DailyDTO> select() {
 		Connection conn = null;
 		List<DailyDTO> todayRev = new ArrayList<DailyDTO>();
 
@@ -26,18 +23,19 @@ public class DailyDAO {
 					"root", "password");
 
 			/*
-			 * ~SQL文~
+			 * 
+			 * 毎日記録結果ページで当日の情報を呼び出すメソッド
 			 * ・毎日入力テーブルからcreated_atをASCで一件とりだす
 			 * ・多分todayRevは配列じゃなくていいけど動けばよいのだ精神
 			 */
 			
-			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
+			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			
 			while (rs.next()) {
 				//結果をコレクションに格納
-				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
+				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
 				todayRev.add(dto);
 			}
 
@@ -68,6 +66,7 @@ public class DailyDAO {
 		Connection conn = null;
 		boolean result = false;
 
+
 		try {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -77,13 +76,17 @@ public class DailyDAO {
 					"root", "password");
 
 			/*
-			 * ~SQL文~
-			 * 1.DiaryRecテーブルに挿入
+			 * 毎日記録入力画面の登録メソッド
+			 * ・DiaryRecテーブルに入力した情報を登録
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
+			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), NOW(), NOW()";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+
+			//分析したデータを格納する
+			
 
 			// SQL文初期値を自動で入力する(Stringのみ)
 			if (daily.getFreeForm() != null) {
@@ -101,16 +104,16 @@ public class DailyDAO {
 			} else {
 				pStmt.setString(3, "");
 			}
-			if (daily.getUpdated_at() != null) {
-				pStmt.setString(4, daily.getUpdated_at());
-			} else {
-				pStmt.setString(4, "");
-			}
-			if (daily.getCreated_at() != null) {
-				pStmt.setString(5, daily.getCreated_at());
-			} else {
-				pStmt.setString(5, "");
-			}
+			// if (daily.getUpdated_at() != null) {
+			// 	pStmt.setString(4, daily.getUpdated_at());
+			// } else {
+			// 	pStmt.setString(4, "");
+			// }
+			// if (daily.getCreated_at() != null) {
+			// 	pStmt.setString(5, daily.getCreated_at());
+			// } else {
+			// 	pStmt.setString(5, "");
+			// }
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -148,7 +151,7 @@ public class DailyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -157,10 +160,11 @@ public class DailyDAO {
 			 * 1.DiaryRecテーブルに挿入
 			 * 2.Questionテーブルに挿入
 			 * 3.QuestionAnsテーブルに挿入
+			 * 途中
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql1 = "UPDATE DailyRec SET freeForm=?, photo=?, positive=?, emotion_id=?, update_at=?, created_at=? "
+			String sql1 = "UPDATE DailyRec SET freeForm=?, photo=?, positive=?, emotion_id=?, update_at=NOW(), created_at=NOW() "
 					+ "WHERE id=?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
@@ -180,59 +184,22 @@ public class DailyDAO {
 			} else {
 				pStmt1.setString(3, "");
 			}
-			if (daily.getUpdate_at() != null) {
-				pStmt1.setString(4, daily.getUpdate_at());
-			} else {
-				pStmt1.setString(4, "");
-			}
-			if (daily.getCreated_at() != null) {
-				pStmt1.setString(5, daily.getCreated_at());
-			} else {
-				pStmt1.setString(5, "");
-			}
+			// if (daily.getUpdate_at() != null) {
+			// 	pStmt1.setString(4, daily.getUpdate_at());
+			// } else {
+			// 	pStmt1.setString(4, "");
+			// }
+			// if (daily.getCreated_at() != null) {
+			// 	pStmt1.setString(5, daily.getCreated_at());
+			// } else {
+			// 	pStmt1.setString(5, "");
+			// }
 			
 			// SQL文を実行する
 			if (pStmt1.executeUpdate() == 1) {
 				result = true;
 			}
 			
-			//2.Questionテーブル
-			String sql2 = "UPDATE Question SET question=?, created_atQcont=? "
-					+ "WHERE question_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getQuestion() != null) {
-				pStmt2.setString(1, daily.getQuestion());
-			} else {
-				pStmt2.setString(1, "");
-			}
-			if (daily.getCreated_atQcont() != null) {
-				pStmt2.setString(2, daily.getCreated_atQcont());
-			} else {
-				pStmt2.setString(2, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt2.executeUpdate() == 1) {
-				result = true;
-			}
-			
-			//3.QuestionAnsテーブル
-			String sql3 = "UPDATE QuestionAns SET created_atQans=? "
-					+ "WHERE question_id=?";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getCreated_atQans() != null) {
-				pStmt3.setString(1, daily.getCreated_atQans());
-			} else {
-				pStmt3.setString(1, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt3.executeUpdate() == 1) {
-				result = true;
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

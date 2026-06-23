@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +38,21 @@ import dto.UserDTO;
 			}
 			
 			
+			//時間帯に合わせたメッセージ
+			LocalTime now = LocalTime.now();
+			String greeting;
+			
+			if(now.isBefore(LocalTime.of(11,0))){
+				greeting = "おはようございます！今日も１日がんばりましょう💪";
+			}else if(now.isBefore(LocalTime.of(14,0))){
+				greeting = "そろそろお昼時ですね。休憩はしっかりとれていますか？";
+			}else if(now.isBefore(LocalTime.of(17,0))){
+				greeting = "こんにちは！午後も自分のペースでがんばりましょう";
+			}else {
+				greeting = "こんばんは！今日も一日お疲れさまでした🌙";
+			}
+			request.setAttribute("greeting", greeting);
+			
 			//ログイン中のユーザーを取得→キャスト
 			UserDTO loginUser = (UserDTO) session.getAttribute("user"); //セッションからUserDTOを取得
 						
@@ -49,7 +65,8 @@ import dto.UserDTO;
 			LocalDate lastLogin = LocalDate.parse(lastloginDate);
 						
 			//今日の日付を取得
-			LocalDate today = LocalDate.now();
+			//LocalDate today = LocalDate.now();
+			LocalDate today = LocalDate.of(2026, 6, 24);
 						
 			//ログインチェック
 			UserDAO uDao = new UserDAO();
@@ -123,6 +140,7 @@ import dto.UserDTO;
 				//ログイン記録を画面表示
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 				dispatcher.forward(request, response);
+				
 			
 		}	
 

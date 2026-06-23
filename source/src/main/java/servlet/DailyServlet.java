@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,11 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.DailyDAO;
 import dao.QuestionDAO;
+import dto.DailyDTO;
 import dto.QuestionDTO;
+import dto.AnalysisDTO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -46,37 +48,47 @@ public class DailyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
-		int userId = Integer.parseInt(request.getParameter("userId"));
+
+		//各質問の点数とABC項目を配列で整理する
+		ArrayList<Integer> point = new ArrayList<>();
+		ArrayList<String> emoType = new ArrayList<>();
+		
+		for (int qGet = 0; qGet < 14; qGet++) {
+			
+			//質問のポイントを取得して格納
+			String qAns = request.getParameter(
+				"q_" + (qGet + 1)
+			);
+			point.add(Integer.parseInt(qAns));
+
+			//質問のABC項目を取得して格納
+			String qEmo = request.getParameter(
+				"qType"
+			);
+			emoType.add(qEmo);
+		}
+
+		//各項目を合算し、分析する
+		QuestionDAO qDao = new QuestionDAO();
+		AnalysisDTO result = qDao.analyze(point, emoType);
+
+		int typeId = result.getTypeId();
+		double negativeRate = result.getNegativeRate();
+		double positiveRate = result.getPositiveRate();
+		double activeIndex = result.getActiveIndex();
+		double emoBalance = result.getEmoBalance();
+
+		//その他のパラメータ
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
+		String positive = request.getParameter("positive");
 		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
-		int type_id = Integer.parseInt(request.getParameter("type_id"));
-		double negative= request.getParameter("negative");
-		double positive= request.getParameter("positive");
-		double activeIndex= request.getParameter("activeIndex");
-		int yearWeek = Integer.parseInt(request.getParameter("yearWeek"));
 
-
-		String updated_at = request.getParameter("updated_at");
-		String created_at = request.getParameter("created_at");
-
-				// リクエストパラメータを取得する
-		// for(QuestionDTO q : qList) {
-		// 	String qAns = request.getParameter(
-		// 		"q_" + q.getId();
-		// 	);
-
-		// 	int score = Integer.parseInt(answer);
-		// }
-
-		// double positiveRate = calcPositiveRate(q1, q2, q3);
-		// double negativeRate = calcNegativeRate(q1, q2, q3);
-		// double activeIndex = calcActiveIndex(q1, q2, q3);
 
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
-		if (dDao.insert()) { // 登録成功
+		if (dDao.insert(new DailyDTO(0, user_id, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex))) { // 登録成功
 			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/dailyRev.jsp");
 		} else { // 登録失敗
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

@@ -53,7 +53,7 @@ public class WeeklyDAO {
 			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
 			int yearWeek = Integer.parseInt(StYearWeek);
 
-			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 
 				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
 				pStmtDay.setInt(1, week.getUser_id());
@@ -66,18 +66,16 @@ public class WeeklyDAO {
 				    DailyDTO daily = new DailyDTO();
 
 				    daily.setId(rsDay.getInt("id"));
-				    daily.setUserId(rsDay.getInt("user_id"));
+				    daily.setUser_id(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
 				    daily.setPositive(rsDay.getString("positive"));
-				    daily.setEmotionId(rsDay.getInt("emotion_id"));
-				    daily.setTypeId(rsDay.getInt("type_id"));
+				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+				    daily.setType_id(rsDay.getInt("type_id"));
 				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
 				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
 				    daily.setActiveIndex(rsDay.getDouble("activeIndex"));
 				    daily.setYearWeek(rsDay.getInt("yearWeek"));
-				    daily.setUpdate_at(rsDay.getString("update_at"));
-				    daily.setCreated_at(rsDay.getString("created_at"));
 				    dailyList.add(daily);
 				}
 			
@@ -152,11 +150,11 @@ public class WeeklyDAO {
 	                "root", "password");
 	        
 	       //その日が属す週の各データをとってくる
-	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 	        
 	       PreparedStatement pStmt = conn.prepareStatement(sql);
 
-	       pStmt.setInt(1, daily.getUserId());
+	       pStmt.setInt(1, daily.getUser_id());
 	       pStmt.setInt(2, daily.getYearWeek());
 
 	       // 空Listを用意
@@ -241,7 +239,7 @@ public class WeeklyDAO {
 
 			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
 				ps.setString(1, weeklyRes);
-				ps.setInt(2, daily.getUserId());
+				ps.setInt(2, daily.getUser_id());
 	            ps.executeUpdate();
 	        }
 
@@ -250,7 +248,7 @@ public class WeeklyDAO {
 	                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-	        	ps.setInt(1, daily.getUserId());
+	        	ps.setInt(1, daily.getUser_id());
 	            ps.setString(2, weeklyRes);
 				ps.setInt(3, analysisCmt);
 				ps.setDouble(4, avgPositive);
@@ -351,7 +349,7 @@ public class WeeklyDAO {
 	                String dailySql =
 	                    "SELECT * FROM DailyRec " +
 	                    "WHERE user_id = ? AND yearWeek = ? " +
-	                    "ORDER BY created_at ASC LIMIT 7";
+	                    "LIMIT 7";
 
 	                PreparedStatement dstmt = conn.prepareStatement(dailySql);
 	                dstmt.setInt(1, user_Id);
@@ -363,11 +361,9 @@ public class WeeklyDAO {
 	                    DailyDTO d = new DailyDTO();
 
 	                    d.setId(drs.getInt("id"));
-	                    d.setUserId(drs.getInt("user_id"));
-	                    d.setFreeForm(drs.getString("freeForm"));
+	                    d.setUser_id(drs.getInt("user_id"));
 	                    d.setPositiveRate(drs.getDouble("positiveRate"));
 	                    d.setNegativeRate(drs.getDouble("negativeRate"));
-	                    d.setCreated_at(drs.getString("created_at"));
 
 	                    latestDailyList.add(d);
 	                }
@@ -375,7 +371,7 @@ public class WeeklyDAO {
 	        }
 	        
 	        // ページング
-	        int limit = 10;
+	        int limit = 5;
 	        int offset = (page - 1) * limit;
 
 	        String weekSql =

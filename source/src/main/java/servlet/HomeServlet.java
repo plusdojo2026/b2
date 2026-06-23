@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +38,21 @@ import dto.UserDTO;
 			}
 			
 			
+			//時間帯に合わせたメッセージ
+			LocalTime now = LocalTime.now();
+			String greeting;
+			
+			if(now.isBefore(LocalTime.of(11,0))){
+				greeting = "おはようございます！今日も１日がんばりましょう💪";
+			}else if(now.isBefore(LocalTime.of(14,0))){
+				greeting = "そろそろお昼時ですね。休憩はしっかりとれていますか？";
+			}else if(now.isBefore(LocalTime.of(17,0))){
+				greeting = "こんにちは！午後も自分のペースでがんばりましょう";
+			}else {
+				greeting = "こんばんは！今日も一日お疲れさまでした🌙";
+			}
+			request.setAttribute("greeting", greeting);
+			
 			//ログイン中のユーザーを取得→キャスト
 			UserDTO loginUser = (UserDTO) session.getAttribute("user"); //セッションからUserDTOを取得
 						
@@ -49,7 +65,8 @@ import dto.UserDTO;
 			LocalDate lastLogin = LocalDate.parse(lastloginDate);
 						
 			//今日の日付を取得
-			LocalDate today = LocalDate.now();
+			//LocalDate today = LocalDate.now();
+			LocalDate today = LocalDate.of(2026, 6, 24);
 						
 			//ログインチェック
 			UserDAO uDao = new UserDAO();
@@ -60,6 +77,18 @@ import dto.UserDTO;
 			System.out.println("parsed lastLogin: " + lastLogin);
 			System.out.println("today: " + today);
 			System.out.println("lastLogin.plusDays(1): " + lastLogin.plusDays(1));
+			
+			
+			//ビンゴリセット処理
+			if(loginUser.getCurrentPos() >= 26) {
+				uDao.loginPosUpdate(loginUser.getId(), 0);
+				BonusDAO bonus2 = new BonusDAO();
+				boolean bonusRes = bonus2.bingoReset(loginUser.getId());
+				if(bonusRes) {
+					System.out.println("ビンゴリセット出来ませんでした");
+				}
+			}
+			
 						
 			if(lastLogin.isEqual(today)) {
 			//今日ログイン済み何もしない
@@ -74,7 +103,7 @@ import dto.UserDTO;
 				int pos = loginUser.getCurrentPos();
 								
 				BonusDAO bonus2 = new BonusDAO();
-				boolean bonusRes = bonus2.bingoLogin(pos);
+				boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
 				if(!bonusRes) {
 					System.out.println("ビンゴの登録に失敗");
 				}else {
@@ -91,7 +120,7 @@ import dto.UserDTO;
 					int pos = loginUser.getCurrentPos();
 							
 					BonusDAO bonus2 = new BonusDAO();
-					boolean bonusRes = bonus2.bingoLogin(pos);
+					boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
 					if(!bonusRes) {
 						System.out.println("ビンゴの登録に失敗");
 					}else {
@@ -111,6 +140,7 @@ import dto.UserDTO;
 				//ログイン記録を画面表示
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 				dispatcher.forward(request, response);
+				
 			
 		}	
 

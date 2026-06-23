@@ -1,4 +1,89 @@
 @charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:850px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+
+
+}
+
+
+@media screen and (max-width:480px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+body{
+    margin: 0;
+    
+}
+
+
+.flexbox{
+    display: flex;
+    align-items: stretch;
+}
+
+.leftScreen, .rightScreen{
+    width: 50%;
+}
+
+.leftScreen{
+    background-image: url("../img/kokorononami.jpg");
+    background-repeat: repeat-y;
+    background-size: 100vh;
+    background-attachment: fixed;
+}
+
+.leftScreen .leftImg{
+    width: 100%;
+}
+
+
+
+/*body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+}
+*/
+
 .tab-2 {
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +91,7 @@
     max-width: 500px;
 }
 
-/* タブのラベルスタイル */
+/* タブのラベルスタイル*/ 
 .tab-2 > label {
     flex: 1 1;
     order: -1;
@@ -62,9 +147,15 @@
 .emotion-radio-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;         /* 選択肢同士の間隔（上下左右） */
+    gap: 15px;
     margin-bottom: 20px;
-    max-width: 525px;  /* 横にぴったり4つ並んだ時点で自動改行させる設定 */
+    width:100%  /*横にぴったり4つ並んだ時点で自動改行させる設定 */
+}
+
+.emotion-radio-group label {
+    /* 全体（100%）から隙間3つ分（15px × 3 = 45px）を引いて、4等分 */
+    width: calc((100% - 45px) / 4) !important;
+    box-sizing: border-box;
 }
 
 .emotion-radio-group label {
@@ -73,7 +164,7 @@
     align-items: center;     /* 左右の中央寄せ */
     justify-content: center; /* 上下の中央寄せ */
     
-    width: 100px;            /* ボックス全体の横幅 */
+    width: 100%;            /* ボックス全体の横幅 */
     height: 110px;           /* ボックス全体の縦幅 */
     padding: 10px;
     border: 2px solid #ccc;  /* 未選択時のグレーの枠線 */
@@ -81,7 +172,7 @@
     background-color: #fff;  /* 通常時の背景（白） */
     cursor: pointer;
     box-sizing: border-box;  /* サイズ計算のズレを完全に防ぐ */
-    transition: all 0.2s ease; /* 💡変化（選択時やホバー時）をすべてなめらかにする */
+    transition: all 0.2s ease; /* 変化（選択時やホバー時）をすべてなめらかにする */
 }
 
 /* マウスを乗せたとき（ホバー時）の効果 */
@@ -95,7 +186,7 @@
     height: 60px;
     object-fit: contain;
     margin-bottom: 8px;      /* 画像と文字の間のすき間 */
-    transition: transform 0.2s ease, filter 0.2s ease; /* 💡画像が縮む時（選択が解除された時）もなめらかにする */
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 /* 文字のスタイル */
@@ -129,11 +220,12 @@
   事実整理、とにかく記入のところ
    =================================================== */
 
-.content-fact input[type="text"] {
-    width: 200%;           /* 💡横幅を枠いっぱいに広げて長い文章を読めるようにする */
+.content-fact input[type="text"], 
+.content-fact textarea{
+    width: 100%;
     
-    padding: 12px 15px;    /* 💡上下と左右に余白を作り、入力欄を縦に大きくする */
-    font-size: 16px;       /* 文字の大きさを少し大きくして見やすくする */
+    padding: 12px 15px;
+    font-size: 16px;
     
     border: 1px solid #ccc;/* 枠線の太さと色 */
     border-radius: 6px;    /* 入力欄の角をほんのり丸くする */
@@ -143,8 +235,9 @@
     box-sizing: border-box;/* 余白（padding）を入れても全体の幅が崩れないようにする設定 */
 }
 
-.content-free input[type="text"] {
-    width: 200%; 
+.content-free input[type="text"], 
+.content-free textarea{
+    width: 100%; 
     
     padding: 12px 15px;
     font-size: 16px;
@@ -155,4 +248,56 @@
     margin-bottom: 15px;
     
     box-sizing: border-box;
+}
+
+/* 親要素：アイコンを絶対配置するための基準点 */
+.btn-container {
+  position: relative;
+  display: inline-block; /* ボタンの幅に合わせる */
+  vertical-align: middle;
+}
+
+/* ボタンのベーススタイル（デフォルト初期化＋共通設定） */
+input[type="submit"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  
+  /* サイズ・余白（右側にアイコン用の余白を広く確保） */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 2.5rem 15px 2.5rem;
+  color: #ffffff;
+  background-color:#2589d0; /* 赤色ボタンのベース */
+  
+  box-sizing: border-box;
+  transition: all 0.1s ease; /* 動きを滑らかに */
+}
+
+/*立体感 */
+input.btn--red.btn--cubic {
+  border-bottom: 5px solid #2589d0;
+}
+
+/* 立体ボタンのホバー*/
+input.btn--red.btn--cubic:hover {
+  transform: translateY(3px); 
+  border-bottom: 2px solid #2589d0;
+}
+
+/* 角丸*/
+input.btn--radius {
+  border-radius: 100vh;
+}
+
+/* 右側アイコンの絶対配置（提示コードの調整） */
+.fa-position-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 縦中央に綺麗に配置 */
+  right: 1.5rem;
+  color: #ffffff;
+  pointer-events: none;
 }

@@ -17,32 +17,39 @@
     <form method="POST" action="/b2/DailyServlet" id="form">
 		<div>
 			<label class="label">感情タグ</label><br>
-		    <input type="radio" name="emotion_id" class="daily">
+			<input type="radio" name="emotion_id" value="1">怒り
+			<input type="radio" name="emotion_id" value="2">悲しみ
+			<input type="radio" name="emotion_id" value="3">悔しい
+			<input type="radio" name="emotion_id" value="4">焦り
+			<input type="radio" name="emotion_id" value="5">楽しい
+			<input type="radio" name="emotion_id" value="6">嬉しい
+			<input type="radio" name="emotion_id" value="7">幸せ
+			<input type="radio" name="emotion_id" value="8">好き
 		</div>
 
 		<div>			
 			<table border="1">
 				<c:forEach var="q" items="${qList}" varStatus="status">
 					<tr>
-						<input type="hidden" name="${q.qType}" value="${q.qType}">
-						<input type="hidden" name="user_id" value="testUser">
+						<input type="hidden" name="qType_${status.count}" value="${q.qType}">
+						<input type="hidden" name="user_id" value="1">
 						<td>Q.${status.count}</td>
 						<td>${q.question}</td>
 						<td>
 							<label>
-								<input type="radio" name=q_"${status.count}" value="0">1
+								<input type="radio" name="q_${status.count}" value="0">1
 							</label>
 							<label>
-								<input type="radio" name=q_"${status.count}" value="1">2
+								<input type="radio" name="q_${status.count}" value="1">2
 							</label>
 							<label>
-							<input type="radio" name=q_"${status.count}" value="2">3
+							<input type="radio" name="q_${status.count}" value="2">3
 							</label>
 							<label>
-								<input type="radio" name=q_"${status.count}" value="3">4
+								<input type="radio" name="q_${status.count}" value="3">4
 							</label>
 							<label>
-								<input type="radio" name=q_"${status.count}" value="4">5
+								<input type="radio" name="q_${status.count}" value="4">5
 							</label>
 						</td>
 					</tr>

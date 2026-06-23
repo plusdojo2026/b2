@@ -31,13 +31,13 @@ public class DailyDAO {
 			 * ・多分todayRevは配列じゃなくていいけど動けばよいのだ精神
 			 */
 			
-			String sql = "SELECT id, user_id, freeForm, photo, positive, emotion_id, type_id, negativeRate, positiveRate, activeIndex, updated_at, created_at FROM DailyRec ORDER BY created_at DESC LIMIT 1";
+			String sql = "SELECT id, user_id, freeForm, photo, positive, emotion_id, type_id, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at DESC LIMIT 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
 			
 			while (rs.next()) {
 				//結果をコレクションに格納
-				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("user_id"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotion_id"), rs.getInt("type_id"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"));
+				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("user_id"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotion_id"), rs.getInt("type_id"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"));
 				todayRev.add(dto);
 			}
 

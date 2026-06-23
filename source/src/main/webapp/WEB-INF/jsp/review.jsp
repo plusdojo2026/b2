@@ -6,14 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
 <title>振り返りページ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/review.css">
 </head>
 <body>
 <div class="flexbox">
 		<div class="leftScreen"></div>
-
+		<!-- メインコンテンツ -->
 		<div class="rightScreen">
-
+			<!-- 週間結果 -->
 			<c:set var="e" value="${weekList[0]}" />
 			<h1 class="period">
 				<c:out value="${e.weeklyRes}" />
@@ -82,47 +85,44 @@ var myLineChart = new Chart(ctx, {
 });
 </script>
 
-<div class="weekList">
-<c:forEach var="week" items="${weekList}">
-<table class="weekTable">
+			<div class="weekList">
+				<c:forEach var="week" items="${weekList}">
+					<table class="weekTable">
 
-  <tr>
-    <td class="weekPeriod">
-      <a href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
-        ${week.weeklyRes}
-      </a>
-    </td>
+						<tr>
+							<td class="weekPeriod"><a
+								href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
+									${week.weeklyRes} </a></td>
 
-    <td class="weekComment">
-      ${week.analysisCmt.substring(0,20)}...
-    </td>
-  </tr>
-</table>
-</c:forEach>
-	</div>
-	<div class="pagination">
-  <c:if test="${currentPage > 1}">
+							<td class="weekComment">
+								${week.analysisCmt.substring(0,20)}...</td>
+						</tr>
+					</table>
+				</c:forEach>
+			</div>
+			<div class="pagination">
+				<c:if test="${currentPage > 1}">
     &lt; 前へ
   </c:if>
-  <c:forEach var="i" begin="1" end="${totalPage}">
-    
-    <c:choose>
-      <c:when test="${i == currentPage}">
-        <span>${i}</span>
-      </c:when>
+				<c:forEach var="i" begin="1" end="${totalPage}">
 
-      <c:otherwise>
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span>${i}</span>
+						</c:when>
+
+						<c:otherwise>
         ${i}
       </c:otherwise>
 
-    </c:choose>
+					</c:choose>
 
-  </c:forEach>
-  <c:if test="${currentPage < totalPage}">
+				</c:forEach>
+				<c:if test="${currentPage < totalPage}">
     次へ &gt;
   </c:if>
 
-</div>
+			</div>
 		</div>
 	</div>
 

@@ -31,8 +31,7 @@ public class WeeklyServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String weeklyRes ="2026-06-08~2026-06-14";
-		//String weeklyRes = request.getParameter("weeklyRes");
+		String weeklyRes = request.getParameter("weeklyRes");
 
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
@@ -40,8 +39,7 @@ public class WeeklyServlet extends HttpServlet {
 		
 		//テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
 		DailyDTO dDto = new DailyDTO();
-		dDto.setUserId(1);
-		dDto.setYearWeek(202624);
+		dDto.setUser_id(1);
 		dao.aggregate(dDto);
 
 		//*ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！

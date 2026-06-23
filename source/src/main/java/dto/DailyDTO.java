@@ -9,12 +9,12 @@ public class DailyDTO implements Serializable {
 	 */
 
 	//フィールド----------------------------------------------
-	private int id, user_id, emotion_id, type_id;
+	private int id, user_id, emotion_id, type_id, yearWeek;
 	private String freeForm, photo, positive;
 	private double negativeRate, positiveRate, activeIndex;
 	
 	//コンストラクタ--------------------------------------------
-	public DailyDTO(int id, int user_id, String freeForm, String photo, String positive, int emotion_id, int type_id, double negativeRate, double positiveRate, double activeIndex) {
+	public DailyDTO(int id, int user_id, String freeForm, String photo, String positive, int emotion_id, int type_id, double negativeRate, double positiveRate, double activeIndex, int yearWeek) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -26,6 +26,7 @@ public class DailyDTO implements Serializable {
 		this.negativeRate = negativeRate;
 		this.positiveRate = positiveRate;
 		this.activeIndex = activeIndex;
+		this.yearWeek = yearWeek;
 	}
 	//一応入力なしを作ってみた
 	public DailyDTO() {
@@ -40,6 +41,7 @@ public class DailyDTO implements Serializable {
 		this.negativeRate = 0;
 		this.positiveRate = 0;
 		this.activeIndex = 0;
+		this.yearWeek = 0;
 	}
 	
 	//ゲッタ、セッタ------------------------------------------------
@@ -102,5 +104,11 @@ public class DailyDTO implements Serializable {
 	}
 	public void setActiveIndex(double activeIndex) {
 		this.activeIndex = activeIndex;
+	}
+	public int getYearWeek() {
+		return yearWeek;
+	}
+	public void setYearWeek(int yearWeek) {
+		this.yearWeek = yearWeek;
 	}
 }

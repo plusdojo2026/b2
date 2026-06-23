@@ -53,20 +53,23 @@ public class DailyServlet extends HttpServlet {
 		ArrayList<Integer> point = new ArrayList<>();
 		ArrayList<Integer> emoType = new ArrayList<>();
 		
-		for (int qGet = 0; qGet < 14; qGet++) {
+		for (int qGet = 1; qGet <= 14; qGet++) {
 			
 			//質問のポイントを取得して格納
 			String qAns = request.getParameter(
-				"q_" + (qGet + 1)
+				"q_" + (qGet)
 			);
 			point.add(Integer.parseInt(qAns));
 
 			//質問のABC項目を取得して格納
 			String qEmo = request.getParameter(
-				"qType_" + (qGet + 1)
+				"qType_" + (qGet)
 			);
 			emoType.add(Integer.parseInt(qEmo));
 		}
+		
+		
+		
 
 		// int type_id = result.getType_id();
 		// double negativeRate = result.getNegativeRate();
@@ -94,7 +97,8 @@ public class DailyServlet extends HttpServlet {
 			result.getTypeId(),
 			result.getNegativeRate(),
 			result.getPositiveRate(),
-			result.getActiveIndex()
+			result.getActiveIndex(),
+			0
 		);
 
 		// 登録処理を行う

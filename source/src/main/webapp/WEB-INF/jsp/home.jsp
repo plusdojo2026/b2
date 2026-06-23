@@ -36,9 +36,9 @@
 		<footer>
 			<button onclick="location.href='/QuickServlet';">簡易記録</button>
 			<button onclick="location.href='/DailyServlet';">毎日記録</button>
-			<button>振り返り機能</button>
-			<button>ログインボーナス</button>
-			<button>マイページ</button>
+			<button onclick="location.href='/ReviewServlet';">振り返り機能</button>
+			<button onclick="location.href='/BonusServlet';">ログインボーナス</button>
+			<button onclick="location.href='/MypageServlet';">マイページ</button>
 		</footer>
 	</body>
 </html>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,7 +17,6 @@
 		<div class="leftScreen"></div>
 
 		<div class="rightScreen">
-
 			<c:set var="e" value="${weekList[0]}" />
 			<h1 class="period">
 				<c:out value="${e.weeklyRes}" />
@@ -34,12 +34,13 @@ var ctx = document.getElementById("myLineChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: [
-      <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-        '${d.created_at.substring(5,7) + 0}月${d.created_at.substring(8,10) + 0}日'
-        ${!s.last ? ',' : ''}
-      </c:forEach>
-    ],
+
+	  labels: [
+	    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+	      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+	    </c:forEach>
+	  ],
+
     datasets: [
       {
         label: 'ポジティブ率',

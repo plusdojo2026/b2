@@ -51,7 +51,7 @@ public class DailyServlet extends HttpServlet {
 
 		//各質問の点数とABC項目を配列で整理する
 		ArrayList<Integer> point = new ArrayList<>();
-		ArrayList<String> emoType = new ArrayList<>();
+		ArrayList<Integer> emoType = new ArrayList<>();
 		
 		for (int qGet = 0; qGet < 14; qGet++) {
 			
@@ -65,7 +65,7 @@ public class DailyServlet extends HttpServlet {
 			String qEmo = request.getParameter(
 				"qType_" + (qGet + 1)
 			);
-			emoType.add(qEmo);
+			emoType.add(Integer.parseInt(qEmo));
 		}
 
 		// int type_id = result.getType_id();

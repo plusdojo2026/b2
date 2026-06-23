@@ -16,6 +16,12 @@ public class QuestionDTO implements Serializable {
 		this.qType = qType;
 		this.created_at = created_at;
 	}
+	public QuestionDTO() {
+		this.id = 0;
+		this.question = "";
+		this.qType = 0;
+		this.created_at = "";
+	}
 
 	//ゲッタ、セッタ
 	public int getId() {
@@ -48,5 +54,8 @@ public class QuestionDTO implements Serializable {
 
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
+	}
+	public int getqType() {
+	    return qType;
 	}
 }

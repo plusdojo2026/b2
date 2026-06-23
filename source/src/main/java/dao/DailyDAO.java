@@ -3,10 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.DailyDTO;
-import dto.AnalysisDTO;
 
 public class DailyDAO {
 
@@ -25,17 +27,17 @@ public class DailyDAO {
 			/*
 			 * 
 			 * 毎日記録結果ページで当日の情報を呼び出すメソッド
-			 * ・毎日入力テーブルからcreated_atをASCで一件とりだす
+			 * ・毎日入力テーブルからcreated_atをDESCで一件とりだす
 			 * ・多分todayRevは配列じゃなくていいけど動けばよいのだ精神
 			 */
 			
-			String sql = "SELECT id, userId, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at FROM DailyRec ORDER BY created_at ASC LIMIT 1";
+			String sql = "SELECT id, user_id, freeForm, photo, positive, emotion_id, type_id, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at DESC LIMIT 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-
+			ResultSet rs = pStmt.executeQuery();
 			
 			while (rs.next()) {
 				//結果をコレクションに格納
-				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("userId"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotionId"), rs.getInt("typeId"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getString("question"), rs.getString("updated_at"), rs.getString("created_at"));
+				DailyDTO dto = new DailyDTO(rs.getInt("id"), rs.getInt("user_id"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotion_id"), rs.getInt("type_id"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"));
 				todayRev.add(dto);
 			}
 
@@ -81,39 +83,32 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), NOW(), NOW()";
+			String sql = "INSERT INTO DailyRec VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, yearWeek(CURDATE(),1), NOW(), NOW()";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 
 			//分析したデータを格納する
-			
-
-			// SQL文初期値を自動で入力する(Stringのみ)
+			pStmt.setInt(1, daily.getUser_id());
 			if (daily.getFreeForm() != null) {
-				pStmt.setString(1, daily.getFreeForm());
-			} else {
-				pStmt.setString(1, "");
-			}
-			if (daily.getPhoto() != null) {
-				pStmt.setString(2, daily.getPhoto());
+				pStmt.setString(2, daily.getFreeForm());
 			} else {
 				pStmt.setString(2, "");
 			}
-			if (daily.getPositive() != null) {
-				pStmt.setString(3, daily.getPositive());
+			if (daily.getPhoto() != null) {
+				pStmt.setString(3, daily.getPhoto());
 			} else {
 				pStmt.setString(3, "");
 			}
-			// if (daily.getUpdated_at() != null) {
-			// 	pStmt.setString(4, daily.getUpdated_at());
-			// } else {
-			// 	pStmt.setString(4, "");
-			// }
-			// if (daily.getCreated_at() != null) {
-			// 	pStmt.setString(5, daily.getCreated_at());
-			// } else {
-			// 	pStmt.setString(5, "");
-			// }
+			if (daily.getPositive() != null) {
+				pStmt.setString(4, daily.getPositive());
+			} else {
+				pStmt.setString(4, "");
+			}
+			pStmt.setInt(5, daily.getEmotion_id());
+			pStmt.setInt(6, daily.getType_id());
+			pStmt.setDouble(7, daily.getNegativeRate());
+			pStmt.setDouble(8, daily.getPositiveRate());
+			pStmt.setDouble(9, daily.getActiveIndex());
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -138,7 +133,7 @@ public class DailyDAO {
 		}
 
 		// 結果を返す
-		return dailyResult;
+		return result;
 	}
 
 	

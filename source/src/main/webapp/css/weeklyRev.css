@@ -9,7 +9,7 @@
 .chart-container {
   width: 100%;
   max-width: 800px;
-  height: 400px;
+  height: 300px;
   margin: 0 auto;
 }
 
@@ -22,6 +22,7 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  margin-top: 25px;
 }
 
 
@@ -58,22 +59,96 @@
 .analysisCmt {
 	padding: 15px;
 }
+/**/
+*{
+    box-sizing: border-box;
+}
 
-	
+@media screen and (max-width:850px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
 
-/* スマホ */
-@media (max-width: 600px) {
-  .container {
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+
+
+}
+
+
+@media screen and (max-width:480px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+    
+.container {
     grid-template-columns: 1fr; /* 1列にする */
+    transform: scale(1.1);
+    height: 55vh;
+    justify-items: center;
   }
-
+  
   .large {
     grid-column: span 1;
   }
   
 .chart-container {
     width: 95%;
-    height: 350px;
+    height: 75vh;
+  }
+  
+.boxContent {
+    font-size: 8vw;
   }
   
 }
+
+
+
+.hidden{
+    display: none;
+}
+
+body{
+    margin: 0;
+}
+
+
+.flexbox{
+    display: flex;
+    align-items: stretch;
+}
+
+.leftScreen, .rightScreen{
+    width: 50%;
+}
+
+.leftScreen{
+    background-image: url("../img/kokorononami.jpg");
+    background-repeat: repeat-y;
+    background-size: 100vh;
+    background-attachment: fixed;
+}
+
+.leftScreen .leftImg{
+    width: 100%;
+}
+
+

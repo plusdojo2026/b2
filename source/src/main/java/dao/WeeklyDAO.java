@@ -53,7 +53,7 @@ public class WeeklyDAO {
 			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
 			int yearWeek = Integer.parseInt(StYearWeek);
 
-			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 
 				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
 				pStmtDay.setInt(1, week.getUser_id());
@@ -66,18 +66,16 @@ public class WeeklyDAO {
 				    DailyDTO daily = new DailyDTO();
 
 				    daily.setId(rsDay.getInt("id"));
-				    daily.setUserId(rsDay.getInt("user_id"));
+				    daily.setUser_id(rsDay.getInt("user_id"));
 				    daily.setFreeForm(rsDay.getString("freeForm"));
 				    daily.setPhoto(rsDay.getString("photo"));
 				    daily.setPositive(rsDay.getString("positive"));
-				    daily.setEmotionId(rsDay.getInt("emotion_id"));
-				    daily.setTypeId(rsDay.getInt("type_id"));
+				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+				    daily.setType_id(rsDay.getInt("type_id"));
 				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
 				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
 				    daily.setActiveIndex(rsDay.getDouble("activeIndex"));
 				    daily.setYearWeek(rsDay.getInt("yearWeek"));
-				    daily.setUpdate_at(rsDay.getString("update_at"));
-				    daily.setCreated_at(rsDay.getString("created_at"));
 				    dailyList.add(daily);
 				}
 			
@@ -152,11 +150,11 @@ public class WeeklyDAO {
 	                "root", "password");
 	        
 	       //その日が属す週の各データをとってくる
-	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ? ORDER BY created_at ASC";
+	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 	        
 	       PreparedStatement pStmt = conn.prepareStatement(sql);
 
-	       pStmt.setInt(1, daily.getUserId());
+	       pStmt.setInt(1, daily.getUser_id());
 	       pStmt.setInt(2, daily.getYearWeek());
 
 	       // 空Listを用意
@@ -241,7 +239,7 @@ public class WeeklyDAO {
 
 			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
 				ps.setString(1, weeklyRes);
-				ps.setInt(2, daily.getUserId());
+				ps.setInt(2, daily.getUser_id());
 	            ps.executeUpdate();
 	        }
 
@@ -250,7 +248,7 @@ public class WeeklyDAO {
 	                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-	        	ps.setInt(1, daily.getUserId());
+	        	ps.setInt(1, daily.getUser_id());
 	            ps.setString(2, weeklyRes);
 				ps.setInt(3, analysisCmt);
 				ps.setDouble(4, avgPositive);
@@ -288,4 +286,149 @@ public class WeeklyDAO {
 		// 結果を返す
 		return result;
 	}
+
+	//振り返り画面用ページング付き一覧表示
+	public List<WeeklyDTO> selectAll(int user_Id, int page) {
+
+	    Connection conn = null;
+	    List<WeeklyDTO> weekList = new ArrayList<>();
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        conn = DriverManager.getConnection(
+	            "jdbc:mysql://localhost:3306/b2?" +
+	            "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	            "root", "password"
+	        );
+
+	        //  最新の created_at を取得
+	        String latestSql =
+	            "SELECT created_at FROM WeekRes " +
+	            "WHERE user_id = ? " +
+	            "ORDER BY created_at DESC LIMIT 1";
+
+	        PreparedStatement latestStmt = conn.prepareStatement(latestSql);
+	        latestStmt.setInt(1, user_Id);
+
+	        ResultSet latestRs = latestStmt.executeQuery();
+
+	        String latestCreatedAt = null;
+	        if (latestRs.next()) {
+	            latestCreatedAt = latestRs.getString("created_at");
+	        }
+
+	        //  最新週のdaily取得
+	        List<DailyDTO> latestDailyList = new ArrayList<>();
+
+	        if (latestCreatedAt != null) {
+
+	            String weeklyResSql =
+	                "SELECT weeklyRes FROM WeekRes " +
+	                "WHERE user_id = ? AND created_at = ?";
+
+	            PreparedStatement wrStmt = conn.prepareStatement(weeklyResSql);
+	            wrStmt.setInt(1, user_Id);
+	            wrStmt.setString(2, latestCreatedAt);
+
+	            ResultSet wrRs = wrStmt.executeQuery();
+
+	            if (wrRs.next()) {
+	                String weeklyRes = wrRs.getString("weeklyRes");
+
+	                String startDateStr = weeklyRes.split("~")[0];
+
+	                LocalDate date = LocalDate.parse(startDateStr);
+
+	                WeekFields wf = WeekFields.ISO;
+	                int year = date.get(wf.weekBasedYear());
+	                int week = date.get(wf.weekOfWeekBasedYear());
+	                int yearWeek = Integer.parseInt(String.format("%d%02d", year, week));
+
+	                // Daily取得
+	                String dailySql =
+	                    "SELECT * FROM DailyRec " +
+	                    "WHERE user_id = ? AND yearWeek = ? " +
+	                    "LIMIT 7";
+
+	                PreparedStatement dstmt = conn.prepareStatement(dailySql);
+	                dstmt.setInt(1, user_Id);
+	                dstmt.setInt(2, yearWeek);
+
+	                ResultSet drs = dstmt.executeQuery();
+
+	                while (drs.next()) {
+	                    DailyDTO d = new DailyDTO();
+
+	                    d.setId(drs.getInt("id"));
+	                    d.setUser_id(drs.getInt("user_id"));
+	                    d.setPositiveRate(drs.getDouble("positiveRate"));
+	                    d.setNegativeRate(drs.getDouble("negativeRate"));
+
+	                    latestDailyList.add(d);
+	                }
+	            }
+	        }
+	        
+	        // ページング
+	        int limit = 5;
+	        int offset = (page - 1) * limit;
+
+	        String weekSql =
+	            "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, " +
+	            "wc.analysisCmt, ms.moodType, wr.created_at " +
+	            "FROM WeekRes wr " +
+	            "JOIN WeekCmt wc ON wr.weekCmt_id = wc.id " +
+	            "JOIN MoodSwings ms ON wr.moodSwings_id = ms.id " +
+	            "WHERE wr.user_id = ? " +
+	            "ORDER BY wr.created_at DESC " +
+	            "LIMIT ? OFFSET ?";
+
+	        PreparedStatement stmt = conn.prepareStatement(weekSql);
+	        stmt.setInt(1, user_Id);
+	        stmt.setInt(2, limit);
+	        stmt.setInt(3, offset);
+
+	        ResultSet rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+
+	            String createdAt = rs.getString("created_at");
+
+	            List<DailyDTO> dailyList;
+
+	            // 最新1件のみdaily付与
+	            if (createdAt.equals(latestCreatedAt)) {
+	                dailyList = new ArrayList<>(latestDailyList);
+	            } else {
+	                dailyList = new ArrayList<>();
+	            }
+
+	            WeeklyDTO weekly = new WeeklyDTO(
+	                rs.getInt("id"),
+	                rs.getInt("user_id"),
+	                rs.getString("weeklyRes"),
+	                rs.getString("analysisCmt"),
+	                rs.getDouble("avgPositive"),
+	                rs.getString("moodType"),
+	                rs.getString("created_at"),
+	                dailyList
+	            );
+
+	            weekList.add(weekly);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        weekList = null;
+	    } finally {
+	        if (conn != null) {
+	            try { conn.close(); } catch (SQLException e) {}
+	        }
+	    }
+
+	    return weekList;
+	}
+
+	
 }

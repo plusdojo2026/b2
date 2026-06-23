@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Arrays;
-
+import dto.AnalysisDTO;
 import dto.QuestionDTO;
 
 public class QuestionDAO {
@@ -71,7 +70,7 @@ public class QuestionDAO {
 		return qList;
 	}
 
-		public AnalysisDTO analyze(ArrayList<Integer> point, ArrayList<String> emoType) {
+		public AnalysisDTO analyze(ArrayList<Integer> point, ArrayList<Integer> emoType) {
 		Connection conn = null;
 		List<AnalysisDTO> result = new ArrayList<AnalysisDTO>();
 
@@ -88,8 +87,13 @@ public class QuestionDAO {
 		 * 
 		 */
 
-		double negative, positive, negativeRate, positiveRate, activeIndex;
+		double negative = 0;
+		double positive = 0;
+		double negativeRate = 0;
+		double positiveRate = 0;
+		double activeIndex = 0;
 		int emoBalance = 1;
+		int typeId = -1;
 		/*
 		 * 感情バランス： 0 = ネガティブ、 1 = 普通、 2 = ポジティブ
 		 */
@@ -111,38 +115,38 @@ public class QuestionDAO {
 			 * ※現在はソートの関係で同点の場合は登録順の早いものが選ばれる
 			 */
 			
-			String sql = "SELECT r.id, r.user_id, typeRes, resultPicture, typeComment, qType FROM RecordType AS r JOIN Question AS q ON r.id = qType WHERE typeRes=?";
+			String sql = "SELECT id FROM RecordType WHERE typeRes=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 
 			//点数を集計する
 			for (int i = 0; i < point.size(); i++) {
 				switch (emoType.get(i)) {
-					case anger:
+					case 1:
 						topEmo[0] += point.get(i);
 						negative += point.get(i);
 						break;
-					case confuse:
+					case 2:
 						topEmo[1] += point.get(i);
 						negative += point.get(i);
 						break;
-					case depression-dejection:
+					case 3:
 						topEmo[2] += point.get(i);
 						negative += point.get(i);
 						break;
-					case fatigue:
+					case 4:
 						topEmo[3] += point.get(i);
 						negative += point.get(i);
 						break;
-					case tension-anxiety:
+					case 5:
 						topEmo[4] += point.get(i);
 						negative += point.get(i);
 						break;
-					case vigor-activity:
+					case 6:
 						topEmo[5] += point.get(i);
 						positive += point.get(i);
 						break;
-					case friendliness:
+					case 7:
 						topEmo[6] += point.get(i);
 						positive += point.get(i);
 						break;
@@ -150,17 +154,45 @@ public class QuestionDAO {
 			}
 
 			//最も点数の高いABC項目を感情タイプ判別の結果としてSQLに格納
-			Arrays.sort(topEmo);
-			
-			if (daily.getTypeRes() != null) {
-				pStmt.setString(1, daily.getTypeRes());
-			} else {
-				pStmt.setString(1, "");
+			int maxIndex = 0;
+
+			for (int i = 1; i < topEmo.length; i++) {
+				if(topEmo[i] > topEmo[maxIndex]) {
+					maxIndex = i;
+				}
 			}
 
+			//感情タイプを判定
+			String typeRes = "";
+			switch(maxIndex) {
+				case 1:
+					typeRes = "anger";
+					break;
+				case 2:
+					typeRes = "confuse";
+					break;
+				case 3:
+					typeRes = "depression-dejection";
+					break;
+				case 4:
+					typeRes = "fatigue";
+					break;
+				case 5:
+					typeRes = "tension-anxiety";
+					break;
+				case 6:
+					typeRes = "vigor-activity";
+					break;
+				case 7:
+					typeRes = "friendliness";
+					break;
+				}
+
+			pStmt.setString(1, typeRes);
+
 			//ポジティブ率、ネガティブ率、感情活性指数を算出
-			negativeRate = negative / 16 * 100;
-			positiveRate = positive / 40 * 100;
+			negativeRate = negative / 40 * 100;
+			positiveRate = positive / 16 * 100;
 			activeIndex = (positive + negative) / 2;
 
 			//ネガティブ率とポジティブ率の比較
@@ -170,6 +202,14 @@ public class QuestionDAO {
 				emoBalance = 2;
 			} else {
 				emoBalance = 1;
+			}
+
+			//SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			//毎日記録のタイプ診断に登録するための値
+			if(rs.next()) {
+				typeId = rs.getInt("id");
 			}
 		
 		//例外処理

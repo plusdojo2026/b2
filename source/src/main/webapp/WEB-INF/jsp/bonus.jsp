@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+	<div id="bonusView"></div>
+    <h1 id="hitbingo">ビンゴ！</h1>
+    <img id="bingoimg" src="img/glad_clione.png">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
@@ -12,7 +17,7 @@
 
     <body>
         <button id="navbtn" type="button"></button>
-        <nav id="navmenu" class="hidden">aaa</nav>
+        <nav id="navmenu" class="close">aaa<br><br><br><br>bbb</nav>
         <div class="flexbox">
             <div class="leftScreen">
             </div>
@@ -64,11 +69,103 @@
                 <br><br>
 
                 <div class="title">水深チェック</div>
-
-                <div></div>
+					<c:forEach var="fish" items="${fishlist}">
+					    <img src="${fish}"><br>
+					</c:forEach>
 
             </div>
         </div>
         <script src="js/bonus.js"></script>
     </body>
+    
+    <script> 
+		const hitview = document.getElementById('bonusView');
+		const hittext = document.getElementById('hitbingo');
+		const hitimg = document.getElementById('bingoimg');
+	
+		hitview.style.display = "none";
+		hittext.style.display = "none";
+		hitimg.style.display = "none";
+    
+    
+    
+	    console.log("ビンゴ開始");
+	
+	    const rows = [...document.querySelectorAll("#bingo tr")];
+	    const grid = rows.map(tr => [...tr.querySelectorAll("td")]);
+	
+	    function isChecked(td) {
+	        return td.dataset.checked === "true";
+	    }
+	    
+	    //ビンゴ演出用
+	    function HitBingo(){
+	    	const hitview = document.getElementById('bonusView');
+	    	const hittext = document.getElementById('hitbingo');
+	    	const hitimg = document.getElementById('bingoimg');
+
+	    	hitview.style.display = "none";
+	    	hittext.style.display = "none";
+	    	hitimg.style.display = "none";
+	    }
+	
+	    function checkBingo() {
+	    	let count=0;
+	        // 横
+	        for (let r = 0; r < 5; r++) {
+	            if (grid[r].every(isChecked)) count++;
+	        }
+	
+	        // 縦
+	        for (let c = 0; c < 5; c++) {
+	            if (grid.every(row => isChecked(row[c]))) count++;
+	        }
+	
+	        // 斜め
+	        const diag1 = grid.every((row, i) => isChecked(row[i]));
+	        const diag2 = grid.every((row, i) => isChecked(row[4 - i]));
+	
+	        if(diag1){
+	    		count++;
+	    	}
+	    	if(diag2){
+	    		count++;
+	    	}
+	    	
+	    	return count;
+	    }
+	
+	    let beforebingo = "${bingo.bingoCount}";
+	    beforebingo = Number(beforebingo);
+	    let bingo = checkBingo();
+	    console.log("Bingo="+beforebingo);
+	    
+	    console.log("現在のビンゴ数"+bingo);
+	    if (bingo > beforebingo) {
+	    	
+	        console.log(bingo+"BINGO!");
+	        fetch("${pageContext.request.contextPath}/BonusServlet", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            body: "bingoCount=" + encodeURIComponent(bingo)
+	        })
+	        .then(res => res.text())
+	        .then(result => {
+	            console.log("サーブレットからの返答:", result);
+	        });	
+	        
+	        //ビンゴ演出
+	    	const hitview = document.getElementById('bonusView');
+	    	const hittext = document.getElementById('hitbingo');
+	    	const hitimg = document.getElementById('bingoimg');
+
+	    	hitview.style.display = "";
+	    	hittext.style.display = "";
+	    	hitimg.style.display = "";
+	    	
+	    	window.setTimeout(HitBingo, 5500);
+	    }
+    </script>
 </html>

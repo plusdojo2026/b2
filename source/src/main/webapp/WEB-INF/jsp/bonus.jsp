@@ -69,8 +69,9 @@
                 <br><br>
 
                 <div class="title">水深チェック</div>
-
-                <div></div>
+					<c:forEach var="fish" items="${fishlist}">
+					    <img src="${fish}"><br>
+					</c:forEach>
 
             </div>
         </div>

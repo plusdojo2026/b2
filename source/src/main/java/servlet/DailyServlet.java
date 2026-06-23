@@ -15,6 +15,7 @@ import dao.DailyDAO;
 import dao.QuestionDAO;
 import dto.DailyDTO;
 import dto.QuestionDTO;
+import dto.AnalysisDTO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -47,13 +48,6 @@ public class DailyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
-		//結果表示などに用いるデータ
-		double negativeRate, positiveRate, activeIndex;
-		
-		negativeRate= 12.0;
-		positiveRate= 10.0;
-		activeIndex= 20.0;
 
 		//各質問の点数とABC項目を配列で整理する
 		ArrayList<Integer> point = new ArrayList<>();
@@ -75,20 +69,26 @@ public class DailyServlet extends HttpServlet {
 		}
 
 		//各項目を合算し、分析する
+		QuestionDAO qDao = new QuestionDAO();
+		AnalysisDTO result = qDao.analyze(point, emoType);
+
+		int typeId = result.getTypeId();
+		double negativeRate = result.getNegativeRate();
+		double positiveRate = result.getPositiveRate();
+		double activeIndex = result.getActiveIndex();
+		double emoBalance = result.getEmoBalance();
 
 		//その他のパラメータ
-		int dailyId = Integer.parseInt(request.getParameter("dailyId"));
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
 		String positive = request.getParameter("positive");
 		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
-		String updated_at = request.getParameter("updated_at");
-		String created_at = request.getParameter("created_at");
 
 
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
-		if (dDao.insert(new DailyDTO(0, user_id, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex, updated_at, created_at))) { // 登録成功
+		if (dDao.insert(new DailyDTO(0, user_id, freeForm, photo, positive, emotionId, typeId, negativeRate, positiveRate, activeIndex))) { // 登録成功
 			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/dailyRev.jsp");
 		} else { // 登録失敗
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

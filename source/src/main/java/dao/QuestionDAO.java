@@ -122,31 +122,31 @@ public class QuestionDAO {
 			//点数を集計する
 			for (int i = 0; i < point.size(); i++) {
 				switch (emoType.get(i)) {
-					case 0:
+					case 1:
 						topEmo[0] += point.get(i);
 						negative += point.get(i);
 						break;
-					case 1:
+					case 2:
 						topEmo[1] += point.get(i);
 						negative += point.get(i);
 						break;
-					case 2:
+					case 3:
 						topEmo[2] += point.get(i);
 						negative += point.get(i);
 						break;
-					case 3:
+					case 4:
 						topEmo[3] += point.get(i);
 						negative += point.get(i);
 						break;
-					case 4:
+					case 5:
 						topEmo[4] += point.get(i);
 						negative += point.get(i);
 						break;
-					case 5:
+					case 6:
 						topEmo[5] += point.get(i);
 						positive += point.get(i);
 						break;
-					case 6:
+					case 7:
 						topEmo[6] += point.get(i);
 						positive += point.get(i);
 						break;
@@ -165,25 +165,25 @@ public class QuestionDAO {
 			//感情タイプを判定
 			String typeRes = "";
 			switch(maxIndex) {
-				case 0:
+				case 1:
 					typeRes = "anger";
 					break;
-				case 1:
+				case 2:
 					typeRes = "confuse";
 					break;
-				case 2:
+				case 3:
 					typeRes = "depression-dejection";
 					break;
-				case 3:
+				case 4:
 					typeRes = "fatigue";
 					break;
-				case 4:
+				case 5:
 					typeRes = "tension-anxiety";
 					break;
-				case 5:
+				case 6:
 					typeRes = "vigor-activity";
 					break;
-				case 6:
+				case 7:
 					typeRes = "friendliness";
 					break;
 				}

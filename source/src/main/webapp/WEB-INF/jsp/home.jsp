@@ -5,18 +5,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>ココロノナミ|ホームページ</title>
+		<link rel="stylesheet" href="/b2/css/home.css"> 
+	</head>
+	
+	<body>
 		<header>
 			<h1>ココロノナミ</h1>
 			<p>むりなく続く、ココロの記録</p>
 		</header>
-	</head>
-	
-	<body>
-		<h2>ホームページ</h2>
 		
 		<aside>
 			<div class = "quickrecord">
 				<p>簡易記録にジャンプ</p>
+				<img src ="">
 			</div>
 			
 			<div class="loginbonus">
@@ -30,15 +31,50 @@
 		</aside>
 		
 		<main>
-		<p>時間コメント表示</p>
+			<p>${greeting}</p> <%--時間帯コメント --%>
+			<div class="homereview">
+				<p>本日の入力：</p>
+				<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+			</div>
+			<div class="homereview">
+				<p>週間レポート</p>
+				<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+			</div>
+			<div class="homereview">
+				<p>TIPS：</p>
+			</div>
 		</main>
 		
-		<footer>
-			<button onclick="location.href='/QuickServlet';">簡易記録</button>
-			<button onclick="location.href='/DailyServlet';">毎日記録</button>
-			<button onclick="location.href='/ReviewServlet';">振り返り機能</button>
-			<button onclick="location.href='/BonusServlet';">ログインボーナス</button>
-			<button onclick="location.href='/MypageServlet';">マイページ</button>
+		<aside> <%--右側にあるナビ --%>
+			<img src ="">
+			<nav>
+				<ul>
+					<li><a href="/b2/QuickServlet">簡易記録</a></li>
+					<li><a href="'/b2/DailyServlet">毎日記録</a></li>
+					<li><a href="'/b2/ReviewServlet">振り返り機能</a></li>
+					<li><a href="'/b2/BonusServlet">ログインボーナス</a></li>
+					<li><a href="'/b2/MypageServlet">マイページ</a></li>
+				</ul>
+			</nav>
+			<div class="homereview">
+				<p>本日の入力：</p>
+				<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+			</div>
+			<div class="homereview">
+				<p>週間レポート</p>
+				<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+			</div>
+			<button>アプリについて</button>
+		</aside>
+		
+		<footer>  
+			<ul>
+				<li><a href="/b2/QuickServlet">簡易記録</a></li>
+				<li><a href="'/b2/DailyServlet">毎日記録</a></li>
+				<li><a href="'/b2/ReviewServlet">振り返り機能</a></li>
+				<li><a href="'/b2/BonusServlet">ログインボーナス</a></li>
+				<li><a href="'/b2/MypageServlet">マイページ</a></li>
+			</ul>
 		</footer>
 	</body>
 </html>

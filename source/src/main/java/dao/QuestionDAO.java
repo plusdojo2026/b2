@@ -105,7 +105,7 @@ public class QuestionDAO {
 			/*
 			 * ~SQL文~
 			 * 引数：point[14], emoType[14]
-			 * 返り値：typeId, negativeRate, positiveRate, activeIndex
+			 * 返り値：typeId, negativeRate, positiveRate, activeIndex, emoBalance
 			 * ・ABC項目ごとに点数を合算し、その点が高い順のリストを作成して並べ替える
 			 * ・
 			 * ※現在はソートの関係で同点の場合は登録順の早いものが選ばれる

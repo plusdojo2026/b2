@@ -81,7 +81,7 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), ?, ?";
+			String sql = "INSERT INTO DailyRec VALUES (0, 0, ?, ?, ?, 0, 0, 0, 0, yearWeek(CURDATE(),1)), NOW(), NOW()";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 
@@ -104,16 +104,16 @@ public class DailyDAO {
 			} else {
 				pStmt.setString(3, "");
 			}
-			if (daily.getUpdated_at() != null) {
-				pStmt.setString(4, daily.getUpdated_at());
-			} else {
-				pStmt.setString(4, "");
-			}
-			if (daily.getCreated_at() != null) {
-				pStmt.setString(5, daily.getCreated_at());
-			} else {
-				pStmt.setString(5, "");
-			}
+			// if (daily.getUpdated_at() != null) {
+			// 	pStmt.setString(4, daily.getUpdated_at());
+			// } else {
+			// 	pStmt.setString(4, "");
+			// }
+			// if (daily.getCreated_at() != null) {
+			// 	pStmt.setString(5, daily.getCreated_at());
+			// } else {
+			// 	pStmt.setString(5, "");
+			// }
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -151,7 +151,7 @@ public class DailyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heartwave?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -164,7 +164,7 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql1 = "UPDATE DailyRec SET freeForm=?, photo=?, positive=?, emotion_id=?, update_at=?, created_at=? "
+			String sql1 = "UPDATE DailyRec SET freeForm=?, photo=?, positive=?, emotion_id=?, update_at=NOW(), created_at=NOW() "
 					+ "WHERE id=?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
@@ -184,59 +184,22 @@ public class DailyDAO {
 			} else {
 				pStmt1.setString(3, "");
 			}
-			if (daily.getUpdate_at() != null) {
-				pStmt1.setString(4, daily.getUpdate_at());
-			} else {
-				pStmt1.setString(4, "");
-			}
-			if (daily.getCreated_at() != null) {
-				pStmt1.setString(5, daily.getCreated_at());
-			} else {
-				pStmt1.setString(5, "");
-			}
+			// if (daily.getUpdate_at() != null) {
+			// 	pStmt1.setString(4, daily.getUpdate_at());
+			// } else {
+			// 	pStmt1.setString(4, "");
+			// }
+			// if (daily.getCreated_at() != null) {
+			// 	pStmt1.setString(5, daily.getCreated_at());
+			// } else {
+			// 	pStmt1.setString(5, "");
+			// }
 			
 			// SQL文を実行する
 			if (pStmt1.executeUpdate() == 1) {
 				result = true;
 			}
 			
-			//2.Questionテーブル
-			String sql2 = "UPDATE Question SET question=?, created_atQcont=? "
-					+ "WHERE question_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getQuestion() != null) {
-				pStmt2.setString(1, daily.getQuestion());
-			} else {
-				pStmt2.setString(1, "");
-			}
-			if (daily.getCreated_atQcont() != null) {
-				pStmt2.setString(2, daily.getCreated_atQcont());
-			} else {
-				pStmt2.setString(2, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt2.executeUpdate() == 1) {
-				result = true;
-			}
-			
-			//3.QuestionAnsテーブル
-			String sql3 = "UPDATE QuestionAns SET created_atQans=? "
-					+ "WHERE question_id=?";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
-			// SQL文初期値を自動で入力する(Stringのみ)
-			if (daily.getCreated_atQans() != null) {
-				pStmt3.setString(1, daily.getCreated_atQans());
-			} else {
-				pStmt3.setString(1, "");
-			}
-			
-			// SQL文を実行する
-			if (pStmt3.executeUpdate() == 1) {
-				result = true;
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

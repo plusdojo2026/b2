@@ -1,1 +1,57 @@
 @charset "UTF-8";
+
+body {
+  background-color: lightblue;
+}
+
+/* 親要素：アイコンを絶対配置するための基準点 */
+.btn-container {
+  position: relative;
+  display: inline-block; /* ボタンの幅に合わせる */
+  vertical-align: middle;
+}
+
+/* ボタンのベーススタイル（デフォルト初期化＋共通設定） */
+input[type="submit"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  
+  /* サイズ・余白（右側にアイコン用の余白を広く確保） */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 2.5rem 15px 2.5rem;
+  color: #ffffff;
+  background-color:#2589d0; 
+  
+  box-sizing: border-box;
+  transition: all 0.1s ease; /* 動きを滑らかに */
+}
+
+/*立体感 */
+input.btn--red.btn--cubic {
+  border-bottom: 5px solid #2589d0;
+}
+
+/* 立体ボタンのホバー*/
+input.btn--red.btn--cubic:hover {
+  transform: translateY(3px); 
+  border-bottom: 2px solid #2589d0;
+}
+
+/* 角丸*/
+input.btn--radius {
+  border-radius: 100vh;
+}
+
+/* 右側アイコンの絶対配置（提示コードの調整） */
+.fa-position-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 縦中央に綺麗に配置 */
+  right: 1.5rem;
+  color: #ffffff;
+  pointer-events: none;
+}

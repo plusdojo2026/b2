@@ -6,24 +6,29 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width">
 <title>週間結果</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/weeklyRev.css">
 </head>
 <body>
-	<c:set var="e" value="${weekList[0]}" />
-	<h1 class="period">
-		<c:out value="${e.weeklyRes}" />
-	</h1>
+	<div class="flexbox">
+		<div class="leftScreen"></div>
 
-	<div class="chart-container">
-	<canvas id="myLineChart" ></canvas>
-	</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-	
-<script>
+		<div class="rightScreen">
+
+			<c:set var="e" value="${weekList[0]}" />
+			<h1 class="period">
+				<c:out value="${e.weeklyRes}" />
+			</h1>
+
+			<div class="chart-container">
+				<canvas id="myLineChart"></canvas>
+			</div>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+			<script>
 var ctx = document.getElementById("myLineChart");
 
 var myLineChart = new Chart(ctx, {
@@ -80,23 +85,24 @@ var myLineChart = new Chart(ctx, {
   }
 });
 </script>
-	<div class="container">
-		<div class="box large">
-		<span class="boxTitle">分析コメント</span>
-		<span class="analysisCmt">
-		<c:out value="${e.analysisCmt}" />
-		</span>
+			<div class="container">
+				<div class="box large">
+					<span class="boxTitle">分析コメント</span> <span class="analysisCmt">
+						<c:out value="${e.analysisCmt}" />
+					</span>
+				</div>
+				<div class="box">
+					<span class="boxTitle">平均ポジティブ率：</span> <span class="boxContent">
+						<fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
+					</span>
+				</div>
+				<div class="box">
+					<span class="boxTitle">気分の浮き沈み：</span> <span class="boxContent">
+						<c:out value="${e.moodType}" />
+					</span>
+				</div>
+			</div>
 		</div>
-		<div class="box">
-		<span class="boxTitle">平均ポジティブ率：</span>
-		<span class="boxContent">
-		<fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
-		</span></div>
-		<div class="box">
-		<span class="boxTitle">気分の浮き沈み：</span>
-		<span class="boxContent">
-		<c:out value="${e.moodType}" />
-		</span></div>
 	</div>
 
 </body>

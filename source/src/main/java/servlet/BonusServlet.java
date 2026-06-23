@@ -46,4 +46,21 @@ public class BonusServlet extends HttpServlet {
 		
 		
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bC = request.getParameter("bingoCount");
+        
+        
+		if(bC != null) {
+			int count = Integer.parseInt(bC);
+			int user_id = 1;
+			BonusDAO bonus = new BonusDAO();
+			boolean res = bonus.setCount(count,user_id);
+			if(res==false){
+				System.out.println("ビンゴ数を登録できませんでした");
+				}
+			}
+
+        response.getWriter().write("OK");
+	}
 }

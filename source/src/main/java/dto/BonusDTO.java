@@ -30,6 +30,8 @@ public class BonusDTO implements Serializable {
 	boolean day23;
 	boolean day24;
 	boolean day25;
+	int bingoCount;
+	
 	
 	
 	public int getId() {
@@ -194,8 +196,14 @@ public class BonusDTO implements Serializable {
 	public void setDay25(boolean day25) {
 		this.day25 = day25;
 	}
+	public int getBingoCount() {
+		return bingoCount;
+	}
+	public void setBingoCount(int bingoCount) {
+		this.bingoCount = bingoCount;
+	}
 	
-	public BonusDTO(int id, int user_id, Boolean day1, Boolean day2, Boolean day3, Boolean day4, Boolean day5, Boolean day6, Boolean day7, Boolean day8, Boolean day9, Boolean day10, Boolean day11, Boolean day12, Boolean day13, Boolean day14, Boolean day15, Boolean day16, Boolean day17, Boolean day18, Boolean day19, Boolean day20, Boolean day21, Boolean day22, Boolean day23, Boolean day24, Boolean day25) {
+	public BonusDTO(int id, int user_id, Boolean day1, Boolean day2, Boolean day3, Boolean day4, Boolean day5, Boolean day6, Boolean day7, Boolean day8, Boolean day9, Boolean day10, Boolean day11, Boolean day12, Boolean day13, Boolean day14, Boolean day15, Boolean day16, Boolean day17, Boolean day18, Boolean day19, Boolean day20, Boolean day21, Boolean day22, Boolean day23, Boolean day24, Boolean day25, int bingoCount) {
 		this.id = id;
 		this.user_id = user_id;
 		this.day1=day1;
@@ -223,6 +231,7 @@ public class BonusDTO implements Serializable {
 		this.day23=day23;
 		this.day24=day24;
 		this.day25=day25;
+		this.bingoCount=bingoCount;
 	}
 	
 }

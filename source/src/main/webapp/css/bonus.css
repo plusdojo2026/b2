@@ -43,6 +43,39 @@ html{
     background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
 }
 
+#navbtn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 25px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+#navmenu{
+    position: absolute;
+    position: fixed;
+    padding: auto;
+    background-color: aliceblue;
+    z-index: 1;
+    animation: nav 0.5s ease-in-out forwards;
+}
+
+@keyframes nav {
+    from{
+    height: 0;
+    width: 0;
+    }
+    to{
+    height: 100%;
+    width: 100%;
+    }
+}
+
+.hidden{
+    display: none;
+}
+
 body{
     margin: 0;
 }
@@ -58,7 +91,7 @@ body{
 }
 
 .leftScreen{
-    background-image: url("leftPage.jpg");
+    background-image: url("../img/kokorononami.jpg");
     background-repeat: repeat-y;
     background-size: 100vh;
     background-attachment: fixed;

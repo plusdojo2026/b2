@@ -70,7 +70,7 @@ public class QuestionDAO {
 		return qList;
 	}
 
-		public AnalysisDTO analyze(ArrayList<Integer> point, ArrayList<String> emoType) {
+		public AnalysisDTO analyze(ArrayList<Integer> point, ArrayList<Integer> emoType) {
 		Connection conn = null;
 		List<AnalysisDTO> result = new ArrayList<AnalysisDTO>();
 
@@ -122,31 +122,31 @@ public class QuestionDAO {
 			//点数を集計する
 			for (int i = 0; i < point.size(); i++) {
 				switch (emoType.get(i)) {
-					case "anger":
+					case 0:
 						topEmo[0] += point.get(i);
 						negative += point.get(i);
 						break;
-					case "confuse":
+					case 1:
 						topEmo[1] += point.get(i);
 						negative += point.get(i);
 						break;
-					case "depression-dejection":
+					case 2:
 						topEmo[2] += point.get(i);
 						negative += point.get(i);
 						break;
-					case "fatigue":
+					case 3:
 						topEmo[3] += point.get(i);
 						negative += point.get(i);
 						break;
-					case "tension-anxiety":
+					case 4:
 						topEmo[4] += point.get(i);
 						negative += point.get(i);
 						break;
-					case "vigor-activity":
+					case 5:
 						topEmo[5] += point.get(i);
 						positive += point.get(i);
 						break;
-					case "friendliness":
+					case 6:
 						topEmo[6] += point.get(i);
 						positive += point.get(i);
 						break;

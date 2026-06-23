@@ -17,22 +17,40 @@
     <form method="POST" action="/b2/DailyServlet" id="form">
 		<div>
 			<label class="label">感情タグ</label><br>
-			<input type="radio" name="emotion_id" value="1">怒り
-			<input type="radio" name="emotion_id" value="2">悲しみ
-			<input type="radio" name="emotion_id" value="3">悔しい
-			<input type="radio" name="emotion_id" value="4">焦り
-			<input type="radio" name="emotion_id" value="5">楽しい
-			<input type="radio" name="emotion_id" value="6">嬉しい
-			<input type="radio" name="emotion_id" value="7">幸せ
-			<input type="radio" name="emotion_id" value="8">好き
+			<label>
+				<input type="hidden" name="qType_${status.count}" value="${q.qType}">
+				<input type="radio" name="emotion_id" value="1">怒り
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="2">悲しみ		
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="3">悔しい
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="4">焦り
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="5">楽しい
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="6">嬉しい
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="7">幸せ
+			</label>
+			<label>
+				<input type="radio" name="emotion_id" value="8">好き
+			</label>
 		</div>
 
 		<div>			
 			<table border="1">
 				<c:forEach var="q" items="${qList}" varStatus="status">
 					<tr>
-						<input type="hidden" name="qType_${status.count}" value=${q.qType}>
-						<input type="hidden" name="user_id" value="1">
+						<td>
+							<input type="hidden" name="user_id" value="1">
+						</td>
 						<td>Q.${status.count}</td>
 						<td>${q.question}</td>
 						<td>
@@ -64,6 +82,9 @@
 List<QuestionDTO> qList =
     (List<QuestionDTO>)request.getAttribute("qList");
 %>
+
+<%= qList.get(0).getQType() %>
+
 
 
 	    <div>

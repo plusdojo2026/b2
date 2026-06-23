@@ -46,15 +46,21 @@ import dto.UserDTO;
 			String userName = request.getParameter("userName");
 			String pw = request.getParameter("pw");
 			
+			//usernameまたはpwが未入力なら登録しない
+			if(userName == null || userName.isEmpty() || pw == null || pw.isEmpty()) {
+				System.out.println("ユーザーネームまたはpwが未入力");
+				request.setAttribute("newUserRegisterror", "ユーザー名とパスワードを入力してください");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); //再度新規登録ページを表示
+				dispatcher.forward(request, response);
+				return;
+			}
 			
 			//重複チェック
 			UserDAO nDao = new UserDAO();
 			boolean exists = nDao.existsUser(userName, pw);
 			
-			
-			
 			if (exists == true) { // 重複あり
-				System.out.println("miss");
+				System.out.println("重複あり");
 				request.setAttribute("newUserRegisterror", "このユーザーは既に登録されています");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); //再度新規登録ページを表示
 				dispatcher.forward(request, response);
@@ -69,7 +75,7 @@ import dto.UserDTO;
 			int id = nDao.insert(user);
 			
 			if(id != 0) { //新規登録成功
-				
+				System.out.println("新規登録成功");
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", id);
 				
@@ -82,6 +88,7 @@ import dto.UserDTO;
 				return;
 				
 			}else { //新規登録失敗
+				System.out.println("新規登録失敗");
 				request.setAttribute("newRegistError", "ユーザー登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); // User（新規登録）ページにフォワードする
 				dispatcher.forward(request, response);

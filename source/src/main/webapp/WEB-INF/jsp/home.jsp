@@ -34,8 +34,8 @@
 		</main>
 		
 		<footer>
-			<button>簡易記録</button>
-			<button>毎日記録</button>
+			<button onclick="location.href='/QuickServlet';">簡易記録</button>
+			<button onclick="location.href='/DailyServlet';">毎日記録</button>
 			<button>振り返り機能</button>
 			<button>ログインボーナス</button>
 			<button>マイページ</button>

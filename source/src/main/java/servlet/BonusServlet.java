@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,11 +41,22 @@ public class BonusServlet extends HttpServlet {
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
 		
 		
+		
+		//ビンゴの内容を取得
+		BonusDAO bonus = new BonusDAO();
+		BonusDTO bingo = bonus.selectBingo(user_id);
+		
+		request.setAttribute("bingo", bingo);
+		
+		int totalBingo = 0;
+		totalBingo = bingo.getTotalBingo();		
+		
 		//魚(水深)処理
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
 		//int depth = loginUser.getDepthCurrent();
-		int depth = 1210;
+		
+		int depth = 600;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";
@@ -128,17 +140,30 @@ public class BonusServlet extends HttpServlet {
 		}
 		
 		
+		if(totalBingo != 0) {
+			if(totalBingo > 1) {
+				fishlist.add(fish5);
+			}
+			else if(totalBingo > 1) {
+				fishlist.add(fish5);
+			}
+			else if(totalBingo > 1) {
+				fishlist.add(fish5);
+			}
+			else if(totalBingo > 1) {
+				fishlist.add(fish5);
+			}
+			else if(totalBingo > 1) {
+				fishlist.add(fish5);
+			}
+		}
+
+		List<String> shuffled = new ArrayList<>(fishlist); // この後ランダムに並べ替えられる、list のコピー
+		Collections.shuffle(shuffled);
 		
-		System.out.println(fishlist);
 		
-		request.setAttribute("fishlist", fishlist);
+		request.setAttribute("fishlist", shuffled);
 		request.setAttribute("depth", depth);
-		
-		//ビンゴの内容を取得
-		BonusDAO bonus = new BonusDAO();
-		BonusDTO bingo = bonus.selectBingo(user_id);
-		
-		request.setAttribute("bingo", bingo);
 		
 		
 		// ログインボーナスページにフォワードする
@@ -159,8 +184,8 @@ public class BonusServlet extends HttpServlet {
 			boolean res = bonus.setCount(count,user_id);
 			if(res==false){
 				System.out.println("ビンゴ数を登録できませんでした");
-				}
 			}
+		}
 
         response.getWriter().write("OK");
 	}

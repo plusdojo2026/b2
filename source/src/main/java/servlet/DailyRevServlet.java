@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +29,7 @@ public class DailyRevServlet extends HttpServlet {
 
 		//毎日記録の最新一件（当日入力したもの）を取得して格納
 		DailyDAO dDao = new DailyDAO();
-		List<DailyDTO> todayRev = dDao.select();
+		DailyDTO todayRev = dDao.select();
 		
 		request.setAttribute("todayRev", todayRev);
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>ココロノナミ|ホームページ</title>
 		<link rel="stylesheet" href="css/home.css" type="text/css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 	</head>
 	
 	<body>
@@ -56,12 +59,24 @@
 				</div>
 				<div class="homereview">
 					<p>週間レポート</p>
+					<c:out value="${weekData}" />
 					<div class="weekly">
 							<div class= "weekly-box">
-								グラフ
+								<c:if test="${not empty weekData}">
+							        <c:set var="e" value="${weekData[0]}" />
+							        <div class="chart-container">
+							            <canvas id="myLineChart"></canvas>
+							        </div>
+							    </c:if>
 							</div>
 							<div class="info-area">
-								グラフの情報
+								<c:if test="${not empty e}">
+							        週の期間：<c:out value="${e.weeklyRes}" /><br>
+							        分析コメント：<c:out value="${e.analysisCmt}" /><br>
+							        平均ポジティブ率：
+							            <fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%<br>
+							        気分の浮き沈み：<c:out value="${e.moodType}" />
+							    </c:if>
 							</div>
 						</div>
 					<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
@@ -122,6 +137,55 @@
 				</ul>
 			</nav>
 		</footer>
+		
+	<script>
+			var ctx = document.getElementById("myLineChart");
+
+			var myLineChart = new Chart(ctx, {
+  			type: 'line',
+			  data: {
+				  labels: [
+				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    </c:forEach>
+				  ],
+			
+			    datasets: [
+			      {
+			        label: 'ポジティブ率',
+			        data: [
+			          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+			            ${d.positiveRate * 100}${!s.last ? ',' : ''}
+			          </c:forEach>
+			        ],
+			        borderColor: "rgba(255,0,0,1)",
+			        backgroundColor: "rgba(0,0,0,0)"
+			      },
+			      {
+			        label: 'ネガティブ率',
+			        data: [
+			          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
+			            ${d.negativeRate * 100}${!t.last ? ',' : ''}
+			          </c:forEach>
+			        ],
+			        borderColor: "rgba(0,0,255,1)",
+			        backgroundColor: "rgba(0,0,0,0)"
+			      }
+			    ]
+			  },
+			  options: {title: {display: false,},legend: {display: false},
+			    responsive: true,
+			    maintainAspectRatio: false, 
+			    scales: {
+			      yAxes: [{
+			        ticks: {
+			          suggestedMax: 100,
+			          suggestedMin: 0,
+			          stepSize: 10,
+			          callback: function(value){
+			            return value + '%'
+			          }}}]}}});
+	</script>
 	<script src="/b2/js/home.js"></script>
 	</body>
 </html>

@@ -149,6 +149,7 @@ import dto.WeeklyDTO;
 				request.setAttribute("randomTip",randomTip);
 				
 				//週別データに追加
+				UserDTO user = (UserDTO) session.getAttribute("user");
 				int userId = user.getId();
 				WeeklyDAO dao = new WeeklyDAO();
 				List<WeeklyDTO> List = dao.latestSelect(userId);

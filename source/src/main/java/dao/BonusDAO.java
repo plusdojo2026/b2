@@ -223,7 +223,7 @@ public class BonusDAO {
 
 			// selectした情報をリストに挿入
 			rs.next();
-			record = new BonusDTO(rs.getInt("id"),rs.getInt("user_id"),rs.getBoolean("day1"),rs.getBoolean("day2"),rs.getBoolean("day3"),rs.getBoolean("day4"),rs.getBoolean("day5"),rs.getBoolean("day6"),rs.getBoolean("day7"),rs.getBoolean("day8"),rs.getBoolean("day9"),rs.getBoolean("day10"),rs.getBoolean("day11"),rs.getBoolean("day12"),rs.getBoolean("day13"),rs.getBoolean("day14"),rs.getBoolean("day15"),rs.getBoolean("day16"),rs.getBoolean("day17"),rs.getBoolean("day18"),rs.getBoolean("day19"),rs.getBoolean("day20"),rs.getBoolean("day21"),rs.getBoolean("day22"),rs.getBoolean("day23"),rs.getBoolean("day24"),rs.getBoolean("day25"),rs.getInt("totalBingo"),rs.getInt("bingoCount"));
+			record = new BonusDTO(rs.getInt("id"),rs.getInt("user_id"),rs.getBoolean("day1"),rs.getBoolean("day2"),rs.getBoolean("day3"),rs.getBoolean("day4"),rs.getBoolean("day5"),rs.getBoolean("day6"),rs.getBoolean("day7"),rs.getBoolean("day8"),rs.getBoolean("day9"),rs.getBoolean("day10"),rs.getBoolean("day11"),rs.getBoolean("day12"),rs.getBoolean("day13"),rs.getBoolean("day14"),rs.getBoolean("day15"),rs.getBoolean("day16"),rs.getBoolean("day17"),rs.getBoolean("day18"),rs.getBoolean("day19"),rs.getBoolean("day20"),rs.getBoolean("day21"),rs.getBoolean("day22"),rs.getBoolean("day23"),rs.getBoolean("day24"),rs.getBoolean("day25"),rs.getInt("bingoCount"));
 			
 			// 結果を返す
 			return record;

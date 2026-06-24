@@ -58,9 +58,10 @@
 				</div>
 				<div class="tab-2">
 
-					<input type="radio" id="tab-fact" name="tab-2" checked> <label
-						for="tab-fact">事実整理</label> <input type="radio" id="tab-free"
-						name="tab-2"> <label for="tab-free">とにかく記入</label>
+					<input type="radio" id="tab-fact" name="tab-2" checked> 
+					<label for="tab-fact">事実整理</label>
+					<input type="radio" id="tab-free" name="tab-2"> 
+					<label for="tab-free">とにかく記入</label>
 
 					<div class="content-fact">
 						<h3>1.出来事</h3>

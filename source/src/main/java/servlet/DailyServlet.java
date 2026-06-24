@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DailyDAO;
 import dao.QuestionDAO;
@@ -48,6 +49,8 @@ public class DailyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(false);
+
 
 		//各質問の点数とABC項目を配列で整理する
 		ArrayList<Integer> point = new ArrayList<>();
@@ -78,6 +81,7 @@ public class DailyServlet extends HttpServlet {
 		// int emoBalance = result.getEmoBalance();
 
 		//その他のパラメータ
+		// int user_id = (Integer)session.getAttribute("user_id");
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");

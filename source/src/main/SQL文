@@ -36,7 +36,7 @@ CREATE TABLE MoodSwings(id int PRIMARY KEY, moodType varchar(100), created_at TI
 CREATE TABLE RecordType(id int AUTO_INCREMENT PRIMARY KEY, typeRes varchar(100), resultPicture_id varchar(100), typeComment varchar(500), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(dailyRec)(外部キーあり)
-CREATE TABLE DailyRec(id int AUTO_INCREMENT PRIMARY KEY, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), type_id int NOT NULL, FOREIGN KEY(type_id) REFERENCES RecordType(id), negativeRate double, positiveRate double, activeIndex double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE DailyRec(id int AUTO_INCREMENT PRIMARY KEY, user_id int, freeForm varchar(1000), photo varchar(100), positive varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), type_id int NOT NULL, FOREIGN KEY(type_id) REFERENCES RecordType(id), negativeRate double, positiveRate double, activeIndex double, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- テーブル作成(simpleRec)(外部キーあり)
 CREATE TABLE SimpleRec(id int AUTO_INCREMENT PRIMARY KEY, user_id int, event varchar(1000), belief varchar(1000), result varchar(1000), reframe varchar(1000), txtFree varchar(1000), emotion_id int NOT NULL, FOREIGN KEY(emotion_id) REFERENCES Emotion(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);

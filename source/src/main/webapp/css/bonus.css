@@ -229,6 +229,7 @@ body{
 	top:150px;
 	left:0;
 	width: 100px;
+	filter: brightness(1);
 	animation: swim 30s ease-out infinite;
 }
 
@@ -237,6 +238,7 @@ body{
 	top:450px;
 	left:0;
 	width: 100px;
+	filter: brightness(1);
 	animation: swimturn 35s ease-out infinite;
 }
 
@@ -245,6 +247,7 @@ body{
 	top:750px;
 	left:0;
 	width: 100px;
+	filter: brightness(1);
 	animation: swim 35s ease-out infinite;
 }
 
@@ -253,6 +256,7 @@ body{
 	top:1050px;
 	left:0;
 	width: 100px;
+	filter: brightness(1);
 	animation: swim 30s ease-out infinite;
 }
 
@@ -261,15 +265,36 @@ body{
 	top:1350px;
 	left:0;
 	width: 100px;
+	filter: brightness(1);
 	animation: swim 30s ease-out infinite;
 }
 
-.depthView{
+/*一段階目の背景*/
+.depthView1{
 	position:relative;
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+}
+
+/*二段階目の背景*/
+.depthView2{
+	position:relative;
+	background: linear-gradient(180deg, rgb(37, 91, 146), rgb(37, 91, 146));
+}
+
+/*三段階目の背景*/
+.depthView3{
+	position:relative;
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+}
+
+/*四段階目の背景*/
+.depthView4{
+	position:relative;
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
 }
 
 .depth{
-	height:600px;
+	height:1500px;
 }
 
 @keyframes swim{

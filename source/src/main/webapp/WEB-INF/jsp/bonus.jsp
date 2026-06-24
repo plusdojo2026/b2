@@ -68,7 +68,7 @@
 
                 <br><br>
 				
-				<div class="depthView">
+				<div class="depthView1">
                 	<div class="title depth">水深チェック</div>
 					<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
 					    <img class="fish${s.index} }" src="${fish}">

@@ -93,7 +93,7 @@ public class QuestionDAO {
 		double positiveRate = 0;
 		double activeIndex = 0;
 		int emoBalance = 1;
-		int typeId = -1;
+		int type_id = 0;
 		/*
 		 * 感情バランス： 0 = ネガティブ、 1 = 普通、 2 = ポジティブ
 		 */
@@ -117,7 +117,6 @@ public class QuestionDAO {
 			
 			String sql = "SELECT id FROM RecordType WHERE typeRes=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-
 
 			//点数を集計する
 			for (int i = 0; i < point.size(); i++) {
@@ -230,7 +229,7 @@ public class QuestionDAO {
 
 		// 結果を返す
 		return new AnalysisDTO(
-			typeId,
+			type_id,
 			negativeRate,
 			positiveRate,
 			activeIndex,

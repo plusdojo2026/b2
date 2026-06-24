@@ -14,11 +14,12 @@
 </head>
 <body>
 	<h1>毎日記録</h1>
-    <form method="POST" action="/b2/DailyServlet" id="form">
+    <form method="POST" action="${pageContext.request.contextPath}/DailyServlet" id="form">
+		<input type="hidden" name="user_id" value="1">
+
 		<div>
 			<label class="label">感情タグ</label><br>
 			<label>
-				<input type="hidden" name="qType_${status.count}" value="${q.qType}">
 				<input type="radio" name="emotion_id" value="1">怒り
 			</label>
 			<label>
@@ -50,7 +51,6 @@
 					<tr>
 						<td>
 							<input type="hidden" name="qType_${status.count}" value="${q.qType}">
-							<input type="hidden" name="user_id" value="1">
 						</td>
 						<td>Q.${status.count}</td>
 						<td>${q.question}</td>

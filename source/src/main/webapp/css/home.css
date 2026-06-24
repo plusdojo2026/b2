@@ -1,7 +1,25 @@
 @charset "UTF-8";
 
+.pic{
+	width:50px;
+	height:50px;
+}
+
+#head{
+	text-align: center;
+}
+
+
+#logo{
+	height: 500px;
+	width: 1000px;
+}
+
+
+/* ぼーだー */
 .quickrecord{
 	border:1px solid black;
+	margin: 0 0 20px 0;
 }
 
 .loginbonus{
@@ -10,12 +28,80 @@
 
 .homereview{
 	border:1px solid black;
+	margin: 0 0 20px 0;
 }
 
-ul{
+.loginbonus ul{
+	border:1px solid black;
+}
+#loginbonus{
+	border:1px solid black;
+}
+
+/* ナビゲーション */
+nav ul{
 	list-style:none;
 	padding: 0;
 	margin: 0;
 	display: flex;
+	justify-content: center;
 }
+
+#slideNav{
+	position: fixed; /* ナビの固定 */
+  	top: 0; /* 画面の一番上に固定 */
+  	right: -530px; /* ← 最初は画面外に隠す */
+  	width: 500px;
+  	height: 100vh; /* 画面いっぱい */
+  	background: #fff; /* 背景色 */
+  	box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* 左に影 */
+  	transition: right 0.3s ease; /* ← スライドアニメーション */
+  	padding: 20px;
+  	padding-top: 150px;
+}
+#slideNav.open {
+  right: 0; /* ← open クラスが付いたら表示 */
+}
+
+#slideBtn{ /* buttonの初期位置 */
+	position: fixed;
+	top: 50px;
+	right:50px;/* 縦方向の位置調整→親の高さの５０％の位置に置く*/
+	z-index: 9999;
+    cursor: pointer;/* カーソルを手にする*/
+}
+#slideBtn.onNav{ /* ナビが開いたとき*/
+	position: absolute; /*自由配置*/
+	top: 10px;
+	right:10px;
+}
+
+
+
+
+/*mainを三分割 */
+.homelayout{
+	display:flex;
+	gap: 20px;
+	margin: auto 20px;
+}
+
+.homelayout main{
+	width:80%;
+	
+}
+
+/*簡易とログインの固定*/
+main{
+  margin-left: 260px;  /* 左 aside の幅 + 余白 */
+  margin-right: 260px; /* 右 aside の幅 + 余白 */
+}
+
+.flex{
+	position: fixed;
+	top: 300px;
+	width: 200px;
+}
+
+
 

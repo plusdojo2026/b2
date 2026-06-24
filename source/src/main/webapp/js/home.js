@@ -8,11 +8,11 @@
 			nav.classList.toggle("open");
 			
 			//画像の入れ替え
-			if(btn.src.includes("Snail.png")){
-				btn.src = "/b2/img/memdaco.png";
+			if(btn.src.includes("yajirusi1.png")){
+				btn.src = "/b2/img/yajirusi2.png";
 				btn.classList.add("onNavi");
 			}else{
-				btn.src = "/b2/img/Snail.png";
+				btn.src = "/b2/img/yajirusi1.png";
 				btn.classList.remove("onNavi");
 			}
 		});		

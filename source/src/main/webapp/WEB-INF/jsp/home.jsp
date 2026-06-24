@@ -12,7 +12,6 @@
 		<header id="head">
 			<div class ="logoWrap">
 				<img src ="/b2/img/kokorononamiyoko.png" id="logo"> 
-				<p>むりなく続く、ココロの記録</p>
 			</div>
 		</header>
 		
@@ -29,8 +28,10 @@
 					<div class="loginbonus">
 						<p>ログインボーナス</p>
 						<ul>
-							<li>通算ログイン：${user.daysTotalLogin}日目</li>
-							<li>連続ログイン：${user.loginStreak}日目</li>
+							<li>通算ログイン</li>
+							<li>${user.daysTotalLogin}日目</li>
+							<li>連続ログイン</li>
+							<li>${user.loginStreak}日目</li>
 						</ul>
 						<p id ="loginbonus">水深：${user.depthCurrent}ｍ</p>
 					</div>
@@ -38,14 +39,27 @@
 			</aside>
 			
 			<main>
-				<p>${greeting}</p> <%--時間帯コメント --%>
+				<p id = "greeting">${greeting}</p> <%--時間帯コメント --%>
 				<div class="homereview">
 					<p>本日の入力：</p>
-					
+					<ul class ="icon-list">
+						<li><img src="/b2/img/happa2.png"></li>
+						<li><img src="/b2/img/kinyuu2.png"></li>
+						<li><img src="/b2/img/syasinn2.png"></li>
+						<li><img src="/b2/img/sakana2.png"></li>
+					</ul>
 					<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
 				</div>
 				<div class="homereview">
 					<p>週間レポート</p>
+					<div class="weekly">
+							<div class= "weekly-box">
+								グラフ
+							</div>
+							<div class="info-area">
+								グラフの情報
+							</div>
+						</div>
 					<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
 				</div>
 				<div class="homereview">
@@ -54,7 +68,7 @@
 			</main>
 			
 			<aside> <%--右側にあるナビ --%>
-				<img src ="/b2/img/Snail.png" class ="pic" id="slideBtn"> 
+				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
 				<div id="slideNav">
 					<nav>
 						<ul>
@@ -67,13 +81,27 @@
 					</nav>
 					<div class="homereview">
 						<p>本日の入力：</p>
+						<ul class ="icon-list">
+							<li><img src="/b2/img/happa2.png"></li>
+							<li><img src="/b2/img/kinyuu2.png"></li>
+							<li><img src="/b2/img/syasinn2.png"></li>
+							<li><img src="/b2/img/sakana2.png"></li>
+						</ul>
 						<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
 					</div>
-					<div class="homereview">
+					<div class="slidehomereview">
 						<p>週間レポート</p>
+						<div class="slideweekly">
+							<div class= "weekly-box">
+								グラフ
+							</div>
+							<div class="info-area">
+								グラフの情報
+							</div>
+						</div>
 						<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
 					</div>
-					<button>アプリについて</button>
+					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>
 			</aside>
 		</div>

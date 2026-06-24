@@ -1,6 +1,13 @@
 @charset "UTF-8";
 
 /*Weekly*/
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  margin: 0 auto;
+}
+
 .weekList {
 	margin: 20px;
 	margin-top: 40px;
@@ -24,7 +31,7 @@
 	white-space: nowrap;
 	width: 3%;
 }
-
+/*Weekly終わり*/
 *{
     box-sizing: border-box;
 }
@@ -62,6 +69,11 @@
         width: 100%;
         margin: auto;
     }
+    /*Weeklyのグラフ*/
+    .chart-container {
+    width: 95%;
+    height: 75vh;
+  }
 }
 
 

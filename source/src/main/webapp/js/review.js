@@ -1,5 +1,4 @@
  /*Weeklyのグラフ */
- /*Weeklyのグラフ */
 function createLineChart(labels, positiveData, negativeData) {
   var ctx = document.getElementById("myLineChart");
 
@@ -54,3 +53,4 @@ window.addEventListener("DOMContentLoaded", function() {
   });
 
 });
+ /*Weeklyのグラフ終わり */

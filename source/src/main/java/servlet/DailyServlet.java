@@ -98,7 +98,7 @@ public class DailyServlet extends HttpServlet {
 			photo,
 			positive,
 			emotion_id,
-			result.getTypeId(),
+			result.getType_id(),
 			result.getNegativeRate(),
 			result.getPositiveRate(),
 			result.getActiveIndex(),

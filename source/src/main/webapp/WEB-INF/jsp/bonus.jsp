@@ -5,7 +5,7 @@
 
 	<div id="bonusView"></div>
     <h1 id="hitbingo">ビンゴ！</h1>
-    <img id="bingoimg" src="img/glad_clione.png">
+    <img id="bingoimg" src="${getfish}">
 
     <head>
         <meta charset="UTF-8">
@@ -170,6 +170,7 @@
 	    	hitview.style.display = "";
 	    	hittext.style.display = "";
 	    	hitimg.style.display = "";
+	    	
 	    	
 	    	window.setTimeout(HitBingo, 5500);
 	    }

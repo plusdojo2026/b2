@@ -35,12 +35,12 @@ public class BonusServlet extends HttpServlet {
 		
 		
 		//ユーザーID
-		int user_id = 1;
+		//int user_id = 1;
 		
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
 		
-		
+		int user_id = loginUser.getId();
 		
 		//ビンゴの内容を取得
 		BonusDAO bonus = new BonusDAO();
@@ -49,14 +49,14 @@ public class BonusServlet extends HttpServlet {
 		request.setAttribute("bingo", bingo);
 		
 		int totalBingo = 0;
-		totalBingo = bingo.getTotalBingo();		
+		totalBingo = bingo.getBingoCount();		
 		
 		//魚(水深)処理
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
-		//int depth = loginUser.getDepthCurrent();
+		int depth = loginUser.getDepthCurrent();
 		
-		int depth = 600;
+		//int depth = 600;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";
@@ -186,6 +186,45 @@ public class BonusServlet extends HttpServlet {
 				System.out.println("ビンゴ数を登録できませんでした");
 			}
 		}
+		
+		String fishName = "";
+		
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+		
+		int user_id = loginUser.getId();
+		
+		//ビンゴの内容を取得
+		BonusDAO bonus = new BonusDAO();
+		BonusDTO bingo = bonus.selectBingo(user_id);
+		
+		request.setAttribute("bingo", bingo);
+		
+		
+		int totalBingo = bingo.getBingoCount();	
+		
+		if(totalBingo != 0) {
+			if(totalBingo == 1) {
+				fishName = "img/fish1.png";
+			}
+			else if(totalBingo == 1) {
+				fishName = "";
+			}
+			else if(totalBingo == 2) {
+				fishName = "";
+			}
+			else if(totalBingo == 3) {
+				fishName = "";
+			}
+			else if(totalBingo == 4) {
+				fishName = "";
+			}
+			else if(totalBingo == 5) {
+				fishName = "";
+			}
+		}
+		
+		request.setAttribute("getfish", fishName);
 
         response.getWriter().write("OK");
 	}

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.WeeklyDAO;
-import dto.DailyDTO;
 import dto.UserDTO;
 import dto.WeeklyDTO;
 
@@ -48,10 +47,10 @@ public class WeeklyServlet extends HttpServlet {
 		WeeklyDAO dao = new WeeklyDAO();
 		WeeklyDTO dto = new WeeklyDTO();
 
-		// テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
-		DailyDTO dDto = new DailyDTO();
-		dDto.setUser_id(1);
-		dao.aggregate(dDto);
+		// テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ）
+		//WeeklyDAO wDao = new WeeklyDAO();
+		//wDao.aggregate(daily);
+		//更新の方もあるならそっちにも追加しとくこと
 
 		dto.setWeeklyRes(weeklyRes);
 		dto.setUser_id(userId);

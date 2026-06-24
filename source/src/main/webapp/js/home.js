@@ -15,5 +15,10 @@
 				btn.src = "/b2/img/yajirusi1.png";
 				btn.classList.remove("onNavi");
 			}
+			
 		});		
   
+  document.getElementById("leftMenuBtn").onclick = function() {
+    const menu = document.querySelector("aside.left-menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+};

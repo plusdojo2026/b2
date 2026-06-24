@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>ココロノナミ|ホームページ</title>
 		<link rel="stylesheet" href="css/home.css" type="text/css">
 	</head>
@@ -17,7 +18,7 @@
 		</header>
 		
 		<div class="homelayout">
-			<aside>
+			<aside class="left-menu">
 				<div class ="flex">
 					<div class = "quickrecord">
 						<p>簡易記録にジャンプ</p>
@@ -39,7 +40,9 @@
 				</div>
 			</aside>
 			
+			
 			<main>
+			<button id="leftMenuBtn" class="sp-only">メニュー</button>
 				<p id = "greeting">${greeting}</p> <%--時間帯コメント --%>
 				<div class="homereview">
 					<p>本日の入力：</p>

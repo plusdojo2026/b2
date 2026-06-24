@@ -335,6 +335,176 @@ main{
 	display: block;
 }
 
+/* デフォルト（PC）では非表示 */
+#leftMenuBtn {
+    display: none;
+}
+
+
+
+
+/* スマホだけ表示するクラス */
+
+
+
+
+@media screen and (max-width: 768px) {
+
+    /* ===== 全体リセット ===== */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: #f5f7fb;
+    }
+
+    /* ===== レイアウト ===== */
+    .homelayout {
+        display: block;
+        margin: 0;
+    }
+
+    aside.left-menu {
+        display: none;
+    }
+
+    /*mainの制限を全解除 */
+    main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .homelayout main {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* ===== カード（全部横いっぱい） ===== */
+    
+	.homereview {
+        
+	width: 95%;          
+    margin: 10px auto;   /* 中央に固定 */
+    padding: 8px 10px;
+    box-sizing: border-box;
+
+    }
+
+
+    /* ===== テキスト ===== */
+    #greeting {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* ===== アイコン ===== */
+    .icon-list {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .icon-list img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* ===== 週間レポート ===== */
+    .weekly {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .weekly-box,
+    .info-area {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* ===== ボタン ===== */
+    button {
+        margin: 15px auto;
+    }
+
+    /* ===== メニューボタン ===== */
+    .sp-only {
+        display: block;
+        margin: 10px auto;
+    }
+    
+    
+	#leftMenuBtn {
+    margin-left: 0;   /* 左寄せ */
+    margin-right: auto; 
+    display: block;
+}
+
+
+	#slideNav {
+        width: 80%;       
+        right: -100%;      
+    }
+
+    #slideNav.open {
+        right: 0;
+    }
+    
+    
+	#slideNav nav ul {
+    flex-wrap: nowrap;        
+    justify-content: center; /* 中央寄せ */
+    gap: 3px;
+	}
+
+	#slideNav nav ul li a {
+    width: auto;           /* 固定幅やめる */
+    
+ 	font-size: 9px;       
+    padding: 5px 6px;
+
+    white-space: nowrap;   /* 改行防止 */
+	}
+    
+    
+	#slideNav .icon-list img {
+    width: 28px;   
+    height: 28px;
+	}
+
+	#slideNav .icon-list {
+    gap: 15px;     /* ← 間隔少し詰める */
+    justify-content: center;
+	}
+    
+
+    
+
+    /* ===== フッター ===== */
+    
+	footer {
+        padding: 5px 5px;
+    }
+
+    footer ul {    
+	width: 100%;
+    margin: 0;
+    padding: 0 10px; 
+    box-sizing: border-box;
+
+    }
+
+    footer ul li a {
+        width: auto;             /* ← 固定幅やめる */
+        font-size: 11px;         /* 少し小さく */
+        padding: 5px 6px;
+    }
+
+}
+
+
 
 
 

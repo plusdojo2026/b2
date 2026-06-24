@@ -11,32 +11,89 @@
 
 
 #logo{
-	height: 500px;
-	width: 1000px;
+	height: 25%;
+	width: 100%;
 }
 
+
+/* button */ 
+button{
+  display: block;
+  margin-left: auto;
+  background: #1e90ff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+  transition: 0.2s ease;
+}
+
+button:hover{
+	background: #1c7ed6;
+}
 
 /* ぼーだー */
 .quickrecord{
-	border:1px solid black;
-	margin: 0 0 20px 0;
+  border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px;            /* 下に余白 */
 }
 
 .loginbonus{
-	border:1px solid black;
+  border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px;            /* 下に余白 */
+  white-space: nowrap;
 }
 
 .homereview{
-	border:1px solid black;
-	margin: 0 0 20px 0;
+  border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px;            /* 下に余白 */
 }
 
 .loginbonus ul{
-	border:1px solid black;
+  border: 1px solid #f0f8ff;      /* 薄いブルーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px;            /* 下に余白 */
+  display: block;
 }
 #loginbonus{
-	border:1px solid black;
+  border: 1px solid #f0f8ff;      /* 薄いブルーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px;            /* 下に余白 */
 }
+
+.weekly-box{
+	border:1px solid black;
+	padding:50px;
+}
+.info-area{
+	border:1px solid black;
+	padding:50px;
+}
+
+
 
 /* ナビゲーション */
 nav ul{
@@ -51,8 +108,8 @@ nav ul{
 	position: fixed; /* ナビの固定 */
   	top: 0; /* 画面の一番上に固定 */
   	right: -530px; /* ← 最初は画面外に隠す */
-  	width: 500px;
-  	height: 100vh; /* 画面いっぱい */
+  	width: 450px;
+  	height: 70vh; /* 画面いっぱい */
   	background: #fff; /* 背景色 */
   	box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* 左に影 */
   	transition: right 0.3s ease; /* ← スライドアニメーション */
@@ -76,6 +133,109 @@ nav ul{
 	right:10px;
 }
 
+#slideNav nav {
+  margin-bottom:30px;
+}
+
+#slideNav nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 3px;
+}
+
+#slideNav nav ul li a {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.2s;
+  width: 60px;
+  text-align: center;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+#slideNav nav ul li a:hover {
+  background: #357ab8;
+}
+
+/* 共通：ボックス全体を小さく */
+#slideNav .homereview,
+#slideNav .slidehomereview{
+    padding: 6px;          /* ← 20px → 6px に縮小 */
+    margin-bottom: 10px;   /* ボックス間の隙間 */
+    font-size: 10px;       /* 全体の文字を小さく */
+    line-height: 1.2;
+}
+
+/* 見出し（p）を小さく */
+#slideNav .homereview p,
+#slideNav .slidehomereview p{
+    margin: 2px 0;
+    font-size: 10px;
+}
+
+/* アイコンリストを縮小 */
+#slideNav .icon-list{
+    display: flex;
+    gap: 8px;              /* ← 20〜30px → 8px */
+    padding: 0;
+}
+
+#slideNav .icon-list img{
+    width: 26px;           /* ← 50px → 26px */
+    height: 26px;
+}
+
+/* weekly（週間レポート）を縮小 */
+#slideNav .slideweekly{
+    display: flex;
+    gap: 8px;              /* ← 30px → 8px */
+}
+
+#slideNav .weekly-box,
+#slideNav .info-area{
+    padding: 6px;          /* ← 20〜30px → 6px */
+    font-size: 10px;
+}
+
+/* ボタンも小さく */
+#slideNav button{
+    padding: 5px 8px;      /* ← 12px 20px → 小さく */
+    font-size: 10px;
+}
+
+
+
+/* フッターのナビゲーション */
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 5px;
+}
+
+ul li a {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #ffffff;
+  color: #1e90ff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.2s;
+  width: 150px;
+  text-align: center;
+  font-size: 16px;
+}
+
+ul li a:hover {
+  background: #f0f8ff;
+  border-color:#f0f8ff;
+}
+
 
 
 
@@ -87,21 +247,77 @@ nav ul{
 }
 
 .homelayout main{
-	width:80%;
-	
+	width:50%;
+	margin: 0 auto;
+}
+
+
+
+#greeting{
+	text-align: center;
 }
 
 /*簡易とログインの固定*/
 main{
   margin-left: 260px;  /* 左 aside の幅 + 余白 */
   margin-right: 260px; /* 右 aside の幅 + 余白 */
+  padding-bottom: 100px;
 }
 
 .flex{
-	position: fixed;
-	top: 300px;
-	width: 200px;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    width: 200px;
+    height: 100vh;      /* ← 画面の2/3に固定 */
+    overflow: hidden;  /* ← はみ出し禁止 */
+    margin-left: 10px;
 }
+
+/* 中身を限界まで圧縮 */
+.flex *{
+    font-size: 10px;     /* 小さく */
+    line-height: 1.0;   /* 行間ゼロに近い */
+    margin: 0;          /* 余白ゼロ */
+    padding: 2px;       /* 内側の余白も最小限 */
+    box-sizing: border-box;
+}
+
+/* ボックス類も圧縮 */
+.flex .quickrecord,
+.flex .loginbonus,
+.flex .homereview{
+    padding: 10px;
+    margin-bottom: 4px;
+}
+
+
+/*毎日アイコン*/
+.icon-list {
+  display: flex;
+  gap: 50px;       /* アイコン同士の間隔 */
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+.icon-list img{
+	width:50px;
+	height:50px;
+}
+
+
+/*週間レポート*/
+.weekly{
+	display: flex;
+	gap:30px;
+}
+
+
+/* ログインボーナスリストだけ縦並び */
+.loginbonus ul li{
+	display: block;
+}
+
 
 
 

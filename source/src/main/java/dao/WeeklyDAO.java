@@ -15,8 +15,8 @@ import dto.DailyDTO;
 import dto.WeeklyDTO;
 
 public class WeeklyDAO {
+	
 	//週間結果ページ表示時に週間のDBから該当の週のデータをもってくるメソッド。
-	//weeklyResを渡したい。該当のWeeklyとDailyのデータを返したい。
 	public List<WeeklyDTO> select(WeeklyDTO week) {
 		Connection conn = null;
 		List<WeeklyDTO> weekList = new ArrayList<WeeklyDTO>();
@@ -430,5 +430,38 @@ public class WeeklyDAO {
 	    return weekList;
 	}
 
-	
+	// WeekRes総件数カウント（ページング用）
+	public int countAll(int user_Id) {
+	    int count = 0;
+	    Connection conn = null;
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        conn = DriverManager.getConnection(
+		            "jdbc:mysql://localhost:3306/b2?" +
+		            "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+		            "root", "password"
+		        );
+
+	        String sql = "SELECT COUNT(*) FROM WeekRes WHERE user_id = ?";
+
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setInt(1, user_Id);
+
+	        ResultSet rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            count = rs.getInt(1);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try { if (conn != null) conn.close(); } catch (SQLException e) {}
+	    }
+
+	    return count;
+	}
+
 }

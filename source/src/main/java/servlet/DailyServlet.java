@@ -111,8 +111,7 @@ public class DailyServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dailyRev.jsp");
 		    dispatcher.forward(request, response);
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/daily.jsp");
-		    dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/DailyServlet");
 		}
 
 	}

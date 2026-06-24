@@ -83,9 +83,11 @@ public class DailyDAO {
 			 */
 			
 			//1.DiaryRecテーブル
-			String sql = "INSERT INTO DailyRec VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, yearWeek(CURDATE(),1), NOW(), NOW()";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			String sql = "INSERT INTO DailyRec "
+					+ "(id, user_id, freeForm, photo, positive, emotion_id, type_id, negativeRate, positiveRate, activeIndex, yearWeek) "
+					+ "VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?, YEARWEEK(CURDATE(),1))";	
 
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//分析したデータを格納する
 			pStmt.setInt(1, daily.getUser_id());

@@ -47,9 +47,7 @@ public class WeeklyServlet extends HttpServlet {
 		dto.setUser_id(1);
 		
 		List<WeeklyDTO> List = dao.select(dto);
-		request.setAttribute("currentPage", 1);
-		request.setAttribute("totalPage", 1);
-
+		
 		// JSP に渡す
 		request.setAttribute("weekList", List);
 

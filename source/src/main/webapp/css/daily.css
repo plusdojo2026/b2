@@ -1,1 +1,111 @@
 @charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:850px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+
+
+}
+
+
+@media screen and (max-width:480px){
+    html{
+        background-color: rgb(255, 255, 255);
+    }
+
+    .leftScreen{
+        display: none;
+    }
+
+    .rightScreen{
+        min-width: 768px;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+body{
+    margin: 0;
+}
+
+
+.flexbox{
+    display: flex;
+    align-items: stretch;
+}
+
+.leftScreen, .rightScreen{
+    width: 50%;
+}
+
+.leftScreen{
+    background-image: url("../img/kokorononami.jpg");
+    background-repeat: repeat-y;
+    background-size: 100vh;
+    background-attachment: fixed;
+}
+
+.leftScreen .leftImg{
+    width: 100%;
+}
+
+/* タブ全体 */
+.tab {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* ラジオボタンを隠す */
+.tab > input[type="radio"] {
+    display: none;
+}
+
+/* タブラベル */
+.tab > label {
+    padding: 10px 20px;
+    background: #2589d0;
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+/* 初期状態は非表示 */
+.tab > div {
+    display: none;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+/* 選択中のタブを強調 */
+#tab1:checked + label,
+#tab2:checked + label {
+    opacity: 1;
+}
+
+/* 選択中のコンテンツを表示 */
+#tab1:checked ~ .content1,
+#tab2:checked ~ .content2 {
+    display: block;
+}

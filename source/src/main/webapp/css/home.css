@@ -109,12 +109,12 @@ nav ul{
   	top: 0; /* 画面の一番上に固定 */
   	right: -530px; /* ← 最初は画面外に隠す */
   	width: 450px;
-  	height: 70vh; /* 画面いっぱい */
+  	height: 100vh; /* 画面いっぱい */
   	background: #fff; /* 背景色 */
   	box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* 左に影 */
   	transition: right 0.3s ease; /* ← スライドアニメーション */
   	padding: 20px;
-  	padding-top: 150px;
+  	padding-top: 80px;
 }
 #slideNav.open {
   right: 0; /* ← open クラスが付いたら表示 */
@@ -122,7 +122,7 @@ nav ul{
 
 #slideBtn{ /* buttonの初期位置 */
 	position: fixed;
-	top: 50px;
+	top: 20px;
 	right:50px;/* 縦方向の位置調整→親の高さの５０％の位置に置く*/
 	z-index: 9999;
     cursor: pointer;/* カーソルを手にする*/
@@ -154,7 +154,7 @@ nav ul{
   transition: 0.2s;
   width: 60px;
   text-align: center;
-  font-size: 10px;
+  font-size: 9px;
   white-space: nowrap;
 }
 
@@ -163,13 +163,20 @@ nav ul{
 }
 
 /* 共通：ボックス全体を小さく */
-#slideNav .homereview,
-#slideNav .slidehomereview{
-    padding: 6px;          /* ← 20px → 6px に縮小 */
-    margin-bottom: 10px;   /* ボックス間の隙間 */
-    font-size: 10px;       /* 全体の文字を小さく */
-    line-height: 1.2;
+#slideNav .homereview{
+    padding: 5px;        /* ← さらに小さく */
+    margin-bottom: 8px;
+    font-size: 9px;
+    line-height: 0.5;
 }
+
+#slideNav .slidehomereview{
+    padding: 20px;       /* ← 大きめにする */
+    margin-bottom: 12px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
 
 /* 見出し（p）を小さく */
 #slideNav .homereview p,
@@ -181,13 +188,13 @@ nav ul{
 /* アイコンリストを縮小 */
 #slideNav .icon-list{
     display: flex;
-    gap: 8px;              /* ← 20〜30px → 8px */
+    gap: 50px;              /* ← 20〜30px → 8px */
     padding: 0;
 }
 
 #slideNav .icon-list img{
-    width: 26px;           /* ← 50px → 26px */
-    height: 26px;
+    width: 40px;           /* ← 50px → 26px */
+    height: 40px;
 }
 
 /* weekly（週間レポート）を縮小 */
@@ -198,14 +205,24 @@ nav ul{
 
 #slideNav .weekly-box,
 #slideNav .info-area{
-    padding: 6px;          /* ← 20〜30px → 6px */
-    font-size: 10px;
+   padding: 12px;     /* ← 6px → 12px にすると縦に広がる */
+    font-size: 16px;   /* ← 20px は大きすぎるので調整 */
+    min-height: 60px
 }
 
 /* ボタンも小さく */
 #slideNav button{
     padding: 5px 8px;      /* ← 12px 20px → 小さく */
     font-size: 10px;
+}
+
+.slidehomereview{
+  border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  border-radius: 12px;            /* 角丸 */
+  padding: 20px;                  /* 内側の余白 */
+  background-color: #ffffff;      /* 白背景 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+  margin-bottom: 20px; 
 }
 
 
@@ -215,27 +232,27 @@ ul {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 5px;
+  gap: 3px;
 }
 
 ul li a {
   display: inline-block;
-  padding: 8px 15px;
+  padding: 5px 8px;
   background: #ffffff;
   color: #1e90ff;
   text-decoration: none;
   border-radius: 5px;
   transition: 0.2s;
-  width: 150px;
+  width: 100px;
   text-align: center;
-  font-size: 16px;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 ul li a:hover {
   background: #f0f8ff;
   border-color:#f0f8ff;
 }
-
 
 
 

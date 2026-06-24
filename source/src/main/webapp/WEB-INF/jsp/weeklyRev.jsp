@@ -22,70 +22,60 @@
 				<c:out value="${e.weeklyRes}" />
 			</h1>
 
-			<div class="chart-container">
-				<canvas id="myLineChart"></canvas>
-			</div>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
+			<div class="chart-container"><canvas id="myLineChart"></canvas></div>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 			<script>
-var ctx = document.getElementById("myLineChart");
+			var ctx = document.getElementById("myLineChart");
 
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-
-	  labels: [
-	    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-	      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
-	    </c:forEach>
-	  ],
-
-    datasets: [
-      {
-        label: 'ポジティブ率',
-        data: [
-          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-            ${d.positiveRate * 100}${!s.last ? ',' : ''}
-          </c:forEach>
-        ],
-        borderColor: "rgba(255,0,0,1)",
-        backgroundColor: "rgba(0,0,0,0)"
-      },
-      {
-        label: 'ネガティブ率',
-        data: [
-          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
-            ${d.negativeRate * 100}${!t.last ? ',' : ''}
-          </c:forEach>
-        ],
-        borderColor: "rgba(0,0,255,1)",
-        backgroundColor: "rgba(0,0,0,0)"
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'ポジティブ率とネガティブ率の遷移'
-    },
-    responsive: true,
-    maintainAspectRatio: false, 
-    scales: {
-      yAxes: [{
-        ticks: {
-          suggestedMax: 100,
-          suggestedMin: 0,
-          stepSize: 10,
-          callback: function(value){
-            return value + '%'
-          }
-        }
-      }]
-    }
-  }
-});
-</script>
+			var myLineChart = new Chart(ctx, {
+  			type: 'line',
+			  data: {
+				  labels: [
+				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    </c:forEach>
+				  ],
+			
+			    datasets: [
+			      {
+			        label: 'ポジティブ率',
+			        data: [
+			          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+			            ${d.positiveRate * 100}${!s.last ? ',' : ''}
+			          </c:forEach>
+			        ],
+			        borderColor: "rgba(255,0,0,1)",
+			        backgroundColor: "rgba(0,0,0,0)"
+			      },
+			      {
+			        label: 'ネガティブ率',
+			        data: [
+			          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
+			            ${d.negativeRate * 100}${!t.last ? ',' : ''}
+			          </c:forEach>
+			        ],
+			        borderColor: "rgba(0,0,255,1)",
+			        backgroundColor: "rgba(0,0,0,0)"
+			      }
+			    ]
+			  },
+			  options: {
+			    title: {
+			      display: true,
+			      text: 'ポジティブ率とネガティブ率の遷移'
+			    },
+			    responsive: true,
+			    maintainAspectRatio: false, 
+			    scales: {
+			      yAxes: [{
+			        ticks: {
+			          suggestedMax: 100,
+			          suggestedMin: 0,
+			          stepSize: 10,
+			          callback: function(value){
+			            return value + '%'
+			          }}}]}}});
+			</script>
 			<div class="container">
 				<div class="box large">
 					<span class="boxTitle">分析コメント</span> <span class="analysisCmt">

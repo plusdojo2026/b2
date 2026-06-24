@@ -53,6 +53,7 @@ public class ReviewServlet extends HttpServlet {
 		WeeklyDAO dao = new WeeklyDAO();
 		// データ取得
 		List<WeeklyDTO> weekList = dao.selectAll(userId, weekPage);
+		List<WeeklyDTO> weekGraph = dao.latestSelect(userId);
 		// 総件数
 		int totalCount = dao.countAll(userId);
 		// ページ計算
@@ -66,6 +67,7 @@ public class ReviewServlet extends HttpServlet {
 		request.setAttribute("weekList", weekList);
 		request.setAttribute("weekPage", weekPage);
 		request.setAttribute("totalWeekPage", totalWeekPage);
+		request.setAttribute("latestWeek", weekGraph);
 
 		// 振り返りページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/review.jsp");

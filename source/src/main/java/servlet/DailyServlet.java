@@ -98,7 +98,7 @@ public class DailyServlet extends HttpServlet {
 			photo,
 			positive,
 			emotion_id,
-			result.getTypeId(),
+			result.getType_id(),
 			result.getNegativeRate(),
 			result.getPositiveRate(),
 			result.getActiveIndex(),
@@ -108,11 +108,9 @@ public class DailyServlet extends HttpServlet {
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
 		if (dDao.insert(daily)) { // 登録成功
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dailyRev.jsp");
-		    dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/DailyRevServlet");
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/daily.jsp");
-		    dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/DailyServlet");
 		}
 
 	}

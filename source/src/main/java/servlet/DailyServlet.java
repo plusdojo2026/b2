@@ -108,8 +108,7 @@ public class DailyServlet extends HttpServlet {
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
 		if (dDao.insert(daily)) { // 登録成功
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dailyRev.jsp");
-		    dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/DailyRevServlet");
 		} else { // 登録失敗
 			response.sendRedirect(request.getContextPath() + "/DailyServlet");
 		}

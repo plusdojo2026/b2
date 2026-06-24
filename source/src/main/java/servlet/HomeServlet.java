@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BonusDAO;
+import dao.TipsDAO;
 import dao.UserDAO;
+import dto.TipsDTO;
 import dto.UserDTO;
 
 
@@ -136,6 +138,13 @@ import dto.UserDTO;
 				//DBの最新情報をセッションに反映
 				UserDTO fresh = uDao.findById(loginUser.getId());
 				session.setAttribute("user", fresh);
+				
+				
+				//ランダムtips
+				TipsDAO tDao = new TipsDAO();
+				TipsDTO randomTip = tDao.Rondom();
+				//jspに渡す
+				request.setAttribute("randomTip",randomTip);
 				
 				//ログイン記録を画面表示
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

@@ -64,7 +64,7 @@
 					<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
 				</div>
 				<div class="homereview">
-					<p>TIPS：</p>
+					<p>TIPS：${randomTip.tips}</p>
 				</div>
 			</main>
 			

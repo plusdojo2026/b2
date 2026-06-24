@@ -29,11 +29,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  color: white;
+  color: black;
   text-align: center;
 
   
- background: rgba(0, 120, 255, 0.3);
+ background: rgba(255, 255, 255, 0.85);
  backdrop-filter: blur(8px);
   padding: 20px;
   border-radius: 10px;

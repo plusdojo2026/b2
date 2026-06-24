@@ -28,8 +28,10 @@
 					<div class="loginbonus">
 						<p>ログインボーナス</p>
 						<ul>
-							<li>通算ログイン：${user.daysTotalLogin}日目</li>
-							<li>連続ログイン：${user.loginStreak}日目</li>
+							<li>通算ログイン</li>
+							<li>${user.daysTotalLogin}日目</li>
+							<li>連続ログイン</li>
+							<li>${user.loginStreak}日目</li>
 						</ul>
 						<p id ="loginbonus">水深：${user.depthCurrent}ｍ</p>
 					</div>
@@ -87,9 +89,9 @@
 						</ul>
 						<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
 					</div>
-					<div class="homereview">
+					<div class="slidehomereview">
 						<p>週間レポート</p>
-						<div class="weekly">
+						<div class="slideweekly">
 							<div class= "weekly-box">
 								グラフ
 							</div>
@@ -99,7 +101,7 @@
 						</div>
 						<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
 					</div>
-					<button>アプリについて</button>
+					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>
 			</aside>
 		</div>

@@ -26,7 +26,7 @@
 					<div class = "quickrecord">
 						<p>簡易記録にジャンプ</p>
 						<a href="/b2/QuickServlet">
-							<img src ="/b2/img/Snail.png" class ="pic">
+							<img src ="/b2/img/fun_clione.png" class ="pic">
 						</a>
 					</div>
 					
@@ -45,7 +45,10 @@
 			
 			
 			<main>
-			<button id="leftMenuBtn" class="sp-only">メニュー</button>
+			<div class="sp-menu-buttons sp-only">
+    			<button class="sp-btn" onclick="location.href='/b2/QuickServlet';">簡易記録</button>
+    			<button id="leftMenuBtn" class="sp-btn sp-only">ボーナス</button>
+			</div>
 				<p id = "greeting">${greeting}</p> <%--時間帯コメント --%>
 				<div class="homereview">
 					<p>本日の入力：</p>
@@ -55,7 +58,7 @@
 						<li><img src="/b2/img/syasinn2.png"></li>
 						<li><img src="/b2/img/sakana2.png"></li>
 					</ul>
-					<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+					<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 				</div>
 				<div class="homereview">
 					<p>週間レポート</p>
@@ -93,8 +96,8 @@
 						<ul>
 							<li><a href="/b2/QuickServlet">簡易記録</a></li>
 							<li><a href="/b2/DailyServlet">毎日記録</a></li>
-							<li><a href="/b2/ReviewServlet">振り返り機能</a></li>
-							<li><a href="/b2/BonusServlet">ログインボーナス</a></li>
+							<li><a href="/b2/ReviewServlet">振り返り</a></li>
+							<li><a href="/b2/BonusServlet">ボーナス</a></li>
 							<li><a href="/b2/MypageServlet">マイページ</a></li>
 						</ul>
 					</nav>
@@ -106,7 +109,7 @@
 							<li><img src="/b2/img/syasinn2.png"></li>
 							<li><img src="/b2/img/sakana2.png"></li>
 						</ul>
-						<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+						<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 					</div>
 					<div class="slidehomereview">
 						<p>週間レポート</p>
@@ -131,8 +134,8 @@
 				<ul>
 					<li><a href="/b2/QuickServlet">簡易記録</a></li>
 					<li><a href="/b2/DailyServlet">毎日記録</a></li>
-					<li><a href="/b2/ReviewServlet">振り返り機能</a></li>
-					<li><a href="/b2/BonusServlet">ログインボーナス</a></li>
+					<li><a href="/b2/ReviewServlet">振り返り</a></li>
+					<li><a href="/b2/BonusServlet">ボーナス</a></li>
 					<li><a href="/b2/MypageServlet">マイページ</a></li>
 				</ul>
 			</nav>

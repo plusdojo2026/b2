@@ -107,17 +107,17 @@ nav ul{
 #slideNav{
 	position: fixed; /* ナビの固定 */
   	top: 0; /* 画面の一番上に固定 */
-  	right: -530px; /* ← 最初は画面外に隠す */
+  	right: -530px; /*  最初は画面外に隠す */
   	width: 450px;
   	height: 100vh; /* 画面いっぱい */
   	background: #fff; /* 背景色 */
   	box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* 左に影 */
-  	transition: right 0.3s ease; /* ← スライドアニメーション */
+  	transition: right 0.3s ease; /*  スライドアニメーション */
   	padding: 20px;
   	padding-top: 80px;
 }
 #slideNav.open {
-  right: 0; /* ← open クラスが付いたら表示 */
+  right: 0; /*  open クラスが付いたら表示 */
 }
 
 #slideBtn{ /* buttonの初期位置 */
@@ -164,14 +164,14 @@ nav ul{
 
 /* 共通：ボックス全体を小さく */
 #slideNav .homereview{
-    padding: 5px;        /* ← さらに小さく */
+    padding: 5px;       
     margin-bottom: 8px;
     font-size: 9px;
     line-height: 0.5;
 }
 
 #slideNav .slidehomereview{
-    padding: 20px;       /* ← 大きめにする */
+    padding: 20px;      
     margin-bottom: 12px;
     font-size: 11px;
     line-height: 1.5;
@@ -188,31 +188,31 @@ nav ul{
 /* アイコンリストを縮小 */
 #slideNav .icon-list{
     display: flex;
-    gap: 50px;              /* ← 20〜30px → 8px */
+    gap: 50px;             
     padding: 0;
 }
 
 #slideNav .icon-list img{
-    width: 40px;           /* ← 50px → 26px */
+    width: 40px;           
     height: 40px;
 }
 
-/* weekly（週間レポート）を縮小 */
+/* weekly（週間記録）を縮小 */
 #slideNav .slideweekly{
     display: flex;
-    gap: 8px;              /* ← 30px → 8px */
+    gap: 8px;            
 }
 
 #slideNav .weekly-box,
 #slideNav .info-area{
-   padding: 12px;     /* ← 6px → 12px にすると縦に広がる */
-    font-size: 16px;   /* ← 20px は大きすぎるので調整 */
+   padding: 12px;     
+    font-size: 16px;   
     min-height: 60px
 }
 
 /* ボタンも小さく */
 #slideNav button{
-    padding: 5px 8px;      /* ← 12px 20px → 小さく */
+    padding: 5px 8px;      
     font-size: 10px;
 }
 
@@ -286,8 +286,8 @@ main{
     top: 25%;
     left: 0;
     width: 200px;
-    height: 100vh;      /* ← 画面の2/3に固定 */
-    overflow: hidden;  /* ← はみ出し禁止 */
+    height: 100vh;      
+    overflow: hidden;  /*  はみ出し禁止 */
     margin-left: 10px;
 }
 
@@ -336,11 +336,23 @@ main{
 }
 
 /* デフォルト（PC）では非表示 */
-#leftMenuBtn {
+aside.left-menu {
+    display: block;
+ }
+
+.sp-only {
     display: none;
 }
 
+@media screen and (min-width: 769px) {
+  aside.left-menu {
+    display: block !important;
+  }
 
+  #leftMenuBtn {
+    display: none !important;
+  }
+}
 
 
 /* スマホだけ表示するクラス */
@@ -349,8 +361,10 @@ main{
 
 
 @media screen and (max-width: 768px) {
-
-    /* ===== 全体リセット ===== */
+	.sp-only {
+        display: block;
+    }
+    /*  全体リセット */
     html, body {
         margin: 0;
         padding: 0;
@@ -358,7 +372,7 @@ main{
         background: #f5f7fb;
     }
 
-    /* ===== レイアウト ===== */
+    /*  レイアウト  */
     .homelayout {
         display: block;
         margin: 0;
@@ -366,6 +380,10 @@ main{
 
     aside.left-menu {
         display: none;
+    }
+    
+    .left-menu .quickrecord {
+    display: none;
     }
 
     /*mainの制限を全解除 */
@@ -381,9 +399,9 @@ main{
         margin: 0 !important;
     }
 
-    /* ===== カード（全部横いっぱい） ===== */
+    /* main */
     
-	.homereview {
+    .homereview {
         
 	width: 95%;          
     margin: 10px auto;   /* 中央に固定 */
@@ -391,15 +409,58 @@ main{
     box-sizing: border-box;
 
     }
+    .slidehomereview {
+        
+	width: 95%;          
+    margin: 10px auto;   /* 中央に固定 */
+    padding: 8px 10px;
+    box-sizing: border-box;
+
+    }
+    
+    #slideNav .homereview button{
+       margin: 15px 8px  0 75%;
+       font-size: 12px;
+       white-space: nowrap;
+    }
+    
+    #slideNav .slidehomereview button{
+       margin: 15px 8px  0 75%;
+       font-size: 12px;
+       white-space: nowrap;
+    }
+    
+    #slideNav .homereview { 
+	width: 95%;          
+    margin: 10px auto;   /* 中央に固定 */
+    padding: 8px 10px;
+    box-sizing: border-box;
+    }
+    
+    #slideNav .slidehomereview {
+        
+	width: 95%;          
+    margin: 10px auto;   /* 中央に固定 */
+    padding: 8px 10px;
+    box-sizing: border-box;
+
+    }
+    
+    #slideBtn{ 
+	position: absolute;
+	right: 16px;  /* ← 基本これ */
+	top: 4%;
+	transform: translateY(-50%);
+    }
 
 
-    /* ===== テキスト ===== */
+    /*  時間帯のテキスト */
     #greeting {
         padding: 10px;
         font-size: 14px;
     }
 
-    /* ===== アイコン ===== */
+    /* アイコン */
     .icon-list {
         justify-content: center;
         gap: 20px;
@@ -410,7 +471,7 @@ main{
         height: 40px;
     }
 
-    /* ===== 週間レポート ===== */
+    /*  週間記録  */
     .weekly {
         display: flex;
         flex-direction: column;
@@ -424,12 +485,14 @@ main{
         box-sizing: border-box;
     }
 
-    /* ===== ボタン ===== */
+    /*  ボタン  */
     button {
-        margin: 15px auto;
+        margin: 15px 15px  0 70%;
+        font-size: 12px;
+        white-space: nowrap;
     }
 
-    /* ===== メニューボタン ===== */
+    /* メニューボタン */
     .sp-only {
         display: block;
         margin: 10px auto;
@@ -437,8 +500,8 @@ main{
     
     
 	#leftMenuBtn {
-    margin-left: 0;   /* 左寄せ */
-    margin-right: auto; 
+    margin-right: 0;   /* 右寄せ */
+    margin-left: auto; 
     display: block;
 }
 
@@ -456,15 +519,13 @@ main{
 	#slideNav nav ul {
     flex-wrap: nowrap;        
     justify-content: center; /* 中央寄せ */
-    gap: 3px;
+    gap: 5px;
 	}
 
 	#slideNav nav ul li a {
     width: auto;           /* 固定幅やめる */
-    
- 	font-size: 9px;       
+ 	font-size: 12px;       
     padding: 5px 6px;
-
     white-space: nowrap;   /* 改行防止 */
 	}
     
@@ -475,17 +536,17 @@ main{
 	}
 
 	#slideNav .icon-list {
-    gap: 15px;     /* ← 間隔少し詰める */
+    gap: 15px;     /* 間隔少し詰める */
     justify-content: center;
 	}
     
 
     
 
-    /* ===== フッター ===== */
+    /* フッター */
     
 	footer {
-        padding: 5px 5px;
+        padding: 30px 5px 5px;
     }
 
     footer ul {    
@@ -493,16 +554,44 @@ main{
     margin: 0;
     padding: 0 10px; 
     box-sizing: border-box;
-
+	gap: 5px;
     }
 
     footer ul li a {
-        width: auto;             /* ← 固定幅やめる */
-        font-size: 11px;         /* 少し小さく */
+        width: auto;             /*  固定やめる */
+        font-size: 14px;         /* 少し小さく */
         padding: 5px 6px;
     }
+    
+    .sp-menu-buttons {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+	}
 
-}
+	.sp-btn {
+    flex: 1;
+    padding: 10px 5px;
+    background-color: #6ec6ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+	}
+	
+	.sp-menu-buttons .sp-btn {
+    margin: 0 !important;
+	}
+	
+    .sp-menu-buttons {
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    gap: 5px;
+    margin-bottom: 15px;
+    width: 30%;
+    margin-right: 0;
+	}
+	
 
 
 

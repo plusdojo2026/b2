@@ -5,7 +5,7 @@
 
 	<div id="bonusView"></div>
     <h1 id="hitbingo">ビンゴ！</h1>
-    <img id="bingoimg" src="img/glad_clione.png">
+    <img id="bingoimg" src="${getfish}">
 
     <head>
         <meta charset="UTF-8">
@@ -159,7 +159,10 @@
 	        })
 	        .then(res => res.text())
 	        .then(result => {
-	            console.log("サーブレットからの返答:", result);
+	        	//ビンゴで取得した画像のパスをsrcに入れる
+	        	const img = document.getElementById("bingoimg");
+	            img.src = result;
+	            //console.log("サーブレットからの返答:", result);
 	        });	
 	        
 	        //ビンゴ演出
@@ -170,6 +173,7 @@
 	    	hitview.style.display = "";
 	    	hittext.style.display = "";
 	    	hitimg.style.display = "";
+	    	
 	    	
 	    	window.setTimeout(HitBingo, 5500);
 	    }

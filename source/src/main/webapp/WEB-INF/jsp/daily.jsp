@@ -67,34 +67,68 @@
 
 							<!-- コンテンツ -->
 							<div class="content1">
-								<table border="1">
-									<c:forEach var="q" items="${qList}" varStatus="status">
-										<tr>
-											<td>
-												<input type="hidden" name="qType_${status.count}" value="${q.qType}">
-											</td>
-											<td>Q.${status.count}</td>
-											<td>${q.question}</td>
-											<td>
-												<label>
-													<input type="radio" name="q_${status.count}" value="0">1
-												</label>
-												<label>
-													<input type="radio" name="q_${status.count}" value="1">2
-												</label>
-												<label>
-												<input type="radio" name="q_${status.count}" value="2">3
-												</label>
-												<label>
-													<input type="radio" name="q_${status.count}" value="3">4
-												</label>
-												<label>
-													<input type="radio" name="q_${status.count}" value="4">5
-												</label>
-											</td>
-										</tr>
-									</c:forEach>
-								</table>
+								<div class="question-list">
+
+								<c:forEach var="q" items="${qList}" varStatus="status">
+
+									<div class="question-card">
+
+										<input type="hidden"
+											name="qType_${status.count}"
+											value="${q.qType}">
+
+										<div class="question-number">
+											Q${status.count}
+										</div>
+
+										<div class="question-text">
+											${q.question}
+										</div>
+
+										<div class="answer-group">
+
+											<label class="answer">
+												<input type="radio"
+													name="q_${status.count}"
+													value="0">
+												<span>1</span>
+											</label>
+
+											<label class="answer">
+												<input type="radio"
+													name="q_${status.count}"
+													value="1">
+												<span>2</span>
+											</label>
+
+											<label class="answer">
+												<input type="radio"
+													name="q_${status.count}"
+													value="2">
+												<span>3</span>
+											</label>
+
+											<label class="answer">
+												<input type="radio"
+													name="q_${status.count}"
+													value="3">
+												<span>4</span>
+											</label>
+
+											<label class="answer">
+												<input type="radio"
+													name="q_${status.count}"
+													value="4">
+												<span>5</span>
+											</label>
+
+										</div>
+
+									</div>
+
+								</c:forEach>
+
+								</div>
 							</div>
 
 							<div class="content2">

@@ -62,6 +62,7 @@ public class ReviewServlet extends HttpServlet {
 		
 		// quick用処理
 		
+		//ここまでQuick
 
 		// JSP に渡す
 		request.setAttribute("weekList", weekList);

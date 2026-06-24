@@ -113,3 +113,31 @@ body{
 #tab4:checked ~ .content4 {
     display: block;
 }
+
+/* 質問リスト */
+.question-list{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.question-card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.question-number{
+    color:#2589d0;
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:20px;
+    line-height:1.6;
+}

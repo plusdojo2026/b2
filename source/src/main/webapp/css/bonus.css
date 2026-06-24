@@ -272,19 +272,23 @@ body{
 /*一段階目の背景*/
 .depthView1{
 	position:relative;
-	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(50, 110, 160));
 }
 
 /*二段階目の背景*/
 .depthView2{
 	position:relative;
-	background: linear-gradient(180deg, rgb(37, 91, 146), rgb(37, 91, 146));
+	background: linear-gradient(180deg, rgb(50, 110, 160), rgb(37, 91, 146));
+}
+
+.depthView2 .fish0, .depthView2 .fish1, .depthView2 .fish2, .depthView2 .fish3, .depthView2 .fish4{
+	filter: brightness(0.8);
 }
 
 /*三段階目の背景*/
 .depthView3{
 	position:relative;
-	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+	background: linear-gradient(180deg, rgb(37, 91, 146), rgb(33, 80, 130));
 }
 
 /*四段階目の背景*/

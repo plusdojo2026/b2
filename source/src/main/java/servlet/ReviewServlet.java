@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.WeeklyDAO;
+import dto.UserDTO;
 import dto.WeeklyDTO;
 
 /**
@@ -28,11 +30,17 @@ public class ReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+				HttpSession session = request.getSession();
+				UserDTO user = (UserDTO) session.getAttribute("user");
+				if (user == null) {
+					response.sendRedirect("LoginServlet");
+					return;
+				}
+				int userId = user.getId();
+		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		
-		//リクエストで取得。後でセッションIDからの取得に変更
-		int userId = 1;
 
 		//Daily用処理
 		

@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.WeeklyDAO;
 import dto.DailyDTO;
+import dto.UserDTO;
 import dto.WeeklyDTO;
 
 /**
@@ -29,6 +31,15 @@ public class WeeklyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		if (user == null) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+		int userId = user.getId();
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String weeklyRes = request.getParameter("weeklyRes");
@@ -36,18 +47,18 @@ public class WeeklyServlet extends HttpServlet {
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
 		WeeklyDTO dto = new WeeklyDTO();
-		
-		//テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
+
+		// テスト用毎日記録ダミー登録。後でDailyの方に入れてもらう（insertの後ろ：dao.aggregate(dto);）
 		DailyDTO dDto = new DailyDTO();
 		dDto.setUser_id(1);
 		dao.aggregate(dDto);
 
-		//*ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
+		// *ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
 		dto.setWeeklyRes(weeklyRes);
-		dto.setUser_id(1);
-		
+		dto.setUser_id(userId);
+
 		List<WeeklyDTO> List = dao.select(dto);
-		
+
 		// JSP に渡す
 		request.setAttribute("weekList", List);
 

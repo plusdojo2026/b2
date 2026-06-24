@@ -3,10 +3,10 @@
 -- ※「外部キーあり」のテーブルは最後に作成する
 
 -- データベース作成
-CREATE DATABASE b2;
+-- CREATE DATABASE b2;
 
 -- データベース遷移
-USE b2;
+-- USE b2;
 
 -- テーブル作成(users)
 CREATE TABLE Users(id INT AUTO_INCREMENT PRIMARY KEY, userName varchar(20), pw varchar(20), loginStreak int DEFAULT 0, daysTotalLogin int DEFAULT 0, depthCurrent int DEFAULT 0, currentPos int DEFAULT 1, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
@@ -172,5 +172,5 @@ VALUES
 ('friendliness', '/img/nimo.png', '周囲との良好な関係が築けている状態です。人との交流を大切にしてください。');
 
 
-
-
+-- ユーザー登録
+INSERT INTO Users(userName, pw) VALUES ('user', '01');

@@ -43,83 +43,93 @@ public class BonusServlet extends HttpServlet {
 		//魚(水深)処理
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
-		int depth = loginUser.getDepthCurrent();
+		//int depth = loginUser.getDepthCurrent();
+		int depth = 210;
 		
 		if(depth > 100) {
-			if(depth < 200) {
-				fish1= "img/fish1.png";
+			fish1= "img/fish1.png";
+			fishlist.add(fish1);
+			if(depth > 200) {
+				fish2= "img/Snail.png";
+				fishlist.add(fish2);
 			}
-			if(depth < 300) {
-				fish2= "";
-			}
-			if(depth < 400) {
+			if(depth > 300) {
 				fish3= "";
+				fishlist.add(fish3);
 			}
-			if(depth < 500) {
+			if(depth > 400) {
 				fish4= "";
+				fishlist.add(fish4);
 			}
-			if(depth < 600) {
+			if(depth > 500) {
 				fish5= "";
+				fishlist.add(fish5);
 			}
 		}
 		else if(depth > 600) {
-			if(depth < 700) {
-				fish1= "";
-			}
-			if(depth < 800) {
+			fish1= "";
+			fishlist.add(fish1);
+			if(depth > 700) {
 				fish2= "";
+				fishlist.add(fish2);
 			}
-			if(depth < 900) {
+			if(depth > 800) {
 				fish3= "";
+				fishlist.add(fish3);
 			}
-			if(depth < 1000) {
+			if(depth > 900) {
 				fish4= "";
+				fishlist.add(fish4);
 			}
-			if(depth < 1100) {
+			if(depth > 1000) {
 				fish5= "";
+				fishlist.add(fish5);
 			}
 		}
 		else if(depth > 1100) {
-			if(depth < 1200) {
-				fish1= "";
-			}
-			if(depth < 1300) {
+			fish1= "";
+			fishlist.add(fish1);
+			if(depth > 1200) {
 				fish2= "";
+				fishlist.add(fish2);
 			}
-			if(depth < 1400) {
+			if(depth > 1300) {
 				fish3= "";
+				fishlist.add(fish3);
 			}
-			if(depth < 1500) {
+			if(depth > 1400) {
 				fish4= "";
+				fishlist.add(fish4);
 			}
-			if(depth < 1600) {
+			if(depth > 1500) {
 				fish5= "";
+				fishlist.add(fish5);
 			}
 		}
 		else if(depth > 1600) {
-			if(depth < 1700) {
-				fish1= "";
-			}
-			if(depth < 1800) {
+			fish1= "";
+			fishlist.add(fish1);
+			if(depth > 1700) {
 				fish2= "";
+				fishlist.add(fish2);
 			}
-			if(depth < 1900) {
+			if(depth > 1800) {
 				fish3= "";
+				fishlist.add(fish3);
 			}
-			if(depth < 2000) {
+			if(depth > 1900) {
 				fish4= "";
+				fishlist.add(fish4);
 			}
-			if(depth < 2100) {
+			if(depth > 2000) {
 				fish5= "";
+				fishlist.add(fish5);
 			}
 		}
-
 		
-		fishlist.add(fish1);
-		fishlist.add(fish2);
-		fishlist.add(fish3);
-		fishlist.add(fish4);
-		fishlist.add(fish5);
+		
+		
+		System.out.println(fishlist);
 		
 		request.setAttribute("fishlist", fishlist);
 		

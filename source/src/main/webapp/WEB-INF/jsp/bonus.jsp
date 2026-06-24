@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -67,11 +67,13 @@
 
 
                 <br><br>
-
-                <div class="title">水深チェック</div>
-					<c:forEach var="fish" items="${fishlist}">
-					    <img src="${fish}"><br>
+				
+				<div class="depthView1">
+                	<div class="title depth">水深チェック</div>
+					<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
+					    <img class="fish${s.index} }" src="${fish}">
 					</c:forEach>
+				</div>
 
             </div>
         </div>

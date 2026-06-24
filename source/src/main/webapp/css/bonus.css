@@ -131,15 +131,15 @@ body{
     color: rgb(255, 255, 255);
     margin: 20px auto;
     filter: brightness(1.5);
+    text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
 }
 
 .bonus-title{
-	background-color:orange;
 	color: white;
-	font-size:30px;
+	font-size:24px;
 	margin-left:50px;
-	font-weight: 1000;
-	box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.3);
+	font-weight: 800;
+	text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
 }
 
 .bingo-field{

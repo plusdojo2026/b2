@@ -93,7 +93,7 @@ public class QuestionDAO {
 		double positiveRate = 0;
 		double activeIndex = 0;
 		int emoBalance = 1;
-		int type_id = 0;
+		int typeId = 0;
 		/*
 		 * 感情バランス： 0 = ネガティブ、 1 = 普通、 2 = ポジティブ
 		 */
@@ -229,7 +229,7 @@ public class QuestionDAO {
 
 		// 結果を返す
 		return new AnalysisDTO(
-			type_id,
+			typeId,
 			negativeRate,
 			positiveRate,
 			activeIndex,

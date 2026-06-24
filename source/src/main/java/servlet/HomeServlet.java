@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,9 +16,10 @@ import javax.servlet.http.HttpSession;
 import dao.BonusDAO;
 import dao.TipsDAO;
 import dao.UserDAO;
+import dao.WeeklyDAO;
 import dto.TipsDTO;
 import dto.UserDTO;
-
+import dto.WeeklyDTO;
 
 
 	@WebServlet("/HomeServlet")
@@ -145,6 +147,13 @@ import dto.UserDTO;
 				TipsDTO randomTip = tDao.Rondom();
 				//jspに渡す
 				request.setAttribute("randomTip",randomTip);
+				
+				//週別データに追加
+				int userId = user.getId();
+				WeeklyDAO dao = new WeeklyDAO();
+				List<WeeklyDTO> List = dao.latestSelect(userId);
+				request.setAttribute("weekData", List);
+
 				
 				//ログイン記録を画面表示
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

@@ -153,7 +153,23 @@ INSERT INTO Tips (id, tips) VALUES
 
 
 
+-- タイプ診断
+INSERT INTO RecordType
+(typeRes, resultPicture_id, typeComment)
+VALUES
+('anger', '/img/piranha.png', '怒りの感情が強く表れています。ストレス要因を整理し、休息や気分転換を意識してみましょう。'),
 
+('confuse', '/img/sardine.png', '混乱や迷いが見られます。考えを紙に書き出し、優先順位を整理すると落ち着きやすくなります。'),
+
+('depression-dejection', '/img/mambo.png', '落ち込みや無力感が強い状態です。無理をせず、信頼できる人に相談することも検討してください。'),
+
+('fatigue', '/img/Jellyfish.png', '心身の疲労が蓄積している可能性があります。十分な睡眠と休養を確保しましょう。'),
+
+('tension-anxiety', '/img/neontetra.png', '不安や緊張が高まっています。深呼吸や軽い運動などでリラックスする時間を作りましょう。'),
+
+('vigor-activity', '/img/koi.png', '活力に満ちた状態です。今の勢いを活かして新しいことに挑戦してみましょう。'),
+
+('friendliness', '/img/nimo.png', '周囲との良好な関係が築けている状態です。人との交流を大切にしてください。');
 
 
 

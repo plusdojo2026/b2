@@ -14,11 +14,12 @@
 </head>
 <body>
 	<h1>毎日記録</h1>
-    <form method="POST" action="/b2/DailyServlet" id="form">
+    <form method="POST" action="${pageContext.request.contextPath}/DailyServlet" id="form">
+		<input type="hidden" name="user_id" value="1">
+
 		<div>
 			<label class="label">感情タグ</label><br>
 			<label>
-				<input type="hidden" name="qType_${status.count}" value="${q.qType}">
 				<input type="radio" name="emotion_id" value="1">怒り
 			</label>
 			<label>
@@ -44,37 +45,54 @@
 			</label>
 		</div>
 
-		<div>			
-			<table border="1">
-				<c:forEach var="q" items="${qList}" varStatus="status">
-					<tr>
-						<td>
-							<input type="hidden" name="qType_${status.count}" value="${q.qType}">
-							<input type="hidden" name="user_id" value="1">
-						</td>
-						<td>Q.${status.count}</td>
-						<td>${q.question}</td>
-						<td>
-							<label>
-								<input type="radio" name="q_${status.count}" value="0">1
-							</label>
-							<label>
-								<input type="radio" name="q_${status.count}" value="1">2
-							</label>
-							<label>
-							<input type="radio" name="q_${status.count}" value="2">3
-							</label>
-							<label>
-								<input type="radio" name="q_${status.count}" value="3">4
-							</label>
-							<label>
-								<input type="radio" name="q_${status.count}" value="4">5
-							</label>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+		<div class="tab">
+
+			<!-- タブボタン -->
+			<input type="radio" id="tab1" name="tab" checked>
+			<label for="tab1">質問</label>
+
+			<input type="radio" id="tab2" name="tab">
+			<label for="tab2">タブ2</label>
+
+			<!-- コンテンツ -->
+			<div class="content1">
+				<table border="1">
+					<c:forEach var="q" items="${qList}" varStatus="status">
+						<tr>
+							<td>
+								<input type="hidden" name="qType_${status.count}" value="${q.qType}">
+							</td>
+							<td>Q.${status.count}</td>
+							<td>${q.question}</td>
+							<td>
+								<label>
+									<input type="radio" name="q_${status.count}" value="0">1
+								</label>
+								<label>
+									<input type="radio" name="q_${status.count}" value="1">2
+								</label>
+								<label>
+								<input type="radio" name="q_${status.count}" value="2">3
+								</label>
+								<label>
+									<input type="radio" name="q_${status.count}" value="3">4
+								</label>
+								<label>
+									<input type="radio" name="q_${status.count}" value="4">5
+								</label>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+
+			<div class="content2">
+				<label class="label">自由入力</label><br>
+				<input type="text" name="freeForm" class="daily" placeholder="ランダムテーマに沿って自由に入力" >
+			</div>
+
 		</div>
+
 
 <%@ page import="java.util.List" %>
 <%@ page import="dto.QuestionDTO" %>
@@ -86,12 +104,6 @@ List<QuestionDTO> qList =
 
 <%= qList.get(0).getQType() %>
 
-
-
-	    <div>
-			<label class="label">自由入力</label><br>
-			<input type="text" name="freeForm" class="daily" placeholder="ランダムテーマに沿って自由に入力" >
-		</div>
 		
 		<div>
 			<label class="label">写真入力(仮)</label><br>

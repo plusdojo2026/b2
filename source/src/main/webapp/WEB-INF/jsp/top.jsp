@@ -9,23 +9,26 @@
 <title>トップページ</title>
 </head>
 <body>
-<div class="flexbox">
-            <div class="leftScreen"></div>
- <div class="rightScreen"> 
-<img src="${pageContext.request.contextPath}/img/logo.png" class=logo>
+<img src="${pageContext.request.contextPath}/img/logo.png" class="logo">
+<div class="hero">
+<img src="${pageContext.request.contextPath}/img/top_clione.png" class="top_clione">	
+<div class="content">
+<c:if test="${empty sessionScope.user}">
 <form method="POST" action="${pageContext.request.contextPath}/TopServlet">
 	<input type="submit" name="register" value="新規登録" class="btn--red btn--cubic btn--radius">
-	<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius"><br>
-	<img src="${pageContext.request.contextPath}/img/top_clione.png" class=top_clione>			
+	<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius"><br>			
 </form>
+</c:if>
+
 <p>
 ココロノナミとは？<br>
 〇選べる2つの記録モード<br>
-簡易記録：好きなタイミングで自由にメモ。<br>認知行動療法に基づいた「ABCモデル」のテンプレートも使えます。<br>
-毎日記録：その日の感情を選び、質問に答えたり、ポジティブな出来事を書き留めたりして記録します。<br>
-〇充実の振り返り機能<br>
-日別・週別レビュー：過去の記録をいつでも簡単に見直せます。<br>
-感情のグラフ化：週別ページでは、1週間の気持ちの浮き沈みがグラフで視覚的に分かります。<br>
+簡易記録では好きなタイミングで自由にメモ。<br>認知行動療法に基づいた「ABCモデル」のテンプレートも使えます。<br>
+毎日記録ではその日の感情を選び、質問に答えたり、<br>
+ポジティブな出来事を書き留めたりして記録します。<br>
+<br>〇充実の振り返り機能<br>
+日別・週別レビューでは過去の記録をいつでも簡単に見直せます。<br>
+感情のグラフ化で1週間の気持ちの浮き沈みがグラフで視覚的に分かります。<br>
 </p>
 </div>
 </div>

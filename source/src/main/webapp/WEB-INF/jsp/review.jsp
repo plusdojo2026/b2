@@ -38,11 +38,11 @@
 				<c:out value="${e.weeklyRes}" />
 			</h1>
 			<!-- グラフ表示 -->
-				<div class="chart-container">
+			<div class="chart-container">
 				
 					<canvas id="myLineChart"></canvas>
-				</div>
-				<script>
+			</div>
+			<script>
 				  const labels = [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
 				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
@@ -58,22 +58,40 @@
 				      ${d.negativeRate * 100}${!t.last ? ',' : ''}
 				    </c:forEach>
 				  ];
-				</script>
-				<script
+			</script>
+			<script
 					src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-				<script src="${pageContext.request.contextPath}/js/review.js"></script>
-				<!-- グラフ表示終わり -->
-				<!-- 週間結果リスト -->
-				<div class="weekList">
-					<c:forEach var="week" items="${weekList}">
-						<table class="weekTable">
-							<tr><td class="weekPeriod"><a href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
-										${week.weeklyRes} </a></td>
+			<script src="${pageContext.request.contextPath}/js/review.js"></script>
+			<!-- グラフ表示終わり -->
+			<!-- 週間結果リスト -->
+			<div class="weekList">
+				<c:forEach var="week" items="${weekList}">
+					<table class="weekTable">
+						<tr><td class="weekPeriod"><a href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
+									${week.weeklyRes} </a></td>
 
 								<td class="weekComment">
 									${week.analysisCmt.substring(0,20)}...</td></tr></table>
-					</c:forEach></div></div>
+				</c:forEach></div>
+				<!-- 週間ページング -->
+				<div class="pagination">
+				
+						<c:if test="${weekPage > 1}">
+							<a href="?weekPage=${weekPage - 1}">← 前へ</a>
+						</c:if>
+
+						<c:forEach var="i" begin="1" end="${totalWeekPage}">
+							<a href="?weekPage=${i}"
+								style="${i == weekPage ? 'font-weight:bold;' : ''}"> ${i} </a>
+						</c:forEach>
+
+						<c:if test="${weekPage < totalWeekPage}">
+							<a href="?weekPage=${weekPage + 1}">次へ →</a>
+						</c:if>
+
 					</div>
+				</div>
+</div>
 
   <!-- 簡易記録 -->
   <div class="content-quick"></div>

@@ -100,7 +100,7 @@ INSERT INTO Question(id, question, qType) VALUES(13,'人との関わりが心地
 INSERT INTO Question(id, question, qType) VALUES(14,'周囲に対して優しく接したい気持ちが自然にあった', 7);
 
 
---tips
+-- tips
 
 INSERT INTO Tips (id, tips) VALUES
 (1, '魚は種類によって寝方が違い、ベラは粘液の寝袋を作り、サメは泳ぎながら眠る。'),

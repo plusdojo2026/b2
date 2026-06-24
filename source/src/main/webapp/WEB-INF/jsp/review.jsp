@@ -16,115 +16,88 @@
 		<div class="leftScreen"></div>
 		<!-- メインコンテンツ -->
 		<div class="rightScreen">
-			<!-- 週間結果 -->
+		
+<div class="tab-3">
+
+  <input type="radio" id="tab-daily" name="tab-3" checked>
+  <label for="tab-daily">毎日記録</label>
+
+  <input type="radio" id="tab-week" name="tab-3">
+  <label for="tab-week">週間結果</label>
+
+  <input type="radio" id="tab-quick" name="tab-3">
+  <label for="tab-quick">簡易記録</label>
+
+<!-- 毎日記録 -->
+  <div class="content-daily"></div>
+
+<!-- 週間結果 -->
+  <div class="content-week">
 			<c:set var="e" value="${weekList[0]}" />
 			<h1 class="period">
 				<c:out value="${e.weeklyRes}" />
 			</h1>
-
+			<!-- グラフ表示 -->
 			<div class="chart-container">
-				<canvas id="myLineChart"></canvas>
+				
+					<canvas id="myLineChart"></canvas>
 			</div>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
 			<script>
-var ctx = document.getElementById("myLineChart");
-
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-	  labels: [
-		    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-		      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
-		    </c:forEach>
-		  ],
-    datasets: [
-      {
-        label: 'ポジティブ率',
-        data: [
-          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-            ${d.positiveRate * 100}${!s.last ? ',' : ''}
-          </c:forEach>
-        ],
-        borderColor: "rgba(255,0,0,1)",
-        backgroundColor: "rgba(0,0,0,0)"
-      },
-      {
-        label: 'ネガティブ率',
-        data: [
-          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
-            ${d.negativeRate * 100}${!t.last ? ',' : ''}
-          </c:forEach>
-        ],
-        borderColor: "rgba(0,0,255,1)",
-        backgroundColor: "rgba(0,0,0,0)"
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'ポジティブ率とネガティブ率の遷移'
-    },
-    responsive: true,
-    maintainAspectRatio: false, 
-    scales: {
-      yAxes: [{
-        ticks: {
-          suggestedMax: 100,
-          suggestedMin: 0,
-          stepSize: 10,
-          callback: function(value){
-            return value + '%'
-          }
-        }
-      }]
-    }
-  }
-});
-</script>
-
+				  const labels = [
+				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    </c:forEach>
+				  ];
+				  const positive = [
+				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
+				      ${d.positiveRate * 100}${!s.last ? ',' : ''}
+				    </c:forEach>
+				  ];
+				  const negative = [
+				    <c:forEach var="d" items="${e.dailyList}" varStatus="t">
+				      ${d.negativeRate * 100}${!t.last ? ',' : ''}
+				    </c:forEach>
+				  ];
+			</script>
+			<script
+					src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+			<script src="${pageContext.request.contextPath}/js/review.js"></script>
+			<!-- グラフ表示終わり -->
+			<!-- 週間結果リスト -->
 			<div class="weekList">
 				<c:forEach var="week" items="${weekList}">
 					<table class="weekTable">
-
-						<tr>
-							<td class="weekPeriod"><a
-								href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
+						<tr><td class="weekPeriod"><a href="WeeklyServlet?weeklyRes=${week.weeklyRes}">
 									${week.weeklyRes} </a></td>
 
-							<td class="weekComment">
-								${week.analysisCmt.substring(0,20)}...</td>
-						</tr>
-					</table>
-				</c:forEach>
-			</div>
-			<div class="pagination">
-				<c:if test="${currentPage > 1}">
-    &lt; 前へ
-  </c:if>
-				<c:forEach var="i" begin="1" end="${totalPage}">
+								<td class="weekComment">
+									${week.analysisCmt.substring(0,20)}...</td></tr></table>
+				</c:forEach></div>
+				<!-- 週間ページング -->
+				<div class="pagination">
+				
+						<c:if test="${weekPage > 1}">
+							<a href="?weekPage=${weekPage - 1}">← 前へ</a>
+						</c:if>
 
-					<c:choose>
-						<c:when test="${i == currentPage}">
-							<span>${i}</span>
-						</c:when>
+						<c:forEach var="i" begin="1" end="${totalWeekPage}">
+							<a href="?weekPage=${i}"
+								style="${i == weekPage ? 'font-weight:bold;' : ''}"> ${i} </a>
+						</c:forEach>
 
-						<c:otherwise>
-        ${i}
-      </c:otherwise>
+						<c:if test="${weekPage < totalWeekPage}">
+							<a href="?weekPage=${weekPage + 1}">次へ →</a>
+						</c:if>
 
-					</c:choose>
+					</div>
+				</div>
+</div>
 
-				</c:forEach>
-				<c:if test="${currentPage < totalPage}">
-    次へ &gt;
-  </c:if>
+  <!-- 簡易記録 -->
+  <div class="content-quick"></div>
 
-			</div>
-		</div>
-	</div>
+</div></div>
+
 
 </body>
 </html>

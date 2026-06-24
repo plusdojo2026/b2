@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.WeeklyDAO;
+import dto.UserDTO;
 import dto.WeeklyDTO;
 
 /**
@@ -28,23 +30,44 @@ public class ReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+				HttpSession session = request.getSession();
+				UserDTO user = (UserDTO) session.getAttribute("user");
+				if (user == null) {
+					response.sendRedirect("LoginServlet");
+					return;
+				}
+				int userId = user.getId();
+		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		//リクエストで取得。後で
-		int page =1;
 
-		// とある週のデータを取得
-		WeeklyDAO dao = new WeeklyDAO();
-
-		//*ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
-		List<WeeklyDTO> List = dao.selectAll(1, 1);
+		//Daily用処理
 		
+		
+		// Weekly用処理
+		int weekPage = 1;
+		if (request.getParameter("weekPage") != null) {
+			weekPage = Integer.parseInt(request.getParameter("weekPage"));
+		}
+		WeeklyDAO dao = new WeeklyDAO();
+		// データ取得
+		List<WeeklyDTO> weekList = dao.selectAll(userId, weekPage);
+		// 総件数
+		int totalCount = dao.countAll(userId);
+		// ページ計算
+		int limit = 5;
+		int totalWeekPage = (int) Math.ceil((double) totalCount / limit);
+		
+		// quick用処理
+		
+
 		// JSP に渡す
-		request.setAttribute("weekList", List);
-		request.setAttribute("currentPage", page);
+		request.setAttribute("weekList", weekList);
+		request.setAttribute("weekPage", weekPage);
+		request.setAttribute("totalWeekPage", totalWeekPage);
 
-
-	// 振り返りページにフォワードする
+		// 振り返りページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/review.jsp");
 		dispatcher.forward(request, response);
 	}

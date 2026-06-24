@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyDTO implements Serializable {
-	private int id;							// ID
-	private int user_id;					// USER_ID
-	private String weeklyRes;		// 週期間
-	private String analysisCmt;	// 分析コメント
-	private double avgPositive;	// 平均ポジティブ率
-	private String moodType;		// 気分の浮き沈み
-	private String created_at;		// 登録日
-	private List<DailyDTO> dailyList;
+	private int id;									// ID
+	private int user_id;							// USER_ID
+	private String weeklyRes;				// 週期間
+	private String analysisCmt;			// 分析コメント
+	private double avgPositive;			// 平均ポジティブ率
+	private String moodType;				// 気分の浮き沈み
+	private String created_at;				// 登録日
+	private List<DailyDTO> dailyList; //その週の日別データ
 
 	public WeeklyDTO(int id, int user_id,  String weeklyRes, String analysisCmt, double avgPositive, String moodType, String created_at, List<DailyDTO> dailyList) {
 		super();

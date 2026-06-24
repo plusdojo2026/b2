@@ -223,3 +223,125 @@ body{
     }
 }
 
+
+.fish0{
+	position: absolute;
+	top:150px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+.fish1{
+	position: absolute;
+	top:450px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swimturn 35s ease-out infinite;
+}
+
+.fish2{
+	position: absolute;
+	top:750px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 35s ease-out infinite;
+}
+
+.fish3{
+	position: absolute;
+	top:1050px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+.fish4{
+	position: absolute;
+	top:1350px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+/*一段階目の背景*/
+.depthView1{
+	position:relative;
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(50, 110, 160));
+}
+
+/*二段階目の背景*/
+.depthView2{
+	position:relative;
+	background: linear-gradient(180deg, rgb(50, 110, 160), rgb(37, 91, 146));
+}
+
+.depthView2 .fish0, .depthView2 .fish1, .depthView2 .fish2, .depthView2 .fish3, .depthView2 .fish4{
+	filter: brightness(0.8);
+}
+
+/*三段階目の背景*/
+.depthView3{
+	position:relative;
+	background: linear-gradient(180deg, rgb(37, 91, 146), rgb(33, 80, 130));
+}
+
+/*四段階目の背景*/
+.depthView4{
+	position:relative;
+	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(37, 91, 146));
+}
+
+.depth{
+	height:1500px;
+}
+
+@keyframes swim{
+	0%{
+		left:10%;
+	}
+	49%{
+		transform: rotateY(0);
+	}
+	50%{
+        left:90%;
+		transform: rotateY(180deg);
+	}
+	99%{
+		transform: rotateY(180deg);
+	}
+	
+	100%{
+		transform: rotateY(0deg);
+		left:10%;
+	}
+}
+
+@keyframes swimturn{
+	0%{
+		left:90%;
+	}
+	49%{
+		transform: rotateY(0);
+	}
+	50%{
+        left:10%;
+		transform: rotateY(180deg);
+	}
+	99%{
+		transform: rotateY(180deg);
+	}
+	
+	100%{
+		transform: rotateY(0deg);
+		left:90%;
+	}
+}
+
+
+

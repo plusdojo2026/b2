@@ -134,6 +134,140 @@ public class WeeklyDAO {
 		return weekList;
 	}
 	
+	public List<WeeklyDTO> latestSelect(int userId) {
+		Connection conn = null;
+		List<WeeklyDTO> weekList = new ArrayList<WeeklyDTO>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			
+			String latestSql =
+				    "SELECT weeklyRes FROM WeekRes " +
+				    "WHERE user_id = ? " +
+				    "ORDER BY created_at DESC LIMIT 1";
+
+				PreparedStatement latestStmt = conn.prepareStatement(latestSql);
+				latestStmt.setInt(1, userId);
+
+				ResultSet latestRs = latestStmt.executeQuery();
+
+				String weeklyRes = null;
+
+				if (latestRs.next()) {
+				    weeklyRes = latestRs.getString("weeklyRes");
+				}
+				// null対策
+				if (weeklyRes == null) {
+					return weekList;
+				}
+
+			String yearweek = weeklyRes.split("~")[0];
+			//LocalDateに変換
+			LocalDate date = LocalDate.parse(yearweek);
+
+			//年・月・日を取り出す
+			int year = date.getYear();
+			int month = date.getMonthValue();
+			int day = date.getDayOfMonth();
+			LocalDate date2 = LocalDate.of(year, month, day);
+
+			//年とISO週番号を出す
+			WeekFields wf = WeekFields.ISO;
+			int yearNum = date2.get(wf.weekBasedYear());
+			int weekNum = date2.get(wf.weekOfWeekBasedYear());
+
+			//YYYYWWに変換
+			String StYearWeek = String.format("%d%02d", yearNum, weekNum);
+			int yearWeek = Integer.parseInt(StYearWeek);
+
+			String sqlDay = "SELECT * FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
+
+				PreparedStatement pStmtDay = conn.prepareStatement(sqlDay);
+				pStmtDay.setInt(1, userId);
+				pStmtDay.setInt(2, yearWeek);
+
+				ResultSet rsDay = pStmtDay.executeQuery();
+
+				List<DailyDTO> dailyList = new ArrayList<>();
+				while (rsDay.next()) {
+				    DailyDTO daily = new DailyDTO();
+
+				    daily.setId(rsDay.getInt("id"));
+				    daily.setUser_id(rsDay.getInt("user_id"));
+				    daily.setFreeForm(rsDay.getString("freeForm"));
+				    daily.setPhoto(rsDay.getString("photo"));
+				    daily.setPositive(rsDay.getString("positive"));
+				    daily.setEmotion_id(rsDay.getInt("emotion_id"));
+				    daily.setType_id(rsDay.getInt("type_id"));
+				    daily.setNegativeRate(rsDay.getDouble("negativeRate"));
+				    daily.setPositiveRate(rsDay.getDouble("positiveRate"));
+				    daily.setActiveIndex(rsDay.getDouble("activeIndex"));
+				    daily.setYearWeek(rsDay.getInt("yearWeek"));
+				    dailyList.add(daily);
+				}
+			
+			// SQL文を準備する
+			String sqlWeek = "SELECT wr.id, wr.user_id, wr.weeklyRes, wr.avgPositive, "
+					+ "wc.analysisCmt, ms.moodType, wr.created_at "
+					+ "FROM WeekRes wr "
+					+ "JOIN WeekCmt wc ON wr.weekCmt_id = wc.id "
+					+ "JOIN MoodSwings ms ON wr.moodSwings_id = ms.id "
+					+ "WHERE wr.weeklyRes = ? AND wr.user_id = ?";
+			
+			PreparedStatement pStmtWeek = conn.prepareStatement(sqlWeek);
+			
+			//SQL文を完成させる//pStmt.setInt(1, weeklyRes);
+			pStmtWeek.setString(1, weeklyRes);
+			pStmtWeek.setInt(2, userId);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmtWeek.executeQuery();
+
+			while (rs.next()) {
+
+			    WeeklyDTO weekly = new WeeklyDTO(
+			        rs.getInt("id"),
+			        rs.getInt("user_id"),
+			        rs.getString("weeklyRes"),
+			        rs.getString("analysisCmt"),
+			        rs.getDouble("avgPositive"),
+			        rs.getString("moodType"),
+			        rs.getString("created_at"),
+			        new ArrayList<>(dailyList)
+			    );
+
+			    weekList.add(weekly);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			weekList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			weekList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					weekList = null;
+				}
+			}
+		}
+		
+		// 結果を返す
+		return weekList;
+	}
+	
 	//毎日記録登録時に該当の日が含まれる週間のDBに更新・新規作成を入れるメソッド
 	public boolean aggregate(DailyDTO daily) {
 		Connection conn = null;

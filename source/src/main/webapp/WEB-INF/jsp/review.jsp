@@ -33,15 +33,12 @@
 
 <!-- 週間結果 -->
   <div class="content-week">
-			<c:set var="e" value="${weekList[0]}" />
+			<c:set var="e" value="${latestWeek[0]}" />
 			<h1 class="period">
 				<c:out value="${e.weeklyRes}" />
 			</h1>
 			<!-- グラフ表示 -->
-			<div class="chart-container">
-				
-					<canvas id="myLineChart"></canvas>
-			</div>
+			<div class="chart-container"><canvas id="myLineChart"></canvas></div>
 			<script>
 				  const labels = [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
@@ -59,8 +56,7 @@
 				    </c:forEach>
 				  ];
 			</script>
-			<script
-					src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 			<script src="${pageContext.request.contextPath}/js/review.js"></script>
 			<!-- グラフ表示終わり -->
 			<!-- 週間結果リスト -->

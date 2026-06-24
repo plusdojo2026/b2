@@ -159,7 +159,10 @@
 	        })
 	        .then(res => res.text())
 	        .then(result => {
-	            console.log("サーブレットからの返答:", result);
+	        	//ビンゴで取得した画像のパスをsrcに入れる
+	        	const img = document.getElementById("bingoimg");
+	            img.src = result;
+	            //console.log("サーブレットからの返答:", result);
 	        });	
 	        
 	        //ビンゴ演出

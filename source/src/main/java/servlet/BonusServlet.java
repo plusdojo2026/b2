@@ -223,9 +223,7 @@ public class BonusServlet extends HttpServlet {
 				fishName = "";
 			}
 		}
-		
-		request.setAttribute("getfish", fishName);
 
-        response.getWriter().write("OK");
+        response.getWriter().write(fishName);
 	}
 }

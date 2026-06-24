@@ -11,21 +11,13 @@
 <body>
 <div class="flexbox">
             <div class="leftScreen"></div>
- <div class="rightScreen">  
-<h1>ココロノナミ</h1>
-<img src="${pageContext.request.contextPath}/img/.png">
+ <div class="rightScreen"> 
+<img src="${pageContext.request.contextPath}/img/logo.png" class=logo>
 <form method="POST" action="${pageContext.request.contextPath}/TopServlet">
 	<input type="submit" name="register" value="新規登録" class="btn--red btn--cubic btn--radius">
 	<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius"><br>
-	<img src="${pageContext.request.contextPath}/img/.png">			
+	<img src="${pageContext.request.contextPath}/img/top_clione.png" class=top_clione>			
 </form>
-
-<p>
-	こころの状態を記録、管理。<br>
-	その日の精神状態を記録、分析。<br>
-	瞬間的な感情を書き出すことで安心。<br>
-	認知行動療法により考え方をかえてみよう。<br>
-</p>
 <p>
 ココロノナミとは？<br>
 〇選べる2つの記録モード<br>

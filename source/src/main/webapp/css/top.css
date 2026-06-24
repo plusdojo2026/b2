@@ -1,8 +1,23 @@
 @charset "UTF-8";
 
 body {
-  background-color: lightblue;
+  background-color:#f0f8ff;
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
 }
+
+.top_clione {
+  width: 500px;
+  height: auto;
+}
+
+.logo{
+	width: 500px;
+  height: auto;
+}
+
+
 
 /* 親要素：アイコンを絶対配置するための基準点 */
 .btn-container {

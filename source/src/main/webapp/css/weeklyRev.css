@@ -59,33 +59,6 @@
 .analysisCmt {
 	padding: 15px;
 }
-
-/*振り返りなのであとでそっちに移す*/
-.weekList {
-	margin: 20px;
-	margin-top: 40px;
-	max-width: 80%;
-	justify-content: center;
-}
-
-.weekTable {
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-}
-
-
-.weekTable td {
-  border: 1px solid #000;
-  padding: 5px;
-}
-
-.weekPeriod {
-  white-space: nowrap;
-  width: 3%;
-}
-
 /**/
 *{
     box-sizing: border-box;

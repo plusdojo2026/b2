@@ -30,6 +30,8 @@ public class ReviewServlet extends HttpServlet {
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+		//リクエストで取得。後で
+		int page =1;
 
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
@@ -39,6 +41,7 @@ public class ReviewServlet extends HttpServlet {
 		
 		// JSP に渡す
 		request.setAttribute("weekList", List);
+		request.setAttribute("currentPage", page);
 
 
 	// 振り返りページにフォワードする

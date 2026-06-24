@@ -70,6 +70,9 @@
 				
 				<div class="depthView${depth <= 600 ? '1' : depth <= 1100 ? '2' : depth <= 1600 ? '3' : '4'} }">
                 	<div class="title depth">水深チェック</div>
+                		<div class="depth-current">
+                    		<h2>現在の水深<span class="depth-length">${depth}<span class="m">　M</span></span></h2>
+                		</div>
 					<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
 					    <img class="fish${s.index} }" src="${fish}">
 					</c:forEach>

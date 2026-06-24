@@ -53,7 +53,6 @@ public class WeeklyServlet extends HttpServlet {
 		dDto.setUser_id(1);
 		dao.aggregate(dDto);
 
-		// *ここで渡す期間とユーザーIDを指定*振り返り画面作ったあとに要変更！！
 		dto.setWeeklyRes(weeklyRes);
 		dto.setUser_id(userId);
 

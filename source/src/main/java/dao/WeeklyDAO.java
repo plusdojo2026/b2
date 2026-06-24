@@ -286,15 +286,17 @@ public class WeeklyDAO {
 	       //その日が属す週の各データをとってくる
 	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 	        
-	       PreparedStatement pStmt = conn.prepareStatement(sql);
-
-	       pStmt.setInt(1, daily.getUser_id());
-	       pStmt.setInt(2, daily.getYearWeek());
 
 	       // 空Listを用意
 	       List<Double> positiveRate = new ArrayList<>();
 	       List<Double> negativeRate = new ArrayList<>();
 	       List<Double> activeIndex = new ArrayList<>();
+	       
+	       try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+	       pStmt.setInt(1, daily.getUser_id());
+	       pStmt.setInt(2, daily.getYearWeek());
+
 	       try (ResultSet rs = pStmt.executeQuery()) {
 	       // 1行ずつ取り出してListに追加
 	       while (rs.next()) {
@@ -307,7 +309,7 @@ public class WeeklyDAO {
 	    	   return false;
 	       }
 
-	       }
+	       }}
 	        //平均ポジティブ率(double)//*100のパーセント変換いらない？後で調整。
 			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
 			//平均ネガティブ率(double)
@@ -365,34 +367,41 @@ public class WeeklyDAO {
 	        LocalDate end = start.plusDays(6);
 	        String weeklyRes = start + "~" + end;
 
-	        //BEGIN
+
 	        conn.setAutoCommit(false);
+	     // UPDATE
+	     String sqlUpdate = "UPDATE WeekRes SET weekCmt_id = ?, avgPositive = ?, moodSwings_id = ? "
+	                      + "WHERE user_id = ? AND weeklyRes = ?";
 
-	        //DELETE
-	        String sqlDelete = "DELETE FROM WeekRes WHERE weeklyRes = ? AND user_id = ?";
+	     int updated = 0;
 
-			try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
-				ps.setString(1, weeklyRes);
-				ps.setInt(2, daily.getUser_id());
-	            ps.executeUpdate();
-	        }
+	     try (PreparedStatement ps = conn.prepareStatement(sqlUpdate)) {
+	         ps.setInt(1, analysisCmt);
+	         ps.setDouble(2, avgPositive);
+	         ps.setInt(3, moodType);
+	         ps.setInt(4, daily.getUser_id());
+	         ps.setString(5, weeklyRes);
+	         updated = ps.executeUpdate();
+	     }
+	     
 
-	        //INSERT
-	        String sqlInsert = "INSERT INTO WeekRes (user_id, weeklyRes, weekCmt_id, avgPositive, moodSwings_id, created_at) "
-	                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+	     // UPDATE件数が0ならINSERT
+	     if (updated == 0) {
+	         String sqlInsert = "INSERT INTO WeekRes (user_id, weeklyRes, weekCmt_id, avgPositive, moodSwings_id, created_at) "
+	                          + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
-	        try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-	        	ps.setInt(1, daily.getUser_id());
-	            ps.setString(2, weeklyRes);
-				ps.setInt(3, analysisCmt);
-				ps.setDouble(4, avgPositive);
-				ps.setInt(5, moodType);
-	            ps.executeUpdate();
-	        }
+	         try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
+	             ps.setInt(1, daily.getUser_id());
+	             ps.setString(2, weeklyRes);
+	             ps.setInt(3, analysisCmt);
+	             ps.setDouble(4, avgPositive);
+	             ps.setInt(5, moodType);
+	             ps.executeUpdate();
+	         }
+	     }
+	     conn.commit();
+	     result = true;
 
-	        //COMMIT
-	        conn.commit();
-	        result = true;
 
 
 		} catch (SQLException e) {

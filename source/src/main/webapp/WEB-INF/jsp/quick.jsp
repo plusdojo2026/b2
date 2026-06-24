@@ -96,5 +96,6 @@
 
 		</div>
 		<script src="bonus.js"></script>
+		</div>
 </body>
 </html>

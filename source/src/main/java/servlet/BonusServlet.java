@@ -44,41 +44,41 @@ public class BonusServlet extends HttpServlet {
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
 		//int depth = loginUser.getDepthCurrent();
-		int depth = 610;
+		int depth = 1210;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";
 			fishlist.add(fish1);
 			if(depth > 200) {
-				fish2= "img/Snail.png";
+				fish2= "img/fish2.png";
 				fishlist.add(fish2);
 			}
 			if(depth > 300) {
-				fish3= "";
+				fish3= "img/fish3.png";
 				fishlist.add(fish3);
 			}
 			if(depth > 400) {
-				fish4= "";
+				fish4= "img/fish4.png";
 				fishlist.add(fish4);
 			}
 			if(depth > 500) {
-				fish5= "";
+				fish5= "img/fish5.png";
 				fishlist.add(fish5);
 			}
 		}
 		else if(depth <= 1100) {
-			fish1= "";
+			fish1= "img/fish6.png";
 			fishlist.add(fish1);
 			if(depth > 700) {
-				fish2= "";
+				fish2= "img/fish7.png";
 				fishlist.add(fish2);
 			}
 			if(depth > 800) {
-				fish3= "";
+				fish3= "img/fish8.png";
 				fishlist.add(fish3);
 			}
 			if(depth > 900) {
-				fish4= "";
+				fish4= "img/fish9.png";
 				fishlist.add(fish4);
 			}
 			if(depth > 1000) {
@@ -87,7 +87,7 @@ public class BonusServlet extends HttpServlet {
 			}
 		}
 		else if(depth <= 1600) {
-			fish1= "";
+			fish1= "img/fish1.png";
 			fishlist.add(fish1);
 			if(depth > 1200) {
 				fish2= "";
@@ -107,7 +107,7 @@ public class BonusServlet extends HttpServlet {
 			}
 		}
 		else {
-			fish1= "";
+			fish1= "img/fish1.png";
 			fishlist.add(fish1);
 			if(depth > 1700) {
 				fish2= "";

@@ -9,15 +9,15 @@
 <title>トップページ</title>
 </head>
 <body>
-<div class="flexbox">
-            <div class="leftScreen"></div>
- <div class="rightScreen"> 
-<img src="${pageContext.request.contextPath}/img/logo.png" class=logo>
+<div class="hero">
+<img src="${pageContext.request.contextPath}/img/top_clione.png" class="top_clione">	
+<div class="content">
 <form method="POST" action="${pageContext.request.contextPath}/TopServlet">
 	<input type="submit" name="register" value="新規登録" class="btn--red btn--cubic btn--radius">
 	<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius"><br>
-	<img src="${pageContext.request.contextPath}/img/top_clione.png" class=top_clione>			
+			
 </form>
+
 <p>
 ココロノナミとは？<br>
 〇選べる2つの記録モード<br>

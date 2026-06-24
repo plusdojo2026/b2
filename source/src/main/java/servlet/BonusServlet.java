@@ -44,9 +44,9 @@ public class BonusServlet extends HttpServlet {
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
 		//int depth = loginUser.getDepthCurrent();
-		int depth = 210;
+		int depth = 610;
 		
-		if(depth > 100) {
+		if(depth <= 600) {
 			fish1= "img/fish1.png";
 			fishlist.add(fish1);
 			if(depth > 200) {
@@ -66,7 +66,7 @@ public class BonusServlet extends HttpServlet {
 				fishlist.add(fish5);
 			}
 		}
-		else if(depth > 600) {
+		else if(depth <= 1100) {
 			fish1= "";
 			fishlist.add(fish1);
 			if(depth > 700) {
@@ -86,7 +86,7 @@ public class BonusServlet extends HttpServlet {
 				fishlist.add(fish5);
 			}
 		}
-		else if(depth > 1100) {
+		else if(depth <= 1600) {
 			fish1= "";
 			fishlist.add(fish1);
 			if(depth > 1200) {
@@ -106,7 +106,7 @@ public class BonusServlet extends HttpServlet {
 				fishlist.add(fish5);
 			}
 		}
-		else if(depth > 1600) {
+		else {
 			fish1= "";
 			fishlist.add(fish1);
 			if(depth > 1700) {
@@ -132,6 +132,7 @@ public class BonusServlet extends HttpServlet {
 		System.out.println(fishlist);
 		
 		request.setAttribute("fishlist", fishlist);
+		request.setAttribute("depth", depth);
 		
 		//ビンゴの内容を取得
 		BonusDAO bonus = new BonusDAO();

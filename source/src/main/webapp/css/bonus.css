@@ -281,6 +281,10 @@ body{
 	background: linear-gradient(180deg, rgb(37, 91, 146), rgb(37, 91, 146));
 }
 
+.depthView2 .fish0, .depthView2 .fish1, .depthView2 .fish2, .depthView2 .fish3, .depthView2 .fish4{
+	filter: brightness(0.8);
+}
+
 /*三段階目の背景*/
 .depthView3{
 	position:relative;

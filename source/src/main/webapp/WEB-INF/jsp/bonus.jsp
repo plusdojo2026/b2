@@ -75,7 +75,7 @@
                     		<h2>現在の水深<span class="depth-length">${depth}<span class="m">　M</span></span></h2>
                 		</div>
 					<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
-					    <img class="fish${s.index} }" src="${fish}">
+					    <div><img class="fish${s.index} }" src="${fish}"></div>
 					</c:forEach>
 				</div>
 

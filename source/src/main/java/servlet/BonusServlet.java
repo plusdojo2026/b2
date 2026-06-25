@@ -174,12 +174,18 @@ public class BonusServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String bC = request.getParameter("bingoCount");
         
+        
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+		
+		String bC = request.getParameter("bingoCount");
+		
+		int user_id = loginUser.getId();
+		//int user_id = 1;
         
 		if(bC != null) {
 			int count = Integer.parseInt(bC);
-			int user_id = 1;
 			BonusDAO bonus = new BonusDAO();
 			boolean res = bonus.setCount(count,user_id);
 			if(res==false){
@@ -189,10 +195,6 @@ public class BonusServlet extends HttpServlet {
 		
 		String fishName = "";
 		
-		HttpSession session = request.getSession();
-		UserDTO loginUser = (UserDTO) session.getAttribute("user");
-		
-		int user_id = loginUser.getId();
 		
 		//ビンゴの内容を取得
 		BonusDAO bonus = new BonusDAO();

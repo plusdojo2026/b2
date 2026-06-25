@@ -298,7 +298,7 @@ body{
 
 /*一段階目の背景*/
 .depthView1{
-	height:1500px;
+	height:1900px;
 	position:relative;
 	background: linear-gradient(180deg, rgb(88, 185, 255), rgb(50, 110, 160));
 }

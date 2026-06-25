@@ -62,13 +62,21 @@ public class DailyServlet extends HttpServlet {
 			String qAns = request.getParameter(
 				"q_" + (qGet)
 			);
-			point.add(Integer.parseInt(qAns));
+			if (qAns == null){
+				point.add(0);
+			} else {
+				point.add(Integer.parseInt(qAns));
+			}
 
 			//質問のABC項目を取得して格納
 			String qEmo = request.getParameter(
 				"qType_" + (qGet)
 			);
-			emoType.add(Integer.parseInt(qEmo));
+			if (qEmo == null){
+				emoType.add(0);
+			} else {
+				emoType.add(Integer.parseInt(qEmo));
+			}
 		}
 		
 		
@@ -86,7 +94,14 @@ public class DailyServlet extends HttpServlet {
 		String freeForm = request.getParameter("freeForm");
 		String photo = request.getParameter("photo");
 		String positive = request.getParameter("positive");
-		int emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
+		String emotion_idStr = request.getParameter("emotion_id");
+		
+		int emotion_id = 0;
+		if (emotion_idStr != null && !emotion_idStr.isEmpty()){
+			emotion_id = Integer.parseInt(request.getParameter("emotion_id"));
+		} else {
+			emotion_id = 0;
+		}
 
 		//各項目を合算し、分析する
 		QuestionDAO qDao = new QuestionDAO();

@@ -310,10 +310,10 @@ public class WeeklyDAO {
 	       }
 
 	       }}
-	        //平均ポジティブ率(double)//*100のパーセント変換いらない？後で調整。
-			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
+	        //平均ポジティブ率(double)
+			double avgPositive = positiveRate.stream().mapToDouble(Double::doubleValue).average().orElse(0);
 			//平均ネガティブ率(double)
-			double avgNegative = negativeRate.stream().mapToDouble(Double::doubleValue).average().orElse(0) * 100;
+			double avgNegative = negativeRate.stream().mapToDouble(Double::doubleValue).average().orElse(0);
 			
 	      //５段階評価で考える？0~20:凪，21~40：穏やか，41~60：平均的，61~80：やや激しめ，81~100： ジェットコースター
 			double avgActiveIndex = activeIndex.stream().mapToDouble(Double::doubleValue).average().orElse(0);

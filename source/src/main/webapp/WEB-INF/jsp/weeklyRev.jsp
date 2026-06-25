@@ -18,9 +18,12 @@
 
 		<div class="rightScreen">
 			<c:set var="e" value="${weekList[0]}" />
+			
 			<h1 class="period">
-				<c:out value="${e.weeklyRes}" />のココロノナミ
+			  <span class="periodWeek"><c:out value="${e.weeklyRes}" /></span>
+			  <span>のココロノナミ</span>
 			</h1>
+
 
 			<div class="chart-container"><canvas id="myLineChart"></canvas></div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
@@ -32,7 +35,7 @@
 			  data: {
 				  labels: [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				      '${e.weeklyRes.substring(5,7) + 0}月${(8 + s.index)}日'${!s.last ? ',' : ''}
 				    </c:forEach>
 				  ],
 			
@@ -69,8 +72,8 @@
 			    scales: {
 			      yAxes: [{
 			        ticks: {
-			          suggestedMax: 100,
-			          suggestedMin: 0,
+			          max: 100,
+			          min: 0,
 			          stepSize: 10,
 			          callback: function(value){
 			            return value + '%'
@@ -93,6 +96,17 @@
 					</span>
 				</div>
 			</div>
+			<footer>  
+			<nav>
+				<ul>
+					<li><a href="/b2/QuickServlet">簡易記録</a></li>
+					<li><a href="/b2/DailyServlet">毎日記録</a></li>
+					<li><a href="/b2/ReviewServlet">振り返り</a></li>
+					<li><a href="/b2/BonusServlet">ボーナス</a></li>
+					<li><a href="/b2/MypageServlet">マイページ</a></li>
+				</ul>
+			</nav>
+		</footer>
 		</div>
 	</div>
 

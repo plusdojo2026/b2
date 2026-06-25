@@ -1,189 +1,187 @@
 @charset "UTF-8";
 
 /*ナビゲーション*/
-/* button */ 
-button{
-  display: block;
-  margin-left: auto;
-  background: #1e90ff;
-  color: #ffffff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-
-  font-size: 16px;
-  font-weight: bold;
-
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-  transition: 0.2s ease;
+/* button */
+button {
+	display: block;
+	margin-left: auto;
+	background: #1e90ff;
+	color: #ffffff;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	transition: 0.2s ease;
 }
 
-button:hover{
+button:hover {
 	background: #1c7ed6;
 }
 
-nav ul{
-	list-style:none;
+nav ul {
+	list-style: none;
 	padding: 0;
 	margin: 0;
 	display: flex;
 	justify-content: center;
 }
 
-#slideNav{
+#slideNav {
 	position: fixed; /* ナビの固定 */
-  	top: 0; /* 画面の一番上に固定 */
-  	right: -530px; /*  最初は画面外に隠す */
-  	width: 450px;
-  	height: 100vh; /* 画面いっぱい */
-  	background: #fff; /* 背景色 */
-  	box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* 左に影 */
-  	transition: right 0.3s ease; /*  スライドアニメーション */
-  	padding: 20px;
-  	padding-top: 80px;
-}
-#slideNav.open {
-  right: 0; /*  open クラスが付いたら表示 */
+	top: 0; /* 画面の一番上に固定 */
+	right: -530px; /*  最初は画面外に隠す */
+	width: 450px;
+	height: 100vh; /* 画面いっぱい */
+	background: #fff; /* 背景色 */
+	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* 左に影 */
+	transition: right 0.3s ease; /*  スライドアニメーション */
+	padding: 20px;
+	padding-top: 80px;
 }
 
-#slideBtn{ /* buttonの初期位置 */
+#slideNav.open {
+	right: 0; /*  open クラスが付いたら表示 */
+}
+
+#slideBtn { /* buttonの初期位置 */
 	position: fixed;
 	top: 20px;
-	right:50px;/* 縦方向の位置調整→親の高さの５０％の位置に置く*/
+	right: 50px; /* 縦方向の位置調整→親の高さの５０％の位置に置く*/
 	z-index: 9999;
-    cursor: pointer;/* カーソルを手にする*/
+	cursor: pointer; /* カーソルを手にする*/
 }
-#slideBtn.onNav{ /* ナビが開いたとき*/
+
+#slideBtn.onNav { /* ナビが開いたとき*/
 	position: absolute; /*自由配置*/
 	top: 10px;
-	right:10px;
+	right: 10px;
 }
 
 #slideNav nav {
-  margin-bottom:30px;
+	margin-bottom: 30px;
 }
 
 #slideNav nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 3px;
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: 3px;
 }
 
 #slideNav nav ul li a {
-  display: inline-block;
-  padding: 8px 15px;
-  background: #4a90e2;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.2s;
-  width: 60px;
-  text-align: center;
-  font-size: 9px;
-  white-space: nowrap;
+	display: inline-block;
+	padding: 8px 15px;
+	background: #4a90e2;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: 0.2s;
+	width: 71px;
+	text-align: center;
+	font-size: 9px;
+	white-space: nowrap;
 }
 
 #slideNav nav ul li a:hover {
-  background: #357ab8;
+	background: #357ab8;
 }
 
 /* 共通：ボックス全体を小さく */
-#slideNav .homereview{
-    padding: 5px;       
-    margin-bottom: 8px;
-    font-size: 9px;
-    line-height: 0.5;
+#slideNav .homereview {
+	padding: 5px;
+	margin-bottom: 8px;
+	font-size: 9px;
+	line-height: 0.5;
 }
 
-#slideNav .slidehomereview{
-    padding: 20px;      
-    margin-bottom: 12px;
-    font-size: 11px;
-    line-height: 1.5;
+#slideNav .slidehomereview {
+	padding: 20px;
+	margin-bottom: 12px;
+	font-size: 11px;
+	line-height: 1.5;
 }
-
 
 /* 見出し（p）を小さく */
-#slideNav .homereview p,
-#slideNav .slidehomereview p{
-    margin: 2px 0;
-    font-size: 10px;
+#slideNav .homereview p, #slideNav .slidehomereview p {
+	margin: 2px 0;
+	font-size: 10px;
 }
 
 /* アイコンリストを縮小 */
-#slideNav .icon-list{
-    display: flex;
-    gap: 50px;             
-    padding: 0;
+#slideNav .icon-list {
+	display: flex;
+	gap: 50px;
+	padding: 0;
 }
 
-#slideNav .icon-list img{
-    width: 40px;           
-    height: 40px;
+#slideNav .icon-list img {
+	width: 40px;
+	height: 40px;
 }
 
 /* weekly（週間記録）を縮小 */
-#slideNav .slideweekly{
-    display: flex;
-    gap: 8px;            
+#slideNav .slideweekly {
+	display: flex;
+	gap: 8px;
 }
 
-#slideNav .weekly-box{
-   padding: 12px;     
-   width: 90%;
-   margin:10px;
+#slideNav .weekly-box {
+	padding: 12px;
+	width: 90%;
+	margin: 10px;
 }
 
-#slideNav .info-area{
-   padding: 12px;     
-    font-size: 16px;   
-    min-height: 30px
+#slideNav .info-area {
+	padding: 12px;
+	font-size: 16px;
+	min-height: 30px
 }
 
 /* ボタンも小さく */
-#slideNav button{
-    padding: 5px 8px;      
-    font-size: 10px;
+#slideNav button {
+	padding: 5px 12px;
+	font-size: 10px;
 }
 
-.slidehomereview{
-  border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
-  border-radius: 12px;            /* 角丸 */
-  padding: 10px;                  /* 内側の余白 */
-  background-color: #ffffff;      /* 白背景 */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
-  margin-bottom: 20px; 
+.slidehomereview {
+	border: 1px solid #e0e0e0; /* 薄いグレーの枠線 */
+	border-radius: 12px; /* 角丸 */
+	padding: 10px; /* 内側の余白 */
+	background-color: #ffffff; /* 白背景 */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* ふわっとした影 */
+	margin-bottom: 20px;
 }
 
-#slideNav .weekly-value{
+#slideNav .weekly-value {
 	font-size: 24px !important;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
+	font-weight: bold;
+	text-align: center;
+	margin: 0;
 }
 
- .slidehomereview .chart-container{
-  height:50px;
+.slidehomereview .chart-container {
+	height: 50px;
 }
 
-
-.pic{
-	width:50px;
-	height:50px;
+.pic {
+	width: 50px;
+	height: 50px;
 }
 
 /*毎日アイコン*/
 .icon-list {
-  display: flex;
-  gap: 50px;       /* アイコン同士の間隔 */
-  padding: 0;
-  list-style: none;
-  justify-content: center;
+	display: flex;
+	gap: 50px; /* アイコン同士の間隔 */
+	padding: 0;
+	list-style: none;
+	justify-content: center;
 }
-.icon-list img{
-	width:50px;
-	height:50px;
+
+.icon-list img {
+	width: 50px;
+	height: 50px;
 }
 
 /* フッターのナビゲーション */
@@ -197,140 +195,150 @@ ul {
 }
 
 ul li a {
-  display: inline-block;
-  padding: 5px 8px;
-  background: #ffffff;
-  color: #1e90ff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.2s;
-  width: 100px;
-  text-align: center;
-  font-size: 13px;
-  white-space: nowrap;
+	display: inline-block;
+	padding: 5px 8px;
+	background: #ffffff;
+	color: #1e90ff;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: 0.2s;
+	width: 100px;
+	text-align: center;
+	font-size: 13px;
+	white-space: nowrap;
 }
 
 ul li a:hover {
-  background: #f0f8ff;
-  border-color:#f0f8ff;
+	background: #f0f8ff;
+	border-color: #f0f8ff;
 }
 
 /*モバイル対応処理*/
-*{
-    box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-@media screen and (max-width:850px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
-
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-
-
+@media screen and (max-width:850px) {
+	html {
+		background-color: rgb(255, 255, 255);
+	}
+	.leftScreen {
+		display: none;
+	}
+	.rightScreen {
+		min-width: 768px;
+		width: 100%;
+		margin: auto;
+	}
 }
 
-
-@media screen and (max-width:480px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
-
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-     .slidehomereview {
-		width: 95%;          
-	    margin: 10px auto;   /* 中央に固定 */
-	    padding: 8px 10px;
-	    box-sizing: border-box;
-    }
-    
-    #slideNav .homereview button{
-       margin: 15px 8px  0 75%;
-       font-size: 12px;
-       white-space: nowrap;
-    }
-    
-    #slideNav .slidehomereview button{
-       margin: 15px 8px  0 75%;
-       font-size: 12px;
-       white-space: nowrap;
-    }
-    
-    #slideNav .homereview { 
-		width: 95%;          
-	    margin: 10px auto;   /* 中央に固定 */
-	    padding: 8px 10px;
-	    box-sizing: border-box;
-    }
-    
-    #slideNav .slidehomereview {    
-		width: 95%;          
-	    margin: 10px auto;   /* 中央に固定 */
-	    padding: 8px 10px;
-	    box-sizing: border-box;
-    }
-    
-    
-#slideBtn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
+@media screen and (max-width:480px) {
+	html {
+		background-color: rgb(255, 255, 255);
+	}
+	.leftScreen {
+		display: none;
+	}
+	.rightScreen {
+		min-width: 768px;
+		width: 100%;
+		margin: auto;
+	}
+	.slidehomereview {
+		width: 95%;
+		margin: 10px auto; /* 中央に固定 */
+		padding: 8px 10px;
+		box-sizing: border-box;
+	}
+	#slideNav {
+		width: 100%; /* ← 画面いっぱい */
+		right: -100%; /* ← 完全に隠す */
+	}
+	#slideNav.open {
+		right: 0;
+	}
+	#slideNav .homereview button {
+		margin: 15px 8px 0 75%;
+		font-size: 12px;
+		white-space: nowrap;
+	}
+	#slideNav .slidehomereview button {
+		margin: 15px 8px 0 75%;
+		font-size: 12px;
+		white-space: nowrap;
+	}
+	#slideNav .homereview {
+		width: 95%;
+		margin: 10px auto; /* 中央に固定 */
+		padding: 8px 10px;
+		box-sizing: border-box;
+	}
+	#slideNav .slidehomereview {
+		width: 95%;
+		margin: 10px auto; /* 中央に固定 */
+		padding: 8px 10px;
+		box-sizing: border-box;
+	}
+	#slideBtn {
+		position: fixed;
+		top: 20px;
+		right: 20px;
+		z-index: 9999;
+	}
+	#slideNav .weekly-value {
+		font-size: 20px !important;
+		font-weight: bold;
+		text-align: center;
+		margin: 0;
+	}
+	#slideNav .info-area {
+		font-size: 13px !important;
+		font-weight: bold;
+		text-align: center;
+		margin: 0;
+	}
+	/* アイコン */
+	.icon-list {
+		justify-content: center;
+		gap: 20px;
+	}
+	.icon-list img {
+		width: 40px;
+		height: 40px;
+	}
+	/*  ボタン  */
+	button {
+		margin: 15px 15px 0 70%;
+		font-size: 12px;
+		white-space: nowrap;
+	}
+	#slideNav nav ul li a {
+		font-size: 1.3rem;
+		width: 140px;
+	}
+	#slideNav .homereview p, #slideNav .slidehomereview p {
+		font-size: 1.2rem;
+	}
+	#slideNav button {
+		font-size: 1.2rem;
+	}
 }
 
-    }
-     /* アイコン */
-    .icon-list {
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .icon-list img {
-        width: 40px;
-        height: 40px;
-    }
-    /*  ボタン  */
-    button {
-        margin: 15px 15px  0 70%;
-        font-size: 12px;
-        white-space: nowrap;
-    }
+.hidden {
+	display: none;
 }
 
-
-
-.hidden{
-    display: none;
+body {
+	margin: 0;
 }
 
-body{
-    margin: 0;
+.flexbox {
+	display: flex;
+	align-items: stretch;
 }
 
-
-.flexbox{
-    display: flex;
-    align-items: stretch;
-}
-
-.leftScreen, .rightScreen{
-    width: 50%;
+.leftScreen, .rightScreen {
+	width: 50%;
 }
 
 .leftScreen {
@@ -341,6 +349,6 @@ body{
 	background-attachment: fixed;
 }
 
-.leftScreen .leftImg{
-    width: 100%;
+.leftScreen .leftImg {
+	width: 100%;
 }

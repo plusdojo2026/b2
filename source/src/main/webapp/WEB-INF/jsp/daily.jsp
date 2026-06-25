@@ -67,6 +67,17 @@
 
 							<!-- コンテンツ -->
 							<div class="content1">
+								<div class="progress-area">
+
+									<div class="progress-text">
+										<span id="answered-count">0</span> / ${qList.size()}問
+									</div>
+
+									<div class="progress-bar">
+										<div class="progress-fill" id="progress-fill"></div>
+									</div>
+
+								</div>
 								<div class="question-list">
 
 								<c:forEach var="q" items="${qList}" varStatus="status">
@@ -88,38 +99,43 @@
 										<div class="answer-group">
 
 											<label class="answer">
-												<input type="radio"
-													name="q_${status.count}"
-													value="0">
-												<span>1</span>
+												<input type="radio" name="q_${status.count}" value="0">
+												<span class="answer-card">
+													<span class="answer-number">1</span>
+													<span class="answer-text">全くそう思わない</span>
+												</span>
 											</label>
 
 											<label class="answer">
-												<input type="radio"
-													name="q_${status.count}"
-													value="1">
-												<span>2</span>
+												<input type="radio" name="q_${status.count}" value="1">
+												<span class="answer-card">
+													<span class="answer-number">2</span>
+													<span class="answer-text">あまりそう思わない</span>
+												</span>
 											</label>
 
 											<label class="answer">
-												<input type="radio"
-													name="q_${status.count}"
-													value="2">
-												<span>3</span>
+												<input type="radio" name="q_${status.count}" value="2">
+												<span class="answer-card">
+													<span class="answer-number">3</span>
+													<span class="answer-text">どちらともいえない</span>
+												</span>
 											</label>
 
 											<label class="answer">
-												<input type="radio"
-													name="q_${status.count}"
-													value="3">
-												<span>4</span>
+												<input type="radio" name="q_${status.count}" value="3">
+												<span class="answer-card">
+													<span class="answer-number">4</span>
+													<span class="answer-text">ややそう思う</span>
+												</span>
 											</label>
 
 											<label class="answer">
-												<input type="radio"
-													name="q_${status.count}"
-													value="4">
-												<span>5</span>
+												<input type="radio" name="q_${status.count}" value="4">
+												<span class="answer-card">
+													<span class="answer-number">5</span>
+													<span class="answer-text">とてもそう思う</span>
+												</span>
 											</label>
 
 										</div>

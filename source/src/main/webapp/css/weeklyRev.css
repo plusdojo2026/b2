@@ -73,74 +73,15 @@
 	padding: 15px;
 }
 
-/* フッターのナビゲーション */
-ul {
-	list-style: none;
-	padding: 0;
-	display: flex;
-	gap: 3px;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-ul li a {
-  display: inline-block;
-  padding: 5px 8px;
-  background: #ffffff;
-  color: #1e90ff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.2s;
-  width: 100px;
-  text-align: center;
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-ul li a:hover {
-  background: #f0f8ff;
-  border-color:#f0f8ff;
-}
-
 /*モバイル対応処理*/
-*{
-    box-sizing: border-box;
-}
 
 @media screen and (max-width:850px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
-
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-
 
 }
 
 
 @media screen and (max-width:480px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
 
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-    
 	.container {
 	    grid-template-columns: 1fr; /* 1列にする */
 	    transform: scale(1.1);
@@ -160,43 +101,6 @@ ul li a:hover {
 	.boxContent {
 	    font-size: 8vw;
 	  }
-	  
-	  /* フッターのナビゲーション */
-ul {
-	margin-top: 40px;
-}
-  
-}
-
-
-
-.hidden{
-    display: none;
-}
-
-body{
-    margin: 0;
-}
-
-
-.flexbox{
-    display: flex;
-    align-items: stretch;
-}
-
-.leftScreen, .rightScreen{
-    width: 50%;
-}
-
-.leftScreen{
-    background-image: url("../img/kokorononami.jpg");
-    background-repeat: repeat-y;
-    background-size: 100vh;
-    background-attachment: fixed;
-}
-
-.leftScreen .leftImg{
-    width: 100%;
 }
 
 

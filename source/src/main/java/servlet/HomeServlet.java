@@ -66,11 +66,13 @@ import dto.WeeklyDTO;
 			//セッションから最終ログイン日時を取得
 			String lastloginStr = loginUser.getUpdated_at();  
 			String lastloginDate = lastloginStr.substring(0,10); //0~10文字目を取得
-			LocalDate lastLogin = LocalDate.parse(lastloginDate);
-						
+			//LocalDate lastLogin = LocalDate.parse(lastloginDate);
+			LocalDate lastLogin = LocalDate.of(2026, 6, 20);
+			
+			
 			//今日の日付を取得
-			//LocalDate today = LocalDate.now();
-			LocalDate today = LocalDate.of(2026, 6, 24);
+			LocalDate today = LocalDate.now();
+			//LocalDate today = LocalDate.of(2026, 6, 24);
 						
 			//ログインチェック
 			UserDAO uDao = new UserDAO();
@@ -122,22 +124,28 @@ import dto.WeeklyDTO;
 				//ログインしていなかった日数を取得(ビンゴに使用)
 				BonusDAO bonus2 = new BonusDAO();
 				int notLogin = bonus2.selectNotlogin(loginUser.getId());
-				session.setAttribute("notLogin", notLogin);
 				
-						uDao.processLoginBreak(loginUser.getId());//通算ログイン(データ)	
-							
-					//ビンゴの登録
-					int pos = loginUser.getCurrentPos();
-							
-					
-					boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
-					if(!bonusRes) {
-						System.out.println("ビンゴの登録に失敗");
-					}else {
-						//posの更新
-						uDao.loginPosUpdate(loginUser.getId(), pos);
-					}
-							
+				uDao.processLoginBreak(loginUser.getId());//通算ログイン(データ)	
+				
+				//ビンゴの登録
+				int pos = loginUser.getCurrentPos();
+				
+				//ログインできなかった日をビンゴテーブルに登録
+				while(notLogin-1 > 0 ) {
+					uDao.loginPosUpdate(loginUser.getId(), pos);
+					notLogin--;
+					pos++;
+				}
+				
+				boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
+				if(!bonusRes) {
+					System.out.println("ビンゴの登録に失敗");
+				}
+				else {
+					//posの更新
+					uDao.loginPosUpdate(loginUser.getId(), pos);
+				}
+				
 			}System.out.println("===================");
 			
 				//最終ログイン日を今日に更新

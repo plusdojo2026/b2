@@ -183,6 +183,16 @@ nav ul {
 	width: 50px;
 	height: 50px;
 }
+.weekly-box{
+	border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  	border-radius: 12px;            /* 角丸 */
+  	padding: 20px;                  /* 内側の余白 */
+  	background-color: #ffffff;      /* 白背景 */
+  	box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+	padding: 20px 50px;
+	width: 70%;
+	margin: 0 auto;
+}
 
 /* フッターのナビゲーション */
 ul {
@@ -281,18 +291,18 @@ ul li a:hover {
 	}
 	#slideBtn {
 		position: fixed;
-		top: 20px;
+		top: 1.2rem;
 		right: 20px;
 		z-index: 9999;
 	}
 	#slideNav .weekly-value {
-		font-size: 20px !important;
+		font-size: 40px !important;
 		font-weight: bold;
 		text-align: center;
 		margin: 0;
 	}
 	#slideNav .info-area {
-		font-size: 13px !important;
+		font-size: 25px !important;
 		font-weight: bold;
 		text-align: center;
 		margin: 0;

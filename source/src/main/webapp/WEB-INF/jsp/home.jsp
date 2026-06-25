@@ -156,7 +156,7 @@
 			  data: {
 				  labels: [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    '${e.weeklyRes.substring(5,7) + 0}月${(8 + s.index)}日'${!s.last ? ',' : ''}
 				    </c:forEach>
 				  ],
 			

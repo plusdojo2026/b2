@@ -19,7 +19,7 @@
 		<div class="rightScreen">
 			<c:set var="e" value="${weekList[0]}" />
 			<h1 class="period">
-				<c:out value="${e.weeklyRes}" />
+				<c:out value="${e.weeklyRes}" />のココロノナミ
 			</h1>
 
 			<div class="chart-container"><canvas id="myLineChart"></canvas></div>
@@ -41,7 +41,7 @@
 			        label: 'ポジティブ率',
 			        data: [
 			          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-			            ${d.positiveRate * 100}${!s.last ? ',' : ''}
+			            ${d.positiveRate}${!s.last ? ',' : ''}
 			          </c:forEach>
 			        ],
 			        borderColor: "rgba(255,0,0,1)",
@@ -51,7 +51,7 @@
 			        label: 'ネガティブ率',
 			        data: [
 			          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
-			            ${d.negativeRate * 100}${!t.last ? ',' : ''}
+			            ${d.negativeRate}${!t.last ? ',' : ''}
 			          </c:forEach>
 			        ],
 			        borderColor: "rgba(0,0,255,1)",

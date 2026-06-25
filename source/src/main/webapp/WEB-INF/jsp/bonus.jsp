@@ -30,7 +30,7 @@
 	
 	                <table id="bingo" class="bingo_table">
 	                    <tr>
-	                        <td data-checked="${bingo.day1}" style="background-color: ${bingo.day1 == true ? 'red' : 'rgba(165, 255, 255, 0.744)'};"><img src="${bingo.day1 == true ? 'img/memdaco.png' : 'img/Snail.png'};"></td>
+	                        <td data-checked="${bingo.day1}" style="background-color: ${bingo.day1 == true ? 'red' : 'rgba(165, 255, 255, 0.744)'};"><img src="${bingo.day1 == true ? 'img/memdaco.png' : 'img/Snail.png'};"><span class="backnumber">1</span></td>
 	                        <td data-checked="${bingo.day2}" style="background-color: ${bingo.day2 == true ? 'red' : 'rgba(165, 255, 255, 0.744)'};"><img src="${bingo.day2 == true ? 'img/memdaco.png' : 'img/Snail.png'};"></td>
 	                        <td data-checked="${bingo.day3}" style="background-color: ${bingo.day3 == true ? 'red' : 'rgba(165, 255, 255, 0.744)'};"><img src="${bingo.day3 == true ? 'img/memdaco.png' : 'img/Snail.png'};"></td>
 	                        <td data-checked="${bingo.day4}" style="background-color: ${bingo.day4 == true ? 'red' : 'rgba(165, 255, 255, 0.744)'};"><img src="${bingo.day4 == true ? 'img/memdaco.png' : 'img/Snail.png'};"></td>

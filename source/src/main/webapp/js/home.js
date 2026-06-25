@@ -18,7 +18,13 @@
 			
 		});		
   
-  document.getElementById("leftMenuBtn").onclick = function() {
-    const menu = document.querySelector("aside.left-menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-};
+  		document.getElementById("leftMenuBtn").onclick = function() {
+			if(window.innerWidth >= 765)retrun;
+			
+    		const menu = document.querySelector("aside.left-menu");
+    		if (menu.style.display === "block") {
+        		menu.style.display = "none";
+    		}else {
+       			menu.style.display = "block";
+    		}
+		};

@@ -26,7 +26,7 @@
 					<div class = "quickrecord">
 						<p>簡易記録にジャンプ</p>
 						<a href="/b2/QuickServlet">
-							<img src ="/b2/img/Snail.png" class ="pic">
+							<img src ="/b2/img/fun_clione.png" class ="pic">
 						</a>
 					</div>
 					
@@ -45,7 +45,10 @@
 			
 			
 			<main>
-			<button id="leftMenuBtn" class="sp-only">メニュー</button>
+			<div class="sp-menu-buttons sp-only">
+    			<button class="sp-btn" onclick="location.href='/b2/QuickServlet';">簡易記録</button>
+    			<button id="leftMenuBtn" class="sp-btn sp-only ">ボーナス</button>
+			</div>
 				<p id = "greeting">${greeting}</p> <%--時間帯コメント --%>
 				<div class="homereview">
 					<p>本日の入力：</p>
@@ -55,11 +58,10 @@
 						<li><img src="/b2/img/syasinn2.png"></li>
 						<li><img src="/b2/img/sakana2.png"></li>
 					</ul>
-					<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+					<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 				</div>
 				<div class="homereview">
 					<p>週間レポート</p>
-					<c:out value="${weekData}" />
 					<div class="weekly">
 							<div class= "weekly-box">
 								<c:if test="${not empty weekData}">
@@ -72,10 +74,6 @@
 							<div class="info-area">
 								<c:if test="${not empty e}">
 							        週の期間：<c:out value="${e.weeklyRes}" /><br>
-							        分析コメント：<c:out value="${e.analysisCmt}" /><br>
-							        平均ポジティブ率：
-							            <fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%<br>
-							        気分の浮き沈み：<c:out value="${e.moodType}" />
 							    </c:if>
 							</div>
 						</div>
@@ -93,8 +91,8 @@
 						<ul>
 							<li><a href="/b2/QuickServlet">簡易記録</a></li>
 							<li><a href="/b2/DailyServlet">毎日記録</a></li>
-							<li><a href="/b2/ReviewServlet">振り返り機能</a></li>
-							<li><a href="/b2/BonusServlet">ログインボーナス</a></li>
+							<li><a href="/b2/ReviewServlet">振り返り</a></li>
+							<li><a href="/b2/BonusServlet">ボーナス</a></li>
 							<li><a href="/b2/MypageServlet">マイページ</a></li>
 						</ul>
 					</nav>
@@ -106,22 +104,34 @@
 							<li><img src="/b2/img/syasinn2.png"></li>
 							<li><img src="/b2/img/sakana2.png"></li>
 						</ul>
-						<button onclick="location.href='/b2/DailyServlet';">記録する！</button>
+						<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 					</div>
+					
 					<div class="slidehomereview">
-						<p>週間レポート</p>
-						<div class="slideweekly">
-							<div class= "weekly-box">
-								グラフ
-							</div>
-							<div class="info-area">
-								グラフの情報
-							</div>
-						</div>
-						<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					<p>週間レポート</p>
+					        <!-- データセット -->
+					        <c:if test="${not empty weekData}">
+					            <c:set var="e" value="${weekData[0]}" />
+					        </c:if>
+					        <!-- ポジティブ率だけ表示 -->
+					        <div class="weekly-box">
+					            <div class="chart-container">
+					                <p class="weekly-value">
+					                    ポジティブ率：
+					                    <fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
+					                </p>
+					            </div>
+					        </div>
+					        <!-- 週の期間 -->
+					        <div class="info-area">
+					            <c:if test="${not empty e}">
+					                週の期間：<c:out value="${e.weeklyRes}" /><br>
+					            </c:if>
+					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					        </div>
 					</div>
 					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
-				</div>
+				</div>		
 			</aside>
 		</div>
 		
@@ -131,8 +141,8 @@
 				<ul>
 					<li><a href="/b2/QuickServlet">簡易記録</a></li>
 					<li><a href="/b2/DailyServlet">毎日記録</a></li>
-					<li><a href="/b2/ReviewServlet">振り返り機能</a></li>
-					<li><a href="/b2/BonusServlet">ログインボーナス</a></li>
+					<li><a href="/b2/ReviewServlet">振り返り</a></li>
+					<li><a href="/b2/BonusServlet">ボーナス</a></li>
 					<li><a href="/b2/MypageServlet">マイページ</a></li>
 				</ul>
 			</nav>
@@ -155,7 +165,7 @@
 			        label: 'ポジティブ率',
 			        data: [
 			          <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-			            ${d.positiveRate * 100}${!s.last ? ',' : ''}
+			            ${d.positiveRate}${!s.last ? ',' : ''}
 			          </c:forEach>
 			        ],
 			        borderColor: "rgba(255,0,0,1)",
@@ -165,7 +175,7 @@
 			        label: 'ネガティブ率',
 			        data: [
 			          <c:forEach var="d" items="${e.dailyList}" varStatus="t">
-			            ${d.negativeRate * 100}${!t.last ? ',' : ''}
+			            ${d.negativeRate}${!t.last ? ',' : ''}
 			          </c:forEach>
 			        ],
 			        borderColor: "rgba(0,0,255,1)",

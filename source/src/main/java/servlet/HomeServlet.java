@@ -118,12 +118,18 @@ import dto.WeeklyDTO;
 			//連続ログインが途切れた時
 			}else {
 				System.out.println("→ 条件3：連続ログイン途切れ（深度 -30）");
-				uDao.processLoginBreak(loginUser.getId());//通算ログイン(データ)	
+				
+				//ログインしていなかった日数を取得(ビンゴに使用)
+				BonusDAO bonus2 = new BonusDAO();
+				int notLogin = bonus2.selectNotlogin(loginUser.getId());
+				session.setAttribute("notLogin", notLogin);
+				
+						uDao.processLoginBreak(loginUser.getId());//通算ログイン(データ)	
 							
 					//ビンゴの登録
 					int pos = loginUser.getCurrentPos();
 							
-					BonusDAO bonus2 = new BonusDAO();
+					
 					boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
 					if(!bonusRes) {
 						System.out.println("ビンゴの登録に失敗");

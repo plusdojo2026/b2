@@ -35,7 +35,7 @@
   <div class="content-week">
 			<c:set var="e" value="${latestWeek[0]}" />
 			<h1 class="period">
-				<c:out value="${e.weeklyRes}" />
+			  <c:out value="${e.weeklyRes}" />のココロノナミ
 			</h1>
 			<!-- グラフ表示 -->
 			<div class="chart-container"><canvas id="myLineChart"></canvas></div>

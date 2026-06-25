@@ -52,7 +52,7 @@ CREATE TABLE WeekRes(id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), 
 -- カラム作成
 
 -- ビンゴ登録
--- INSERT INTO Bingo(user_id) VALUES(1);
+INSERT INTO Bingo(user_id) VALUES(1);
 
 
 -- 感情タグ登録

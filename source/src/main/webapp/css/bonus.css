@@ -108,7 +108,7 @@ body{
     background-image: url("../img/kokorononami.jpg");
     background-repeat: no-repeat;
     background-position: left top;
-    background-size: 100% auto; /* 横幅を要素に合わせて強制 */
+    background-size: 50vw auto; /* 横幅を要素に合わせて強制 */
     background-attachment: fixed;
 }
 
@@ -159,26 +159,37 @@ body{
     background-color: #ffffffb2;
     border:3px solid #ffffff;
     border-radius: 20px;
-    box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
 
 
 .bingo_table td{
+	position:relative;
 	font-size: 20px;
     font-weight: 500;
 	text-align: center;
 	width: 100px;
 	height: 100px;
     padding: 15px;
-    border: 3px solid #ffffff;
+    border: 3px solid rgba(200, 200, 200, 0.744);
     background-color: rgba(165, 255, 255, 0.744);
-    box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
     border-radius: 50%;
 }
 
+.backnumber{
+	position:absolute;
+	font-size:50px;
+	top:0;
+	left:34px;
+	z-index: 0;
+	opacity:0.5;
+}
+
 .bingo_table img{
-	width: 60px;
+
+	width: 50px;
 }
 
 #bonusView{

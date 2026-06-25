@@ -52,7 +52,10 @@ main{
   
   box-sizing: border-box;
   transition: all 0.1s ease; /* 動きを滑らかに */
+  
+  text-decoration: none;
 }
+
 
 /*立体感 */
 .btn--red.btn--cubic {

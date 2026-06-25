@@ -1,1 +1,115 @@
 @charset "UTF-8";
+
+.logo-pc {
+	  display: block;
+	  height: 25%;
+	  width: 100%;
+}
+.logo-sf {
+  display: none;
+}
+
+#head{
+	text-align: center;
+}
+
+
+
+
+main{
+	text-align: center;
+	margin-top: 90px;
+	margin-bottom: 90px;
+}
+
+.form input{
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 15px  !important;
+}
+
+.form input[name="pw"]{
+	margin: 10px 10px 30px;
+	padding: 10px ;
+}
+
+
+.btn--red.btn--cubic  {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  
+  /* サイズ・余白（右側にアイコン用の余白を広く確保） */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 1.5rem;
+  color: #ffffff;
+  background-color:#2589d0; 
+  
+  box-sizing: border-box;
+  transition: all 0.1s ease; /* 動きを滑らかに */
+  
+  text-decoration: none;
+}
+
+
+/*立体感 */
+.btn--red.btn--cubic {
+  border-bottom: 5px solid #2589d0;
+  margin: 10px 5px;
+}
+
+/* 立体ボタンのホバー*/
+.btn--red.btn--cubic:hover {
+  transform: translateY(3px); 
+  border-bottom: 2px solid #2589d0;
+}
+
+/* 角丸*/
+.btn--radius {
+  border-radius: 100vh;
+}
+
+/* 右側アイコンの絶対配置*/
+.fa-position-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 縦中央に綺麗に配置 */
+  right: 1.5rem;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+
+
+@media screen and (max-width: 768px){
+/*  全体リセット */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: #f5f7fb;
+    }
+    	
+#head{
+	text-align: center;
+}
+
+
+main{
+	text-align: center;
+}
+	
+.logo-pc {
+  display: none;
+}
+.logo-sf {
+	display: block;
+	height: 25%;
+	width: 100%;
+}
+	
+}

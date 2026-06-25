@@ -16,7 +16,8 @@
 	<body>
 		<header id="head">
 			<div class ="logoWrap">
-				<img src ="/b2/img/kokorononamiyoko.png" id="logo"> 
+				<img src ="/b2/img/kokorononamiyoko.png" class="logo-pc" id="logo">
+				<img src ="/b2/img/kokorononamisumaho.png" class="logo-sf">  
 			</div>
 		</header>
 		
@@ -24,12 +25,11 @@
 			<aside class="left-menu">
 				<div class ="flex">
 					<div class = "quickrecord">
-						<p>簡易記録にジャンプ</p>
+						<p>簡易記録</p>
 						<a href="/b2/QuickServlet">
 							<img src ="/b2/img/fun_clione.png" class ="pic">
 						</a>
 					</div>
-					
 					<div class="loginbonus">
 						<p>ログインボーナス</p>
 						<ul>
@@ -61,7 +61,7 @@
 					<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 				</div>
 				<div class="homereview">
-					<p>週間レポート</p>
+					<p>週間レポート：</p>
 					<div class="weekly">
 							<div class= "weekly-box">
 								<c:if test="${not empty weekData}">
@@ -89,11 +89,11 @@
 				<div id="slideNav">
 					<nav>
 						<ul>
-							<li><a href="/b2/QuickServlet">簡易記録</a></li>
-							<li><a href="/b2/DailyServlet">毎日記録</a></li>
-							<li><a href="/b2/ReviewServlet">振り返り</a></li>
-							<li><a href="/b2/BonusServlet">ボーナス</a></li>
-							<li><a href="/b2/MypageServlet">マイページ</a></li>
+							<li><a href="/b2/QuickServlet"><b>簡易記録</b></a></li>
+							<li><a href="/b2/DailyServlet"><b>毎日記録</b></a></li>
+							<li><a href="/b2/ReviewServlet"><b>振り返り</b></a></li>
+							<li><a href="/b2/BonusServlet"><b>ボーナス</b></a></li>
+							<li><a href="/b2/MypageServlet"><b>マイページ</b></a></li>
 						</ul>
 					</nav>
 					<div class="homereview">
@@ -139,11 +139,11 @@
 		<footer>  
 			<nav>
 				<ul>
-					<li><a href="/b2/QuickServlet">簡易記録</a></li>
-					<li><a href="/b2/DailyServlet">毎日記録</a></li>
-					<li><a href="/b2/ReviewServlet">振り返り</a></li>
-					<li><a href="/b2/BonusServlet">ボーナス</a></li>
-					<li><a href="/b2/MypageServlet">マイページ</a></li>
+					<li><a href="/b2/QuickServlet"><b>簡易記録</b></a></li>
+					<li><a href="/b2/DailyServlet"><b>毎日記録</b></a></li>
+					<li><a href="/b2/ReviewServlet"><b>振り返り</b></a></li>
+					<li><a href="/b2/BonusServlet"><b>ボーナス</b></a></li>
+					<li><a href="/b2/MypageServlet"><b>マイページ</b></a></li>
 				</ul>
 			</nav>
 		</footer>

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.QuickDAO;
 import dao.WeeklyDAO;
+import dto.QuickDTO;
 import dto.UserDTO;
 import dto.WeeklyDTO;
 
@@ -61,15 +63,26 @@ public class ReviewServlet extends HttpServlet {
 		int totalWeekPage = (int) Math.ceil((double) totalCount / limit);
 		
 		// quick用処理
+		QuickDAO qdao = new QuickDAO();
+		//デモ用
+		userId = 1;
+		
+		List<QuickDTO> qdtList = qdao.selectid(userId);
+		//セッションスコープに格納する
+		
+		session.setAttribute("quickList", qdtList );
 		
 		//ここまでQuick
 
+		
+		
+		
 		// JSP に渡す
 		request.setAttribute("weekList", weekList);
 		request.setAttribute("weekPage", weekPage);
 		request.setAttribute("totalWeekPage", totalWeekPage);
 		request.setAttribute("latestWeek", weekGraph);
-
+		
 		// 振り返りページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/review.jsp");
 		dispatcher.forward(request, response);

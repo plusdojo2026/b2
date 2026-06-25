@@ -87,13 +87,22 @@
 
 					</div>
 				</div>
-</div>
+
 
   <!-- 簡易記録 -->
-  <div class="content-quick"></div>
-
-</div></div>
-
+  <div class="content-quick">
+  <c:forEach var="e" items="${quickList}" >
+  出来事<input type="text" name="event" value="${e.event}"><br>
+  信念<input type="text" name="belief" value="${e.belief}"><br>
+  結果<input type="text" name="result" value="${e.result}"><br>
+  ポジティブに変換<input type="text" name="reframe" value="${e.reframe}"><br>
+  自由入力<input type="text" name="" value="${e.txtFree}"><br>
+  感情タグ<input type="text" name="" value="${e.emotion_id}"><br>
+  </c:forEach>
+</div>
+</div>
+</div>
+</div>
 
 </body>
 </html>

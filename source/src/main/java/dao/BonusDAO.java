@@ -247,4 +247,55 @@ public class BonusDAO {
 	}
 	
 	
+	
+	
+	
+	//ログインしていなかった日数
+	public int selectNotlogin(int user_id) {
+		Connection conn = null;
+		int record = 0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+			
+			//ログインできなかった日付を取得
+			String sql = "SELECT DATEDIFF(CURDATE(), DATE(updated_at)) as days_not_logged_in FROM Users WHERE id=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setInt(1,user_id);	
+			
+			
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// selectした情報をリストに挿入
+			rs.next();
+			record = rs.getInt("days_not_logged_in");
+			
+			// 結果を返す
+			return record;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return record;
+	}
+	
 }

@@ -66,11 +66,13 @@ import dto.WeeklyDTO;
 			//セッションから最終ログイン日時を取得
 			String lastloginStr = loginUser.getUpdated_at();  
 			String lastloginDate = lastloginStr.substring(0,10); //0~10文字目を取得
-			LocalDate lastLogin = LocalDate.parse(lastloginDate);
-						
+			//LocalDate lastLogin = LocalDate.parse(lastloginDate);
+			LocalDate lastLogin = LocalDate.of(2026, 6, 20);
+			
+			
 			//今日の日付を取得
-			//LocalDate today = LocalDate.now();
-			LocalDate today = LocalDate.of(2026, 6, 24);
+			LocalDate today = LocalDate.now();
+			//LocalDate today = LocalDate.of(2026, 6, 24);
 						
 			//ログインチェック
 			UserDAO uDao = new UserDAO();
@@ -118,20 +120,32 @@ import dto.WeeklyDTO;
 			//連続ログインが途切れた時
 			}else {
 				System.out.println("→ 条件3：連続ログイン途切れ（深度 -30）");
+				
+				//ログインしていなかった日数を取得(ビンゴに使用)
+				BonusDAO bonus2 = new BonusDAO();
+				int notLogin = bonus2.selectNotlogin(loginUser.getId());
+				
 				uDao.processLoginBreak(loginUser.getId());//通算ログイン(データ)	
-							
-					//ビンゴの登録
-					int pos = loginUser.getCurrentPos();
-							
-					BonusDAO bonus2 = new BonusDAO();
-					boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
-					if(!bonusRes) {
-						System.out.println("ビンゴの登録に失敗");
-					}else {
-						//posの更新
-						uDao.loginPosUpdate(loginUser.getId(), pos);
-					}
-							
+				
+				//ビンゴの登録
+				int pos = loginUser.getCurrentPos();
+				
+				//ログインできなかった日をビンゴテーブルに登録
+				while(notLogin-1 > 0 ) {
+					uDao.loginPosUpdate(loginUser.getId(), pos);
+					notLogin--;
+					pos++;
+				}
+				
+				boolean bonusRes = bonus2.bingoLogin(pos,loginUser.getId());
+				if(!bonusRes) {
+					System.out.println("ビンゴの登録に失敗");
+				}
+				else {
+					//posの更新
+					uDao.loginPosUpdate(loginUser.getId(), pos);
+				}
+				
 			}System.out.println("===================");
 			
 				//最終ログイン日を今日に更新

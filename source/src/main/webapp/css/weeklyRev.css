@@ -1,16 +1,16 @@
 @charset "UTF-8";
 
-.weekTitle {
-	position: fixed;
-	top: 72%;
-	left: 11%;
-	color: #FFFFFF;
-}
-
 .period {
 	font-size: 1.5rem;
 	text-align: center;
 	color: #2589d0;
+}
+
+.periodWeek {
+	color: #FFFFFF;
+    background-color: #2589d0;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .chart-container {
@@ -18,6 +18,7 @@
   max-width: 800px;
   height: 300px;
   margin: 0 auto;
+  
 }
 
 /*分析結果*/
@@ -71,45 +72,16 @@
 .analysisCmt {
 	padding: 15px;
 }
-/**/
-*{
-    box-sizing: border-box;
-}
+
+/*モバイル対応処理*/
 
 @media screen and (max-width:850px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
-
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-
 
 }
 
 
 @media screen and (max-width:480px){
-    html{
-        background-color: rgb(255, 255, 255);
-    }
 
-    .leftScreen{
-        display: none;
-    }
-
-    .rightScreen{
-        min-width: 768px;
-        width: 100%;
-        margin: auto;
-    }
-    
 	.container {
 	    grid-template-columns: 1fr; /* 1列にする */
 	    transform: scale(1.1);
@@ -129,38 +101,6 @@
 	.boxContent {
 	    font-size: 8vw;
 	  }
-  
-}
-
-
-
-.hidden{
-    display: none;
-}
-
-body{
-    margin: 0;
-}
-
-
-.flexbox{
-    display: flex;
-    align-items: stretch;
-}
-
-.leftScreen, .rightScreen{
-    width: 50%;
-}
-
-.leftScreen{
-    background-image: url("../img/kokorononami.jpg");
-    background-repeat: repeat-y;
-    background-size: 100vh;
-    background-attachment: fixed;
-}
-
-.leftScreen .leftImg{
-    width: 100%;
 }
 
 

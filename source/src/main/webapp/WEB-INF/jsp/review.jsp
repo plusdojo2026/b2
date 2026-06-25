@@ -92,12 +92,39 @@
   <!-- 簡易記録 -->
   <div class="content-quick">
   <c:forEach var="e" items="${quickList}" >
-  出来事<input type="text" name="event" value="${e.event}"><br>
-  信念<input type="text" name="belief" value="${e.belief}"><br>
-  結果<input type="text" name="result" value="${e.result}"><br>
-  ポジティブに変換<input type="text" name="reframe" value="${e.reframe}"><br>
-  自由入力<input type="text" name="" value="${e.txtFree}"><br>
-  感情タグ<input type="text" name="" value="${e.emotion_id}"><br>
+  <div class="content-quick2">
+  <c:if test="${not empty e.event}"><div class=record-item ><label>出来事:</label><input type="text" name="event" value="${e.event}" style="border: none;"></div></c:if>
+  <c:if test="${not empty e.belief}"><div class=record-item ><label>信念:</label><input type="text" name="belief" value="${e.belief}" style="border: none;"></div></c:if>
+  <c:if test="${not empty e.result}"><div class=record-item ><label>結果:</label><input type="text" name="result" value="${e.result}" style="border: none;"></div></c:if>
+  <c:if test="${not empty e.reframe}"><div class=record-item ><label>ポジティブに変換:</label><input type="text" name="reframe" value="${e.reframe}" style="border: none;"></div></c:if>
+  <c:if test="${not empty e.txtFree}"><div class=record-item ><label>自由入力:</label><input type="text" name="" value="${e.txtFree}" style="border: none;"></div></c:if>
+  <div class=record-item ><label>感情:</label>
+  <c:if test="${e.emotion_id eq 1}">
+  怒り
+  </c:if>
+    <c:if test="${e.emotion_id eq 2}">
+ 悲しい
+  </c:if>
+   <c:if test="${e.emotion_id eq 3}">
+ 悔しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 4}">
+ 焦り
+  </c:if>
+  <c:if test="${e.emotion_id eq 5}">
+ 楽しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 6}">
+ 嬉しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 7}">
+ 幸せ
+  </c:if>
+  <c:if test="${e.emotion_id eq 8}">
+ 好き
+  </c:if>
+  </div>
+  </div>
   </c:forEach>
 </div>
 </div>

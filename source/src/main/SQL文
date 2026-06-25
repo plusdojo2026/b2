@@ -43,7 +43,7 @@ CREATE TABLE SimpleRec(id int AUTO_INCREMENT PRIMARY KEY, user_id int, event var
 
 
 -- テーブル作成(weekRes)(外部キーあり)
-CREATE TABLE WeekRes(id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), weekCmt_id int, FOREIGN KEY(weekCmt_id) REFERENCES WeekCmt(id), avgPositive double, moodSwings_id int, FOREIGN KEY(moodSwings_id) REFERENCES MoodSwings(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE WeekRes(id int AUTO_INCREMENT PRIMARY KEY, user_id int, weeklyRes varchar(100), weekCmt_id int, FOREIGN KEY(weekCmt_id) REFERENCES WeekCmt(id), avgPositive double, moodSwings_id int, FOREIGN KEY(moodSwings_id) REFERENCES MoodSwings(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 
 
@@ -52,7 +52,7 @@ CREATE TABLE WeekRes(id int AUTO_INCREMENT PRIMARY KEY, weeklyRes varchar(100), 
 -- カラム作成
 
 -- ビンゴ登録
--- INSERT INTO Bingo(user_id) VALUES(1);
+INSERT INTO Bingo(user_id) VALUES(1);
 
 
 -- 感情タグ登録

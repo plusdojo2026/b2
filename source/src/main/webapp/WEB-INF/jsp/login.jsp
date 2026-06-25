@@ -24,10 +24,11 @@
 							ログインID<input type="text" name="userName" placeholder="kokorononami73"><br> 
 							パスワード<input type="password" name="pw" placeholder="QAwSeDrftgyHUjiKolp"><br> 
 						</div>
-						<button onclick="location.href='/b2/UserServlet';" class="btn--red btn--cubic btn--radius">新規登録</button>
+						<a href="/b2/UserServlet" class="btn--red btn--cubic btn--radius">新規登録</a>
 						<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius">
 						
 					</form>
+					
 		</main>	
 	</body>
 </html>

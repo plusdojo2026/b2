@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html{
+	background-color: #f5f5f5;
+}
+
 .pic{
 	width:50px;
 	height:50px;
@@ -269,8 +273,8 @@ ul {
 ul li a {
   display: inline-block;
   padding: 5px 8px;
-  background: #ffffff;
-  color: #1e90ff;
+  background: #4a90e2;
+  color: white;
   text-decoration: none;
   border-radius: 5px;
   transition: 0.2s;
@@ -281,8 +285,7 @@ ul li a {
 }
 
 ul li a:hover {
-  background: #f0f8ff;
-  border-color:#f0f8ff;
+   background: #357ab8;
 }
 
 

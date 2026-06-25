@@ -84,13 +84,29 @@ button:hover{
   margin-bottom: 20px;            /* 下に余白 */
 }
 
+    
 .weekly-box{
-	border:1px solid black;
-	padding:50px;
+	border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
+  	border-radius: 12px;            /* 角丸 */
+  	padding: 20px;                  /* 内側の余白 */
+  	background-color: #ffffff;      /* 白背景 */
+  	box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
+	padding: 20px 50px;
+	width: 70%;
+	margin: 0 auto;
 }
+
+.chart-container{
+    width:100%;
+    height: 200px;
+    position: relative;
+    }
+
 .info-area{
-	border:1px solid black;
-	padding:50px;
+	
+	padding: 10px 50px;
+	width: 70%;
+	margin: 0 0 0 auto;
 }
 
 
@@ -203,11 +219,16 @@ nav ul{
     gap: 8px;            
 }
 
-#slideNav .weekly-box,
+#slideNav .weekly-box{
+   padding: 12px;     
+   width: 90%;
+   margin:10px;
+}
+
 #slideNav .info-area{
    padding: 12px;     
     font-size: 16px;   
-    min-height: 60px
+    min-height: 30px
 }
 
 /* ボタンも小さく */
@@ -219,12 +240,22 @@ nav ul{
 .slidehomereview{
   border: 1px solid #e0e0e0;      /* 薄いグレーの枠線 */
   border-radius: 12px;            /* 角丸 */
-  padding: 20px;                  /* 内側の余白 */
+  padding: 10px;                  /* 内側の余白 */
   background-color: #ffffff;      /* 白背景 */
   box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* ふわっとした影 */
   margin-bottom: 20px; 
 }
 
+#slideNav .weekly-value{
+	font-size: 24px !important;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+ .slidehomereview .chart-container{
+  height:50px;
+}
 
 
 /* フッターのナビゲーション */
@@ -260,7 +291,7 @@ ul li a:hover {
 .homelayout{
 	display:flex;
 	gap: 20px;
-	margin: auto 20px;
+	margin: 30px 20px auto;
 }
 
 .homelayout main{
@@ -268,10 +299,9 @@ ul li a:hover {
 	margin: 0 auto;
 }
 
-
-
 #greeting{
 	text-align: center;
+	padding-bottom: 30px;
 }
 
 /*簡易とログインの固定*/
@@ -323,12 +353,12 @@ main{
 }
 
 
-/*週間レポート*/
+/*週間レポート
 .weekly{
 	display: flex;
 	gap:30px;
 }
-
+*/
 
 /* ログインボーナスリストだけ縦並び */
 .loginbonus ul li{
@@ -355,10 +385,9 @@ aside.left-menu {
 }
 
 
+
+
 /* スマホだけ表示するクラス */
-
-
-
 
 @media screen and (max-width: 768px) {
 	.sp-only {
@@ -401,21 +430,17 @@ aside.left-menu {
 
     /* main */
     
-    .homereview {
-        
-	width: 95%;          
-    margin: 10px auto;   /* 中央に固定 */
-    padding: 8px 10px;
-    box-sizing: border-box;
-
+    .homereview {  
+		width: 95%;          
+	    margin: 10px auto;   /* 中央に固定 */
+	    padding: 8px 10px;
+	    box-sizing: border-box;
     }
     .slidehomereview {
-        
-	width: 95%;          
-    margin: 10px auto;   /* 中央に固定 */
-    padding: 8px 10px;
-    box-sizing: border-box;
-
+		width: 95%;          
+	    margin: 10px auto;   /* 中央に固定 */
+	    padding: 8px 10px;
+	    box-sizing: border-box;
     }
     
     #slideNav .homereview button{
@@ -431,26 +456,24 @@ aside.left-menu {
     }
     
     #slideNav .homereview { 
-	width: 95%;          
-    margin: 10px auto;   /* 中央に固定 */
-    padding: 8px 10px;
-    box-sizing: border-box;
+		width: 95%;          
+	    margin: 10px auto;   /* 中央に固定 */
+	    padding: 8px 10px;
+	    box-sizing: border-box;
     }
     
-    #slideNav .slidehomereview {
-        
-	width: 95%;          
-    margin: 10px auto;   /* 中央に固定 */
-    padding: 8px 10px;
-    box-sizing: border-box;
-
+    #slideNav .slidehomereview {    
+		width: 95%;          
+	    margin: 10px auto;   /* 中央に固定 */
+	    padding: 8px 10px;
+	    box-sizing: border-box;
     }
     
     #slideBtn{ 
-	position: absolute;
-	right: 16px;  /* ← 基本これ */
-	top: 4%;
-	transform: translateY(-50%);
+		position: absolute;
+		right: 16px;  /* ← 基本これ */
+		top: 4%;
+		transform: translateY(-50%);
     }
 
 
@@ -458,6 +481,7 @@ aside.left-menu {
     #greeting {
         padding: 10px;
         font-size: 14px;
+        white-space: nowrap;
     }
 
     /* アイコン */
@@ -478,12 +502,25 @@ aside.left-menu {
         gap: 10px;
     }
 
-    .weekly-box,
+    .weekly-box{
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        height: 100%;
+    }
+    .chart-container{
+    width:100%;
+    height: 180px;
+    position: relative;
+    }
     .info-area {
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
     }
+    
+    
+    
 
     /*  ボタン  */
     button {
@@ -500,9 +537,9 @@ aside.left-menu {
     
     
 	#leftMenuBtn {
-    margin-right: 0;   /* 右寄せ */
-    margin-left: auto; 
-    display: block;
+	    margin-right: 0;   /* 右寄せ */
+	    margin-left: auto; 
+	    display: block;
 }
 
 
@@ -517,27 +554,27 @@ aside.left-menu {
     
     
 	#slideNav nav ul {
-    flex-wrap: nowrap;        
-    justify-content: center; /* 中央寄せ */
-    gap: 5px;
+	    flex-wrap: nowrap;        
+	    justify-content: center; /* 中央寄せ */
+	    gap: 5px;
 	}
 
 	#slideNav nav ul li a {
-    width: auto;           /* 固定幅やめる */
- 	font-size: 12px;       
-    padding: 5px 6px;
-    white-space: nowrap;   /* 改行防止 */
+	    width: auto;           /* 固定幅やめる */
+	 	font-size: 12px;       
+	    padding: 5px 6px;
+	    white-space: nowrap;   /* 改行防止 */
 	}
     
     
 	#slideNav .icon-list img {
-    width: 28px;   
-    height: 28px;
+	    width: 28px;   
+	    height: 28px;
 	}
 
 	#slideNav .icon-list {
-    gap: 15px;     /* 間隔少し詰める */
-    justify-content: center;
+	    gap: 15px;     /* 間隔少し詰める */
+	    justify-content: center;
 	}
     
 
@@ -550,11 +587,11 @@ aside.left-menu {
     }
 
     footer ul {    
-	width: 100%;
-    margin: 0;
-    padding: 0 10px; 
-    box-sizing: border-box;
-	gap: 5px;
+		width: 100%;
+	    margin: 0;
+	    padding: 0 10px; 
+	    box-sizing: border-box;
+		gap: 5px;
     }
 
     footer ul li a {
@@ -564,35 +601,50 @@ aside.left-menu {
     }
     
     .sp-menu-buttons {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 15px;
+	    display: flex;
+	    gap: 5px;
+	    margin-bottom: 15px;
 	}
 
 	.sp-btn {
-    flex: 1;
-    padding: 10px 5px;
-    background-color: #6ec6ff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 13px;
+	    flex: 1;
+	    padding: 10px 5px;
+	    background-color: #6ec6ff;
+	    color: #fff;
+	    border: none;
+	    border-radius: 8px;
+	    font-size: 13px;
 	}
 	
 	.sp-menu-buttons .sp-btn {
-    margin: 0 !important;
+    	margin: 0 !important;
 	}
 	
     .sp-menu-buttons {
-    display: flex;
-    justify-content: flex-end; /* 右寄せ */
-    gap: 5px;
-    margin-bottom: 15px;
-    width: 30%;
-    margin-right: 0;
+	    display: flex;
+	    justify-content: flex-end; /* 右寄せ */
+	    gap: 5px;
+	    margin-bottom: 15px;
+	    width: 30%;
+	    margin-right: 0;
 	}
 	
+	
+	#slideNav .weekly-value{
+	font-size: 20px !important;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
 
+#slideNav .info-area{
+	font-size: 13px !important;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+	
+}
 
 
 

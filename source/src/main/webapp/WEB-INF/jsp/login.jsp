@@ -17,14 +17,15 @@
 		</header>
 		
 		<main>
-		
+		<h1>ログイン</h1>
+		<hr>
 			
 					<form method="POST" action="${pageContext.request.contextPath}/LoginServlet">
 						<div class="form">
 							ログインID<input type="text" name="userName" placeholder="kokorononami73"><br> 
 							パスワード<input type="password" name="pw" placeholder="QAwSeDrftgyHUjiKolp"><br> 
 						</div>
-						<a href="/b2/UserServlet" class="btn--red btn--cubic btn--radius">新規登録</a>
+						<a href="/b2/UserServlet" class="btn--red btn--cubic btn--radius">新規登録はこちら</a>
 						<input type="submit" name="login" value="ログイン" class="btn--red btn--cubic btn--radius">
 						
 					</form>

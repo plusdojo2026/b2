@@ -25,9 +25,10 @@ public class BonusDAO {
 					"root", "password");
 			
 			//新しいビンゴを作成
-			String sql = "INSERT INTO Bingo(user_id,day1) VALUES(1,1);";
+			String sql = "INSERT INTO Bingo(user_id,day1) VALUES(?,1);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
+			pStmt.setInt(1,user_id);	
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -71,7 +72,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//今日のビンゴを登録
-			String sql = "UPDATE Bingo SET day" + String.valueOf(pos) + "=1 WHERE id=?";
+			String sql = "UPDATE Bingo SET day" + String.valueOf(pos) + "=1 WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1,user_id);	
@@ -117,7 +118,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//今日のビンゴを登録
-			String sql = "UPDATE Bingo SET bingoCount =? WHERE id=?";
+			String sql = "UPDATE Bingo SET bingoCount =? WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1,user_id);	
@@ -164,7 +165,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//今日のビンゴを登録
-			String sql = "UPDATE Bingo SET day1=0, day2=0, day3=0, day4=0, day5=0, day6=0, day7=0, day8=0, day9=0, day10=0, day11=0, day12=0, day13=0, day14=0, day15=0, day16=0, day17=0, day18=0, day19=0, day20=0, day21=0, day22=0, day23=0, day24=0, day25=0, bingoCount=0 WHERE id=?";
+			String sql = "UPDATE Bingo SET day1=0, day2=0, day3=0, day4=0, day5=0, day6=0, day7=0, day8=0, day9=0, day10=0, day11=0, day12=0, day13=0, day14=0, day15=0, day16=0, day17=0, day18=0, day19=0, day20=0, day21=0, day22=0, day23=0, day24=0, day25=0, bingoCount=0 WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1,user_id);				
@@ -210,7 +211,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//今日のビンゴを登録
-			String sql = "SELECT * FROM Bingo WHERE id=?";
+			String sql = "SELECT * FROM Bingo WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//現在位置をカラム名に代入

@@ -141,28 +141,33 @@ public class BonusServlet extends HttpServlet {
 		
 		
 		if(totalBingo != 0) {
-			if(totalBingo > 1) {
-				fishlist.add(fish5);
+			if(totalBingo >= 1) {
+				fishlist.add("img/koi.png");
 			}
-			else if(totalBingo > 1) {
-				fishlist.add(fish5);
+			if(totalBingo >= 2) {
+				fishlist.add("img/koi.png");
 			}
-			else if(totalBingo > 1) {
-				fishlist.add(fish5);
+			if(totalBingo >= 3) {
+				fishlist.add("img/koi.png");
 			}
-			else if(totalBingo > 1) {
-				fishlist.add(fish5);
+			if(totalBingo >= 4) {
+				fishlist.add("img/koi.png");
 			}
-			else if(totalBingo > 1) {
-				fishlist.add(fish5);
+			if(totalBingo >= 5) {
+				fishlist.add("img/koi.png");
 			}
 		}
-
+		
+		
+		System.out.println("フィッシュリスト"+fishlist);
 		List<String> shuffled = new ArrayList<>(fishlist); // この後ランダムに並べ替えられる、list のコピー
 		Collections.shuffle(shuffled);
+		int end = Math.min(shuffled.size(), 4);
+		List<String> newlist = shuffled.subList(0, end);
+		System.out.println("シャッフル後"+shuffled);
+
 		
-		
-		request.setAttribute("fishlist", shuffled);
+		request.setAttribute("fishlist", newlist);
 		request.setAttribute("depth", depth);
 		
 		
@@ -210,19 +215,19 @@ public class BonusServlet extends HttpServlet {
 				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 1) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 2) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 3) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 4) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 5) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 		}
 

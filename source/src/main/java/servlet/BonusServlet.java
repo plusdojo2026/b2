@@ -210,19 +210,19 @@ public class BonusServlet extends HttpServlet {
 				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 1) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 2) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 3) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 4) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 			else if(totalBingo == 5) {
-				fishName = "";
+				fishName = "img/fish1.png";
 			}
 		}
 

@@ -109,26 +109,26 @@
 					
 					<div class="slidehomereview">
 					<p>週間レポート</p>
-					        <!-- データセット -->
 					        <c:if test="${not empty weekData}">
-					            <c:set var="e" value="${weekData[0]}" />
-					        </c:if>
-					        <!-- ポジティブ率だけ表示 -->
-					        <div class="weekly-box">
-					            <div class="chart-container">
-					                <p class="weekly-value">
-					                    ポジティブ率：
-					                    <fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
-					                </p>
-					            </div>
-					        </div>
-					        <!-- 週の期間 -->
-					        <div class="info-area">
-					            <c:if test="${not empty e}">
-					                週の期間：<c:out value="${e.weeklyRes}" /><br>
-					            </c:if>
+							    <c:set var="slideE" value="${weekData[0]}" />
+							</c:if>
+							
+							<div class="weekly-box">
+							    <div class="chart-container">
+							        <p class="weekly-value">
+							            ポジティブ率：
+							            <fmt:formatNumber value="${slideE.avgPositive}" maxFractionDigits="1" />%
+							        </p>
+							    </div>
+							</div>
+							
+							<div class="info-area">
+							    <c:if test="${not empty slideE}">
+							        週の期間：<c:out value="${slideE.weeklyRes}" /><br>
+							    </c:if>
+							</div>
 					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
-					        </div>
+					        
 					</div>
 					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>		

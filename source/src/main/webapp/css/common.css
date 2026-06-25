@@ -205,22 +205,21 @@ ul {
 }
 
 ul li a {
-	display: inline-block;
-	padding: 5px 8px;
-	background: #ffffff;
-	color: #1e90ff;
-	text-decoration: none;
-	border-radius: 5px;
-	transition: 0.2s;
-	width: 100px;
-	text-align: center;
-	font-size: 13px;
-	white-space: nowrap;
+  display: inline-block;
+  padding: 5px 8px;
+  background: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.2s;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 ul li a:hover {
-	background: #f0f8ff;
-	border-color: #f0f8ff;
+   background: #357ab8;
 }
 
 /*モバイル対応処理*/
@@ -269,12 +268,12 @@ ul li a:hover {
 	}
 	#slideNav .homereview button {
 		margin: 15px 8px 0 75%;
-		font-size: 12px;
+		font-size: 1.2rem;
 		white-space: nowrap;
 	}
 	#slideNav .slidehomereview button {
 		margin: 15px 8px 0 75%;
-		font-size: 12px;
+		font-size: 1.2rem;
 		white-space: nowrap;
 	}
 	#slideNav .homereview {
@@ -330,7 +329,10 @@ ul li a:hover {
 		font-size: 1.2rem;
 	}
 	#slideNav button {
-		font-size: 1.2rem;
+		font-size: 1rem;
+	}
+	ul li a {
+	margin-top: 20px;
 	}
 }
 

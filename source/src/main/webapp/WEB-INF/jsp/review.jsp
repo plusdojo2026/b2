@@ -98,7 +98,32 @@
   <c:if test="${not empty e.result}"><div class=record-item ><label>結果:</label><input type="text" name="result" value="${e.result}" style="border: none;"></div></c:if>
   <c:if test="${not empty e.reframe}"><div class=record-item ><label>ポジティブに変換:</label><input type="text" name="reframe" value="${e.reframe}" style="border: none;"></div></c:if>
   <c:if test="${not empty e.txtFree}"><div class=record-item ><label>自由入力:</label><input type="text" name="" value="${e.txtFree}" style="border: none;"></div></c:if>
-  <div class=record-item ><label>感情タグ:</label><input type="text" name="" value="${e.emotion_id}" style="border: none;"></div>
+  <div class=record-item ><label>感情:</label>
+  <c:if test="${e.emotion_id eq 1}">
+  怒り
+  </c:if>
+    <c:if test="${e.emotion_id eq 2}">
+ 悲しい
+  </c:if>
+   <c:if test="${e.emotion_id eq 3}">
+ 悔しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 4}">
+ 焦り
+  </c:if>
+  <c:if test="${e.emotion_id eq 5}">
+ 楽しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 6}">
+ 嬉しい
+  </c:if>
+  <c:if test="${e.emotion_id eq 7}">
+ 幸せ
+  </c:if>
+  <c:if test="${e.emotion_id eq 8}">
+ 好き
+  </c:if>
+  </div>
   </div>
   </c:forEach>
 </div>

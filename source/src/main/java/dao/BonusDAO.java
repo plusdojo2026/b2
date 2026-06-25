@@ -265,7 +265,7 @@ public class BonusDAO {
 					"root", "password");
 			
 			//ログインできなかった日付を取得
-			String sql = "SELECT DATEDIFF(CURDATE(), DATE(updated_at)) as days_not_logged_in FROM users WHERE id=?;";
+			String sql = "SELECT DATEDIFF(CURDATE(), DATE(updated_at)) as days_not_logged_in FROM Users WHERE id=?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1,user_id);	

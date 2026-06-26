@@ -7,6 +7,9 @@
 			//ナビの開閉
 			nav.classList.toggle("open");
 			
+			//ナビの開閉
+			 document.body.classList.toggle("nav-open");
+			 
 			//画像の入れ替え
 			if(btn.src.includes("yajirusi1.png")){
 				btn.src = "/b2/img/yajirusi2.png";

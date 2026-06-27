@@ -89,7 +89,7 @@ import dto.UserDTO;
 				
 			}else { //新規登録失敗
 				System.out.println("新規登録失敗");
-				request.setAttribute("newRegistError", "ユーザー登録に失敗しました。");
+				request.setAttribute("newUserRegisterror", "ユーザー登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); // User（新規登録）ページにフォワードする
 				dispatcher.forward(request, response);
 				return;

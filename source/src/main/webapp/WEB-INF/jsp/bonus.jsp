@@ -24,6 +24,7 @@
 
             <div class="rightScreen">
             <div class="bonus-title"><h1>ログインボーナス</h1></div>
+            <hr>
             	<div class="bingo-field">
 	                <div class="title">BINGO</div>
 	
@@ -71,6 +72,7 @@
 				
 				<div class="depthView${depth <= 600 ? '1' : depth <= 1100 ? '2' : depth <= 1600 ? '3' : '4'} }">
                 	<div class="title depth">水深チェック</div>
+                	<hr>
                 		<div class="depth-current">
                     		<h2>現在の水深<span class="depth-length">${depth}<span class="m">　M</span></span></h2>
                 		</div>

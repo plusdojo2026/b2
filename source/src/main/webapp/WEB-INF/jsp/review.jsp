@@ -35,24 +35,24 @@
   <div class="content-week">
 			<c:set var="e" value="${latestWeek[0]}" />
 			<h1 class="period">
-				<c:out value="${e.weeklyRes}" />
+			  <c:out value="${e.weeklyRes}" />のココロノナミ
 			</h1>
 			<!-- グラフ表示 -->
 			<div class="chart-container"><canvas id="myLineChart"></canvas></div>
 			<script>
 				  const labels = [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    '${e.weeklyRes.substring(5,7) + 0}月${(8 + s.index)}日'${!s.last ? ',' : ''}
 				    </c:forEach>
 				  ];
 				  const positive = [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-				      ${d.positiveRate * 100}${!s.last ? ',' : ''}
+				      ${d.positiveRate}${!s.last ? ',' : ''}
 				    </c:forEach>
 				  ];
 				  const negative = [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="t">
-				      ${d.negativeRate * 100}${!t.last ? ',' : ''}
+				      ${d.negativeRate}${!t.last ? ',' : ''}
 				    </c:forEach>
 				  ];
 			</script>

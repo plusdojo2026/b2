@@ -21,8 +21,8 @@ function createLineChart(labels, positiveData, negativeData) {
     responsive: true,
     maintainAspectRatio: false,
     scales: {yAxes: [{ticks: {
-            suggestedMax: 100,
-            suggestedMin: 0,
+            max: 100,
+            min: 0,
             stepSize: 10,
             callback: function(value){
               return value + '%'

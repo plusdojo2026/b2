@@ -61,7 +61,7 @@ import dto.UserDTO;
 			
 			if (exists == true) { // 重複あり
 				System.out.println("重複あり");
-				request.setAttribute("newUserRegisterror", "このユーザーは既に登録されています");
+				request.setAttribute("newUserRegisterror", "このidとpwの組み合わせはすでに使用されています。idかpwを変更してください。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); //再度新規登録ページを表示
 				dispatcher.forward(request, response);
 				return;
@@ -89,7 +89,7 @@ import dto.UserDTO;
 				
 			}else { //新規登録失敗
 				System.out.println("新規登録失敗");
-				request.setAttribute("newRegistError", "ユーザー登録に失敗しました。");
+				request.setAttribute("newUserRegisterror", "ユーザー登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/user.jsp"); // User（新規登録）ページにフォワードする
 				dispatcher.forward(request, response);
 				return;

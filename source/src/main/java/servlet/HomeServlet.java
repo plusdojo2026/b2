@@ -66,8 +66,8 @@ import dto.WeeklyDTO;
 			//セッションから最終ログイン日時を取得
 			String lastloginStr = loginUser.getUpdated_at();  
 			String lastloginDate = lastloginStr.substring(0,10); //0~10文字目を取得
-			//LocalDate lastLogin = LocalDate.parse(lastloginDate);
-			LocalDate lastLogin = LocalDate.of(2026, 6, 20);
+			LocalDate lastLogin = LocalDate.parse(lastloginDate);
+
 			
 			
 			//今日の日付を取得

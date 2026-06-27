@@ -19,8 +19,7 @@ public class UserDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 					"root", "password");
 
 			// SQL文を準備する
@@ -82,9 +81,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000");
 
 				// SQL文を準備する
 				String sql = "INSERT INTO Users(userName, pw) VALUES (?, ?)";
@@ -148,8 +145,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 
 					// SQL文を準備する
@@ -201,8 +197,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 						"root", "password");
 
 				// SELECT文を準備する(ログイン判定+ユーザー情報取得)
@@ -262,8 +257,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 						"root", "password");
 
 				// SQL文を準備する
@@ -305,8 +299,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 	
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 						"root", "password");
 	
 				// SQL文を準備する
@@ -348,8 +341,7 @@ public class UserDAO {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 			
 						// データベースに接続する
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 								"root", "password");
 			
 						// SQL文を準備する
@@ -392,8 +384,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 	
 					// SQL文を準備する
@@ -435,8 +426,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 	
 					// SQL文を準備する
@@ -478,8 +468,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 	
 					// SQL文を準備する(現在の深度を取得)
@@ -538,8 +527,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 
 					// SQL文を準備する
@@ -582,8 +570,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 							"root", "password");
 					
 					//pos(ビンゴの日付の更新)
@@ -641,8 +628,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 		
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 						"root", "password");
 		
 				// SQL文を準備する

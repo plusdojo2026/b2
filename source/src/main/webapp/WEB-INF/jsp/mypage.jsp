@@ -18,13 +18,14 @@
 		
 	<main>
 		<h1>マイページ</h1>
-		<hr>
 			<form method="POST" action="${pageContext.request.contextPath}/MypageServlet">
+			<div class="form">
 				ログインID<input type="text" name="userName" value="${user.userName}"><br> 
-				パスワード<input type="password" name="pw" value="${user.pw}"><br>
-				<input type="submit" name="submit" value="更新" class="btn--red btn--cubic btn--radius"><br> 
+				パスワード<input type="password" name="pw" value="${user.pw}">
+			</div>	
 				<a href="/b2/HomeServlet" class="btn--red btn--cubic btn--radius">戻る</a>
-				<a href="/b2/TopServlet" class="btn--red btn--cubic btn--radius">ログアウト</a>
+				<input type="submit" name="submit" value="更新" class="btn--red btn--cubic btn--radius"><br> 
+				<a href="/b2/TopServlet" >ログアウト</a>
 			</form>
 			</main>	
 	</body>

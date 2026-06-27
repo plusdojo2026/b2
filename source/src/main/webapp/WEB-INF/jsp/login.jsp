@@ -18,7 +18,6 @@
 		
 		<main>
 		<h1>ログイン</h1>
-		<hr>
 			
 					<form method="POST" action="${pageContext.request.contextPath}/LoginServlet">
 						<div class="form">

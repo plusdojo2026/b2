@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,6 @@
 
 <main>
 <h1>新規登録</h1>
-<hr>
 		<form method="POST" action="${pageContext.request.contextPath}/UserServlet">
 		<div class="form">
 			ログインID<input type="text" name="userName"><br> 
@@ -29,6 +29,14 @@
 			<a href="/b2/TopServlet" class="btn--red btn--cubic btn--radius">TOPへ</a>
 			<input type="submit" name="login" value="新規登録" class="btn--red btn--cubic btn--radius">
 		</form>
-</main>	
+</main>
+<c:if test="${not empty newUserRegisterror}">
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        alert("${newUserRegisterror}");
+    });
+</script>
+</c:if>
+
 		</body>
 </html>

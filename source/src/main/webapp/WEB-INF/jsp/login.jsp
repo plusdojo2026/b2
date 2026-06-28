@@ -20,7 +20,7 @@
 		<main>
 		<h1>ログイン</h1>
 			
-					<form method="POST" action="${pageContext.request.contextPath}/LoginServlet">
+					<form method="POST" action="${pageContext.request.contextPath}/LoginServlet" id="loginform">
 						<div class="form">
 							ログインID<input type="text" name="userName" placeholder="kokorononami73"><br> 
 							パスワード<input type="password" name="pw" placeholder="QAwSeDrftgyHUjiKolp"><br> 
@@ -34,7 +34,7 @@
 <c:if test="${not empty loginError}">
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        alert("${newUserRegisterror}");
+        alert("${loginError}");
     });
 </script>
 </c:if>		

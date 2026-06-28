@@ -83,7 +83,7 @@ import dto.UserDTO;
 			boolean exists = uDao.existsUser(userName, pw);
 			if (exists == true) { // 重複あり
 				System.out.println("重複エラー：既に使われている");
-				request.setAttribute("mypageError", "このユーザー名とパスワードの組み合わせは既に使われています");
+				request.setAttribute("mypage", "このユーザー名とパスワードの組み合わせは既に使われています");
 				doGet(request,response);
 				return;
 			}
@@ -103,10 +103,10 @@ import dto.UserDTO;
 				//セッションのユーザーの情報も更新
 				loginUser.setUserName(userName);
 				loginUser.setPw(pw);
-				session.setAttribute("mypageMessage", "更新が完了しました。");
+				session.setAttribute("mypage", "更新が完了しました。");
 			}else { //編集失敗
 				System.out.println("ユーザー更新失敗");
-				session.setAttribute("mypageError", "ユーザー登録に失敗しました。");
+				session.setAttribute("mypage", "ユーザー登録に失敗しました。");
 			}
 			//更新後の画面を再表示
 			response.sendRedirect("/b2/MypageServlet");

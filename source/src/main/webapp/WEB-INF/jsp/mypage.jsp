@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +22,13 @@
 			<form method="POST" action="${pageContext.request.contextPath}/MypageServlet">
 			<div class="form">
 				ログインID<input type="text" name="userName" value="${user.userName}"><br> 
-				パスワード<input type="password" name="pw" value="${user.pw}">
+				パスワード<input type="password" id="pw" name="pw" value="${user.pw}" onclick="this.type='text'" onblur="this.type='password'">
 			</div>	
 				<a href="/b2/HomeServlet" class="btn--red btn--cubic btn--radius">戻る</a>
 				<input type="submit" name="submit" value="更新" class="btn--red btn--cubic btn--radius"><br> 
 				<a href="/b2/TopServlet" >ログアウト</a>
 			</form>
-			</main>	
+			</main>
+		
 	</body>
 </html>

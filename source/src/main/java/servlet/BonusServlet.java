@@ -35,7 +35,6 @@ public class BonusServlet extends HttpServlet {
 		
 		
 		//ユーザーID
-		//int user_id = 1;
 		
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
@@ -56,7 +55,6 @@ public class BonusServlet extends HttpServlet {
 		List <String> fishlist = new ArrayList<>();
 		int depth = loginUser.getDepthCurrent();
 		
-		//int depth = 600;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";
@@ -142,10 +140,10 @@ public class BonusServlet extends HttpServlet {
 		
 		if(totalBingo != 0) {
 			if(totalBingo >= 1) {
-				fishlist.add("img/koi.png");
+				fishlist.add("img/bingo_sbbp.png");
 			}
 			if(totalBingo >= 2) {
-				fishlist.add("img/koi.png");
+				fishlist.add("img/bingo_fish.png");
 			}
 			if(totalBingo >= 3) {
 				fishlist.add("img/koi.png");
@@ -212,10 +210,10 @@ public class BonusServlet extends HttpServlet {
 		
 		if(totalBingo != 0) {
 			if(totalBingo == 1) {
-				fishName = "img/fish1.png";
+				fishName = "img/bingo_sbbp.png";
 			}
 			else if(totalBingo == 1) {
-				fishName = "img/fish1.png";
+				fishName = "img/bingo_fish.png";
 			}
 			else if(totalBingo == 2) {
 				fishName = "img/fish1.png";

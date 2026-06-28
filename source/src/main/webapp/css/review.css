@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 /*Weekly*/
+.period {
+	font-size: 1rem;
+	text-align: center;
+	color: #2589d0;
+}
 .chart-container {
   width: 100%;
   max-width: 800px;

@@ -14,9 +14,23 @@
 	</head>
 	
 	<body>
+	
+	<div class="depthView${depth <= 600 ? '1' : depth <= 1100 ? '2' : depth <= 1600 ? '3' : '4'} }">
+		<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
+		    <div><img class="fish${s.index} }" src="${fish}"></div>
+		</c:forEach>
+	
+	
+	
+	
+	
+	
+	
+	 <div class="page-wrapper">
 		<header id="head">
 			<div class ="logoWrap">
-				<img src ="/b2/img/kokorononamiyoko.png" id="logo"> 
+				<img src ="/b2/img/kokorononamiyoko.png" class="logo-pc" id="logo">
+				<img src ="/b2/img/kokorononamisumaho.png" class="logo-sf">  
 			</div>
 		</header>
 		
@@ -24,12 +38,11 @@
 			<aside class="left-menu">
 				<div class ="flex">
 					<div class = "quickrecord">
-						<p>簡易記録にジャンプ</p>
+						<p>簡易記録</p>
 						<a href="/b2/QuickServlet">
 							<img src ="/b2/img/fun_clione.png" class ="pic">
 						</a>
 					</div>
-					
 					<div class="loginbonus">
 						<p>ログインボーナス</p>
 						<ul>
@@ -61,7 +74,7 @@
 					<button onclick="location.href='/b2/DailyServlet';">記録する</button>
 				</div>
 				<div class="homereview">
-					<p>週間レポート</p>
+					<p>週間レポート：</p>
 					<div class="weekly">
 							<div class= "weekly-box">
 								<c:if test="${not empty weekData}">
@@ -73,27 +86,28 @@
 							</div>
 							<div class="info-area">
 								<c:if test="${not empty e}">
-							        週の期間：<c:out value="${e.weeklyRes}" /><br>
+							        <c:out value="${e.weeklyRes}" /><br>
 							    </c:if>
 							</div>
 						</div>
-					<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					<button onclick="location.href='/b2/ReviewServlet';" id= "weeklybutton">VIEW ALL</button>
 				</div>
 				<div class="homereview">
 					<p>TIPS：${randomTip.tips}</p>
 				</div>
 			</main>
-			
+		</div>	
+	</div>			
 			<aside> <%--右側にあるナビ --%>
-				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
+				<img src ="/b2/img/yajirusi3.png" class ="pic" id="slideBtn"> 
 				<div id="slideNav">
 					<nav>
 						<ul>
-							<li><a href="/b2/QuickServlet">簡易記録</a></li>
-							<li><a href="/b2/DailyServlet">毎日記録</a></li>
-							<li><a href="/b2/ReviewServlet">振り返り</a></li>
-							<li><a href="/b2/BonusServlet">ボーナス</a></li>
-							<li><a href="/b2/MypageServlet">マイページ</a></li>
+							<li><a href="/b2/QuickServlet"><b>簡易記録</b></a></li>
+							<li><a href="/b2/DailyServlet"><b>毎日記録</b></a></li>
+							<li><a href="/b2/ReviewServlet"><b>振り返り</b></a></li>
+							<li><a href="/b2/BonusServlet"><b>ボーナス</b></a></li>
+							<li><a href="/b2/MypageServlet"><b>マイページ</b></a></li>
 						</ul>
 					</nav>
 					<div class="homereview">
@@ -124,7 +138,7 @@
 							
 							<div class="info-area">
 							    <c:if test="${not empty slideE}">
-							        週の期間：<c:out value="${slideE.weeklyRes}" /><br>
+							       <c:out value="${slideE.weeklyRes}" /><br>
 							    </c:if>
 							</div>
 					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
@@ -133,21 +147,21 @@
 					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>		
 			</aside>
-		</div>
 		
 		
+			
 		<footer>  
 			<nav>
 				<ul>
-					<li><a href="/b2/QuickServlet">簡易記録</a></li>
-					<li><a href="/b2/DailyServlet">毎日記録</a></li>
-					<li><a href="/b2/ReviewServlet">振り返り</a></li>
-					<li><a href="/b2/BonusServlet">ボーナス</a></li>
-					<li><a href="/b2/MypageServlet">マイページ</a></li>
+					<li><a href="/b2/QuickServlet"><b>簡易記録</b></a></li>
+					<li><a href="/b2/DailyServlet"><b>毎日記録</b></a></li>
+					<li><a href="/b2/ReviewServlet"><b>振り返り</b></a></li>
+					<li><a href="/b2/BonusServlet"><b>ボーナス</b></a></li>
+					<li><a href="/b2/MypageServlet"><b>マイページ</b></a></li>
 				</ul>
 			</nav>
 		</footer>
-		
+	</div>
 	<script>
 			var ctx = document.getElementById("myLineChart");
 
@@ -156,7 +170,7 @@
 			  data: {
 				  labels: [
 				    <c:forEach var="d" items="${e.dailyList}" varStatus="s">
-				      '${e.weeklyRes.substring(5,7)}月${(8 + s.index)}日'${!s.last ? ',' : ''}
+				    '${e.weeklyRes.substring(5,7) + 0}月${(8 + s.index)}日'${!s.last ? ',' : ''}
 				    </c:forEach>
 				  ],
 			
@@ -197,5 +211,6 @@
 			          }}}]}}});
 	</script>
 	<script src="/b2/js/home.js"></script>
+
 	</body>
 </html>

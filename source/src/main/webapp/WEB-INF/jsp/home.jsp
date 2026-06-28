@@ -14,6 +14,7 @@
 	</head>
 	
 	<body>
+	 <div class="page-wrapper">
 		<header id="head">
 			<div class ="logoWrap">
 				<img src ="/b2/img/kokorononamiyoko.png" class="logo-pc" id="logo">
@@ -73,17 +74,18 @@
 							</div>
 							<div class="info-area">
 								<c:if test="${not empty e}">
-							        週の期間：<c:out value="${e.weeklyRes}" /><br>
+							        <c:out value="${e.weeklyRes}" /><br>
 							    </c:if>
 							</div>
 						</div>
-					<button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					<button onclick="location.href='/b2/ReviewServlet';" id= "weeklybutton">VIEW ALL</button>
 				</div>
 				<div class="homereview">
 					<p>TIPS：${randomTip.tips}</p>
 				</div>
 			</main>
-			
+		</div>	
+	</div>			
 			<aside> <%--右側にあるナビ --%>
 				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
 				<div id="slideNav">
@@ -124,7 +126,7 @@
 							
 							<div class="info-area">
 							    <c:if test="${not empty slideE}">
-							        週の期間：<c:out value="${slideE.weeklyRes}" /><br>
+							       <c:out value="${slideE.weeklyRes}" /><br>
 							    </c:if>
 							</div>
 					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
@@ -133,9 +135,9 @@
 					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>		
 			</aside>
-		</div>
 		
 		
+			
 		<footer>  
 			<nav>
 				<ul>
@@ -197,5 +199,6 @@
 			          }}}]}}});
 	</script>
 	<script src="/b2/js/home.js"></script>
+
 	</body>
 </html>

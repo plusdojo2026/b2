@@ -26,9 +26,21 @@
 			</div>	
 				<a href="/b2/HomeServlet" class="btn--red btn--cubic btn--radius">戻る</a>
 				<input type="submit" name="submit" value="更新" class="btn--red btn--cubic btn--radius"><br> 
-				<a href="/b2/TopServlet" >ログアウト</a>
+				<a href="/b2/TopServlet" id="logout">ログアウト</a>
 			</form>
 			</main>
-		
+<script>
+			'use strict';
+			
+				document.getElementById('logout').onclick = function(event){
+			    event.preventDefault();
+			    let ans =confirm('ログアウトしますか？');
+			    if(ans === false){
+			        event.preventDefault();
+			    }else{
+			        window.location.replace('/b2/TopServlet'); /*→location：元の画面に戻る,replace:戻るボタンを押しても戻らない*/ 
+			    }
+			};
+		</script>   		
 	</body>
 </html>

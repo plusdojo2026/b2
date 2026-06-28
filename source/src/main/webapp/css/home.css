@@ -766,3 +766,227 @@ body.nav-open footer {
 
 
 
+
+
+
+
+
+/*ここから魚の表示*/
+.fish0{
+	position: absolute;
+	top:350px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+.fish1{
+	position: absolute;
+	top:650px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swimturn 35s ease-out infinite;
+}
+
+.fish2{
+	position: absolute;
+	top:950px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 35s ease-out infinite;
+}
+
+.fish3{
+	position: absolute;
+	top:1250px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+.fish4{
+	position: absolute;
+	top:1550px;
+	left:0;
+	width: 100px;
+	filter: brightness(1);
+	animation: swim 30s ease-out infinite;
+}
+
+/*一段階目の背景*/
+.depthView1 {
+    height: 1900px;
+    position: relative;
+    z-index: 0;
+}
+
+.depthView1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    width:100%;
+    height:1900px;
+
+    /* 背景画像 */
+    background-image: 
+        linear-gradient(180deg, rgba(88, 185, 255, 0.5), rgba(50, 110, 160, 0.5)),
+        url("../img/oceanfloor-tate01.png");
+
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+}
+
+.depthView1 .fish0, .depthView1 .fish1, .depthView1 .fish2, .depthView1 .fish3, .depthView1 .fish4{
+	filter: brightness(1.0);
+	opacity:0.9;
+}
+
+
+
+/*二段階目の背景*/
+.depthView2{
+	height:1900px;
+	position:relative;
+	z-index: 0;
+}
+
+.depthView2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    width:100%;
+    height:1900px;
+
+    /* 背景画像 */
+    background-image: 
+        linear-gradient(180deg, rgba(88, 185, 255, 0.5), rgba(50, 110, 160, 0.5)),
+        url("../img/oceanfloor-tate02.png");
+
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+}
+
+.depthView2 .fish0, .depthView2 .fish1, .depthView2 .fish2, .depthView2 .fish3, .depthView2 .fish4{
+	filter: brightness(0.8);
+}
+
+/*三段階目の背景*/
+.depthView3{
+	height:1900px;
+	position: relative;
+	z-index: 0;
+}
+
+.depthView3::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    width:100%;
+    height:1900px;
+
+    /* 背景画像 */
+    background-image: 
+        linear-gradient(180deg, rgba(88, 185, 255, 0.5), rgba(50, 110, 160, 0.5)),
+        url("../img/oceanfloor-tate03.png");
+
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+}
+
+.depthView3 .fish0, .depthView3 .fish1, .depthView3 .fish2, .depthView3 .fish3, .depthView3 .fish4{
+	filter: brightness(0.8);
+}
+
+/*四段階目の背景*/
+.depthView4{
+	height:1900px;
+	position:relative;
+	z-index: 0;
+}
+
+.depthView4::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    width:100%;
+    height:1900px;
+
+    /* 背景画像 */
+    background-image: 
+        linear-gradient(180deg, rgba(88, 185, 255, 0.5), rgba(50, 110, 160, 0.5)),
+        url("../img/oceanfloor-tate04.png");
+
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+}
+
+.depthView3 .fish0, .depthView3 .fish1, .depthView3 .fish2, .depthView3 .fish3, .depthView3 .fish4{
+	filter: brightness(0.8);
+}
+
+
+
+@keyframes swim{
+	0%{
+		left:5%;
+	}
+	49%{
+		transform: rotateY(0);
+	}
+	50%{
+        left:80%;
+		transform: rotateY(180deg);
+	}
+	99%{
+		transform: rotateY(180deg);
+	}
+	
+	100%{
+		transform: rotateY(0deg);
+		left:5%;
+	}
+}
+
+
+@keyframes swimturn {
+  0% {
+    left: 80%;
+    transform: rotateY(180deg); /* ← 元画像が逆向きなのでここを反転 */
+  }
+  49% {
+    transform: rotateY(180deg);
+  }
+  50% {
+    left: 5%;
+    transform: rotateY(0deg); /* ← 反転 */
+  }
+  99% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+    left: 80%;
+  }
+}
+
+

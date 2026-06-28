@@ -123,6 +123,9 @@ body{
     font-weight:bold;
 
     margin-bottom:15px;
+
+    color:#ffffff;
+    background-color:#2589d0;
 }
 .photo-box{
     width:350px;

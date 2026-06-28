@@ -20,7 +20,11 @@ public class DailyDAO {
 
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+					"b2", "7grzQ32C9PWe9pdD");
+			
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//					"root", "password");
 
 			/*
 			 * 
@@ -72,7 +76,11 @@ public class DailyDAO {
 
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+					"b2", "7grzQ32C9PWe9pdD");
+			
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//					"root", "password");
 
 			/*
 			 * 毎日記録入力画面の登録メソッド
@@ -145,9 +153,14 @@ public class DailyDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
+			
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+					"b2", "7grzQ32C9PWe9pdD");
+			
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//					"root", "password");
 
 			/*
 			 * ~SQL文~

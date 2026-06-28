@@ -35,12 +35,12 @@ public class BonusServlet extends HttpServlet {
 		
 		
 		//ユーザーID
-		//int user_id = 1;
+		int user_id = 1;
 		
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
 		
-		int user_id = loginUser.getId();
+		//int user_id = loginUser.getId();
 		
 		//ビンゴの内容を取得
 		BonusDAO bonus = new BonusDAO();
@@ -54,9 +54,9 @@ public class BonusServlet extends HttpServlet {
 		//魚(水深)処理
 		String fish1="",fish2="",fish3="",fish4="",fish5="";
 		List <String> fishlist = new ArrayList<>();
-		int depth = loginUser.getDepthCurrent();
+		//int depth = loginUser.getDepthCurrent();
 		
-		//int depth = 600;
+		int depth = 0;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";

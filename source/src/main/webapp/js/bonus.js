@@ -1,16 +1,47 @@
+	'use strict';
 
-//ナビゲーションボタン
-const nav = document.getElementById("navmenu");
-const btn = document.getElementById("navbtn");
-
-btn.addEventListener("click", () => {
-    if (nav.classList.contains("open")) {
-        nav.classList.remove("open");
-        nav.classList.add("close");
-    } else {
-        nav.classList.remove("close");
-        nav.classList.add("open");
-    }
-});
+	document.querySelectorAll('.bingo_table td').forEach(td => {
+	    td.addEventListener('pointerenter', () => {
+	        td.classList.add('roll');
+	        td.addEventListener('animationend', () => {
+	            td.classList.remove('roll');
+	        }, { once: true });
+	    });
+	});
 
 
+
+
+
+		
+		const btn = document.getElementById("slideBtn");
+		const nav = document.getElementById("slideNav"); 	
+		
+		btn.addEventListener("click", () => {
+			//ナビの開閉
+			nav.classList.toggle("open");
+			
+			//ナビの開閉
+			 document.body.classList.toggle("nav-open");
+			 
+			//画像の入れ替え
+			if(btn.src.includes("yajirusi1.png")){
+				btn.src = "/b2/img/yajirusi2.png";
+				btn.classList.add("onNavi");
+			}else{
+				btn.src = "/b2/img/yajirusi1.png";
+				btn.classList.remove("onNavi");
+			}
+			
+		});		
+  
+  		document.getElementById("leftMenuBtn").onclick = function() {
+			if(window.innerWidth >= 765)retrun;
+			
+    		const menu = document.querySelector("aside.left-menu");
+    		if (menu.style.display === "block") {
+        		menu.style.display = "none";
+    		}else {
+       			menu.style.display = "block";
+    		}
+		};

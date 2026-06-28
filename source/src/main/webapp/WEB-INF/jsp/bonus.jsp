@@ -16,14 +16,63 @@
 
 
     <body>
-        <button id="navbtn" type="button"></button>
-        <nav id="navmenu" class="close">aaa<br><br><br><br>bbb</nav>
+        	<aside> <%--右側にあるナビ --%>
+				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
+				<div id="slideNav">
+					<nav>
+						<ul>
+							<li><a href="/b2/QuickServlet"><b>簡易記録</b></a></li>
+							<li><a href="/b2/DailyServlet"><b>毎日記録</b></a></li>
+							<li><a href="/b2/ReviewServlet"><b>振り返り</b></a></li>
+							<li><a href="/b2/BonusServlet"><b>ボーナス</b></a></li>
+							<li><a href="/b2/MypageServlet"><b>マイページ</b></a></li>
+						</ul>
+					</nav>
+					<div class="homereview">
+						<p>本日の入力：</p>
+						<ul class ="icon-list">
+							<li><img src="/b2/img/happa2.png"></li>
+							<li><img src="/b2/img/kinyuu2.png"></li>
+							<li><img src="/b2/img/syasinn2.png"></li>
+							<li><img src="/b2/img/sakana2.png"></li>
+						</ul>
+						<button onclick="location.href='/b2/DailyServlet';">記録する</button>
+					</div>
+					
+					<div class="slidehomereview">
+					<p>週間レポート</p>
+					        <c:if test="${not empty weekData}">
+							    <c:set var="slideE" value="${weekData[0]}" />
+							</c:if>
+							
+							<div class="weekly-box">
+							    <div class="chart-container">
+							        <p class="weekly-value">
+							            ポジティブ率：
+							            <fmt:formatNumber value="${slideE.avgPositive}" maxFractionDigits="1" />%
+							        </p>
+							    </div>
+							</div>
+							
+							<div class="info-area">
+							    <c:if test="${not empty slideE}">
+							        週の期間：<c:out value="${slideE.weeklyRes}" /><br>
+							    </c:if>
+							</div>
+					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					        
+					</div>
+					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
+				</div>		
+			</aside>
         <div class="flexbox">
             <div class="leftScreen">
             </div>
 
             <div class="rightScreen">
-            <div class="bonus-title"><h1>ログインボーナス</h1></div>
+            <div class="title-back">
+            	<div class="bonus-title"><h1>ログインボーナス</h1></div>
+            </div>
             <hr>
             	<div class="bingo-field">
 	                <div class="title">BINGO</div>

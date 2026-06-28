@@ -35,7 +35,6 @@ public class BonusServlet extends HttpServlet {
 		
 		
 		//ユーザーID
-		//int user_id = 1;
 		
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
@@ -56,7 +55,6 @@ public class BonusServlet extends HttpServlet {
 		List <String> fishlist = new ArrayList<>();
 		int depth = loginUser.getDepthCurrent();
 		
-		//int depth = 600;
 		
 		if(depth <= 600) {
 			fish1= "img/fish1.png";

@@ -14,6 +14,18 @@
 	</head>
 	
 	<body>
+	
+	<div class="depthView${depth <= 600 ? '1' : depth <= 1100 ? '2' : depth <= 1600 ? '3' : '4'} }">
+		<c:forEach var="fish" items="${requestScope.fishlist}" varStatus="s">
+		    <div><img class="fish${s.index} }" src="${fish}"></div>
+		</c:forEach>
+	
+	
+	
+	
+	
+	
+	
 	 <div class="page-wrapper">
 		<header id="head">
 			<div class ="logoWrap">
@@ -149,7 +161,7 @@
 				</ul>
 			</nav>
 		</footer>
-		
+	</div>
 	<script>
 			var ctx = document.getElementById("myLineChart");
 

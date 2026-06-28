@@ -77,17 +77,27 @@
 					<p>週間レポート：</p>
 					<div class="weekly">
 							<div class= "weekly-box">
-								<c:if test="${not empty weekData}">
-							        <c:set var="e" value="${weekData[0]}" />
-							        <div class="chart-container">
-							            <canvas id="myLineChart"></canvas>
-							        </div>
-							    </c:if>
+								<c:choose>
+									<c:when test="${not empty weekData}">
+								        <c:set var="e" value="${weekData[0]}" />
+								        <div class="chart-container">
+								            <canvas id="myLineChart"></canvas>
+								        </div>
+								    </c:when>
+								 <c:otherwise>
+					                <p class="no-week-data">まだ週間データがありません</p>
+					             </c:otherwise>
+					        	</c:choose>
 							</div>
 							<div class="info-area">
-								<c:if test="${not empty e}">
-							        <c:out value="${e.weeklyRes}" /><br>
-							    </c:if>
+								<c:choose>
+									<c:when test="${not empty e}">
+								        <c:out value="${e.weeklyRes}" /><br>
+								    </c:when>
+							    	<c:otherwise>
+                						<p class="no-week-data">毎日記録の質問に回答してみよう！</p>
+            						</c:otherwise>
+        						</c:choose>
 							</div>
 						</div>
 					<button onclick="location.href='/b2/ReviewServlet';" id= "weeklybutton">VIEW ALL</button>
@@ -123,26 +133,35 @@
 					
 					<div class="slidehomereview">
 					<p>週間レポート</p>
-					        <c:if test="${not empty weekData}">
-							    <c:set var="slideE" value="${weekData[0]}" />
-							</c:if>
-							
+						
+					    
 							<div class="weekly-box">
 							    <div class="chart-container">
-							        <p class="weekly-value">
-							            ポジティブ率：
-							            <fmt:formatNumber value="${slideE.avgPositive}" maxFractionDigits="1" />%
-							        </p>
+							    	<c:choose>
+							    		<c:when test="${not empty slideE}">
+								    		<p class="weekly-value">
+									            ポジティブ率：
+									            <fmt:formatNumber value="${slideE.avgPositive}" maxFractionDigits="1" />%
+								        	</p>
+								        </c:when>
+								        <c:otherwise>
+					             			<p class="no-week-data">まだ週間記録がありません</p>
+					        			</c:otherwise>  	
+							    	</c:choose>
 							    </div>
 							</div>
 							
 							<div class="info-area">
-							    <c:if test="${not empty slideE}">
-							       <c:out value="${slideE.weeklyRes}" /><br>
-							    </c:if>
+								<c:choose>
+								    <c:when test="${not empty slideE}">
+								       <c:out value="${slideE.weeklyRes}" /><br>
+								    </c:when>
+								    <c:otherwise>
+					             			<p class="no-week-data">毎日記録の質問に回答してみよう！</p>
+					        		</c:otherwise>
+					        	</c:choose> 
 							</div>
-					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
-					        
+					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button> 
 					</div>
 					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
 				</div>		

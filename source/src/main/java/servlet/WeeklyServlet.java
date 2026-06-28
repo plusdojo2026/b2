@@ -42,6 +42,7 @@ public class WeeklyServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String weeklyRes = request.getParameter("weeklyRes");
+	
 
 		// とある週のデータを取得
 		WeeklyDAO dao = new WeeklyDAO();
@@ -52,8 +53,15 @@ public class WeeklyServlet extends HttpServlet {
 		//wDao.aggregate(daily);
 		//更新の方もあるならそっちにも追加しとくこと
 
-		dto.setWeeklyRes(weeklyRes);
 		dto.setUser_id(userId);
+		// URL直指定エラー対策
+		if (weeklyRes == null) {
+			response.sendRedirect("HomeServlet");
+			return;
+		} else {
+			dto.setWeeklyRes(weeklyRes);
+		}
+
 
 		List<WeeklyDTO> List = dao.select(dto);
 

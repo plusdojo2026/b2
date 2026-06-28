@@ -140,6 +140,13 @@
 
 										</div>
 
+										<c:if test="${status.last}">
+											<button type="button"
+													class="next-tab"
+													onclick="checkQuestionAndNext()">
+												次へ
+											</button>
+										</c:if>
 									</div>
 
 								</c:forEach>

@@ -20,7 +20,7 @@
 
                     <!-- ① -->
                     <div class="result-date">
-                        ${t.yearWeek}のあなたは
+                        本日のあなたは
                     </div>
 
                     <div class="result-type">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="result-character">
-                        <img src="${pageContext.request.contextPath}/img/${t.type_id}.png"
+                        <img src="${pageContext.request.contextPath}/img/manbo.png"
                             alt="診断キャラクター">
                     </div>
 
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="result-emotion">
-                        <img src="${pageContext.request.contextPath}/img/emotion_${t.emotion_id}.png"
+                        <img src="${pageContext.request.contextPath}/img/sad_clione.png"
                             alt="感情アイコン">
                     </div>
 
@@ -54,11 +54,11 @@
 
                                 <c:choose>
                                     <c:when test="${not empty t.photo}">
-                                        <img src="${pageContext.request.contextPath}/upload/${t.photo}">
+                                        <img src="${pageContext.request.contextPath}/img/syasinn.png">
                                     </c:when>
 
                                     <c:otherwise>
-                                        <img src="${pageContext.request.contextPath}/img/noimage.png">
+                                        <img src="${pageContext.request.contextPath}/img/syasinn2.png">
                                     </c:otherwise>
                                 </c:choose>
 
@@ -90,7 +90,7 @@
 
                     <!-- ⑨ -->
                     <div class="back-area">
-                        <a href="${pageContext.request.contextPath}/ListServlet"
+                        <a href="${pageContext.request.contextPath}/HomeServlet"
                         class="back-btn">
                             一覧に戻る
                         </a>

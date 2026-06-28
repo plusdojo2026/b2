@@ -22,31 +22,40 @@
 					<form method="POST" action="${pageContext.request.contextPath}/DailyServlet" id="form">
 						<input type="hidden" name="user_id" value="1">
 
-						<div>
-							<label class="label">感情タグ</label><br>
-							<label>
-								<input type="radio" name="emotion_id" value="1">怒り
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="2">悲しみ		
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="3">悔しい
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="4">焦り
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="5">楽しい
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="6">嬉しい
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="7">幸せ
-							</label>
-							<label>
-								<input type="radio" name="emotion_id" value="8">好き
+						<p>感情タグ[必須]：</p>
+						<div class="emotion-radio-group">
+							<input type="radio" name="emotion_id" value="1" id=emo1> <label
+								for="emo1"> <img
+								src="${pageContext.request.contextPath}/img/angry_clione.png">
+								<span>怒り</span>
+							</label> <input type="radio" name="emotion_id" value="2" id=emo2> <label
+								for="emo2"> <img
+								src="${pageContext.request.contextPath}/img/sad_clione.png">
+								<span>悲しい</span>
+							</label> <input type="radio" name="emotion_id" value="3" id=emo3> <label
+								for="emo3"> <img
+								src="${pageContext.request.contextPath}/img/frustrated_clione.png">
+								<span>悔しい</span>
+							</label> <input type="radio" name="emotion_id" value="4" id=emo4> <label
+								for="emo4"> <img
+								src="${pageContext.request.contextPath}/img/panic_clione.png">
+								<span>焦り</span>
+							</label> <input type="radio" name="emotion_id" value="5" id=emo5> <label
+								for="emo5"> <img
+								src="${pageContext.request.contextPath}/img/fun_clione.png">
+								<span>楽しい</span>
+							</label> <input type="radio" name="emotion_id" value="6" id=emo6> <label
+								for="emo6"> <img
+								src="${pageContext.request.contextPath}/img/glad_clione.png">
+								<span>嬉しい</span>
+							</label> <input type="radio" name="emotion_id" value="7" id=emo7> <label
+								for="emo7"> <img
+								src="${pageContext.request.contextPath}/img/happy_clione.png">
+								<span>幸せ</span>
+							</label> <input type="radio" name="emotion_id" value="8" id=emo8> <label
+								for="emo8"> <img
+								src="${pageContext.request.contextPath}/img/love_clione.png">
+								<span>好き</span>
 							</label>
 						</div>
 

@@ -24,11 +24,11 @@
                     </div>
 
                     <div class="result-type">
-                        ${t.type_id}
+                        マンボウメンタル
                     </div>
 
                     <div class="result-character">
-                        <img src="${pageContext.request.contextPath}/img/manbo.png"
+                        <img src="${pageContext.request.contextPath}/img/mambo.png"
                             alt="診断キャラクター">
                     </div>
 
@@ -88,7 +88,6 @@
 
                     </div>
 
-                    <!-- ⑨ -->
                     <div class="back-area">
                         <a href="${pageContext.request.contextPath}/HomeServlet"
                         class="back-btn">

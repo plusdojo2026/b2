@@ -281,3 +281,124 @@ body{
     color:#2563eb;
     font-weight:600;
 }
+
+
+/* 小笠原さんのCSSからお借りしました、ありがとうございます。 */
+
+
+
+/* ===================================================
+   ↓感情タグの見た目
+   =================================================== */
+/* 本体のラジオボタンを非表示にする */
+.emotion-radio-group input[type="radio"] {
+    display: none;
+}
+
+/* 選択肢全体を横並び（4つで自動改行）にする */
+.emotion-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    width:100%  /*横にぴったり4つ並んだ時点で自動改行させる設定 */
+}
+
+.emotion-radio-group label {
+    /* 全体（100%）から隙間3つ分（15px × 3 = 45px）を引いて、4等分 */
+    width: calc((100% - 45px) / 4) !important;
+    box-sizing: border-box;
+}
+
+.emotion-radio-group label {
+    display: flex;
+    flex-direction: column;  /* 画像の下に文字を配置（縦並び） */
+    align-items: center;     /* 左右の中央寄せ */
+    justify-content: center; /* 上下の中央寄せ */
+    
+    width: 100%;            /* ボックス全体の横幅 */
+    height: 110px;           /* ボックス全体の縦幅 */
+    padding: 10px;
+    border: 2px solid #ccc;  /* 未選択時のグレーの枠線 */
+    border-radius: 10px;     /* 角丸 */
+    background-color: #fff;  /* 通常時の背景（白） */
+    cursor: pointer;
+    box-sizing: border-box;  /* サイズ計算のズレを完全に防ぐ */
+    transition: all 0.2s ease; /* 変化（選択時やホバー時）をすべてなめらかにする */
+}
+
+/* マウスを乗せたとき（ホバー時）の効果 */
+.emotion-radio-group label:hover {
+    background-color: #f7f7f7;
+    border-color: #999;
+}
+
+.emotion-radio-group label img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 8px;      /* 画像と文字の間のすき間 */
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* 文字のスタイル */
+.emotion-radio-group label span {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+/* 画像が選択された（チェックが入った）時のスタイル　*/
+/* 選ばれたボタン（label自体）の枠線と背景色を変える */
+.emotion-radio-group input[type="radio"]:checked + label {
+    border-color: #ff6b6b !important;       /* 選択時：枠線を「太い赤」にする */
+    border-width: 3px !important;           /* 選択時：枠線を少し太くして強調 */
+    background-color: #fff5f5 !important;   /* 選択時：背景を「薄い赤」にする */
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.4) !important; /* 選択時：周りをふんわり赤く光らせる */
+}
+
+/* 選ばれたボタンの中にある「画像（img）」を拡大して影をつける */
+.emotion-radio-group input[type="radio"]:checked + label img {
+    transform: scale(1.15) !important;      /* 画像を1.15倍に拡大 */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15)) !important; /* 画像に影をつけて浮き上がらせる */
+}
+
+/* 選ばれたボタンの「文字（span）」も太字にして目立たせる */
+.emotion-radio-group input[type="radio"]:checked + label span {
+    font-weight: bold !important;
+    color: #ff6b6b !important;
+}
+
+/* ボタンのベーススタイル（デフォルト初期化＋共通設定） */
+input[type="submit"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  
+  /* サイズ・余白（右側にアイコン用の余白を広く確保） */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 2.5rem 15px 2.5rem;
+  color: #ffffff;
+  background-color:#2589d0; /* 赤色ボタンのベース */
+  
+  box-sizing: border-box;
+  transition: all 0.1s ease; /* 動きを滑らかに */
+}
+
+/*立体感 */
+input.btn--red.btn--cubic {
+  border-bottom: 5px solid #2589d0;
+}
+
+/* 立体ボタンのホバー*/
+input.btn--red.btn--cubic:hover {
+  transform: translateY(3px); 
+  border-bottom: 2px solid #2589d0;
+}
+
+/* 角丸*/
+input.btn--radius {
+  border-radius: 100vh;
+}

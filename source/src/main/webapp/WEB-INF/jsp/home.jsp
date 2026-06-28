@@ -99,7 +99,7 @@
 		</div>	
 	</div>			
 			<aside> <%--右側にあるナビ --%>
-				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
+				<img src ="/b2/img/yajirusi3.png" class ="pic" id="slideBtn"> 
 				<div id="slideNav">
 					<nav>
 						<ul>

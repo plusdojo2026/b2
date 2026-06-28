@@ -11,18 +11,18 @@
 			 document.body.classList.toggle("nav-open");
 			 
 			//画像の入れ替え
-			if(btn.src.includes("yajirusi1.png")){
+			if(btn.src.includes("yajirusi3.png")){
 				btn.src = "/b2/img/yajirusi2.png";
 				btn.classList.add("onNavi");
 			}else{
-				btn.src = "/b2/img/yajirusi1.png";
+				btn.src = "/b2/img/yajirusi3.png";
 				btn.classList.remove("onNavi");
 			}
 			
 		});		
   
   		document.getElementById("leftMenuBtn").onclick = function() {
-			if(window.innerWidth >= 765)retrun;
+			if(window.innerWidth >= 765)return;
 			
     		const menu = document.querySelector("aside.left-menu");
     		if (menu.style.display === "block") {

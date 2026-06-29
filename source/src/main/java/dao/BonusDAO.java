@@ -20,9 +20,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//新しいビンゴを作成
 			String sql = "INSERT INTO Bingo(user_id,day1) VALUES(?,1);";
@@ -67,9 +65,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//今日のビンゴを登録
 			String sql = "UPDATE Bingo SET day" + String.valueOf(pos) + "=1 WHERE user_id=?";
@@ -113,9 +109,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//今日のビンゴを登録
 			String sql = "UPDATE Bingo SET bingoCount =? WHERE user_id=?";
@@ -160,9 +154,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//今日のビンゴを登録
 			String sql = "UPDATE Bingo SET day1=0, day2=0, day3=0, day4=0, day5=0, day6=0, day7=0, day8=0, day9=0, day10=0, day11=0, day12=0, day13=0, day14=0, day15=0, day16=0, day17=0, day18=0, day19=0, day20=0, day21=0, day22=0, day23=0, day24=0, day25=0, bingoCount=0 WHERE user_id=?";
@@ -206,9 +198,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//今日のビンゴを登録
 			String sql = "SELECT * FROM Bingo WHERE user_id=?";
@@ -260,9 +250,7 @@ public class BonusDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 			//ログインできなかった日付を取得
 			String sql = "SELECT DATEDIFF(CURDATE(), DATE(updated_at)) as days_not_logged_in FROM Users WHERE id=?;";

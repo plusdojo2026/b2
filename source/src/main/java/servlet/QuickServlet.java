@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.QuickDAO;
 import dto.QuickDTO;
+import dto.UserDTO;
 
 
 /**
@@ -32,8 +34,6 @@ public class QuickServlet extends HttpServlet {
 		// 簡易記録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/quick.jsp");
 		dispatcher.forward(request, response);
-		
-		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +41,9 @@ public class QuickServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する    
 	    request.setCharacterEncoding("UTF-8");
+	    HttpSession session = request.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		int userId = user.getId();
 	    String event = request.getParameter("event");
 	    String belief = request.getParameter("belief");
 	    String resultTxt = request.getParameter("result");
@@ -50,7 +53,7 @@ public class QuickServlet extends HttpServlet {
 
 	    // DTO に詰める
 	    QuickDTO qdto = new QuickDTO();
-	    qdto.setUser_id(1);
+	    qdto.setUser_id(userId);
 	    qdto.setEvent(event);
 	    qdto.setBelief(belief);
 	    qdto.setResult(resultTxt);
@@ -61,10 +64,6 @@ public class QuickServlet extends HttpServlet {
 	    QuickDAO qdao = new QuickDAO();
 	    boolean result = qdao.insert(qdto);
 	    System.out.println(result);
-	    
-	    
-	    //テスト用本番はセッションスコープ
-	    int user_id = 1;
 	    
 	    //ポップアップを成功と表示
 

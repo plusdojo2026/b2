@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.DailyDAO;
 import dao.QuestionDAO;
+import dao.WeeklyDAO;
 import dto.AnalysisDTO;
 import dto.DailyDTO;
 import dto.QuestionDTO;
@@ -122,7 +123,9 @@ public class DailyServlet extends HttpServlet {
 
 		// 登録処理を行う
 		DailyDAO dDao = new DailyDAO();
+		WeeklyDAO wDao = new WeeklyDAO();
 		if (dDao.insert(daily)) { // 登録成功
+			wDao.aggregate(daily);
 			response.sendRedirect(request.getContextPath() + "/DailyRevServlet");
 		} else { // 登録失敗
 			response.sendRedirect(request.getContextPath() + "/DailyServlet");

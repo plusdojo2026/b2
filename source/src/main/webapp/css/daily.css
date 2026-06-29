@@ -368,6 +368,47 @@ body{
     color: #ff6b6b !important;
 }
 
+/* ===================================================
+  事実整理、とにかく記入のところ
+   =================================================== */
+
+.content-fact input[type="text"], 
+.content-fact textarea{
+    width: 100%;
+    
+    padding: 12px 15px;
+    font-size: 16px;
+    
+    border: 1px solid #ccc;/* 枠線の太さと色 */
+    border-radius: 6px;    /* 入力欄の角をほんのり丸くする */
+    margin-top: 8px;       /* 見出し（h3）との間のすき間 */
+    margin-bottom: 15px;   /* 次の見出しとの間のすき間 */
+    
+    box-sizing: border-box;/* 余白（padding）を入れても全体の幅が崩れないようにする設定 */
+}
+
+.content-free input[type="text"], 
+.content-free textarea{
+    width: 100%; 
+    
+    padding: 12px 15px;
+    font-size: 16px;
+    
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    
+    box-sizing: border-box;
+}
+
+/* 親要素：アイコンを絶対配置するための基準点 */
+.btn-container {
+  position: relative;
+  display: inline-block; /* ボタンの幅に合わせる */
+  vertical-align: middle;
+}
+
 /* ボタンのベーススタイル（デフォルト初期化＋共通設定） */
 input[type="submit"] {
   -webkit-appearance: none;
@@ -401,4 +442,14 @@ input.btn--red.btn--cubic:hover {
 /* 角丸*/
 input.btn--radius {
   border-radius: 100vh;
+}
+
+/* 右側アイコンの絶対配置（提示コードの調整） */
+.fa-position-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 縦中央に綺麗に配置 */
+  right: 1.5rem;
+  color: #ffffff;
+  pointer-events: none;
 }

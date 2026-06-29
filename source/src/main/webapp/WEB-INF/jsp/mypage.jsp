@@ -26,7 +26,7 @@
 			</div>	
 				<a href="/b2/HomeServlet" class="btn--red btn--cubic btn--radius">戻る</a>
 				<input type="submit" name="submit" value="更新" class="btn--red btn--cubic btn--radius"><br> 
-				<a href="/b2/TopServlet" id="logout">ログアウト</a>
+				<a href="/b2/TopServlet?name=logout" id="logout">ログアウト</a>
 			</form>
 			</main>
 <script>

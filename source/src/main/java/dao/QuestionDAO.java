@@ -21,13 +21,13 @@ public class QuestionDAO {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-//			+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-//			"b2", "7grzQ32C9PWe9pdD");
-			
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+			"b2", "7grzQ32C9PWe9pdD");
+			
+			// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+			// 		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+			// 		"root", "password");
 
 			/*
 			 * ~SQL文~
@@ -106,13 +106,13 @@ public class QuestionDAO {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-//					"b2", "7grzQ32C9PWe9pdD");
-
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+					"b2", "7grzQ32C9PWe9pdD");
+
+			// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+			// 		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+			// 		"root", "password");
 			
 			/*
 			 * ~SQL文~

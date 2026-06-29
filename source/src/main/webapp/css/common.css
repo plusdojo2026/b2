@@ -37,6 +37,7 @@ nav ul {
 	background: #fff; /* 背景色 */
 	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* 左に影 */
 	transition: right 0.3s ease; /*  スライドアニメーション */
+	transform: translateX(100%);
 	padding: 20px;
 	padding-top: 80px;
 }

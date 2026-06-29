@@ -121,8 +121,8 @@ public class BonusDAO {
 			String sql = "UPDATE Bingo SET bingoCount =? WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			pStmt.setInt(1,user_id);	
-			pStmt.setInt(2,count);	
+			pStmt.setInt(1,count);	
+			pStmt.setInt(2,user_id);	
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

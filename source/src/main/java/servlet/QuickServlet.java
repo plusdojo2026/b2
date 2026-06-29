@@ -68,7 +68,8 @@ public class QuickServlet extends HttpServlet {
 	    //ポップアップを成功と表示
 
 	    // 結果ページにフォワード
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-	    dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
+		dispatcher.forward(request, response);
+
 	}
 }

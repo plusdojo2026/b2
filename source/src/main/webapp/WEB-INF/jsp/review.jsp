@@ -10,6 +10,8 @@
 <title>振り返りページ</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/review.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body>
 <div class="flexbox">
@@ -19,13 +21,13 @@
 		
 <div class="tab-3">
 
-  <input type="radio" id="tab-daily" name="tab-3" checked>
+  <input type="radio" id="tab-daily" name="tab-3">
   <label for="tab-daily">毎日記録</label>
 
   <input type="radio" id="tab-week" name="tab-3">
   <label for="tab-week">週間結果</label>
 
-  <input type="radio" id="tab-quick" name="tab-3">
+  <input type="radio" id="tab-quick" name="tab-3"  checked>
   <label for="tab-quick">簡易記録</label>
 
 <!-- 毎日記録 -->
@@ -128,8 +130,70 @@
   </c:forEach>
 </div>
 </div>
-</div>
-</div>
+			<footer>
+				<nav>
+					<ul>
+						<li><a href="/b2/QuickServlet">簡易記録</a></li>
+						<li><a href="/b2/DailyServlet">毎日記録</a></li>
+						<li><a href="/b2/ReviewServlet">振り返り</a></li>
+						<li><a href="/b2/BonusServlet">ボーナス</a></li>
+						<li><a href="/b2/MypageServlet">マイページ</a></li>
+					</ul>
+				</nav>
+			</footer>
+		</div>
+<aside> <%--右側にあるナビ --%>
+				<img src ="/b2/img/yajirusi1.png" class ="pic" id="slideBtn"> 
+				<div id="slideNav">
+					<nav>
+						<ul>
+							<li><a href="/b2/QuickServlet">簡易記録</a></li>
+							<li><a href="/b2/DailyServlet">毎日記録</a></li>
+							<li><a href="/b2/ReviewServlet">振り返り</a></li>
+							<li><a href="/b2/BonusServlet">ボーナス</a></li>
+							<li><a href="/b2/MypageServlet">マイページ</a></li>
+						</ul>
+					</nav>
+					<div class="homereview">
+						<p>本日の入力：</p>
+						<ul class ="icon-list">
+							<li><img src="/b2/img/happa2.png"></li>
+							<li><img src="/b2/img/kinyuu2.png"></li>
+							<li><img src="/b2/img/syasinn2.png"></li>
+							<li><img src="/b2/img/sakana2.png"></li>
+						</ul>
+						<button onclick="location.href='/b2/DailyServlet';">記録する</button>
+					</div>
+					
+					<div class="slidehomereview">
+					<p>週間レポート</p>
+					        <!-- データセット -->
+					        <c:if test="${not empty weekData}">
+					            <c:set var="e" value="${weekData[0]}" />
+					        </c:if>
+					        <!-- ポジティブ率だけ表示 -->
+					        <div class="weekly-box">
+					            <div class="chart-container">
+					                <p class="weekly-value">
+					                    ポジティブ率：
+					                    <fmt:formatNumber value="${e.avgPositive}" maxFractionDigits="1" />%
+					                </p>
+					            </div>
+					        </div>
+					        <!-- 週の期間 -->
+					        <div class="info-area">
+					            <c:if test="${not empty e}">
+					                週の期間：<c:out value="${e.weeklyRes}" /><br>
+					            </c:if>
+					            <button onclick="location.href='/b2/ReviewServlet';">VIEW ALL</button>
+					        </div>
+					</div>
+					<button onclick="location.href='/b2/TopServlet';">アプリについて</button>
+				</div>		
+			</aside>
+		<script src="bonus.js"></script>
+		<script src="/b2/js/common.js"></script>
 
-</body>
+		</div>
+		</body>
 </html>

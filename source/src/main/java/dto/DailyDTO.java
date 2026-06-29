@@ -12,6 +12,8 @@ public class DailyDTO implements Serializable {
 	private int id, user_id, emotion_id, type_id, yearWeek;
 	private String freeForm, photo, positive;
 	private double negativeRate, positiveRate, activeIndex;
+
+	private RecordTypeDTO recordType;
 	
 	//コンストラクタ--------------------------------------------
 	public DailyDTO(int id, int user_id, String freeForm, String photo, String positive, int emotion_id, int type_id, double negativeRate, double positiveRate, double activeIndex, int yearWeek) {
@@ -110,5 +112,13 @@ public class DailyDTO implements Serializable {
 	}
 	public void setYearWeek(int yearWeek) {
 		this.yearWeek = yearWeek;
+	}
+	
+	//join用RecordType
+	public RecordTypeDTO getRecordType() {
+		return recordType;
+	}
+	public void setRecordType(RecordTypeDTO recordType) {
+		this.recordType = recordType;
 	}
 }

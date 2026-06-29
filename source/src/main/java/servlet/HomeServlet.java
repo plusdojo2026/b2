@@ -185,7 +185,7 @@ import dto.WeeklyDTO;
 				request.setAttribute("bingo", bingo);
 				
 				int totalBingo = 0;
-				totalBingo = bingo.getBingoCount();		
+				totalBingo = bingo.getBingoCount();
 				
 				//魚(水深)処理
 				String fish1="",fish2="",fish3="",fish4="",fish5="";

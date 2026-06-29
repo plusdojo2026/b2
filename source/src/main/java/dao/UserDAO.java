@@ -19,9 +19,7 @@ public class UserDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 			// SQL文を準備する
 			String sql = "SELECT id, userName, pw, loginStreak, daysTotalLogin, depthCurrent, currentPos, updated_at, created_at FROM Users WHERE id = ?";
@@ -82,9 +80,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 				// SQL文を準備する
 				String sql = "INSERT INTO Users(userName, pw) VALUES (?, ?)";
@@ -148,9 +144,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 					// SQL文を準備する
 					String sql = "SELECT COUNT(*) FROM Users WHERE userName=? AND pw=?";
@@ -201,9 +195,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 				// SELECT文を準備する(ログイン判定+ユーザー情報取得)
 				String sql = "SELECT id, userName, pw, loginStreak, daysTotalLogin, depthCurrent, currentPos, updated_at, created_at FROM Users WHERE userName=? AND pw=?";
@@ -262,9 +254,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 				// SQL文を準備する
 				String sql = "UPDATE Users SET daysTotalLogin= daysTotalLogin +1 WHERE id=?";
@@ -305,9 +295,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 	
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 	
 				// SQL文を準備する
 				String sql = "UPDATE Users SET loginStreak = loginStreak +1 WHERE id=?";
@@ -348,9 +336,7 @@ public class UserDAO {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 			
 						// データベースに接続する
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-								"root", "password");
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 			
 						// SQL文を準備する
 						String sql = "UPDATE Users SET loginStreak = 1 WHERE id=?";
@@ -392,9 +378,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 	
 					// SQL文を準備する
 					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 10 WHERE id=?";
@@ -435,9 +419,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 	
 					// SQL文を準備する
 					String sql = "UPDATE Users SET depthCurrent = depthCurrent + 1 WHERE id=?";
@@ -478,9 +460,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 	
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 	
 					// SQL文を準備する(現在の深度を取得)
 					String sql1 = "SELECT depthCurrent FROM Users WHERE id=?";
@@ -538,9 +518,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
 					// SQL文を準備する
 					String sql = "UPDATE Users SET updated_at = ? WHERE id=?";
@@ -582,9 +560,7 @@ public class UserDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-							"root", "password");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 					
 					//pos(ビンゴの日付の更新)
 					pos += 1;
@@ -641,9 +617,7 @@ public class UserDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 		
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 		
 				// SQL文を準備する
 				String sql = "UPDATE Users SET userName=?, pw=? WHERE id=?";

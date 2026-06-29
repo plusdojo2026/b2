@@ -28,6 +28,9 @@ public class WeeklyDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//					"root", "password");
 			
 			String weeklyRes = week.getWeeklyRes();
 			//最初の日を取り出す
@@ -143,6 +146,9 @@ public class WeeklyDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//	        		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//	        			"root", "password");
 			
 			String latestSql =
 				    "SELECT weeklyRes FROM WeekRes " +
@@ -276,6 +282,9 @@ public class WeeklyDAO {
 	        // データベースに接続
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 	        
+//	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//	        		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//	        			"root", "password");
 	       //その日が属す週の各データをとってくる
 	       String sql = "SELECT negativeRate, positiveRate, activeIndex FROM DailyRec WHERE user_id = ? AND yearWeek = ?";
 	        
@@ -434,6 +443,10 @@ public class WeeklyDAO {
 
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
+//	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//	        		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//	        			"root", "password");
+	        
 	        //  最新の created_at を取得
 	        String latestSql =
 	            "SELECT created_at FROM WeekRes " +
@@ -572,6 +585,10 @@ public class WeeklyDAO {
 
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000", "b2", "7grzQ32C9PWe9pdD");
 
+//	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+//	        		+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//	        			"root", "password");
+	        
 	        String sql = "SELECT COUNT(*) FROM WeekRes WHERE user_id = ?";
 
 	        PreparedStatement stmt = conn.prepareStatement(sql);

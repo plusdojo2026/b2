@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/dailyRev.css">
     </head>
     <body>
+        <!-- DailyDAOのselectメソッドから値を格納 -->
         <c:set var="t" value="${todayRev}"></c:set>
     
         <div class="flexbox">
@@ -18,27 +19,26 @@
             <div class="rightScreen">
                 <div class="result-container">
 
-                    <!-- ① -->
+                    <!-- タイプ診断 -->
                     <div class="result-date">
                         本日のあなたは
                     </div>
 
                     <div class="result-type">
-                        マンボウメンタル
+                        [${t.recordType.typeRes}]
                     </div>
 
                     <div class="result-character">
-                        <img src="${pageContext.request.contextPath}/img/mambo.png"
+                        <img src="${pageContext.request.contextPath}${t.recordType.resultPicture}"
                             alt="診断キャラクター">
                     </div>
 
                     <div class="result-comment">
-                        心が弱ってしまっているようです<br>
-                        自分を大事にしてくださいね
+                        ${t.recordType.typeComment}
                     </div>
 
                     <div class="result-emotion">
-                        <img src="${pageContext.request.contextPath}/img/sad_clione.png"
+                        <img src="${pageContext.request.contextPath}/img/glad_clione.png"
                             alt="感情アイコン">
                     </div>
 

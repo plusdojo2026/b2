@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dto.DailyDTO;
+import dto.RecordTypeDTO;
 
 public class DailyDAO {
 
@@ -18,13 +19,13 @@ public class DailyDAO {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"b2", "7grzQ32C9PWe9pdD");
-			
 //			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 //					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-//					"root", "password");
+//					"b2", "7grzQ32C9PWe9pdD");
+			
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
 			/*
 			 * 
@@ -33,13 +34,38 @@ public class DailyDAO {
 			 * 
 			 */
 			
-			String sql = "SELECT id, user_id, freeForm, photo, positive, emotion_id, type_id, negativeRate, positiveRate, activeIndex, yearWeek, updated_at, created_at FROM DailyRec ORDER BY created_at DESC LIMIT 1";
+			String sql = "SELECT d.id, d.user_id, d.freeForm, d.photo, d.positive, d.emotion_id, d.type_id, d.negativeRate, d.positiveRate, d.activeIndex, d.yearWeek, d.updated_at, d.created_at, "
+				+"r.id AS record_id, r.typeRes, r.resultPicture_id, r.typeComment "
+				+"FROM DailyRec AS d INNER JOIN RecordType AS r ON d.type_id = r.id "
+				+"ORDER BY created_at DESC LIMIT 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
 			
 			while (rs.next()) {
 				//結果をコレクションに格納
-				todayRev = new DailyDTO(rs.getInt("id"), rs.getInt("user_id"),rs.getString("freeForm"), rs.getString("photo"), rs.getString("positive"), rs.getInt("emotion_id"), rs.getInt("type_id"), rs.getDouble("negativeRate"), rs.getDouble("positiveRate"), rs.getDouble("activeIndex"), rs.getInt("yearWeek"));
+				todayRev = new DailyDTO(
+					rs.getInt("id"), 
+					rs.getInt("user_id"),
+					rs.getString("freeForm"), 
+					rs.getString("photo"), 
+					rs.getString("positive"), 
+					rs.getInt("emotion_id"), 
+					rs.getInt("type_id"), 
+					rs.getDouble("negativeRate"), 
+					rs.getDouble("positiveRate"), 
+					rs.getDouble("activeIndex"), 
+					rs.getInt("yearWeek")
+				);
+
+				//診断結果に対応するデータも結果ページに渡す
+				RecordTypeDTO recordType = new RecordTypeDTO(
+					rs.getInt("record_id"),
+					rs.getString("typeRes"),
+					rs.getString("resultPicture_id"),
+					rs.getString("typeComment")
+				);
+				
+				todayRev.setRecordType(recordType);
 			}
 
 			rs.close();
@@ -74,13 +100,13 @@ public class DailyDAO {
 			// JDBCドライバ読み込み、データベース接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"b2", "7grzQ32C9PWe9pdD");
-			
 //			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 //					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-//					"root", "password");
+//					"b2", "7grzQ32C9PWe9pdD");
+			
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
 			/*
 			 * 毎日記録入力画面の登録メソッド
@@ -154,13 +180,13 @@ public class DailyDAO {
 
 			// データベースに接続する
 			
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"b2", "7grzQ32C9PWe9pdD");
-			
 //			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
 //					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-//					"root", "password");
+//					"b2", "7grzQ32C9PWe9pdD");
+			
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
 			/*
 			 * ~SQL文~
